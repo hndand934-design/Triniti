@@ -1,1 +1,174 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>TRINITI</title>
+  <link rel="stylesheet" href="./triniti.css" />
+</head>
 
+<body>
+  <!-- фон НЕ должен перехватывать клики -->
+  <div class="bg" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="brand">
+      <div class="logo">TR</div>
+      <div class="brandTxt">
+        <div class="t">TRINITI</div>
+        <div class="s">мини-игры • единый кошелёк</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="navBtn navBtn--active" href="./index.html">Игры</a>
+      <a class="navBtn" href="#faq">FAQ</a>
+      <a class="navBtn" href="#about">О проекте</a>
+    </nav>
+
+    <div class="topRight">
+      <a class="pill pill--tg" href="#" id="tgBtn" role="button" aria-label="Telegram">
+        <span class="dot"></span> Telegram
+      </a>
+      <a class="pill pill--vk" href="#" id="vkBtn" role="button" aria-label="VK">
+        <span class="dot"></span> VK
+      </a>
+
+      <a class="cta" href="/mini-caz/" id="goGames">
+        ИГРЫ
+        <span class="ctaSub">перейти</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="heroLeft">
+        <div class="h1">TRINITI</div>
+        <div class="h2">Красиво. Быстро. Один кошелёк на все режимы.</div>
+
+        <div class="heroBadges">
+          <div class="badge">RNG локально</div>
+          <div class="badge">GitHub Pages</div>
+          <div class="badge">Mobile-first</div>
+        </div>
+
+        <div class="heroActions">
+          <a class="btn btn--primary" href="/mini-caz/">Открыть режимы</a>
+          <a class="btn btn--ghost" href="#faq">Как это работает</a>
+        </div>
+      </div>
+
+      <div class="heroRight">
+        <div class="glassCard">
+          <div class="glassCardTop">
+            <div class="glassTitle">Панель</div>
+            <div class="glassHint">кнопки пока заглушки</div>
+          </div>
+          <div class="glassRow">
+            <button class="chip" type="button">Пополнить</button>
+            <button class="chip" type="button">Профиль</button>
+            <button class="chip" type="button">Поддержка</button>
+          </div>
+          <div class="glassLine"></div>
+          <div class="glassSmall">
+            Хочешь “как справа” (плитки, снег, гирлянды и т.п.) — можно докрутить, но сейчас делаем основу.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gridTitle">
+      <div class="gridH">Игры</div>
+      <div class="gridS">Кликабельна только плитка “Игры” (ведёт в mini-caz). Остальное — заглушки.</div>
+    </section>
+
+    <section class="tiles" aria-label="tiles">
+      <!-- ВАЖНО: абсолютный путь, чтобы не ломалось на GitHub Pages -->
+      <a class="tile tile--big" href="/mini-caz/">
+        <div class="tileIcon">🎮</div>
+        <div class="tileTxt">
+          <div class="tileName">Игры</div>
+          <div class="tileDesc">Открыть все режимы (RPS / Mines / Dice / Wheel / Crash / Tower / …)</div>
+        </div>
+        <div class="tileBtn">Играть</div>
+      </a>
+
+      <a class="tile" href="#" aria-disabled="true">
+        <div class="tileIcon">🏆</div>
+        <div class="tileTxt">
+          <div class="tileName">Jackpot</div>
+          <div class="tileDesc">Скоро</div>
+        </div>
+        <div class="tileBtn tileBtn--muted">—</div>
+      </a>
+
+      <a class="tile" href="#" aria-disabled="true">
+        <div class="tileIcon">🫧</div>
+        <div class="tileTxt">
+          <div class="tileName">Bubbles</div>
+          <div class="tileDesc">Скоро</div>
+        </div>
+        <div class="tileBtn tileBtn--muted">—</div>
+      </a>
+
+      <a class="tile" href="#" aria-disabled="true">
+        <div class="tileIcon">🎰</div>
+        <div class="tileTxt">
+          <div class="tileName">Slots</div>
+          <div class="tileDesc">Скоро</div>
+        </div>
+        <div class="tileBtn tileBtn--muted">—</div>
+      </a>
+
+      <a class="tile" href="#" aria-disabled="true">
+        <div class="tileIcon">⚔️</div>
+        <div class="tileTxt">
+          <div class="tileName">Battle</div>
+          <div class="tileDesc">Скоро</div>
+        </div>
+        <div class="tileBtn tileBtn--muted">—</div>
+      </a>
+
+      <a class="tile" href="#" aria-disabled="true">
+        <div class="tileIcon">🎯</div>
+        <div class="tileTxt">
+          <div class="tileName">Roulette</div>
+          <div class="tileDesc">Скоро</div>
+        </div>
+        <div class="tileBtn tileBtn--muted">—</div>
+      </a>
+    </section>
+
+    <section id="about" class="block">
+      <div class="blockH">О проекте</div>
+      <div class="blockP">
+        TRINITI — оболочка/главная. Реальные игры лежат в <b>/mini-caz/</b>.
+        Тут мы делаем красивую витрину, кнопки TG/VK и навигацию.
+      </div>
+    </section>
+
+    <section id="faq" class="block">
+      <div class="blockH">FAQ</div>
+      <div class="faq">
+        <div class="q">
+          <div class="qq">Почему раньше “плитки не нажимались”?</div>
+          <div class="aa">Обычно потому что фон/оверлей перекрывает клики или относительные ссылки ломаются. Здесь фон всегда <b>pointer-events:none</b>, а ссылки — <b>абсолютные</b>.</div>
+        </div>
+        <div class="q">
+          <div class="qq">Как перейти в режимы?</div>
+          <div class="aa">Нажми плитку “Игры” или кнопку “ИГРЫ” сверху — ведёт в <b>/mini-caz/</b>.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div>TRINITI • v1</div>
+      <div class="muted">Кнопки TG/VK пока заглушки • дизайн в ваших цветах</div>
+    </footer>
+  </main>
+
+  <script src="./triniti.js"></script>
+</body>
+</html>
