@@ -4,170 +4,258 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>TRINITI</title>
+
   <link rel="stylesheet" href="./triniti.css" />
 </head>
-
 <body>
-  <!-- фон НЕ должен перехватывать клики -->
-  <div class="bg" aria-hidden="true"></div>
-  <div class="noise" aria-hidden="true"></div>
+  <!-- background -->
+  <div class="bg">
+    <div class="bg__glow bg__glow--a"></div>
+    <div class="bg__glow bg__glow--b"></div>
+    <div class="bg__grid"></div>
+  </div>
 
-  <header class="top">
-    <div class="brand">
-      <div class="logo">TR</div>
-      <div class="brandTxt">
-        <div class="t">TRINITI</div>
-        <div class="s">мини-игры • единый кошелёк</div>
+  <div class="app">
+
+    <!-- Top bar -->
+    <header class="topbar glass">
+      <div class="brand">
+        <div class="brand__logo" aria-hidden="true">T</div>
+        <div class="brand__txt">
+          <div class="brand__title">TRINITI</div>
+          <div class="brand__sub">Мини-игры • единый кошелёк</div>
+        </div>
       </div>
-    </div>
 
-    <nav class="nav">
-      <a class="navBtn navBtn--active" href="./index.html">Игры</a>
-      <a class="navBtn" href="#faq">FAQ</a>
-      <a class="navBtn" href="#about">О проекте</a>
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+          <span id="soundDot" class="dot"></span>
+          <span id="soundTxt">Звук on</span>
+        </button>
+
+        <button id="bonusBtn" class="btn btn--accent" type="button">+1000</button>
+
+        <div class="pill pill--balance">
+          Баланс: <b id="bal">0</b> <span class="coin">🪙</span>
+        </div>
+
+        <button id="tgBtn" class="iconBtn" type="button" aria-label="Telegram">
+          <span class="icon">✈️</span>
+        </button>
+        <button id="vkBtn" class="iconBtn" type="button" aria-label="VK">
+          <span class="icon">VK</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero slider (no heavy images, just premium cards) -->
+    <section class="hero">
+      <div class="hero__card glass">
+        <div class="hero__left">
+          <div class="hero__kicker">TRINITI • Premium UI</div>
+          <h1 class="hero__title">Играй быстро.<br/>Кэшауть вовремя.</h1>
+          <div class="hero__desc">
+            Единая тема • единый кошелёк • честный RNG.
+          </div>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#games">Все игры</a>
+            <a class="btn btn--ghost" href="#history">История</a>
+          </div>
+        </div>
+
+        <div class="hero__right">
+          <div class="hero__tile hero__tile--big">
+            <div class="hero__tileTop">
+              <div class="tag">Турбина удачи</div>
+              <div class="tag tag--muted">Ежедневно</div>
+            </div>
+            <div class="hero__tileMid">
+              <div class="jackpot">x<span>4.00</span></div>
+              <div class="jackpot__sub">выбери множитель и крути</div>
+            </div>
+            <div class="hero__tileBottom">
+              <a class="btn btn--small btn--primary" href="./wheel/">Открыть Wheel</a>
+              <div class="dots" aria-hidden="true">
+                <span class="dotx on"></span><span class="dotx"></span><span class="dotx"></span><span class="dotx"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__miniRow">
+            <div class="hero__tile hero__tile--mini">
+              <div class="miniTitle">Cashback</div>
+              <div class="miniSub">каждый четверг</div>
+              <div class="miniBadge">BONUS</div>
+            </div>
+            <div class="hero__tile hero__tile--mini">
+              <div class="miniTitle">Free chips</div>
+              <div class="miniSub">+1000 за клик</div>
+              <div class="miniBadge miniBadge--accent">FREE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs like JetTon/1win but minimal -->
+      <div class="tabs glass">
+        <button class="tab active" data-tab="all" type="button">
+          <span class="tab__ico">▦</span> Все игры
+        </button>
+        <button class="tab" data-tab="fast" type="button">
+          <span class="tab__ico">⚡</span> Быстрые
+        </button>
+        <button class="tab" data-tab="risk" type="button">
+          <span class="tab__ico">🔥</span> Риск
+        </button>
+        <button class="tab" data-tab="other" type="button">
+          <span class="tab__ico">★</span> Другое
+        </button>
+
+        <div class="tabs__right">
+          <button class="searchBtn" type="button" id="searchBtn" aria-label="Поиск">
+            <span class="tab__ico">🔎</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Games -->
+    <section id="games" class="section">
+      <div class="sectionHead">
+        <div class="sectionTitle">Игры</div>
+        <a class="pill pill--link" href="#games">Смотреть все →</a>
+      </div>
+
+      <div class="gamesGrid" id="gamesGrid">
+        <!-- your real modes -->
+        <a class="gameCard glass" href="./rps/" data-group="fast">
+          <div class="gameIcon">✊</div>
+          <div class="gameName">RPS</div>
+          <div class="gameDesc">серия побед • лестница • cashout</div>
+          <div class="gameTags">
+            <span class="gTag">Fast</span><span class="gTag gTag--muted">x ladder</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./penalty/" data-group="risk">
+          <div class="gameIcon">⚽</div>
+          <div class="gameName">Penalty</div>
+          <div class="gameDesc">умный вратарь • 2 сложности • X лестница</div>
+          <div class="gameTags">
+            <span class="gTag">Risk</span><span class="gTag gTag--muted">series</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./mines/" data-group="risk">
+          <div class="gameIcon">💣</div>
+          <div class="gameName">Mines</div>
+          <div class="gameDesc">5×5 • выбор мин • cashout</div>
+          <div class="gameTags">
+            <span class="gTag">Risk</span><span class="gTag gTag--muted">RNG</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./wheel/" data-group="fast">
+          <div class="gameIcon">🎡</div>
+          <div class="gameName">Wheel</div>
+          <div class="gameDesc">выбор множителя • ставка • прокрутка</div>
+          <div class="gameTags">
+            <span class="gTag">Fast</span><span class="gTag gTag--muted">x pick</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./dice/" data-group="fast">
+          <div class="gameIcon">🎲</div>
+          <div class="gameName">Dice</div>
+          <div class="gameDesc">меньше/больше • house edge • 3D</div>
+          <div class="gameTags">
+            <span class="gTag">Fast</span><span class="gTag gTag--muted">3D</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./coinflip/" data-group="fast">
+          <div class="gameIcon">🪙</div>
+          <div class="gameName">Coin Flip</div>
+          <div class="gameDesc">орёл/решка • 3D монета • x2</div>
+          <div class="gameTags">
+            <span class="gTag">Fast</span><span class="gTag gTag--muted">x2</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./crash/" data-group="risk">
+          <div class="gameIcon">🚀</div>
+          <div class="gameName">Crash</div>
+          <div class="gameDesc">график 60fps • cashout в полёте</div>
+          <div class="gameTags">
+            <span class="gTag">Risk</span><span class="gTag gTag--muted">curve</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./tower/" data-group="risk">
+          <div class="gameIcon">🐉</div>
+          <div class="gameName">Tower</div>
+          <div class="gameDesc">яйца/черепа • 2 режима • cashout</div>
+          <div class="gameTags">
+            <span class="gTag">Risk</span><span class="gTag gTag--muted">ladder</span>
+          </div>
+        </a>
+
+        <!-- placeholder cards (без анимаций) -->
+        <div class="gameCard glass gameCard--disabled" data-group="other">
+          <div class="gameIcon">🎰</div>
+          <div class="gameName">Slots</div>
+          <div class="gameDesc">скоро</div>
+          <div class="gameTags"><span class="gTag gTag--muted">placeholder</span></div>
+        </div>
+
+        <div class="gameCard glass gameCard--disabled" data-group="other">
+          <div class="gameIcon">🃏</div>
+          <div class="gameName">Battle</div>
+          <div class="gameDesc">скоро</div>
+          <div class="gameTags"><span class="gTag gTag--muted">placeholder</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- History (simple strip like JetTon) -->
+    <section id="history" class="section">
+      <div class="sectionHead">
+        <div class="sectionTitle">История игр</div>
+        <div class="pill pill--muted">локально</div>
+      </div>
+
+      <div class="history glass">
+        <div class="history__row" id="historyRow">
+          <!-- filled by JS -->
+        </div>
+        <div class="history__hint">Пока это демонстрация (можно подключить к вашим режимам позже).</div>
+      </div>
+    </section>
+
+    <!-- Bottom nav (mobile) -->
+    <nav class="bottomNav glass">
+      <button class="bItem active" data-jump="#games" type="button">
+        <span class="bIco">🏠</span><span class="bTxt">Главная</span>
+      </button>
+      <button class="bItem" data-jump="#games" type="button">
+        <span class="bIco">▦</span><span class="bTxt">Игры</span>
+      </button>
+      <button class="bItem" data-jump="#history" type="button">
+        <span class="bIco">🕓</span><span class="bTxt">История</span>
+      </button>
+      <button class="bItem" id="supportBtn" type="button">
+        <span class="bIco">🎧</span><span class="bTxt">Поддержка</span>
+      </button>
+      <button class="bItem" id="menuBtn" type="button">
+        <span class="bIco">☰</span><span class="bTxt">Меню</span>
+      </button>
     </nav>
 
-    <div class="topRight">
-      <a class="pill pill--tg" href="#" id="tgBtn" role="button" aria-label="Telegram">
-        <span class="dot"></span> Telegram
-      </a>
-      <a class="pill pill--vk" href="#" id="vkBtn" role="button" aria-label="VK">
-        <span class="dot"></span> VK
-      </a>
-
-      <a class="cta" href="/mini-caz/" id="goGames">
-        ИГРЫ
-        <span class="ctaSub">перейти</span>
-      </a>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <section class="hero">
-      <div class="heroLeft">
-        <div class="h1">TRINITI</div>
-        <div class="h2">Красиво. Быстро. Один кошелёк на все режимы.</div>
-
-        <div class="heroBadges">
-          <div class="badge">RNG локально</div>
-          <div class="badge">GitHub Pages</div>
-          <div class="badge">Mobile-first</div>
-        </div>
-
-        <div class="heroActions">
-          <a class="btn btn--primary" href="/mini-caz/">Открыть режимы</a>
-          <a class="btn btn--ghost" href="#faq">Как это работает</a>
-        </div>
-      </div>
-
-      <div class="heroRight">
-        <div class="glassCard">
-          <div class="glassCardTop">
-            <div class="glassTitle">Панель</div>
-            <div class="glassHint">кнопки пока заглушки</div>
-          </div>
-          <div class="glassRow">
-            <button class="chip" type="button">Пополнить</button>
-            <button class="chip" type="button">Профиль</button>
-            <button class="chip" type="button">Поддержка</button>
-          </div>
-          <div class="glassLine"></div>
-          <div class="glassSmall">
-            Хочешь “как справа” (плитки, снег, гирлянды и т.п.) — можно докрутить, но сейчас делаем основу.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="gridTitle">
-      <div class="gridH">Игры</div>
-      <div class="gridS">Кликабельна только плитка “Игры” (ведёт в mini-caz). Остальное — заглушки.</div>
-    </section>
-
-    <section class="tiles" aria-label="tiles">
-      <!-- ВАЖНО: абсолютный путь, чтобы не ломалось на GitHub Pages -->
-      <a class="tile tile--big" href="/mini-caz/">
-        <div class="tileIcon">🎮</div>
-        <div class="tileTxt">
-          <div class="tileName">Игры</div>
-          <div class="tileDesc">Открыть все режимы (RPS / Mines / Dice / Wheel / Crash / Tower / …)</div>
-        </div>
-        <div class="tileBtn">Играть</div>
-      </a>
-
-      <a class="tile" href="#" aria-disabled="true">
-        <div class="tileIcon">🏆</div>
-        <div class="tileTxt">
-          <div class="tileName">Jackpot</div>
-          <div class="tileDesc">Скоро</div>
-        </div>
-        <div class="tileBtn tileBtn--muted">—</div>
-      </a>
-
-      <a class="tile" href="#" aria-disabled="true">
-        <div class="tileIcon">🫧</div>
-        <div class="tileTxt">
-          <div class="tileName">Bubbles</div>
-          <div class="tileDesc">Скоро</div>
-        </div>
-        <div class="tileBtn tileBtn--muted">—</div>
-      </a>
-
-      <a class="tile" href="#" aria-disabled="true">
-        <div class="tileIcon">🎰</div>
-        <div class="tileTxt">
-          <div class="tileName">Slots</div>
-          <div class="tileDesc">Скоро</div>
-        </div>
-        <div class="tileBtn tileBtn--muted">—</div>
-      </a>
-
-      <a class="tile" href="#" aria-disabled="true">
-        <div class="tileIcon">⚔️</div>
-        <div class="tileTxt">
-          <div class="tileName">Battle</div>
-          <div class="tileDesc">Скоро</div>
-        </div>
-        <div class="tileBtn tileBtn--muted">—</div>
-      </a>
-
-      <a class="tile" href="#" aria-disabled="true">
-        <div class="tileIcon">🎯</div>
-        <div class="tileTxt">
-          <div class="tileName">Roulette</div>
-          <div class="tileDesc">Скоро</div>
-        </div>
-        <div class="tileBtn tileBtn--muted">—</div>
-      </a>
-    </section>
-
-    <section id="about" class="block">
-      <div class="blockH">О проекте</div>
-      <div class="blockP">
-        TRINITI — оболочка/главная. Реальные игры лежат в <b>/mini-caz/</b>.
-        Тут мы делаем красивую витрину, кнопки TG/VK и навигацию.
-      </div>
-    </section>
-
-    <section id="faq" class="block">
-      <div class="blockH">FAQ</div>
-      <div class="faq">
-        <div class="q">
-          <div class="qq">Почему раньше “плитки не нажимались”?</div>
-          <div class="aa">Обычно потому что фон/оверлей перекрывает клики или относительные ссылки ломаются. Здесь фон всегда <b>pointer-events:none</b>, а ссылки — <b>абсолютные</b>.</div>
-        </div>
-        <div class="q">
-          <div class="qq">Как перейти в режимы?</div>
-          <div class="aa">Нажми плитку “Игры” или кнопку “ИГРЫ” сверху — ведёт в <b>/mini-caz/</b>.</div>
-        </div>
-      </div>
-    </section>
-
     <footer class="foot">
-      <div>TRINITI • v1</div>
-      <div class="muted">Кнопки TG/VK пока заглушки • дизайн в ваших цветах</div>
+      <div class="muted">TRINITI • GitHub Pages • RNG локально • единый кошелёк</div>
     </footer>
-  </main>
+  </div>
 
   <script src="./triniti.js"></script>
 </body>
