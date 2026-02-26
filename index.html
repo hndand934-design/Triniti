@@ -1,1 +1,252 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>TRINITI</title>
 
+  <link rel="stylesheet" href="./triniti.css" />
+</head>
+<body>
+  <div class="bg">
+    <div class="bg__glow bg__glow--a"></div>
+    <div class="bg__glow bg__glow--b"></div>
+    <div class="bg__grid"></div>
+  </div>
+
+  <div class="app">
+
+    <header class="topbar glass">
+      <div class="brand">
+        <div class="brand__logo" aria-hidden="true">T</div>
+        <div class="brand__txt">
+          <div class="brand__title">TRINITI</div>
+          <div class="brand__sub">Мини-игры • единый кошелёк</div>
+        </div>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+          <span id="soundDot" class="dot"></span>
+          <span id="soundTxt">Звук on</span>
+        </button>
+
+        <button id="bonusBtn" class="btn btn--accent" type="button">+1000</button>
+
+        <div class="pill pill--balance">
+          Баланс: <b id="bal">0</b> <span class="coin">🪙</span>
+        </div>
+
+        <button id="tgBtn" class="iconBtn" type="button" aria-label="Telegram">
+          <span class="icon">✈️</span>
+        </button>
+        <button id="vkBtn" class="iconBtn" type="button" aria-label="VK">
+          <span class="icon">VK</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero__card glass">
+        <div class="hero__left">
+          <div class="hero__kicker">TRINITI • Premium UI</div>
+          <h1 class="hero__title">Играй быстро.<br/>Кэшауть вовремя.</h1>
+          <div class="hero__desc">
+            Единая тема • единый кошелёк • честный RNG.
+          </div>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#games">Все игры</a>
+            <a class="btn btn--ghost" href="#history">История</a>
+          </div>
+        </div>
+
+        <div class="hero__right">
+          <div class="hero__tile hero__tile--big">
+            <div class="hero__tileTop">
+              <div class="tag">Турбина удачи</div>
+              <div class="tag tag--muted">Ежедневно</div>
+            </div>
+            <div class="hero__tileMid">
+              <div class="jackpot">x<span>4.00</span></div>
+              <div class="jackpot__sub">выбери множитель и крути</div>
+            </div>
+            <div class="hero__tileBottom">
+              <a class="btn btn--small btn--primary" href="./wheel/" data-route="wheel/">Открыть Wheel</a>
+              <div class="dots" aria-hidden="true">
+                <span class="dotx on"></span><span class="dotx"></span><span class="dotx"></span><span class="dotx"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero__miniRow">
+            <div class="hero__tile hero__tile--mini">
+              <div class="miniTitle">Cashback</div>
+              <div class="miniSub">каждый четверг</div>
+              <div class="miniBadge">BONUS</div>
+            </div>
+            <div class="hero__tile hero__tile--mini" id="freeChipsTile">
+              <div class="miniTitle">Free chips</div>
+              <div class="miniSub">+1000 за клик</div>
+              <div class="miniBadge miniBadge--accent">FREE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs glass">
+        <button class="tab active" data-tab="all" type="button">
+          <span class="tab__ico">▦</span> Все игры
+        </button>
+        <button class="tab" data-tab="fast" type="button">
+          <span class="tab__ico">⚡</span> Быстрые
+        </button>
+        <button class="tab" data-tab="risk" type="button">
+          <span class="tab__ico">🔥</span> Риск
+        </button>
+        <button class="tab" data-tab="other" type="button">
+          <span class="tab__ico">★</span> Другое
+        </button>
+
+        <div class="tabs__right">
+          <button class="searchBtn" type="button" id="searchBtn" aria-label="Поиск">
+            <span class="tab__ico">🔎</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="games" class="section">
+      <div class="sectionHead">
+        <div class="sectionTitle">Игры</div>
+        <a class="pill pill--link" href="#games">Смотреть все →</a>
+      </div>
+
+      <div class="gamesGrid" id="gamesGrid">
+        <a class="gameCard glass" href="./rps/" data-route="rps/" data-group="fast">
+          <div class="gameIcon">✊</div>
+          <div class="gameName">RPS</div>
+          <div class="gameDesc">серия побед • лестница • cashout</div>
+          <div class="gameTags">
+            <span class="gTag">Fast</span><span class="gTag gTag--muted">x ladder</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./penalty/" data-route="penalty/" data-group="risk">
+          <div class="gameIcon">⚽</div>
+          <div class="gameName">Penalty</div>
+          <div class="gameDesc">умный вратарь • 2 сложности • X лестница</div>
+          <div class="gameTags">
+            <span class="gTag">Risk</span><span class="gTag gTag--muted">series</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./mines/" data-route="mines/" data-group="risk">
+          <div class="gameIcon">💣</div>
+          <div class="gameName">Mines</div>
+          <div class="gameDesc">5×5 • выбор мин • cashout</div>
+          <div class="gameTags">
+            <span class="gTag">Risk</span><span class="gTag gTag--muted">RNG</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./wheel/" data-route="wheel/" data-group="fast">
+          <div class="gameIcon">🎡</div>
+          <div class="gameName">Wheel</div>
+          <div class="gameDesc">выбор множителя • ставка • прокрутка</div>
+          <div class="gameTags">
+            <span class="gTag">Fast</span><span class="gTag gTag--muted">x pick</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./dice/" data-route="dice/" data-group="fast">
+          <div class="gameIcon">🎲</div>
+          <div class="gameName">Dice</div>
+          <div class="gameDesc">меньше/больше • house edge • 3D</div>
+          <div class="gameTags">
+            <span class="gTag">Fast</span><span class="gTag gTag--muted">3D</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./coinflip/" data-route="coinflip/" data-group="fast">
+          <div class="gameIcon">🪙</div>
+          <div class="gameName">Coin Flip</div>
+          <div class="gameDesc">орёл/решка • 3D монета • x2</div>
+          <div class="gameTags">
+            <span class="gTag">Fast</span><span class="gTag gTag--muted">x2</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./crash/" data-route="crash/" data-group="risk">
+          <div class="gameIcon">🚀</div>
+          <div class="gameName">Crash</div>
+          <div class="gameDesc">график 60fps • cashout в полёте</div>
+          <div class="gameTags">
+            <span class="gTag">Risk</span><span class="gTag gTag--muted">curve</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./tower/" data-route="tower/" data-group="risk">
+          <div class="gameIcon">🐉</div>
+          <div class="gameName">Tower</div>
+          <div class="gameDesc">яйца/черепа • 2 режима • cashout</div>
+          <div class="gameTags">
+            <span class="gTag">Risk</span><span class="gTag gTag--muted">ladder</span>
+          </div>
+        </a>
+
+        <div class="gameCard glass gameCard--disabled" data-group="other">
+          <div class="gameIcon">🎰</div>
+          <div class="gameName">Slots</div>
+          <div class="gameDesc">скоро</div>
+          <div class="gameTags"><span class="gTag gTag--muted">placeholder</span></div>
+        </div>
+
+        <div class="gameCard glass gameCard--disabled" data-group="other">
+          <div class="gameIcon">🃏</div>
+          <div class="gameName">Battle</div>
+          <div class="gameDesc">скоро</div>
+          <div class="gameTags"><span class="gTag gTag--muted">placeholder</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="history" class="section">
+      <div class="sectionHead">
+        <div class="sectionTitle">История игр</div>
+        <div class="pill pill--muted">локально</div>
+      </div>
+
+      <div class="history glass">
+        <div class="history__row" id="historyRow"></div>
+        <div class="history__hint">Пока это демонстрация (можно подключить к вашим режимам позже).</div>
+      </div>
+    </section>
+
+    <nav class="bottomNav glass">
+      <button class="bItem active" data-jump="#games" type="button">
+        <span class="bIco">🏠</span><span class="bTxt">Главная</span>
+      </button>
+      <button class="bItem" data-jump="#games" type="button">
+        <span class="bIco">▦</span><span class="bTxt">Игры</span>
+      </button>
+      <button class="bItem" data-jump="#history" type="button">
+        <span class="bIco">🕓</span><span class="bTxt">История</span>
+      </button>
+      <button class="bItem" id="supportBtn" type="button">
+        <span class="bIco">🎧</span><span class="bTxt">Поддержка</span>
+      </button>
+      <button class="bItem" id="menuBtn" type="button">
+        <span class="bIco">☰</span><span class="bTxt">Меню</span>
+      </button>
+    </nav>
+
+    <footer class="foot">
+      <div class="muted">TRINITI • GitHub Pages • RNG локально • единый кошелёк</div>
+    </footer>
+  </div>
+
+  <script src="./shared/wallet.js"></script>
+  <script src="./triniti.js"></script>
+</body>
+</html>
