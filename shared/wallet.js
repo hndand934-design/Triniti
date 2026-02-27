@@ -1,6 +1,5 @@
-/* shared/wallet.js — единый кошелёк TRINITI (safe) */
 (() => {
-  const KEY = "triniti_wallet_v1";
+  const KEY = "triniti_shared_wallet_v1";
 
   function load() {
     try {
@@ -16,36 +15,27 @@
 
   let state = load();
 
-  function emit() {
-    try {
-      window.dispatchEvent(new CustomEvent("wallet:update", { detail: { coins: state.coins } }));
-    } catch {}
+  function setCoins(v) {
+    state.coins = Math.max(0, Math.floor(Number(v) || 0));
+    save(state);
+    return state.coins;
   }
 
-  function clamp(v) {
-    return Math.max(0, Math.floor(Number(v) || 0));
+  function addCoins(d) {
+    return setCoins(state.coins + Math.floor(Number(d) || 0));
   }
 
-  const api = {
-    getCoins() {
-      return state.coins;
-    },
-    setCoins(v) {
-      state.coins = clamp(v);
-      save(state);
-      emit();
-      return state.coins;
-    },
-    addCoins(d) {
-      state.coins = clamp(state.coins + (Number(d) || 0));
-      save(state);
-      emit();
-      return state.coins;
-    }
+  function getCoins() {
+    // всегда читаем актуальное (если другое окно поменяло)
+    state = load();
+    return state.coins;
+  }
+
+  // Глобальный API для всех режимов
+  window.SharedWallet = {
+    KEY,
+    getCoins,
+    setCoins,
+    addCoins
   };
-
-  window.SharedWallet = api;
-
-  // на всякий случай — обновим сразу
-  emit();
 })();
