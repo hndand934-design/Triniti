@@ -1,7 +1,10 @@
+/* shared/wallet.js
+   ЕДИНЫЙ КОШЕЛЁК для всех режимов TRINITI
+*/
 (() => {
-  const KEY = "triniti_shared_wallet_v1";
+  const KEY = "triniti_wallet_v1";
 
-  function load() {
+  function read() {
     try {
       const w = JSON.parse(localStorage.getItem(KEY) || "null");
       if (w && typeof w.coins === "number") return { coins: Math.floor(w.coins) };
@@ -9,33 +12,57 @@
     return { coins: 1000 };
   }
 
-  function save(w) {
-    localStorage.setItem(KEY, JSON.stringify({ coins: Math.floor(w.coins) }));
+  function write(coins) {
+    const safe = Math.max(0, Math.floor(coins));
+    localStorage.setItem(KEY, JSON.stringify({ coins: safe }));
+    return safe;
   }
 
-  let state = load();
+  let state = read();
+  const listeners = new Set();
+
+  function emit() {
+    for (const fn of listeners) {
+      try { fn(state.coins); } catch {}
+    }
+  }
 
   function setCoins(v) {
-    state.coins = Math.max(0, Math.floor(Number(v) || 0));
-    save(state);
+    state.coins = write(v);
+    emit();
     return state.coins;
   }
 
   function addCoins(d) {
-    return setCoins(state.coins + Math.floor(Number(d) || 0));
+    return setCoins(state.coins + (Number(d) || 0));
   }
 
   function getCoins() {
-    // всегда читаем актуальное (если другое окно поменяло)
-    state = load();
+    // всегда актуально
+    state = read();
     return state.coins;
   }
 
-  // Глобальный API для всех режимов
+  function onChange(fn) {
+    listeners.add(fn);
+    // сразу отдадим текущее
+    try { fn(getCoins()); } catch {}
+    return () => listeners.delete(fn);
+  }
+
+  // синхронизация между вкладками
+  window.addEventListener("storage", (e) => {
+    if (e.key !== KEY) return;
+    state = read();
+    emit();
+  });
+
+  // Экспорт в window
   window.SharedWallet = {
     KEY,
     getCoins,
     setCoins,
-    addCoins
+    addCoins,
+    onChange,
   };
 })();
