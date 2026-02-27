@@ -5,12 +5,17 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>TRINITI — Wheel</title>
 
-  <!-- ЕДИНЫЙ КОШЕЛЁК -->
-  <script src="../shared/wallet.js"></script>
+  <!-- ОБЩИЕ СТИЛИ (если файл существует) -->
+  <link rel="stylesheet" href="../shared/theme.css" />
 
   <!-- СТИЛИ РЕЖИМА -->
   <link rel="stylesheet" href="./style.css" />
+
+  <!-- ЕДИНЫЙ КОШЕЛЁК + ЛОГИКА РЕЖИМА -->
+  <script src="../shared/wallet.js" defer></script>
+  <script src="./app.js" defer></script>
 </head>
+
 <body>
   <div class="bg"></div>
 
@@ -31,15 +36,14 @@
 
         <div class="pill pill--balance">🪙 <b id="balance">0</b></div>
 
-        <a class="pill pill--link" href="../index.html">← На главную</a>
+        <a class="pill pill--link" href="../index.html">← Назад</a>
       </div>
     </header>
 
     <main class="layout">
-      <!-- LEFT -->
       <section class="card card--left">
         <div class="cardHead">
-          <div class="h1">Турбина удачи</div>
+          <div class="h1">Wheel</div>
           <div class="hint">Выбери множитель снизу и нажми «Крутить». Выигрыш только при попадании.</div>
         </div>
 
@@ -47,7 +51,6 @@
           <div class="wheelPanel">
             <div class="pointer" aria-hidden="true"></div>
             <canvas id="wheel" width="620" height="620"></canvas>
-
             <div class="wheelCenter">
               <div class="centerText">Выбери множитель</div>
               <div class="centerSub">и нажми «Крутить»</div>
@@ -85,7 +88,6 @@
         </div>
       </section>
 
-      <!-- RIGHT -->
       <aside class="card card--right">
         <div class="cardHead">
           <div class="h1">Ставка</div>
@@ -115,7 +117,5 @@
       </aside>
     </main>
   </div>
-
-  <script src="./app.js"></script>
 </body>
 </html>
