@@ -1,1 +1,121 @@
-.
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>TRINITI — Wheel</title>
+
+  <!-- ЕДИНЫЙ КОШЕЛЁК -->
+  <script src="../shared/wallet.js"></script>
+
+  <!-- СТИЛИ РЕЖИМА -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="bg"></div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar__left">
+        <div class="title">Wheel</div>
+        <div class="subtitle">TRINITI • единый кошелёк</div>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+          <span class="dot" id="soundDot"></span>
+          <span id="soundText">Звук on</span>
+        </button>
+
+        <button id="bonusBtn" class="pill pill--bonus" type="button">+1000 🪙</button>
+
+        <div class="pill pill--balance">🪙 <b id="balance">0</b></div>
+
+        <a class="pill pill--link" href="../index.html">← На главную</a>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- LEFT -->
+      <section class="card card--left">
+        <div class="cardHead">
+          <div class="h1">Турбина удачи</div>
+          <div class="hint">Выбери множитель снизу и нажми «Крутить». Выигрыш только при попадании.</div>
+        </div>
+
+        <div class="wheelWrap">
+          <div class="wheelPanel">
+            <div class="pointer" aria-hidden="true"></div>
+            <canvas id="wheel" width="620" height="620"></canvas>
+
+            <div class="wheelCenter">
+              <div class="centerText">Выбери множитель</div>
+              <div class="centerSub">и нажми «Крутить»</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="choiceRow" role="group" aria-label="Выбор множителя">
+          <button class="pick" data-pick="1.5" type="button"><span class="bar bar--green"></span>1.50x</button>
+          <button class="pick" data-pick="1.7" type="button"><span class="bar bar--white"></span>1.70x</button>
+          <button class="pick" data-pick="2.0" type="button"><span class="bar bar--yellow"></span>2.00x</button>
+          <button class="pick" data-pick="3.0" type="button"><span class="bar bar--purple"></span>3.00x</button>
+          <button class="pick" data-pick="4.0" type="button"><span class="bar bar--orange"></span>4.00x</button>
+        </div>
+
+        <button id="spinBtn" class="btnPrimary" type="button" disabled>Крутить</button>
+
+        <div class="statusRow">
+          <div class="statusBox">
+            <div class="label">Статус</div>
+            <div class="value" id="statusView">Ожидание</div>
+          </div>
+          <div class="statusBox">
+            <div class="label">Твой выбор</div>
+            <div class="value" id="pickView">—</div>
+          </div>
+          <div class="statusBox">
+            <div class="label">Результат</div>
+            <div class="value" id="resultView">—</div>
+          </div>
+        </div>
+
+        <div class="footNote">
+          Правило: если выпало на твой множитель — выигрываешь ×множитель, иначе ставка сгорает.
+        </div>
+      </section>
+
+      <!-- RIGHT -->
+      <aside class="card card--right">
+        <div class="cardHead">
+          <div class="h1">Ставка</div>
+          <div class="hint">Монеты виртуальные, без вывода.</div>
+        </div>
+
+        <div class="betBox">
+          <div class="chips" role="group" aria-label="chips">
+            <button class="chip" data-bet="10" type="button">10</button>
+            <button class="chip" data-bet="50" type="button">50</button>
+            <button class="chip" data-bet="100" type="button">100</button>
+            <button class="chip" data-bet="250" type="button">250</button>
+            <button class="chip" data-bet="500" type="button">500</button>
+            <button class="chip" data-bet="max" type="button">MAX</button>
+          </div>
+
+          <div class="betRow">
+            <button id="betMinus" class="btnSmall" type="button">−</button>
+            <input id="betInput" class="betInput" type="number" min="1" step="1" value="100" />
+            <button id="betPlus" class="btnSmall" type="button">+</button>
+          </div>
+
+          <div class="mutedLine">
+            Баланс: <b>🪙 <span id="balance2">0</span></b>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
