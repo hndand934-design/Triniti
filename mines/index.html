@@ -1,1 +1,131 @@
-.
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>TRINITI — Mines</title>
+
+  <!-- (опционально) общий стиль, если есть -->
+  <link rel="stylesheet" href="../shared/theme.css" />
+
+  <!-- стиль режима -->
+  <link rel="stylesheet" href="./style.css" />
+
+  <!-- единый кошелёк + логика режима -->
+  <script src="../shared/wallet.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+
+<body>
+  <div class="bg"></div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar__left">
+        <div class="title">Mines</div>
+        <div id="subTitle" class="subtitle">TRINITI • единый кошелёк</div>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+          <span class="dot"></span>
+          <span id="soundText">Звук</span>
+        </button>
+
+        <button id="bonusBtn" class="pill pill--bonus" type="button">+1000 🪙</button>
+
+        <div class="pill pill--balance">🪙 <b id="balance">0</b></div>
+
+        <a class="pill pill--link" href="../index.html">← Назад</a>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- LEFT: поле -->
+      <section class="panel panel--left">
+        <div class="panelHead">
+          <div>
+            <div class="h1">Mines</div>
+            <div class="hint">Открывай safe клетки. Чем больше мин — тем выше X. Можно “Забрать”.</div>
+          </div>
+        </div>
+
+        <div id="grid" class="grid" aria-label="mines grid"></div>
+
+        <div class="statsRow">
+          <div class="statBox">
+            <div class="label">Открыто safe</div>
+            <div class="value"><b id="openedView">0</b> / <span id="safeMaxView">22</span></div>
+          </div>
+          <div class="statBox">
+            <div class="label">Множитель</div>
+            <div class="value"><b id="multView">x1.00</b></div>
+          </div>
+          <div class="statBox">
+            <div class="label">Забрать сейчас</div>
+            <div class="value"><b id="cashNowView">—</b></div>
+          </div>
+        </div>
+
+        <div class="actionsRow">
+          <button id="cashoutBtn" class="btnPrimary" type="button" disabled>Забрать</button>
+          <button id="resetBtn" class="btnGhost" type="button">Сброс</button>
+        </div>
+
+        <div id="msg" class="msg">Выбери ставку и количество мин, затем нажми Start.</div>
+      </section>
+
+      <!-- RIGHT: управление -->
+      <aside class="panel panel--right">
+        <div class="panelHead">
+          <div class="h2">Ставка</div>
+          <div class="muted">Монеты виртуальные, без вывода.</div>
+        </div>
+
+        <div class="chips" role="group" aria-label="chips">
+          <button class="chip" data-bet="10" type="button">10</button>
+          <button class="chip" data-bet="50" type="button">50</button>
+          <button class="chip" data-bet="100" type="button">100</button>
+          <button class="chip" data-bet="250" type="button">250</button>
+          <button class="chip" data-bet="500" type="button">500</button>
+          <button class="chip" data-bet="max" type="button">MAX</button>
+        </div>
+
+        <div class="betRow">
+          <button id="betMinus" class="btnSmall" type="button">−</button>
+          <input id="betInput" class="betInput" type="number" min="1" step="1" value="100" />
+          <button id="betPlus" class="btnSmall" type="button">+</button>
+        </div>
+
+        <div class="rangeBlock">
+          <div class="rangeTitle">
+            <div class="h2">Mines</div>
+            <div class="pill pill--mini"><b id="minesView">3</b></div>
+          </div>
+          <input id="minesRange" class="range" type="range" min="3" max="24" value="3" />
+          <div class="muted" style="margin-top:6px;">
+            На раунде менять нельзя. Больше мин — выше риск и выше X.
+          </div>
+        </div>
+
+        <button id="startBtn" class="btnPrimary" type="button">Start</button>
+
+        <div class="ladderWrap">
+          <div class="ladderTitle">
+            <span>Лесенка X</span>
+            <span class="ladderHint">показывается заранее</span>
+          </div>
+
+          <div class="ladderBox">
+            <div id="ladderGrid" class="ladderGrid"></div>
+          </div>
+        </div>
+
+        <div class="footerNote">
+          Честный RNG: crypto.getRandomValues. Монеты виртуальные.
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
