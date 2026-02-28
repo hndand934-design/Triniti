@@ -40,7 +40,7 @@
 
   function addCoins(d) { Wallet.add(d); renderTop(); }
 
-  // ===== Sound (лёгкий, без лагов) =====
+  // ===== Sound =====
   let soundOn = true;
   let audioCtx = null;
 
@@ -130,12 +130,13 @@
   bonusBtn.onclick = onBonus;
   bonusBtn2.onclick = onBonus;
 
-  // ===== Game state =====
+  // ===== Game config =====
   const HOUSE_EDGE = 0.985;
+
   let mode = "more";
   let busy = false;
 
-  // ===== Cube faces (pips) =====
+  // ===== Куб: точки (если вдруг у тебя не смонтированы — безопасно) =====
   const PIPS = {
     1: [4],
     2: [0, 8],
@@ -151,9 +152,11 @@
     return `<div class="pips" aria-label="pips-${val}">${dots}</div>`;
   }
 
-  function mountFaces() {
-    // Важно: соответствие твоей разметке граней:
-    // top=1 bottom=6 front=2 back=5 right=3 left=4
+  function mountFacesSafe() {
+    const top = cubeEl.querySelector('[data-face="top"]');
+    if (!top) return;
+
+    // соответствие твоей разметке:
     cubeEl.querySelector('[data-face="top"]').innerHTML = faceHTML(1);
     cubeEl.querySelector('[data-face="bottom"]').innerHTML = faceHTML(6);
     cubeEl.querySelector('[data-face="front"]').innerHTML = faceHTML(2);
@@ -161,105 +164,71 @@
     cubeEl.querySelector('[data-face="right"]').innerHTML = faceHTML(3);
     cubeEl.querySelector('[data-face="left"]').innerHTML = faceHTML(4);
   }
-  mountFaces();
+  mountFacesSafe();
 
-  // ===== Orientation model (24 состояния) =====
-  // Мы храним, какое число сейчас на каждой стороне.
-  const BASE = { U: 1, D: 6, F: 2, B: 5, R: 3, L: 4 };
-
-  function keyOf(o) { return `${o.U}${o.D}${o.F}${o.B}${o.R}${o.L}`; }
-
-  // Повороты на 90° (логическая модель куба)
-  function rotX(o) { // вращаем "на себя": верх->перед
-    return { U: o.B, D: o.F, F: o.U, B: o.D, R: o.R, L: o.L };
-  }
-  function rotY(o) { // вправо: перед->право
-    return { U: o.U, D: o.D, F: o.L, B: o.R, R: o.F, L: o.B };
-  }
-  function rotZ(o) { // по часовой: верх->право
-    return { U: o.L, D: o.R, F: o.F, B: o.B, R: o.U, L: o.D };
-  }
-
-  function normDeg(d) {
-    let x = d % 360;
-    if (x < 0) x += 360;
-    return x;
-  }
-
-  // BFS: собираем все ориентации + углы
-  function bfsOrientations() {
-    const start = { ...BASE };
-    const q = [{ o: start, rx: 0, ry: 0, rz: 0 }];
-    const seen = new Map();
-    seen.set(keyOf(start), { rx: 0, ry: 0, rz: 0, o: start });
-
-    const moves = [
-      { fn: rotX, dx: 90, dy: 0, dz: 0 },
-      { fn: rotY, dx: 0, dy: 90, dz: 0 },
-      { fn: rotZ, dx: 0, dy: 0, dz: 90 },
-    ];
-
-    while (q.length) {
-      const cur = q.shift();
-      for (const m of moves) {
-        const no = m.fn(cur.o);
-        const k = keyOf(no);
-        if (seen.has(k)) continue;
-
-        const nx = normDeg(cur.rx + m.dx);
-        const ny = normDeg(cur.ry + m.dy);
-        const nz = normDeg(cur.rz + m.dz);
-
-        const rec = { rx: nx, ry: ny, rz: nz, o: no };
-        seen.set(k, rec);
-        q.push({ o: no, rx: nx, ry: ny, rz: nz });
-      }
+  // ===== ✅ ЖЁСТКАЯ таблица углов: ВСЕГДА правильный TOP при твоей раскладке граней =====
+  // top=1, bottom=6, front=2, back=5, right=3, left=4
+  function anglesForTop(n) {
+    // rx вокруг X, ry вокруг Y, rz вокруг Z
+    // (без учёта базового наклона -22/35, он добавится ниже)
+    switch (n) {
+      case 1: return { rx: 0,   ry: 0, rz: 0 };
+      case 2: return { rx: -90, ry: 0, rz: 0 };   // front -> top
+      case 3: return { rx: 0,   ry: 0, rz: -90 }; // right -> top
+      case 4: return { rx: 0,   ry: 0, rz: 90 };  // left -> top
+      case 5: return { rx: 90,  ry: 0, rz: 0 };   // back -> top
+      case 6: return { rx: 180, ry: 0, rz: 0 };   // bottom -> top
+      default: return { rx: 0,  ry: 0, rz: 0 };
     }
-
-    const byTop = new Map();
-    for (const rec of seen.values()) {
-      const top = rec.o.U;
-      if (!byTop.has(top)) byTop.set(top, []);
-      byTop.get(top).push(rec);
-    }
-    return byTop;
   }
 
-  const ORIENTS_BY_TOP = bfsOrientations();
-
-  // ===== ✅ КЛЮЧЕВОЙ ФИКС: применяем transform в правильном порядке =====
-  // CSS transforms применяются справа-налево, поэтому чтобы логика совпала, мы пишем:
-  // ... rotateZ(rz) rotateY(ry) rotateX(rx)
-  // Тогда по факту применяется: rotateX -> rotateY -> rotateZ (как в нашей модели).
-  function applyCubeTransform(rx, ry, rz) {
+  // ===== ✅ ВАЖНО: transform пишем так, чтобы порядок был предсказуем =====
+  // rotateX(-22) rotateY(35) — базовая поза,
+  // потом применяем rz/ry/rx строго в конце.
+  function applyCube(rx, ry, rz) {
     cubeEl.style.transform =
       `rotateX(-22deg) rotateY(35deg) ` +
       `rotateZ(${rz}deg) rotateY(${ry}deg) rotateX(${rx}deg)`;
   }
 
-  // Стартовая поза
-  applyCubeTransform(0, 0, 0);
+  // старт
+  applyCube(0, 0, 0);
 
-  function spinToRecord(rec) {
+  function spinToTopValue(n) {
+    const a = anglesForTop(n);
+
+    // делаем красиво: полные обороты + случайный yaw вокруг Y (не меняет top)
     const extraX = 360 * randInt(1, 2);
-    const extraY = 360 * randInt(1, 2);
     const extraZ = 360 * randInt(0, 1);
+    const extraY = 90 * randInt(0, 3) + 360 * randInt(0, 1);
 
-    const rx = rec.rx + extraX;
-    const ry = rec.ry + extraY;
-    const rz = rec.rz + extraZ;
+    const rx = a.rx + extraX;
+    const ry = a.ry + extraY;
+    const rz = a.rz + extraZ;
 
     return new Promise((resolve) => {
+      let done = false;
+
       const onEnd = (e) => {
-        // ✅ чтобы не ловить transitionend от внутренних .face/.pip
         if (e.target !== cubeEl) return;
+        if (done) return;
+        done = true;
         cubeEl.removeEventListener("transitionend", onEnd);
         resolve();
       };
+
       cubeEl.addEventListener("transitionend", onEnd);
 
-      // применяем
-      applyCubeTransform(rx, ry, rz);
+      // fallback, если transitionend не пришёл (иногда мобилки чудят)
+      setTimeout(() => {
+        if (done) return;
+        done = true;
+        cubeEl.removeEventListener("transitionend", onEnd);
+        resolve();
+      }, 1200);
+
+      // запускаем
+      applyCube(rx, ry, rz);
     });
   }
 
@@ -273,8 +242,8 @@
     recalc();
   }
   betInput.addEventListener("input", clampBet);
-  betMinus.onclick = () => { betInput.value = String((Number(betInput.value)||1) - 10); clampBet(); };
-  betPlus.onclick  = () => { betInput.value = String((Number(betInput.value)||1) + 10); clampBet(); };
+  betMinus.onclick = () => { betInput.value = String((Number(betInput.value) || 1) - 10); clampBet(); };
+  betPlus.onclick  = () => { betInput.value = String((Number(betInput.value) || 1) + 10); clampBet(); };
 
   document.querySelectorAll(".chip").forEach((b) => {
     b.onclick = () => {
@@ -328,7 +297,7 @@
   }
   recalc();
 
-  // ===== Roll action (синхрон 100%) =====
+  // ===== Roll action: ✅ абсолютный синхрон =====
   rollBtn.onclick = async () => {
     if (busy) return;
 
@@ -344,21 +313,15 @@
 
     const thr = Number(thrRange.value);
 
-    // ✅ выбираем число и ОДНОЗНАЧНО соответствующую ориентацию
-    const wantedTop = randInt(1, 6);
-    const list = ORIENTS_BY_TOP.get(wantedTop);
-    const rec = list[randInt(0, list.length - 1)];
-
-    // ✅ итоговое число берём из ориентации (то, что реально сверху по модели)
-    // это же число показываем текстом и используем для win/lose
-    const result = rec.o.U;
+    // ✅ одно число — и визуал, и текст, и win/lose
+    const result = randInt(1, 6);
 
     rolledView.textContent = "…";
     beep(520, 55, 0.02);
 
-    await spinToRecord(rec);
+    await spinToTopValue(result);
 
-    // ✅ теперь точно синхрон
+    // ✅ теперь ВСЕГДА совпадает с верхней гранью
     rolledView.textContent = String(result);
 
     const win =
