@@ -171,30 +171,50 @@ body{
   overflow:hidden;
 }
 
-.cubeView{ perspective: 900px; transform: translateZ(0); }
+.cubeView{
+  perspective: 900px;
+  transform: translateZ(0);
+}
+
+/* ✅ ВАЖНО: наклон камеры как в Dice Final */
 .cube{
-  --rx: 0deg; --ry: 0deg; --rz: 0deg;
+  --rx: 0deg;
+  --ry: 0deg;
+  --rz: 0deg;
+
   position: relative;
   width: 108px;
   height: 108px;
+
   transform-style: preserve-3d;
-  transform: rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz));
+
+  transform:
+    rotateX(-22deg) rotateY(35deg)
+    rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz));
+
   transition: transform 900ms cubic-bezier(.2,.85,.2,1);
   will-change: transform;
 }
 
 /* НЕпрозрачные грани */
 .face{
-  position:absolute; inset:0;
+  position:absolute;
+  inset:0;
   border-radius: 16px;
+
   background:
     radial-gradient(120px 90px at 30% 25%, rgba(255,255,255,.12), rgba(255,255,255,0) 55%),
     linear-gradient(180deg, rgba(26,33,52,1), rgba(10,14,24,1));
+
   border: 1px solid rgba(255,255,255,.16);
+
   box-shadow:
     0 18px 30px rgba(0,0,0,.45),
     0 0 0 1px rgba(0,0,0,.35) inset;
-  display:flex; align-items:center; justify-content:center;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 .face--front  { transform: rotateY(  0deg) translateZ(54px); }
@@ -217,6 +237,7 @@ body{
   background: rgba(0,0,0,.14);
   border: 1px solid rgba(255,255,255,.08);
 }
+
 .pip{
   width: 9px;
   height: 9px;
@@ -232,12 +253,16 @@ body{
 
 /* BET */
 .bet{ padding: 10px 12px 12px; }
+
 .betHead{
   display:flex; justify-content:space-between; align-items:center; gap:10px;
   margin-bottom:8px;
 }
 
-.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chips{
+  display:flex; flex-wrap:wrap; gap:8px;
+}
+
 .chip{
   padding:9px 11px;
   border-radius:999px;
@@ -256,6 +281,7 @@ body{
   gap:8px;
   align-items:center;
 }
+
 .btnSmall{
   height:42px;
   border-radius: 14px;
@@ -266,6 +292,7 @@ body{
   cursor:pointer;
 }
 .btnSmall:active{transform:scale(.99)}
+
 .betInput{
   height:42px;
   border-radius: 14px;
@@ -299,27 +326,28 @@ body{
   color: var(--muted);
 }
 
-/* MOBILE PACKING */
+/* MOBILE */
 @media (max-width: 520px){
-  .cardHead{flex-direction:column; align-items:stretch; padding-bottom:10px;}
-  .cardHead__right{justify-content:flex-start}
-  .seg{min-width:0; flex:1; padding:9px 10px;}
+  .cardHead{flex-direction:column; align-items:stretch;}
+  .seg{min-width:0; flex:1;}
 
-  /* оставляем 3 статы в ряд, но компактно */
-  .grid3{ grid-template-columns: repeat(3, 1fr); gap:6px; }
-  .stat{ padding:8px 9px; }
-  .value{ font-size:13px; }
-
-  /* меньше высота арены */
   .cubeStage{ height: 190px; }
   .cube{ width: 98px; height: 98px; }
+
   .pips{ width: 70px; height: 70px; gap:6px; padding:9px; }
   .pip{ width: 8px; height: 8px; }
 
-  /* chips 3 в ряд */
-  .chips{ display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; }
-  .chip{ width:100%; text-align:center; justify-content:center; }
+  .chips{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:8px;
+  }
+  .chip{
+    width:100%;
+    text-align:center;
+  }
 }
+
 @media (prefers-reduced-motion: reduce){
   .cube{transition:none}
 }
