@@ -1,277 +1,377 @@
 (() => {
   // =========================
-  // 0) Shared Wallet bootstrap
+  // Shared Wallet + fallback
   // =========================
-  // Если shared/wallet.js по какой-то причине не загрузился — делаем fallback,
-  // чтобы сайт НЕ ломался и кошелёк всё равно был единым.
-  const WALLET_KEY = "triniti_shared_wallet_v1";
+  const WALLET_KEY_FALLBACK = "mini_wallet_home_fallback_v1";
 
-  function ensureSharedWallet() {
+  const Wallet = (() => {
     const sw = window.SharedWallet;
-
-    if (
-      sw &&
-      typeof sw.getCoins === "function" &&
-      typeof sw.setCoins === "function" &&
-      typeof sw.addCoins === "function"
-    ) {
-      return sw; // всё ок
+    if (sw && typeof sw.getCoins === "function" && typeof sw.setCoins === "function" && typeof sw.addCoins === "function") {
+      return {
+        get() { return Math.floor(Number(sw.getCoins()) || 0); },
+        set(v) { sw.setCoins(Math.max(0, Math.floor(Number(v) || 0))); },
+        add(d) { sw.addCoins(Math.floor(Number(d) || 0)); },
+      };
     }
 
-    // fallback
-    function load() {
-      try {
-        const v = JSON.parse(localStorage.getItem(WALLET_KEY) || "null");
-        if (v && typeof v.coins === "number") return { coins: Math.max(0, Math.floor(v.coins)) };
-      } catch {}
-      return { coins: 1000 };
-    }
+    let coins = (() => {
+      const raw = localStorage.getItem(WALLET_KEY_FALLBACK);
+      const n = raw ? Number(raw) : 1000;
+      return Number.isFinite(n) ? n : 1000;
+    })();
 
-    function save(state) {
-      localStorage.setItem(WALLET_KEY, JSON.stringify({ coins: Math.max(0, Math.floor(state.coins)) }));
-    }
+    function save(){ localStorage.setItem(WALLET_KEY_FALLBACK, String(coins)); }
 
-    const state = load();
-
-    window.SharedWallet = {
-      getCoins() {
-        return Math.max(0, Math.floor(state.coins));
-      },
-      setCoins(n) {
-        state.coins = Math.max(0, Math.floor(Number(n) || 0));
-        save(state);
-      },
-      addCoins(d) {
-        state.coins = Math.max(0, Math.floor(state.coins + (Number(d) || 0)));
-        save(state);
-      },
+    return {
+      get(){ return Math.floor(Number(coins) || 0); },
+      set(v){ coins = Math.max(0, Math.floor(Number(v) || 0)); save(); },
+      add(d){ this.set(this.get() + Math.floor(Number(d) || 0)); },
     };
+  })();
 
-    return window.SharedWallet;
+  const $ = (s) => document.querySelector(s);
+
+  function renderWallet(){
+    const c = Wallet.get();
+    const b1 = $("#balance");
+    const b2 = $("#balance2");
+    if (b1) b1.textContent = String(c);
+    if (b2) b2.textContent = String(c);
   }
-
-  const SW = ensureSharedWallet();
+  function addCoins(d){ Wallet.add(d); renderWallet(); }
 
   // =========================
-  // 1) Helpers
+  // RNG
   // =========================
-  const $ = (sel) => document.querySelector(sel);
-  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
-
-  function coins() {
-    return Math.floor(Number(SW.getCoins()) || 0);
-  }
-  function setCoins(v) {
-    SW.setCoins(v);
-    syncBalanceUI();
-  }
-  function addCoins(d) {
-    SW.addCoins(d);
-    syncBalanceUI();
+  function rngInt(n){
+    const u = new Uint32Array(1);
+    crypto.getRandomValues(u);
+    return u[0] % n;
   }
 
   // =========================
-  // 2) Sound (тихо) + toggle
+  // Sound
   // =========================
   const SOUND_KEY = "triniti_sound_v1";
   let soundOn = (localStorage.getItem(SOUND_KEY) ?? "1") === "1";
+  let audioCtx = null;
 
-  function beep(freq = 520, ms = 55, vol = 0.03) {
+  function ensureCtx(){
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    if (!audioCtx) audioCtx = new AC();
+    return audioCtx;
+  }
+
+  function beep(freq=520, ms=60, vol=0.03){
     if (!soundOn) return;
-    try {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      const ctx = new AC();
+    try{
+      const ctx = ensureCtx();
+      if (!ctx) return;
       const o = ctx.createOscillator();
       const g = ctx.createGain();
       o.type = "sine";
       o.frequency.value = freq;
-      g.gain.value = vol;
-      o.connect(g);
-      g.connect(ctx.destination);
-      o.start();
-      setTimeout(() => {
-        o.stop();
-        ctx.close();
-      }, ms);
-    } catch {}
+
+      const t0 = ctx.currentTime;
+      g.gain.setValueAtTime(0.0001, t0);
+      g.gain.exponentialRampToValueAtTime(vol, t0 + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + ms/1000);
+
+      o.connect(g); g.connect(ctx.destination);
+      o.start(t0);
+      o.stop(t0 + ms/1000 + 0.02);
+    }catch{}
   }
 
-  function applySoundUI() {
-    const soundTxt = $("#soundTxt");
-    const soundDot = $("#soundDot");
-    if (soundTxt) soundTxt.textContent = soundOn ? "Звук on" : "Звук off";
-    if (soundDot) {
-      soundDot.style.background = soundOn ? "#26d47b" : "#ff5a6a";
-      soundDot.style.boxShadow = soundOn
-        ? "0 0 0 3px rgba(38,212,123,.14)"
-        : "0 0 0 3px rgba(255,90,106,.14)";
+  function renderSoundUI(){
+    const txt = $("#soundText");
+    const dot = $("#soundDot");
+    if (txt) txt.textContent = soundOn ? "Звук on" : "Звук off";
+    if (dot){
+      dot.style.background = soundOn ? "#26d47b" : "#ff5a6a";
+      dot.style.boxShadow  = soundOn ? "0 0 0 3px rgba(38,212,123,.14)" : "0 0 0 3px rgba(255,90,106,.14)";
     }
   }
 
-  // =========================
-  // 3) Balance UI sync
-  // =========================
-  function syncBalanceUI() {
-    const bal = $("#bal");
-    if (bal) bal.textContent = String(coins());
-  }
+  $("#soundBtn")?.addEventListener("click", async () => {
+    soundOn = !soundOn;
+    localStorage.setItem(SOUND_KEY, soundOn ? "1" : "0");
+    renderSoundUI();
+    beep(soundOn ? 640 : 240, 60, 0.03);
+    if (soundOn && audioCtx && audioCtx.state === "suspended"){
+      try{ await audioCtx.resume(); }catch{}
+    }
+  });
 
-  // обновление, если баланс менялся в другой вкладке/странице
-  window.addEventListener("storage", (e) => {
-    if (e.key === WALLET_KEY) syncBalanceUI();
+  // бонус +1000
+  $("#bonusBtn")?.addEventListener("click", () => {
+    addCoins(1000);
+    beep(760, 70, 0.03);
   });
 
   // =========================
-  // 4) Header buttons
+  // Халява модалка
   // =========================
-  function initHeader() {
-    const soundBtn = $("#soundBtn");
-    const bonusBtn = $("#bonusBtn");
-    const freeTile = $("#freeChipsTile");
+  const freeModal = $("#freeModal");
 
-    applySoundUI();
-    syncBalanceUI();
-
-    if (soundBtn) {
-      soundBtn.addEventListener("click", () => {
-        soundOn = !soundOn;
-        localStorage.setItem(SOUND_KEY, soundOn ? "1" : "0");
-        applySoundUI();
-        beep(soundOn ? 640 : 240, 60, 0.03);
-      });
-    }
-
-    // +1000 на главной (кнопка в шапке)
-    if (bonusBtn) {
-      bonusBtn.addEventListener("click", () => {
-        addCoins(1000);
-        beep(760, 70, 0.03);
-      });
-    }
-
-    // +1000 на плитке "Free chips"
-    if (freeTile) {
-      freeTile.addEventListener("click", () => {
-        addCoins(1000);
-        beep(760, 70, 0.03);
-        // небольшой визуальный фидбек, если CSS поддержит
-        freeTile.classList.add("pulse");
-        setTimeout(() => freeTile.classList.remove("pulse"), 250);
-      });
-    }
-
-    // TG/VK кнопки — просто заглушки (без ошибок)
-    const tgBtn = $("#tgBtn");
-    const vkBtn = $("#vkBtn");
-    if (tgBtn) tgBtn.addEventListener("click", () => beep(520, 50, 0.02));
-    if (vkBtn) vkBtn.addEventListener("click", () => beep(520, 50, 0.02));
+  function openModal(){
+    freeModal?.classList.add("open");
+    freeModal?.setAttribute("aria-hidden","false");
+    beep(520, 50, 0.02);
+  }
+  function closeModal(){
+    freeModal?.classList.remove("open");
+    freeModal?.setAttribute("aria-hidden","true");
+    beep(420, 50, 0.02);
   }
 
+  $("#freeBtn")?.addEventListener("click", openModal);
+  $("#freeBtn2")?.addEventListener("click", openModal);
+  $("#freeClose")?.addEventListener("click", closeModal);
+
+  freeModal?.addEventListener("click", (e) => {
+    const t = e.target;
+    if (t && t.dataset && t.dataset.close) closeModal();
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && freeModal?.classList.contains("open")) closeModal();
+  });
+
+  // tabs
+  const tabDaily = $("#tabDaily");
+  const tabSocial= $("#tabSocial");
+  const paneDaily= $("#paneDaily");
+  const paneSocial=$("#paneSocial");
+
+  function setTab(which){
+    const isDaily = which === "daily";
+    tabDaily?.classList.toggle("active", isDaily);
+    tabSocial?.classList.toggle("active", !isDaily);
+    paneDaily?.classList.toggle("hidden", !isDaily);
+    paneSocial?.classList.toggle("hidden", isDaily);
+    beep(500, 45, 0.015);
+  }
+  tabDaily?.addEventListener("click", () => setTab("daily"));
+  tabSocial?.addEventListener("click", () => setTab("social"));
+
   // =========================
-  // 5) Tabs фильтр игр
+  // Daily wheel
   // =========================
-  function initTabs() {
-    const tabs = $$(".tab");
-    const grid = $("#gamesGrid");
-    if (!tabs.length || !grid) return;
+  const DAILY_KEY = "triniti_daily_spin_v1";
+  const freeStatus = $("#freeStatus");
+  const spinBtn = $("#spinBtn");
+  const dailyMsg = $("#dailyMsg");
+  const wheelCanvas = $("#dailyWheel");
+  const wheelCenterTxt = $("#wheelCenterTxt");
+  const wheelCenterSub = $("#wheelCenterSub");
+  const prizeListEl = $("#prizeList");
 
-    function setTab(name) {
-      tabs.forEach((t) => t.classList.toggle("active", t.dataset.tab === name));
+  const PRIZES = [
+    { label: "+0 🪙", coins: 0 },
+    { label: "+50 🪙", coins: 50 },
+    { label: "+100 🪙", coins: 100 },
+    { label: "+150 🪙", coins: 150 },
+    { label: "+200 🪙", coins: 200 },
+    { label: "+250 🪙", coins: 250 },
+    { label: "+500 🪙", coins: 500 },
+    { label: "+1000 🪙", coins: 1000 },
+  ];
 
-      const cards = $$("#gamesGrid .gameCard");
-      cards.forEach((c) => {
-        const g = c.dataset.group || "other";
-        const show = name === "all" ? true : g === name;
-        c.style.display = show ? "" : "none";
-      });
-    }
+  const todayStr = () => {
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth()+1).padStart(2,"0");
+    const day = String(d.getDate()).padStart(2,"0");
+    return `${y}-${m}-${day}`;
+  };
 
-    tabs.forEach((t) => {
-      t.addEventListener("click", () => {
-        setTab(t.dataset.tab || "all");
-        beep(520, 45, 0.02);
-      });
-    });
+  function canSpinToday(){ return localStorage.getItem(DAILY_KEY) !== todayStr(); }
+  function markSpun(){ localStorage.setItem(DAILY_KEY, todayStr()); }
 
-    setTab("all");
+  function renderFreeStatus(){
+    if (!freeStatus) return;
+    freeStatus.textContent = canSpinToday() ? "доступна" : "уже забрана";
   }
 
-  // =========================
-  // 6) Bottom nav jump
-  // =========================
-  function initBottomNav() {
-    const items = $$(".bItem[data-jump]");
-    if (!items.length) return;
-
-    items.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const target = btn.getAttribute("data-jump");
-        if (!target) return;
-
-        const el = document.querySelector(target);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-          items.forEach((b) => b.classList.toggle("active", b === btn));
-          beep(520, 45, 0.02);
-        }
-      });
-    });
-
-    // support/menu — без алертов
-    const supportBtn = $("#supportBtn");
-    const menuBtn = $("#menuBtn");
-    if (supportBtn) supportBtn.addEventListener("click", () => beep(520, 50, 0.02));
-    if (menuBtn) menuBtn.addEventListener("click", () => beep(520, 50, 0.02));
-  }
-
-  // =========================
-  // 7) Search (простой)
-  // =========================
-  function initSearch() {
-    const btn = $("#searchBtn");
-    const grid = $("#gamesGrid");
-    if (!btn || !grid) return;
-
-    btn.addEventListener("click", () => {
-      const q = (prompt("Поиск игры (например: mines, wheel, rps)") || "").trim().toLowerCase();
-      if (!q) return;
-
-      const cards = $$("#gamesGrid .gameCard");
-      let any = false;
-
-      cards.forEach((c) => {
-        const text = (c.textContent || "").toLowerCase();
-        const show = text.includes(q);
-        c.style.display = show ? "" : "none";
-        if (show) any = true;
-      });
-
-      // если ничего — вернём все
-      if (!any) {
-        cards.forEach((c) => (c.style.display = ""));
-      }
-
-      beep(520, 45, 0.02);
+  function renderPrizeList(){
+    if (!prizeListEl) return;
+    prizeListEl.innerHTML = "";
+    PRIZES.forEach((p) => {
+      const d = document.createElement("div");
+      d.className = "prizeItem";
+      d.innerHTML = `<div class="p">${p.label}</div><div class="t">в общий кошелёк</div>`;
+      prizeListEl.appendChild(d);
     });
   }
 
-  // =========================
-  // 8) Init
-  // =========================
-  function init() {
-    initHeader();
-    initTabs();
-    initBottomNav();
-    initSearch();
-    syncBalanceUI();
+  function drawWheel(){
+    if (!wheelCanvas) return;
+    const ctx = wheelCanvas.getContext("2d");
+    const W = wheelCanvas.width;
+    const H = wheelCanvas.height;
+    const cx = W/2, cy = H/2;
+    const r = Math.min(W,H) * 0.48;
+
+    ctx.clearRect(0,0,W,H);
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, r+8, 0, Math.PI*2);
+    ctx.fillStyle = "rgba(255,255,255,.06)";
+    ctx.fill();
+
+    const n = PRIZES.length;
+    const step = (Math.PI*2)/n;
+
+    for(let i=0;i<n;i++){
+      const a0 = -Math.PI/2 + i*step;
+      const a1 = a0 + step;
+
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, a0, a1);
+      ctx.closePath();
+
+      ctx.fillStyle = (i%2===0) ? "rgba(109,75,255,.22)" : "rgba(255,154,60,.18)";
+      ctx.fill();
+
+      ctx.strokeStyle = "rgba(255,255,255,.10)";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(a0 + step/2);
+      ctx.textAlign = "right";
+      ctx.fillStyle = "rgba(255,255,255,.92)";
+      ctx.font = "900 22px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial";
+      ctx.fillText(PRIZES[i].label, r - 14, 8);
+      ctx.restore();
+    }
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, r*0.12, 0, Math.PI*2);
+    ctx.fillStyle = "rgba(0,0,0,.25)";
+    ctx.fill();
+    ctx.strokeStyle = "rgba(255,255,255,.10)";
+    ctx.stroke();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
+  let spinning = false;
+
+  function spinToIndex(winIndex){
+    return new Promise((resolve) => {
+      const n = PRIZES.length;
+      const step = (Math.PI*2)/n;
+      const sliceCenter = (winIndex + 0.5) * step;
+      const fullTurns = 3 + rngInt(3);
+      const target = (Math.PI*2)*fullTurns + (Math.PI*2 - sliceCenter) + (Math.PI/2);
+
+      wheelCanvas.style.transition = "transform 1100ms cubic-bezier(.2,.85,.2,1)";
+      wheelCanvas.style.transform = `rotate(${target}rad)`;
+
+      const onEnd = () => {
+        wheelCanvas.removeEventListener("transitionend", onEnd);
+        resolve();
+      };
+      wheelCanvas.addEventListener("transitionend", onEnd, { once:true });
+    });
   }
 
-  // на всякий — обновим баланс после полной загрузки
-  window.addEventListener("load", syncBalanceUI);
+  async function onSpin(){
+    if (spinning) return;
+
+    if (!canSpinToday()){
+      if (dailyMsg) dailyMsg.textContent = "Сегодня уже крутили. Приходи завтра 😉";
+      beep(220, 90, 0.03);
+      return;
+    }
+
+    spinning = true;
+    if (spinBtn) spinBtn.disabled = true;
+
+    if (wheelCenterTxt) wheelCenterTxt.textContent = "…";
+    if (wheelCenterSub) wheelCenterSub.textContent = "крутим";
+    if (dailyMsg) dailyMsg.textContent = "Крутим колесо…";
+    beep(520, 55, 0.02);
+
+    const winIndex = rngInt(PRIZES.length);
+    await spinToIndex(winIndex);
+
+    const prize = PRIZES[winIndex];
+    addCoins(prize.coins);
+
+    markSpun();
+    renderFreeStatus();
+
+    if (wheelCenterTxt) wheelCenterTxt.textContent = `+${prize.coins}`;
+    if (wheelCenterSub) wheelCenterSub.textContent = "🪙 начислено";
+    if (dailyMsg) dailyMsg.textContent = `Готово! Ты получил: ${prize.label}`;
+
+    beep(760, 70, 0.03);
+    setTimeout(() => beep(920, 70, 0.03), 90);
+
+    spinning = false;
+    if (spinBtn) spinBtn.disabled = false;
+  }
+
+  spinBtn?.addEventListener("click", onSpin);
+
+  // =========================
+  // Social бонусы (1 раз)
+  // =========================
+  const VK_KEY = "triniti_bonus_vk_v1";
+  const TG_KEY = "triniti_bonus_tg_v1";
+
+  const claimVK = $("#claimVK");
+  const claimTG = $("#claimTG");
+  const vkState = $("#vkState");
+  const tgState = $("#tgState");
+
+  function renderSocial(){
+    const vkDone = localStorage.getItem(VK_KEY) === "1";
+    const tgDone = localStorage.getItem(TG_KEY) === "1";
+
+    if (vkState) vkState.textContent = vkDone ? "Получено ✅" : "Не получено";
+    if (tgState) tgState.textContent = tgDone ? "Получено ✅" : "Не получено";
+
+    if (claimVK) claimVK.disabled = vkDone;
+    if (claimTG) claimTG.disabled = tgDone;
+  }
+
+  function claimOnce(key, amount){
+    if (localStorage.getItem(key) === "1") return;
+    localStorage.setItem(key, "1");
+    addCoins(amount);
+    renderSocial();
+    beep(760, 70, 0.03);
+    setTimeout(() => beep(920, 70, 0.03), 90);
+  }
+
+  claimVK?.addEventListener("click", () => claimOnce(VK_KEY, 500));
+  claimTG?.addEventListener("click", () => claimOnce(TG_KEY, 500));
+
+  // =========================
+  // init
+  // =========================
+  (function init(){
+    renderWallet();
+    renderSoundUI();
+    renderSocial();
+    renderPrizeList();
+    drawWheel();
+    renderFreeStatus();
+
+    if (wheelCanvas){
+      wheelCanvas.style.transform = "rotate(0rad)";
+      wheelCanvas.style.transformOrigin = "50% 50%";
+    }
+  })();
+
+  window.addEventListener("focus", () => {
+    renderWallet();
+    renderFreeStatus();
+    renderSocial();
+  });
 })();
