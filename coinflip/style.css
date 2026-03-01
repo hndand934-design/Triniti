@@ -1,1 +1,325 @@
+:root{
+  --bg0:#0b0f1a;
+  --bg1:#0b1222;
+  --text:#eaf0ff;
+  --muted: rgba(234,240,255,.68);
 
+  --stroke: rgba(255,255,255,.10);
+  --stroke2: rgba(255,255,255,.08);
+
+  --blue1:#4c7dff;
+  --blue2:#2b61ff;
+
+  --gold1:#ffd66e;
+  --gold2:#b6801f;
+
+  --sil1:#e4eeff;
+  --sil2:#98a9c9;
+
+  --pur1:#b18cff;
+  --pur2:#5c2dd6;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color:var(--text);
+  background: linear-gradient(180deg, var(--bg0), var(--bg1));
+  overflow-x:hidden;
+}
+
+.bg{
+  position:fixed; inset:0;
+  background:
+    radial-gradient(900px 600px at 20% 15%, rgba(76,125,255,.22), transparent 55%),
+    radial-gradient(900px 700px at 80% 75%, rgba(176,64,255,.18), transparent 58%),
+    radial-gradient(700px 400px at 50% 40%, rgba(255,255,255,.05), transparent 60%);
+  pointer-events:none;
+}
+
+.app{
+  width:min(980px, calc(100% - 20px));
+  margin: 14px auto 18px;
+}
+@media (max-width: 520px){
+  .app{ width: calc(100% - 16px); margin: 10px auto 14px; }
+}
+
+/* TOPBAR */
+.topbar{
+  display:flex; justify-content:space-between; align-items:center; gap:10px;
+  padding:12px 14px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+  border:1px solid var(--stroke2);
+}
+.title{font-weight:950}
+.subtitle{font-size:12px; opacity:.8; margin-top:2px}
+.topbar__right{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+
+.pill{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid var(--stroke);
+  background: rgba(255,255,255,.05);
+  color:var(--text);
+  cursor:pointer;
+  user-select:none;
+}
+.pill--balance{cursor:default}
+.pill--bonus{
+  background: rgba(76,125,255,.14);
+  border-color: rgba(76,125,255,.28);
+}
+.dot{
+  width:8px;height:8px;border-radius:99px;background:#26d47b;
+  box-shadow: 0 0 0 3px rgba(38,212,123,.14);
+}
+
+.card{
+  margin-top:12px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+  border:1px solid var(--stroke2);
+  overflow:hidden;
+}
+.cardHead{padding:14px 14px 10px}
+.h1{font-weight:950; font-size:18px}
+.h2{font-weight:900; font-size:14px}
+.hint{font-size:12px; color:var(--muted); margin-top:4px}
+.muted{font-size:12px; color:var(--muted)}
+
+.arena{ padding: 10px 14px 14px; }
+
+.coinPanel{
+  border-radius: 16px;
+  border:1px solid rgba(255,255,255,.08);
+  background:
+    radial-gradient(700px 240px at 40% 30%, rgba(255,255,255,.05), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.10));
+  padding: 12px;
+}
+.coinWrap{
+  height: 230px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.18);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+
+/* ===== COIN 3D ===== */
+.coin3d{
+  width: 150px;
+  height: 150px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(0) rotateX(10deg);
+  will-change: transform;
+}
+
+/* “толщина” монеты */
+.coinFace{
+  position:absolute; inset:0;
+  border-radius: 999px;
+  backface-visibility: hidden;
+  border: 2px solid rgba(255,255,255,.14);
+  box-shadow: 0 16px 32px rgba(0,0,0,.35);
+}
+
+/* FRONT/BACK */
+.coinFace--front{ transform: translateZ(8px); }
+.coinFace--back { transform: rotateY(180deg) translateZ(8px); }
+
+/* ребро */
+.coinEdge{
+  position:absolute; inset:-1px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,.18),
+      rgba(0,0,0,.30),
+      rgba(255,255,255,.18)
+    );
+  opacity: .75;
+  transform: scaleX(.18) rotateY(90deg);
+  backface-visibility: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+}
+
+/* блики */
+.coinFace::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,.50), transparent 48%),
+    radial-gradient(circle at 70% 75%, rgba(0,0,0,.25), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.10));
+  pointer-events:none;
+}
+.coinFace::after{
+  content:"";
+  position:absolute; inset:10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.10);
+  opacity:.7;
+  pointer-events:none;
+}
+
+/* темы */
+.coin3d--purple .coinFace{ background: linear-gradient(180deg, rgba(177,140,255,.85), rgba(92,45,214,.62)); }
+.coin3d--gold   .coinFace{ background: linear-gradient(180deg, rgba(255,214,110,.92), rgba(182,128,31,.62)); }
+.coin3d--silver .coinFace{ background: linear-gradient(180deg, rgba(228,238,255,.96), rgba(152,169,201,.64)); }
+
+/* ребро толще во время вращения */
+.coin3d.spinning .coinEdge{
+  opacity:.92;
+  transform: scaleX(.32) rotateY(90deg);
+}
+
+/* анимация */
+.coin3d.spin{
+  animation: coinSpin3D 900ms cubic-bezier(.2,.85,.2,1) both;
+}
+@keyframes coinSpin3D{
+  0%   { transform: translateZ(0) rotateX(10deg) rotateY(0deg)   scale(1); }
+  20%  { transform: translateZ(0) rotateX(14deg) rotateY(220deg) scale(1.03); }
+  50%  { transform: translateZ(0) rotateX(18deg) rotateY(540deg) scale(1.05); }
+  80%  { transform: translateZ(0) rotateX(14deg) rotateY(780deg) scale(1.02); }
+  100% { transform: translateZ(0) rotateX(10deg) rotateY(900deg) scale(1); }
+}
+
+/* ===== controls ===== */
+.btnPrimary{
+  margin: 12px 0 0;
+  width: 100%;
+  padding: 14px 14px;
+  border-radius: 16px;
+  font-weight:950;
+  font-size:16px;
+  color: var(--text);
+  cursor:pointer;
+  border:1px solid rgba(76,125,255,.60);
+  background: linear-gradient(180deg, rgba(76,125,255,.95), rgba(43,97,255,.85));
+  box-shadow: 0 16px 30px rgba(43,97,255,.18);
+}
+.btnPrimary:disabled{opacity:.6; cursor:not-allowed}
+.btnPrimary:active{transform:scale(.99)}
+
+.controls{ padding-top: 14px; }
+
+.rowTitle{
+  display:flex; justify-content:space-between; align-items:baseline; gap:10px;
+  margin-bottom:8px;
+}
+
+.betRow{
+  display:grid;
+  grid-template-columns: 46px 1fr 46px;
+  gap:10px;
+  align-items:center;
+}
+.btnSmall{
+  height:44px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+  color:var(--text);
+  font-weight:950;
+  cursor:pointer;
+}
+.btnSmall:active{transform:scale(.99)}
+.betInput{
+  height:44px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+  color: var(--text);
+  font-weight:950;
+  padding: 0 12px;
+  outline:none;
+}
+
+.chips{
+  margin-top:10px;
+  display:flex; flex-wrap:wrap; gap:8px;
+}
+.chip{
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.05);
+  color:var(--text);
+  cursor:pointer;
+  font-weight:900;
+}
+.chip:active{transform:scale(.98)}
+
+.pickRow{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
+}
+.pick{
+  padding:12px 12px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.12);
+  color:var(--text);
+  font-weight:950;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  background: rgba(255,255,255,.05);
+}
+.pick.active{
+  outline:2px solid rgba(76,125,255,.55);
+  box-shadow: 0 10px 20px rgba(0,0,0,.18);
+}
+.pick--gold{
+  background: linear-gradient(180deg, rgba(255,214,110,.22), rgba(182,128,31,.08));
+  border-color: rgba(255,214,110,.26);
+}
+.pick--silver{
+  background: linear-gradient(180deg, rgba(228,238,255,.18), rgba(152,169,201,.08));
+  border-color: rgba(228,238,255,.22);
+}
+.mark{ width:10px; height:10px; border-radius:99px; }
+.mark--gold{ background: rgba(255,214,110,.95); }
+.mark--silver{ background: rgba(228,238,255,.95); }
+
+.stats{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:10px;
+}
+.stat{
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  padding:10px 12px;
+}
+.label{font-size:12px; color:var(--muted)}
+.value{margin-top:2px; font-size:14px}
+
+.footNote{
+  margin-top:10px;
+  font-size:12px;
+  color: var(--muted);
+}
+
+/* мобилка */
+@media (max-width: 420px){
+  .coinWrap{height: 210px;}
+  .coin3d{width: 136px; height:136px;}
+  .stats{grid-template-columns: 1fr;}
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .coin3d.spin{animation:none}
+}
