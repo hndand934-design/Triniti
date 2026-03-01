@@ -1,1 +1,296 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Mini Games</title>
 
+  <!-- shared theme + shared wallet -->
+  <link rel="stylesheet" href="./shared/theme.css">
+  <script src="./shared/wallet.js"></script>
+
+  <!-- home -->
+  <link rel="stylesheet" href="./triniti.css" />
+</head>
+<body>
+  <div class="bg">
+    <div class="bg__glow bg__glow--a"></div>
+    <div class="bg__glow bg__glow--b"></div>
+    <div class="bg__grid"></div>
+  </div>
+
+  <div class="app">
+    <!-- TOPBAR -->
+    <header class="topbar glass">
+      <div class="brand">
+        <div class="brand__logo">MG</div>
+        <div>
+          <div class="brand__title">MINI GAMES</div>
+          <div class="brand__sub">Открыто вне Telegram · общий баланс</div>
+        </div>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill pill--link" type="button" aria-label="Звук">
+          <span id="soundDot" class="dot"></span>
+          <span id="soundText">Звук on</span>
+        </button>
+
+        <button id="freeBtn" class="pill pill--link pill--accent" type="button" aria-label="Халява">
+          <span class="pill__ico">🎁</span>
+          <span>Халява</span>
+        </button>
+
+        <button id="bonusBtn" class="pill pill--link pill--bonus" type="button">+1000 🪙</button>
+
+        <div class="pill pill--balance">🪙 <b id="balance">1000</b></div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__card glass">
+        <div class="hero__left">
+          <div class="hero__kicker">
+            <span class="tag tag--muted">FINAL</span>
+            <span class="tag">RNG: crypto.getRandomValues</span>
+          </div>
+
+          <div class="hero__title">Играй как на настоящем сайте</div>
+          <div class="hero__desc">
+            Все режимы используют <b>общий кошелёк</b>. Халява — ежедневное колесо + бонусы VK/TG.
+          </div>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="./wheel/">Открыть Wheel</a>
+            <button id="freeBtn2" class="btn btn--accent" type="button">Халява 🎁</button>
+            <button id="bonusBtn2" class="btn btn--ghost" type="button">+1000 🪙</button>
+          </div>
+        </div>
+
+        <div class="hero__right">
+          <div class="hero__tile hero__tile--big">
+            <div class="hero__tileTop">
+              <div class="tag">Баланс</div>
+              <div class="tag tag--muted">общий</div>
+            </div>
+
+            <div class="hero__tileMid">
+              <div class="jackpot">🪙 <span id="balance2">1000</span></div>
+              <div class="jackpot__sub">Доступно для всех режимов</div>
+            </div>
+
+            <div class="hero__tileBottom">
+              <div class="dots" aria-hidden="true">
+                <div class="dotx on"></div><div class="dotx"></div><div class="dotx"></div>
+              </div>
+              <div class="tag tag--muted">Без вывода</div>
+            </div>
+          </div>
+
+          <div class="hero__miniRow">
+            <div class="hero__tile hero__tile--mini">
+              <div class="miniBadge miniBadge--accent" id="freeStatus">доступна</div>
+              <div class="miniTitle">Халява</div>
+              <div class="miniSub">Ежедневное колесо + бонусы</div>
+            </div>
+            <div class="hero__tile hero__tile--mini">
+              <div class="miniBadge">Честно</div>
+              <div class="miniTitle">RNG</div>
+              <div class="miniSub">crypto.getRandomValues</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMES -->
+    <section class="section">
+      <div class="sectionHead">
+        <div class="sectionTitle">Режимы</div>
+        <div class="muted">Выбирай и играй</div>
+      </div>
+
+      <div class="gamesGrid" id="gamesGrid">
+        <a class="gameCard glass" href="./dice/">
+          <div class="gameIcon">🎲</div>
+          <div class="gameName">Dice</div>
+          <div class="gameDesc">3D кубик · меньше/больше · честный RNG</div>
+          <div class="gameTags">
+            <span class="gTag">быстро</span>
+            <span class="gTag gTag--muted">x</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./coinflip/">
+          <div class="gameIcon">🪙</div>
+          <div class="gameName">Coin Flip</div>
+          <div class="gameDesc">Орёл/решка · 3D монета · ставка</div>
+          <div class="gameTags">
+            <span class="gTag">50/50</span>
+            <span class="gTag gTag--muted">x2</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./crash/">
+          <div class="gameIcon">🚀</div>
+          <div class="gameName">Crash</div>
+          <div class="gameDesc">График 60fps · забирай вовремя</div>
+          <div class="gameTags">
+            <span class="gTag">риск</span>
+            <span class="gTag gTag--muted">cashout</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./mines/">
+          <div class="gameIcon">💣</div>
+          <div class="gameName">Mines</div>
+          <div class="gameDesc">5×5 · лестница X · cashout</div>
+          <div class="gameTags">
+            <span class="gTag">тактика</span>
+            <span class="gTag gTag--muted">step</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./rps/">
+          <div class="gameIcon">✊✌️✋</div>
+          <div class="gameName">RPS</div>
+          <div class="gameDesc">Серия · лестница X · cashout</div>
+          <div class="gameTags">
+            <span class="gTag">серия</span>
+            <span class="gTag gTag--muted">x</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./penalty/">
+          <div class="gameIcon">⚽</div>
+          <div class="gameName">Penalty</div>
+          <div class="gameDesc">Вратарь · уровни сложности · X</div>
+          <div class="gameTags">
+            <span class="gTag">skill</span>
+            <span class="gTag gTag--muted">AI</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./tower/">
+          <div class="gameIcon">🐉</div>
+          <div class="gameName">Tower</div>
+          <div class="gameDesc">Яйцо/череп · ряды · cashout</div>
+          <div class="gameTags">
+            <span class="gTag">step</span>
+            <span class="gTag gTag--muted">risk</span>
+          </div>
+        </a>
+
+        <a class="gameCard glass" href="./wheel/">
+          <div class="gameIcon">🎡</div>
+          <div class="gameName">Wheel</div>
+          <div class="gameDesc">Выбор X · честный RNG · классика</div>
+          <div class="gameTags">
+            <span class="gTag">classic</span>
+            <span class="gTag gTag--muted">spin</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="foot">
+        Монеты виртуальные. Вывода нет. Все режимы работают локально.
+      </div>
+    </section>
+  </div>
+
+  <!-- HALYAVA MODAL -->
+  <div id="freeModal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__panel glass" role="dialog" aria-modal="true" aria-label="Халява">
+      <div class="modal__head">
+        <div class="modal__title">Халява 🎁</div>
+        <button class="modal__close" id="freeClose" type="button" aria-label="Закрыть">✕</button>
+      </div>
+
+      <div class="tabs">
+        <button id="tabDaily" class="tab active" type="button">Ежедневное колесо</button>
+        <button id="tabSocial" class="tab" type="button">Бонусы VK/TG</button>
+      </div>
+
+      <!-- DAILY -->
+      <section id="paneDaily" class="pane">
+        <div class="dailyWrap">
+          <div class="dailyLeft">
+            <div class="dailyCard">
+              <div class="dailyTitle">Ежедневное колесо</div>
+              <div class="dailyHint">1 попытка в сутки. Приз начисляется в общий кошелёк.</div>
+
+              <div class="wheelBox">
+                <div class="pointer"></div>
+                <canvas id="dailyWheel" width="520" height="520"></canvas>
+                <div class="wheelCenter">
+                  <div class="centerBig" id="wheelCenterTxt">SPIN</div>
+                  <div class="centerSmall" id="wheelCenterSub">сегодня</div>
+                </div>
+              </div>
+
+              <button id="spinBtn" class="btn btn--primary btn--wide" type="button">Крутить</button>
+              <div class="dailyMsg" id="dailyMsg">Жми “Крутить” и забирай приз.</div>
+            </div>
+          </div>
+
+          <div class="dailyRight">
+            <div class="listCard">
+              <div class="listTitle">Призы</div>
+              <div id="prizeList" class="prizeList"></div>
+              <div class="listNote">RNG: <code>crypto.getRandomValues</code></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOCIAL -->
+      <section id="paneSocial" class="pane hidden">
+        <div class="socialCard">
+          <div class="dailyTitle">Бонусы за подписку</div>
+          <div class="dailyHint">Один раз на браузер (локально).</div>
+
+          <div class="socialGrid">
+            <div class="socItem">
+              <div class="socTop">
+                <div class="socIcon">VK</div>
+                <div>
+                  <div class="socName">Подписка ВК</div>
+                  <div class="socDesc">+500 🪙</div>
+                </div>
+              </div>
+              <div class="socBtns">
+                <a class="btn btn--ghost" href="#" onclick="return false;">Открыть ВК</a>
+                <button id="claimVK" class="btn btn--primary" type="button">Я подписался</button>
+              </div>
+              <div class="socState" id="vkState">Не получено</div>
+            </div>
+
+            <div class="socItem">
+              <div class="socTop">
+                <div class="socIcon">TG</div>
+                <div>
+                  <div class="socName">Подписка Telegram</div>
+                  <div class="socDesc">+500 🪙</div>
+                </div>
+              </div>
+              <div class="socBtns">
+                <a class="btn btn--ghost" href="#" onclick="return false;">Открыть TG</a>
+                <button id="claimTG" class="btn btn--primary" type="button">Я подписался</button>
+              </div>
+              <div class="socState" id="tgState">Не получено</div>
+            </div>
+          </div>
+
+          <div class="finePrint">
+            * Реальная проверка подписки делается через сервер/бота. Сейчас логика локальная.
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="./triniti.js"></script>
+</body>
+</html>
