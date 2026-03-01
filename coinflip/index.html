@@ -1,1 +1,115 @@
-.
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Mini Games — Coin Flip</title>
+
+  <!-- shared theme + shared wallet -->
+  <link rel="stylesheet" href="../shared/theme.css">
+  <script src="../shared/wallet.js" defer></script>
+
+  <!-- game styles -->
+  <link rel="stylesheet" href="./style.css" />
+
+  <!-- game logic -->
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="bg"></div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar__left">
+        <div class="title">Mini Games</div>
+        <div id="subTitle" class="subtitle">Открыто вне Telegram</div>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+          <span class="dot"></span>
+          <span id="soundText">Звук on</span>
+        </button>
+
+        <button id="bonusBtn" class="pill pill--bonus" type="button">+1000 🪙</button>
+
+        <div class="pill pill--balance">🪙 <b id="balance">1000</b></div>
+      </div>
+    </header>
+
+    <main class="card">
+      <div class="cardHead">
+        <div>
+          <div class="h1">Coin Flip</div>
+          <div class="hint">До броска монета фиолетовая. Орёл — золото, решка — серебро.</div>
+        </div>
+      </div>
+
+      <section class="arena">
+        <div class="coinPanel">
+          <div class="coinWrap" aria-label="coin arena">
+            <!-- 3D coin -->
+            <div id="coin" class="coin3d coin3d--purple" aria-label="coin">
+              <div class="coinFace coinFace--front"></div>
+              <div class="coinEdge"></div>
+              <div class="coinFace coinFace--back"></div>
+            </div>
+          </div>
+        </div>
+
+        <button id="flipBtn" class="btnPrimary" type="button">Ставка</button>
+
+        <section class="controls">
+          <div class="rowTitle">
+            <div class="h2">Сумма ставки</div>
+            <div class="muted">Баланс: <b>🪙 <span id="balance2">1000</span></b></div>
+          </div>
+
+          <div class="betRow">
+            <button id="betMinus" class="btnSmall" type="button">−</button>
+            <input id="betInput" class="betInput" type="number" min="1" step="1" value="50" />
+            <button id="betPlus" class="btnSmall" type="button">+</button>
+          </div>
+
+          <div class="chips" role="group" aria-label="chips">
+            <button class="chip" data-bet="10" type="button">10</button>
+            <button class="chip" data-bet="50" type="button">50</button>
+            <button class="chip" data-bet="100" type="button">100</button>
+            <button class="chip" data-bet="250" type="button">250</button>
+            <button class="chip" data-bet="500" type="button">500</button>
+            <button class="chip" data-bet="max" type="button">MAX</button>
+          </div>
+
+          <div class="pickRow">
+            <button id="pickEagle" class="pick pick--gold active" type="button">
+              <span class="mark mark--gold"></span> Орёл
+            </button>
+            <button id="pickTail" class="pick pick--silver" type="button">
+              <span class="mark mark--silver"></span> Решка
+            </button>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="label">Ставка</div>
+              <div class="value"><b id="betView">50</b> 🪙</div>
+            </div>
+            <div class="stat">
+              <div class="label">Выигрыш</div>
+              <div class="value"><b id="winView">+0</b> 🪙</div>
+            </div>
+            <div class="stat">
+              <div class="label">Статус</div>
+              <div class="value"><b id="statusView">Готов</b></div>
+            </div>
+          </div>
+
+          <div class="footNote">
+            При изменении ставки — монета снова становится фиолетовой до следующего броска.
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
