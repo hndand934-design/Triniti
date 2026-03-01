@@ -1,1 +1,149 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Mini Games — Dragon Tower</title>
 
+  <!-- ОБЩИЙ СТИЛЬ + ОБЩИЙ КОШЕЛЁК (обязательно) -->
+ <link rel="stylesheet" href="../shared/theme.css">
+<script src="../shared/wallet.js"></script>
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="bg"></div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar__left">
+        <div class="title">Dragon Tower</div>
+        <div id="subTitle" class="subtitle">Открыто вне Telegram</div>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+          <span class="dot"></span>
+          <span id="soundText">Звук on</span>
+        </button>
+
+        <button id="bonusBtn" class="pill pill--bonus" type="button">+1000 🪙</button>
+
+        <div class="pill pill--balance">Баланс <b id="balance">1000</b> 🪙</div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- LEFT -->
+      <aside class="panel">
+        <div class="panel__block">
+          <div class="blockTitle">Режим</div>
+          <div class="modeRow" role="group" aria-label="mode">
+            <button id="modeNormal" class="seg active" type="button">Обычный</button>
+            <button id="modeHard" class="seg" type="button">Сложный</button>
+          </div>
+          <div id="modeHint" class="tiny muted">Обычный: 3 яйца / 1 череп</div>
+        </div>
+
+        <div class="panel__block">
+          <div class="blockTitle">Ставка</div>
+
+          <div class="betRow">
+            <button id="betMinus" class="btnMini" type="button">−</button>
+            <input id="betInput" class="betInput" type="number" min="1" step="1" value="100" />
+            <button id="betPlus" class="btnMini" type="button">+</button>
+          </div>
+
+          <div class="chips" role="group" aria-label="chips">
+            <button class="chip" data-bet="10" type="button">10</button>
+            <button class="chip" data-bet="50" type="button">50</button>
+            <button class="chip" data-bet="100" type="button">100</button>
+            <button class="chip" data-bet="250" type="button">250</button>
+            <button class="chip" data-bet="500" type="button">500</button>
+            <button class="chip" data-bet="max" type="button">MAX</button>
+          </div>
+
+          <div class="actionRow">
+            <button id="startBtn" class="btnPrimary" type="button">Ставка</button>
+            <button id="cashoutBtn" class="btnDanger" type="button" disabled>Кэшаут</button>
+          </div>
+
+          <div class="rules">
+            <div class="rule">• Ставка списывается 1 раз при старте игры.</div>
+            <div class="rule">• Выбирай плитку в текущем ряду. Яйцо — идёшь выше, череп — проигрыш.</div>
+            <div class="rule">• Кэшаут доступен после победы ряда: ставка × X.</div>
+          </div>
+        </div>
+
+        <div class="panel__block">
+          <div class="blockTitle">Статус</div>
+
+          <div class="statusGrid">
+            <div class="stat">
+              <div class="stat__label">Статус</div>
+              <div id="statusText" class="stat__value">Ожидание</div>
+            </div>
+
+            <div class="stat">
+              <div class="stat__label">Текущий X</div>
+              <div id="xText" class="stat__value">x1.00</div>
+            </div>
+
+            <div class="stat">
+              <div class="stat__label">Потенциал</div>
+              <div id="potentialText" class="stat__value">0 🪙</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER -->
+      <section class="boardCard">
+        <div class="boardHead">
+          <div class="boardHead__left">
+            <div class="h1">Башня</div>
+          </div>
+
+          <!-- decorative 3 towers -->
+          <div class="towers" aria-hidden="true">
+            <div class="towerPip"></div>
+            <div class="towerPip"></div>
+            <div class="towerPip"></div>
+          </div>
+
+          <div class="boardHead__right">
+            <div class="tag">Локально • RNG</div>
+            <div id="difficultyTag" class="tag tag--muted">Сложность: обычный</div>
+          </div>
+        </div>
+
+        <div id="towerGrid" class="towerGrid" aria-label="tower grid"></div>
+
+        <div class="legend">
+          <span class="legendDot legendDot--egg"></span> яйцо
+          <span class="legendDot legendDot--skull"></span> череп
+          <span class="legendDot legendDot--rng"></span> локально RNG
+        </div>
+      </section>
+
+      <!-- RIGHT -->
+      <aside class="panel panel--right">
+        <div class="panel__block">
+          <div class="blockTitleRow">
+            <div class="blockTitle">Шкала X</div>
+            <div class="tiny muted">прокрутка</div>
+          </div>
+
+          <div id="ladder" class="ladder" aria-label="ladder"></div>
+
+          <div class="tip">
+            Прошёл ряд — X растёт. Череп — ставка сгорает.
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
