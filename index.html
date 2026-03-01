@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Mini Games</title>
+  <title>Triniti — Mini Games</title>
 
   <!-- shared theme + shared wallet -->
   <link rel="stylesheet" href="./shared/theme.css">
   <script src="./shared/wallet.js"></script>
 
-  <!-- home -->
+  <!-- home styles -->
   <link rel="stylesheet" href="./triniti.css" />
 </head>
 <body>
@@ -17,8 +17,8 @@
   <div class="sparkles" aria-hidden="true"></div>
 
   <div class="app">
-    <!-- TOPBAR -->
-    <header class="topbar">
+    <!-- ===== DESKTOP TOPBAR (как было) ===== -->
+    <header class="topbar topbar--desk">
       <div class="topbar__left">
         <div class="title">Mini Games</div>
         <div class="subtitle">Открыто вне Telegram · общий баланс</div>
@@ -29,9 +29,6 @@
           <span id="soundDot" class="dot"></span>
           <span id="soundText">Звук on</span>
         </button>
-
-        <button id="depositBtn" class="pill pill--ghost" type="button">Пополнить</button>
-        <button id="withdrawBtn" class="pill pill--ghost" type="button">Вывести</button>
 
         <button id="freeBtn" class="pill pill--free" type="button" aria-label="Халява">
           <span class="gift">🎁</span>
@@ -44,167 +41,222 @@
       </div>
     </header>
 
-    <!-- BODY -->
-    <main class="home">
-      <!-- LEFT LINE -->
-      <aside class="rail" aria-label="Быстрые режимы">
-        <div class="railCard">
-          <div class="railBal">
-            <div class="railBal__title">Баланс</div>
-            <div class="railBal__val">🪙 <b id="balanceRail">1000</b></div>
-          </div>
+    <!-- ===== MOBILE HEADER (как на скрине) ===== -->
+    <header class="mHeader" aria-label="mobile header">
+      <div class="mTop">
+        <div class="mBrand">Triniti</div>
+      </div>
 
-          <nav class="railNav">
-            <a class="railBtn active" href="./dice/" title="Dice"><span>🎲</span></a>
-            <a class="railBtn" href="./mines/" title="Mines"><span>💣</span></a>
-            <a class="railBtn" href="./crash/" title="Crash"><span>🚀</span></a>
-            <a class="railBtn" href="./coinflip/" title="Coin Flip"><span>🪙</span></a>
-            <a class="railBtn" href="./rps/" title="RPS"><span>✊</span></a>
-            <a class="railBtn" href="./penalty/" title="Penalty"><span>⚽</span></a>
-            <a class="railBtn" href="./tower/" title="Tower"><span>🐉</span></a>
-            <a class="railBtn" href="./wheel/" title="Wheel"><span>🎡</span></a>
+      <nav class="mTabs" aria-label="разделы">
+        <button class="mTab active" data-tab="games" type="button">Игры</button>
+        <button class="mTab" data-tab="bonus" type="button">Бонусы</button>
+        <button class="mTab" data-tab="promo" type="button">Промокоды</button>
+        <button class="mTab" data-tab="support" type="button">Поддержка</button>
+        <button class="mTab" data-tab="free" type="button">Халява</button>
+      </nav>
 
-            <button id="freeBtnRail" class="railBtn railBtn--gift" type="button" title="Халява">
-              <span>🎁</span>
-            </button>
-          </nav>
+      <div class="mWallet" aria-label="wallet bar">
+        <div class="mWalletLeft">
+          <div class="mUser">GG</div>
+          <div class="mCoins">🪙 <b id="mBalance">1000</b></div>
         </div>
-      </aside>
+        <div class="mWalletRight">
+          <button id="mDeposit" class="mAction" type="button">Пополнить</button>
+          <button id="mWithdraw" class="mAction mAction--ghost" type="button">Вывести</button>
+        </div>
+      </div>
+    </header>
 
-      <!-- CONTENT -->
-      <section class="content">
-        <!-- HERO (оставлен пустым) -->
-        <section class="hero card hero--empty" aria-label="Блок будет заполнен позже">
-          <!-- специально пусто -->
-        </section>
-
-        <!-- GAMES GRID -->
-        <section class="grid">
-          <a class="gameCard" href="./dice/">
-            <div class="gcTop">
-              <div class="gcIcon">🎲</div>
-              <div class="gcName">Dice</div>
-            </div>
-            <div class="gcDesc">3D кубик · меньше/больше · честный RNG</div>
-            <div class="gcMeta">Моментальная игра</div>
-          </a>
-
-          <a class="gameCard" href="./coinflip/">
-            <div class="gcTop">
-              <div class="gcIcon">🪙</div>
-              <div class="gcName">Coin Flip</div>
-            </div>
-            <div class="gcDesc">Орёл/Решка · 3D монета</div>
-            <div class="gcMeta">Быстрый риск</div>
-          </a>
-
-          <a class="gameCard" href="./crash/">
-            <div class="gcTop">
-              <div class="gcIcon">🚀</div>
-              <div class="gcName">Crash</div>
-            </div>
-            <div class="gcDesc">Ракета растёт · забирай вовремя</div>
-            <div class="gcMeta">60fps график</div>
-          </a>
-
-          <a class="gameCard" href="./mines/">
-            <div class="gcTop">
-              <div class="gcIcon">💣</div>
-              <div class="gcName">Mines</div>
-            </div>
-            <div class="gcDesc">5×5 · лестница X · cashout</div>
-            <div class="gcMeta">Тактика</div>
-          </a>
-
-          <a class="gameCard" href="./rps/">
-            <div class="gcTop">
-              <div class="gcIcon">✊✌️✋</div>
-              <div class="gcName">RPS</div>
-            </div>
-            <div class="gcDesc">Серия · лестница X · cashout</div>
-            <div class="gcMeta">Скорость</div>
-          </a>
-
-          <a class="gameCard" href="./penalty/">
-            <div class="gcTop">
-              <div class="gcIcon">⚽</div>
-              <div class="gcName">Penalty</div>
-            </div>
-            <div class="gcDesc">Вратарь · сложность · лестница X</div>
-            <div class="gcMeta">Экшен</div>
-          </a>
-
-          <a class="gameCard" href="./tower/">
-            <div class="gcTop">
-              <div class="gcIcon">🐉</div>
-              <div class="gcName">Tower</div>
-            </div>
-            <div class="gcDesc">Яйцо/череп · ряды · cashout</div>
-            <div class="gcMeta">Риск по шагам</div>
-          </a>
-
-          <a class="gameCard" href="./wheel/">
-            <div class="gcTop">
-              <div class="gcIcon">🎡</div>
-              <div class="gcName">Wheel</div>
-            </div>
-            <div class="gcDesc">Выбор X · честный RNG</div>
-            <div class="gcMeta">Классика</div>
-          </a>
-        </section>
-
-        <footer class="footer">
-          <div class="footCard">
-            <div class="footTitle">Важно</div>
-            <div class="footTxt">Монеты виртуальные. Вывода нет. Все режимы работают локально.</div>
+    <main class="home">
+      <!-- ===== DESKTOP HERO (как было, но без лишнего) ===== -->
+      <section class="hero card hero--desk">
+        <div class="hero__left">
+          <div class="h1">Выбирай режим</div>
+          <div class="hint">
+            Все режимы используют <b>общий кошелёк</b>. RNG: <code>crypto.getRandomValues</code>.
           </div>
-        </footer>
+
+          <div class="heroStats">
+            <div class="miniCard">
+              <div class="k">Баланс</div>
+              <div class="v">🪙 <b id="balance2">1000</b></div>
+            </div>
+            <div class="miniCard">
+              <div class="k">Халява</div>
+              <div class="v"><b id="freeStatus">доступна</b></div>
+            </div>
+            <div class="miniCard">
+              <div class="k">Версия</div>
+              <div class="v"><b>FINAL</b></div>
+            </div>
+          </div>
+
+          <div class="heroBtns">
+            <a class="btnPrimary" href="./wheel/" aria-label="Открыть Wheel">Открыть Wheel</a>
+            <button id="freeBtn2" class="btnGhost" type="button">Халява 🎁</button>
+          </div>
+        </div>
+
+        <div class="hero__right">
+          <!-- по просьбе: “выбери режим” блок оставляем пустым -->
+          <div class="heroEmpty" aria-label="empty block"></div>
+        </div>
       </section>
+
+      <!-- ===== MOBILE PAGES (контент переключается вкладками) ===== -->
+      <section class="mPages">
+        <!-- GAMES -->
+        <section class="mPage" id="page-games">
+          <div class="mSectionHead">
+            <div class="mH">Игры</div>
+            <div class="mS">Список игр</div>
+          </div>
+
+          <section class="grid grid--cards" id="gamesGrid">
+            <a class="gameCard" href="./dice/">
+              <div class="gcTop"><div class="gcIcon">🎲</div><div class="gcName">Dice</div></div>
+              <div class="gcDesc">3D кубик · меньше/больше</div>
+              <div class="gcMeta">Играть</div>
+            </a>
+
+            <a class="gameCard" href="./coinflip/">
+              <div class="gcTop"><div class="gcIcon">🪙</div><div class="gcName">Coin Flip</div></div>
+              <div class="gcDesc">Орёл/Решка · 3D монета</div>
+              <div class="gcMeta">Играть</div>
+            </a>
+
+            <a class="gameCard" href="./crash/">
+              <div class="gcTop"><div class="gcIcon">🚀</div><div class="gcName">Crash</div></div>
+              <div class="gcDesc">Растёт · забирай вовремя</div>
+              <div class="gcMeta">Играть</div>
+            </a>
+
+            <a class="gameCard" href="./mines/">
+              <div class="gcTop"><div class="gcIcon">💣</div><div class="gcName">Mines</div></div>
+              <div class="gcDesc">5×5 · лестница X · cashout</div>
+              <div class="gcMeta">Играть</div>
+            </a>
+
+            <a class="gameCard" href="./rps/">
+              <div class="gcTop"><div class="gcIcon">✊✌️✋</div><div class="gcName">RPS</div></div>
+              <div class="gcDesc">Серия · лестница X</div>
+              <div class="gcMeta">Играть</div>
+            </a>
+
+            <a class="gameCard" href="./penalty/">
+              <div class="gcTop"><div class="gcIcon">⚽</div><div class="gcName">Penalty</div></div>
+              <div class="gcDesc">Вратарь · сложность</div>
+              <div class="gcMeta">Играть</div>
+            </a>
+
+            <a class="gameCard" href="./tower/">
+              <div class="gcTop"><div class="gcIcon">🐉</div><div class="gcName">Tower</div></div>
+              <div class="gcDesc">Яйцо/череп · cashout</div>
+              <div class="gcMeta">Играть</div>
+            </a>
+
+            <a class="gameCard" href="./wheel/">
+              <div class="gcTop"><div class="gcIcon">🎡</div><div class="gcName">Wheel</div></div>
+              <div class="gcDesc">Выбор X · честный RNG</div>
+              <div class="gcMeta">Играть</div>
+            </a>
+          </section>
+
+          <!-- MOBILE CAROUSEL (низ) -->
+          <section class="mCarousel" aria-label="carousel">
+            <a class="mChip" href="./dice/"><span>🎲</span><b>Dice</b></a>
+            <a class="mChip" href="./coinflip/"><span>🪙</span><b>Coin</b></a>
+            <a class="mChip" href="./crash/"><span>🚀</span><b>Crash</b></a>
+            <a class="mChip" href="./mines/"><span>💣</span><b>Mines</b></a>
+            <a class="mChip" href="./rps/"><span>✊</span><b>RPS</b></a>
+            <a class="mChip" href="./penalty/"><span>⚽</span><b>Penalty</b></a>
+            <a class="mChip" href="./tower/"><span>🐉</span><b>Tower</b></a>
+            <a class="mChip" href="./wheel/"><span>🎡</span><b>Wheel</b></a>
+          </section>
+        </section>
+
+        <!-- BONUS -->
+        <section class="mPage hidden" id="page-bonus">
+          <div class="mSectionHead"><div class="mH">Бонусы</div><div class="mS">Скоро</div></div>
+          <div class="mPlaceholder">Раздел в разработке.</div>
+        </section>
+
+        <!-- PROMO -->
+        <section class="mPage hidden" id="page-promo">
+          <div class="mSectionHead"><div class="mH">Промокоды</div><div class="mS">Скоро</div></div>
+          <div class="mPlaceholder">Раздел в разработке.</div>
+        </section>
+
+        <!-- SUPPORT -->
+        <section class="mPage hidden" id="page-support">
+          <div class="mSectionHead"><div class="mH">Поддержка</div><div class="mS">Скоро</div></div>
+          <div class="mPlaceholder">Раздел в разработке.</div>
+        </section>
+
+        <!-- FREE (открывает модалку) -->
+        <section class="mPage hidden" id="page-free">
+          <div class="mSectionHead"><div class="mH">Халява</div><div class="mS">Ежедневное колесо</div></div>
+          <button id="mFreeOpen" class="mBigBtn" type="button">Открыть Халяву 🎁</button>
+          <div class="mHint">1 попытка в сутки + бонусы за VK/TG.</div>
+        </section>
+      </section>
+
+      <!-- ===== DESKTOP GRID (как было) ===== -->
+      <section class="grid grid--desk">
+        <a class="gameCard" href="./dice/"><div class="gcTop"><div class="gcIcon">🎲</div><div class="gcName">Dice</div></div><div class="gcDesc">3D кубик · меньше/больше · честный RNG</div><div class="gcMeta">Моментальная игра</div></a>
+        <a class="gameCard" href="./coinflip/"><div class="gcTop"><div class="gcIcon">🪙</div><div class="gcName">Coin Flip</div></div><div class="gcDesc">Орёл/Решка · 3D монета</div><div class="gcMeta">Быстрый риск</div></a>
+        <a class="gameCard" href="./crash/"><div class="gcTop"><div class="gcIcon">🚀</div><div class="gcName">Crash</div></div><div class="gcDesc">Ракета растёт · забирай вовремя</div><div class="gcMeta">60fps график</div></a>
+        <a class="gameCard" href="./mines/"><div class="gcTop"><div class="gcIcon">💣</div><div class="gcName">Mines</div></div><div class="gcDesc">5×5 · лестница X · cashout</div><div class="gcMeta">Тактика</div></a>
+        <a class="gameCard" href="./rps/"><div class="gcTop"><div class="gcIcon">✊✌️✋</div><div class="gcName">RPS</div></div><div class="gcDesc">Серия · лестница X · cashout</div><div class="gcMeta">Скорость</div></a>
+        <a class="gameCard" href="./penalty/"><div class="gcTop"><div class="gcIcon">⚽</div><div class="gcName">Penalty</div></div><div class="gcDesc">Вратарь · сложность · лестница X</div><div class="gcMeta">Экшен</div></a>
+        <a class="gameCard" href="./tower/"><div class="gcTop"><div class="gcIcon">🐉</div><div class="gcName">Tower</div></div><div class="gcDesc">Яйцо/череп · ряды · cashout</div><div class="gcMeta">Риск по шагам</div></a>
+        <a class="gameCard" href="./wheel/"><div class="gcTop"><div class="gcIcon">🎡</div><div class="gcName">Wheel</div></div><div class="gcDesc">Выбор X · честный RNG</div><div class="gcMeta">Классика</div></a>
+      </section>
+
+      <footer class="footer footer--desk">
+        <div class="footCard">
+          <div class="footTitle">Важно</div>
+          <div class="footTxt">Монеты виртуальные. Вывода нет. Все режимы работают локально.</div>
+        </div>
+      </footer>
     </main>
   </div>
 
-  <!-- HALYAVA MODAL -->
+  <!-- HALYAVA MODAL (НЕПРОЗРАЧНЫЙ) -->
   <div id="freeModal" class="modal" aria-hidden="true">
     <div class="modal__backdrop" data-close="1"></div>
-
     <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Халява">
       <div class="modal__head">
         <div class="modal__title">Халява 🎁</div>
+        <div class="modal__timer" id="dailyTimer">до попытки: --:--:--</div>
         <button class="modal__close" id="freeClose" type="button" aria-label="Закрыть">✕</button>
       </div>
 
       <div class="tabs">
         <button id="tabDaily" class="tab active" type="button">Ежедневное колесо</button>
-        <button id="tabSocial" class="tab" type="button">Бонусы</button>
+        <button id="tabSocial" class="tab" type="button">VK / TG</button>
       </div>
 
-      <!-- DAILY -->
+      <!-- DAILY WHEEL -->
       <section id="paneDaily" class="pane">
-        <div class="dailyTopRow">
-          <div>
-            <div class="dailyTitle">Ежедневное колесо</div>
-            <div class="dailyHint">1 попытка в сутки. Приз сразу в общий кошелёк.</div>
-          </div>
-
-          <div class="timerBox">
-            <div class="timerLabel">Следующая попытка через</div>
-            <div class="timerVal" id="dailyTimer">00:00:00</div>
-          </div>
-        </div>
-
         <div class="dailyWrap">
           <div class="dailyLeft">
-            <div class="wheelBox">
-              <div class="pointer"></div>
-              <canvas id="dailyWheel" width="520" height="520"></canvas>
-              <div class="wheelCenter">
-                <div class="centerBig" id="wheelCenterTxt">SPIN</div>
-                <div class="centerSmall" id="wheelCenterSub">сегодня</div>
-              </div>
-            </div>
+            <div class="dailyCard">
+              <div class="dailyTitle">Ежедневное колесо</div>
+              <div class="dailyHint">1 попытка в сутки. Приз начисляется сразу в общий кошелёк.</div>
 
-            <button id="spinBtn" class="btnPrimary" type="button">Крутить</button>
-            <div class="dailyMsg" id="dailyMsg">Жми “Крутить” и забирай приз.</div>
+              <div class="wheelBox">
+                <div class="pointer"></div>
+                <canvas id="dailyWheel" width="520" height="520"></canvas>
+                <div class="wheelCenter">
+                  <div class="centerBig" id="wheelCenterTxt">SPIN</div>
+                  <div class="centerSmall" id="wheelCenterSub">сегодня</div>
+                </div>
+              </div>
+
+              <button id="spinBtn" class="btnPrimary" type="button">Крутить</button>
+              <div class="dailyMsg" id="dailyMsg">Жми “Крутить” и забирай приз.</div>
+            </div>
           </div>
 
           <div class="dailyRight">
@@ -217,7 +269,7 @@
         </div>
       </section>
 
-      <!-- SOCIAL -->
+      <!-- SOCIAL BONUS -->
       <section id="paneSocial" class="pane hidden">
         <div class="socialCard">
           <div class="dailyTitle">Бонусы за подписку</div>
@@ -255,9 +307,7 @@
             </div>
           </div>
 
-          <div class="finePrint">
-            * Реальная проверка подписки делается через сервер/бота. Сейчас логика локальная.
-          </div>
+          <div class="finePrint">* Реальная проверка подписки делается через сервер/бота. Тут — локально.</div>
         </div>
       </section>
     </div>
