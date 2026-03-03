@@ -1,1 +1,269 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>Triniti</title>
 
+  <!-- shared theme + shared wallet -->
+  <link rel="stylesheet" href="./shared/theme.css">
+  <script src="./shared/wallet.js"></script>
+
+  <!-- home -->
+  <link rel="stylesheet" href="./triniti.css" />
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="nebula" aria-hidden="true"></div>
+  <div class="sparkles" aria-hidden="true"></div>
+
+  <div class="app">
+    <!-- TOPBAR (ПК). На мобилке скрывается CSS-ом -->
+    <header class="topbar">
+      <div class="topbar__left">
+        <div class="brand">
+          <!-- LOGO (Triangle DOWN like your reference) -->
+          <span class="brandMarkWrap" aria-hidden="true">
+            <svg class="brandMarkSvg" viewBox="0 0 64 64" aria-label="Triniti logo" role="img">
+              <defs>
+                <linearGradient id="triGoldGradDesk" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="var(--gold2)"/>
+                  <stop offset="0.48" stop-color="var(--gold)"/>
+                  <stop offset="1" stop-color="var(--gold3)"/>
+                </linearGradient>
+
+                <!-- Cut T out of triangle -->
+                <mask id="triCutTDesk">
+                  <rect width="64" height="64" fill="#fff"/>
+
+                  <!-- “T” cut (black removes). Made to match reference: wide top, narrow stem -->
+                  <path fill="#000" d="
+                    M18 18
+                    H46
+                    V24
+                    H36.8
+                    V46
+                    H27.2
+                    V24
+                    H18
+                    Z
+                  "/>
+
+                  <!-- inner diagonal nib (small notch like on reference) -->
+                  <path fill="#000" d="M34.5 24 L42 24 L35.5 31 Z"/>
+                </mask>
+              </defs>
+
+              <!-- Triangle DOWN (top edge flat, point down) -->
+              <path
+                class="triMain"
+                fill="url(#triGoldGradDesk)"
+                mask="url(#triCutTDesk)"
+                d="
+                  M10 14
+                  H54
+                  Q56 14 55 16
+                  L34 53
+                  Q32 56 30 53
+                  L9 16
+                  Q8 14 10 14
+                  Z
+                "
+              />
+
+              <!-- inner subtle stroke (premium) -->
+              <path
+                class="triStroke"
+                d="
+                  M12.5 16
+                  H51.5
+                  L33.4 49.8
+                  Q32 52.2 30.6 49.8
+                  L12.5 16
+                  Z
+                "
+              />
+            </svg>
+          </span>
+
+          <div class="brandText">
+            <div class="title">Triniti</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topbar__center">
+        <button class="navPill active" type="button" data-jump="#games">Игры</button>
+        <button class="navPill" type="button" data-open="promo">Промокоды</button>
+        <button class="navPill" type="button" data-open="support">Поддержка</button>
+        <button class="navPill navPill--free" type="button" data-open="free">Халява</button>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+          <span id="soundDot" class="dot"></span>
+          <span id="soundText">Звук on</span>
+        </button>
+
+        <div class="pill pill--balance">🪙 <b id="balance">1000</b></div>
+      </div>
+    </header>
+
+    <main class="home">
+      <!-- MOBILE PANEL (ТОЛЬКО МОБИЛКА) -->
+      <section class="mHeader" aria-label="Triniti mobile">
+        <div class="mBrand">
+          <span class="mBrandMarkWrap" aria-hidden="true">
+            <svg class="mBrandMarkSvg" viewBox="0 0 64 64" aria-label="Triniti logo" role="img">
+              <defs>
+                <linearGradient id="triGoldGradMob" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="var(--gold2)"/>
+                  <stop offset="0.48" stop-color="var(--gold)"/>
+                  <stop offset="1" stop-color="var(--gold3)"/>
+                </linearGradient>
+
+                <mask id="triCutTMob">
+                  <rect width="64" height="64" fill="#fff"/>
+                  <path fill="#000" d="
+                    M18 18
+                    H46
+                    V24
+                    H36.8
+                    V46
+                    H27.2
+                    V24
+                    H18
+                    Z
+                  "/>
+                  <path fill="#000" d="M34.5 24 L42 24 L35.5 31 Z"/>
+                </mask>
+              </defs>
+
+              <path
+                class="triMain"
+                fill="url(#triGoldGradMob)"
+                mask="url(#triCutTMob)"
+                d="
+                  M10 14
+                  H54
+                  Q56 14 55 16
+                  L34 53
+                  Q32 56 30 53
+                  L9 16
+                  Q8 14 10 14
+                  Z
+                "
+              />
+              <path
+                class="triStroke"
+                d="
+                  M12.5 16
+                  H51.5
+                  L33.4 49.8
+                  Q32 52.2 30.6 49.8
+                  L12.5 16
+                  Z
+                "
+              />
+            </svg>
+          </span>
+
+          <div class="mTitle">Triniti</div>
+        </div>
+
+        <div class="mTabs" role="tablist" aria-label="Разделы">
+          <button class="mTab active" type="button" data-jump="#games">Игры</button>
+          <button class="mTab" type="button" data-open="promo">Промокоды</button>
+          <button class="mTab" type="button" data-open="support">Поддержка</button>
+          <button class="mTab mTab--free" type="button" data-open="free">Халява</button>
+        </div>
+
+        <div class="mWallet">
+          <div class="mBal">
+            <div class="mBal__name">GG</div>
+            <div class="mBal__val">🪙 <b id="balance2">1000</b></div>
+          </div>
+          <div class="mActions">
+            <button id="depositBtnMobile" class="mBtn mBtn--primary" type="button">Пополнить</button>
+            <button id="withdrawBtnMobile" class="mBtn mBtn--ghost" type="button">Вывести</button>
+          </div>
+        </div>
+      </section>
+      <!-- /MOBILE PANEL -->
+
+      <!-- LEFT RAIL (ПК/планшет). На мобилке скрывается CSS-ом -->
+      <aside class="rail" aria-label="Быстрые режимы">
+        <div class="railCard">
+          <div class="railBal">
+            <div class="railBal__title">Баланс</div>
+            <div class="railBal__val">🪙 <b id="balanceRail">1000</b></div>
+          </div>
+
+          <nav class="railNav">
+            <a class="railBtn active" href="./dice/" title="Dice"><span>🎲</span></a>
+            <a class="railBtn" href="./mines/" title="Mines"><span>💣</span></a>
+            <a class="railBtn" href="./crash/" title="Crash"><span>🚀</span></a>
+            <a class="railBtn" href="./coinflip/" title="Coin Flip"><span>🪙</span></a>
+            <a class="railBtn" href="./rps/" title="RPS"><span>✊</span></a>
+            <a class="railBtn" href="./penalty/" title="Penalty"><span>⚽</span></a>
+            <a class="railBtn" href="./tower/" title="Tower"><span>🐉</span></a>
+            <a class="railBtn" href="./wheel/" title="Wheel"><span>🎡</span></a>
+
+            <button class="railBtn railBtn--gift" type="button" data-open="free" title="Халява">
+              <span>🎁</span>
+            </button>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+      <section class="content">
+        <!-- HERO (ПК): плашка пустая + квадраты пополнить/вывести -->
+        <section class="hero card" aria-label="Блок будет заполнен позже">
+          <div class="heroRow">
+            <div class="heroEmpty"></div>
+
+            <div class="heroTiles">
+              <button id="depositBtn" class="tileBtn tileBtn--primary" type="button">
+                <div class="tileTop">Пополнить</div>
+                <div class="tileSub">виртуальные монеты</div>
+              </button>
+
+              <button id="withdrawBtn" class="tileBtn tileBtn--ghost" type="button">
+                <div class="tileTop">Вывести</div>
+                <div class="tileSub">виртуальные монеты</div>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- GAMES GRID -->
+        <section id="games" class="grid">
+          <a class="gameCard" href="./dice/"><div class="gcTop"><div class="gcIcon">🎲</div><div class="gcName">Dice</div></div><div class="gcDesc">3D кубик · меньше/больше · честный RNG</div><div class="gcMeta">Моментальная игра</div></a>
+          <a class="gameCard" href="./coinflip/"><div class="gcTop"><div class="gcIcon">🪙</div><div class="gcName">Coin Flip</div></div><div class="gcDesc">Орёл/Решка · 3D монета</div><div class="gcMeta">Быстрый риск</div></a>
+          <a class="gameCard" href="./crash/"><div class="gcTop"><div class="gcIcon">🚀</div><div class="gcName">Crash</div></div><div class="gcDesc">Ракета растёт · забирай вовремя</div><div class="gcMeta">60fps график</div></a>
+          <a class="gameCard" href="./mines/"><div class="gcTop"><div class="gcIcon">💣</div><div class="gcName">Mines</div></div><div class="gcDesc">5×5 · лестница X · cashout</div><div class="gcMeta">Тактика</div></a>
+          <a class="gameCard" href="./rps/"><div class="gcTop"><div class="gcIcon">✊✌️✋</div><div class="gcName">RPS</div></div><div class="gcDesc">Серия · лестница X · cashout</div><div class="gcMeta">Скорость</div></a>
+          <a class="gameCard" href="./penalty/"><div class="gcTop"><div class="gcIcon">⚽</div><div class="gcName">Penalty</div></div><div class="gcDesc">Вратарь · сложность · лестница X</div><div class="gcMeta">Экшен</div></a>
+          <a class="gameCard" href="./tower/"><div class="gcTop"><div class="gcIcon">🐉</div><div class="gcName">Tower</div></div><div class="gcDesc">Яйцо/череп · ряды · cashout</div><div class="gcMeta">Риск по шагам</div></a>
+          <a class="gameCard" href="./wheel/"><div class="gcTop"><div class="gcIcon">🎡</div><div class="gcName">Wheel</div></div><div class="gcDesc">Выбор X · честный RNG</div><div class="gcMeta">Классика</div></a>
+        </section>
+
+        <section class="card shelf" aria-label="Полка (пусто)"></section>
+
+        <footer class="footer">
+          <div class="footCard">
+            <div class="footTitle">Важно</div>
+            <div class="footTxt">Монеты виртуальные. Вывода нет. Все режимы работают локально.</div>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <!-- твои модалки free/promo/support оставляй как были -->
+  <script src="./triniti.js"></script>
+</body>
+</html>
