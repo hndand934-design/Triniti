@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
+  <!-- фикс масштаба/обрезания на iPhone -->
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover" />
   <meta name="format-detection" content="telephone=no" />
   <title>Triniti</title>
@@ -16,7 +17,6 @@
 
 <body>
   <div class="bg"></div>
-  <div class="nebula" aria-hidden="true"></div>
   <div class="sparkles" aria-hidden="true"></div>
 
   <div class="app">
@@ -24,67 +24,52 @@
     <header class="topbar">
       <div class="topbar__left">
         <div class="brand">
-          <!-- LOGO (Triangle DOWN like your reference) -->
-          <span class="brandMarkWrap" aria-hidden="true">
-            <svg class="brandMarkSvg" viewBox="0 0 64 64" aria-label="Triniti logo" role="img">
+          <!-- LOGO (max similar style, crisp SVG, no blur) -->
+          <span class="brandMark" aria-hidden="true">
+            <svg class="brandMark__svg" viewBox="0 0 64 64" role="img" aria-label="Triniti logo">
               <defs>
-                <linearGradient id="triGoldGradDesk" x1="0" y1="0" x2="1" y2="1">
+                <!-- metallic gold gradient (no blur) -->
+                <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0" stop-color="var(--gold2)"/>
-                  <stop offset="0.48" stop-color="var(--gold)"/>
+                  <stop offset="0.55" stop-color="var(--gold)"/>
                   <stop offset="1" stop-color="var(--gold3)"/>
                 </linearGradient>
+                <linearGradient id="gEdge" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="rgba(255,255,255,.26)"/>
+                  <stop offset="1" stop-color="rgba(0,0,0,.15)"/>
+                </linearGradient>
 
-                <!-- Cut T out of triangle -->
-                <mask id="triCutTDesk">
+                <!-- mask: keep outer triangle, cut inner triangle, cut stylized T with narrow blades -->
+                <mask id="mTriT">
                   <rect width="64" height="64" fill="#fff"/>
 
-                  <!-- “T” cut (black removes). Made to match reference: wide top, narrow stem -->
-                  <path fill="#000" d="
-                    M18 18
-                    H46
-                    V24
-                    H36.8
-                    V46
-                    H27.2
-                    V24
-                    H18
-                    Z
-                  "/>
+                  <!-- inner triangle cut (thin frame like premium mark) -->
+                  <path fill="#000" d="M20 22 L44 22 L32 46 Z"/>
 
-                  <!-- inner diagonal nib (small notch like on reference) -->
-                  <path fill="#000" d="M34.5 24 L42 24 L35.5 31 Z"/>
+                  <!-- stylized T cut: narrow top + sharp inner cuts -->
+                  <!-- top bar -->
+                  <path fill="#000" d="M18 18 H46 V24 H36.6 V26.2 H27.4 V24 H18 Z"/>
+
+                  <!-- stem (slightly flared + knife cuts) -->
+                  <path fill="#000" d="M29.3 26.2 H34.7 V48.5 H29.3 Z"/>
+
+                  <!-- diagonal blade cuts to match “узкие срезы” vibe -->
+                  <path fill="#000" d="M34.7 28.5 L41.8 24 H46 L36.3 31.2 Z"/>
+                  <path fill="#000" d="M29.3 28.5 L22.2 24 H18 L27.7 31.2 Z"/>
+
+                  <!-- tiny notch at bottom (sharp look) -->
+                  <path fill="#000" d="M29.3 48.5 H34.7 L32 54 Z"/>
                 </mask>
               </defs>
 
-              <!-- Triangle DOWN (top edge flat, point down) -->
-              <path
-                class="triMain"
-                fill="url(#triGoldGradDesk)"
-                mask="url(#triCutTDesk)"
-                d="
-                  M10 14
-                  H54
-                  Q56 14 55 16
-                  L34 53
-                  Q32 56 30 53
-                  L9 16
-                  Q8 14 10 14
-                  Z
-                "
-              />
+              <!-- Outer triangle DOWN -->
+              <path d="M10 14 H54 L32 56 Z" fill="url(#gGold)" mask="url(#mTriT)"/>
 
-              <!-- inner subtle stroke (premium) -->
-              <path
-                class="triStroke"
-                d="
-                  M12.5 16
-                  H51.5
-                  L33.4 49.8
-                  Q32 52.2 30.6 49.8
-                  L12.5 16
-                  Z
-                "
-              />
+              <!-- crisp outline (outer) -->
+              <path d="M10 14 H54 L32 56 Z" class="brandMark__stroke"/>
+
+              <!-- subtle edge highlight (still crisp) -->
+              <path d="M10.8 14.8 H53.2 L32 55 Z" fill="none" stroke="url(#gEdge)" stroke-width="1"/>
             </svg>
           </span>
 
@@ -114,59 +99,32 @@
     <main class="home">
       <!-- MOBILE PANEL (ТОЛЬКО МОБИЛКА) -->
       <section class="mHeader" aria-label="Triniti mobile">
-        <div class="mBrand">
-          <span class="mBrandMarkWrap" aria-hidden="true">
-            <svg class="mBrandMarkSvg" viewBox="0 0 64 64" aria-label="Triniti logo" role="img">
+        <div class="mBrandRow">
+          <span class="brandMark brandMark--m" aria-hidden="true">
+            <svg class="brandMark__svg" viewBox="0 0 64 64" role="img" aria-label="Triniti logo">
               <defs>
-                <linearGradient id="triGoldGradMob" x1="0" y1="0" x2="1" y2="1">
+                <linearGradient id="gGoldM" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0" stop-color="var(--gold2)"/>
-                  <stop offset="0.48" stop-color="var(--gold)"/>
+                  <stop offset="0.55" stop-color="var(--gold)"/>
                   <stop offset="1" stop-color="var(--gold3)"/>
                 </linearGradient>
-
-                <mask id="triCutTMob">
+                <linearGradient id="gEdgeM" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="rgba(255,255,255,.26)"/>
+                  <stop offset="1" stop-color="rgba(0,0,0,.15)"/>
+                </linearGradient>
+                <mask id="mTriTM">
                   <rect width="64" height="64" fill="#fff"/>
-                  <path fill="#000" d="
-                    M18 18
-                    H46
-                    V24
-                    H36.8
-                    V46
-                    H27.2
-                    V24
-                    H18
-                    Z
-                  "/>
-                  <path fill="#000" d="M34.5 24 L42 24 L35.5 31 Z"/>
+                  <path fill="#000" d="M20 22 L44 22 L32 46 Z"/>
+                  <path fill="#000" d="M18 18 H46 V24 H36.6 V26.2 H27.4 V24 H18 Z"/>
+                  <path fill="#000" d="M29.3 26.2 H34.7 V48.5 H29.3 Z"/>
+                  <path fill="#000" d="M34.7 28.5 L41.8 24 H46 L36.3 31.2 Z"/>
+                  <path fill="#000" d="M29.3 28.5 L22.2 24 H18 L27.7 31.2 Z"/>
+                  <path fill="#000" d="M29.3 48.5 H34.7 L32 54 Z"/>
                 </mask>
               </defs>
-
-              <path
-                class="triMain"
-                fill="url(#triGoldGradMob)"
-                mask="url(#triCutTMob)"
-                d="
-                  M10 14
-                  H54
-                  Q56 14 55 16
-                  L34 53
-                  Q32 56 30 53
-                  L9 16
-                  Q8 14 10 14
-                  Z
-                "
-              />
-              <path
-                class="triStroke"
-                d="
-                  M12.5 16
-                  H51.5
-                  L33.4 49.8
-                  Q32 52.2 30.6 49.8
-                  L12.5 16
-                  Z
-                "
-              />
+              <path d="M10 14 H54 L32 56 Z" fill="url(#gGoldM)" mask="url(#mTriTM)"/>
+              <path d="M10 14 H54 L32 56 Z" class="brandMark__stroke"/>
+              <path d="M10.8 14.8 H53.2 L32 55 Z" fill="none" stroke="url(#gEdgeM)" stroke-width="1"/>
             </svg>
           </span>
 
@@ -263,7 +221,189 @@
     </main>
   </div>
 
-  <!-- твои модалки free/promo/support оставляй как были -->
+  <!-- ===================== -->
+  <!-- MODAL: HALYAVA -->
+  <!-- ===================== -->
+  <div id="freeModal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="1"></div>
+
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Халява">
+      <div class="modal__head">
+        <div class="modal__title">Халява 🎁</div>
+        <button class="modal__close" id="freeClose" type="button" aria-label="Закрыть">✕</button>
+      </div>
+
+      <div class="tabs">
+        <button id="tabDaily" class="tab active" type="button">Ежедневное колесо</button>
+        <button id="tabSocial" class="tab" type="button">Подписки</button>
+      </div>
+
+      <section id="paneDaily" class="pane">
+        <div class="dailyTopRow">
+          <div>
+            <div class="dailyTitle">Ежедневное колесо</div>
+            <div class="dailyHint">1 попытка в сутки. Приз сразу в кошелёк.</div>
+          </div>
+
+          <div class="timerBox">
+            <div class="timerLabel">Следующая попытка через</div>
+            <div class="timerVal" id="dailyTimer">00:00:00</div>
+          </div>
+        </div>
+
+        <div class="dailyWrap">
+          <div class="dailyLeft">
+            <div class="wheelBox">
+              <div class="pointer"></div>
+              <canvas id="dailyWheel" width="520" height="520"></canvas>
+              <div class="wheelCenter">
+                <div class="centerBig" id="wheelCenterTxt">SPIN</div>
+                <div class="centerSmall" id="wheelCenterSub">сегодня</div>
+              </div>
+            </div>
+
+            <button id="spinBtn" class="btnPrimary" type="button">Крутить</button>
+            <div class="dailyMsg" id="dailyMsg">Жми “Крутить” и забирай приз.</div>
+          </div>
+
+          <div class="dailyRight">
+            <div class="listCard">
+              <div class="listTitle">Призы</div>
+              <div id="prizeList" class="prizeList"></div>
+              <div class="listNote">RNG: <code>crypto.getRandomValues</code></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="paneSocial" class="pane hidden">
+        <div class="socialCard">
+          <div class="dailyTitle">Бонусы за подписку</div>
+          <div class="dailyHint">Один раз на браузер (локально).</div>
+
+          <div class="socialGrid">
+            <div class="socItem">
+              <div class="socTop">
+                <div class="socIcon">VK</div>
+                <div>
+                  <div class="socName">Подписка ВК</div>
+                  <div class="socDesc">+10 🪙</div>
+                </div>
+              </div>
+              <div class="socBtns">
+                <a class="btnGhost" href="#" onclick="return false;">Открыть ВК</a>
+                <button id="claimVK" class="btnPrimary" type="button">Я подписался</button>
+              </div>
+              <div class="socState" id="vkState">Не получено</div>
+            </div>
+
+            <div class="socItem">
+              <div class="socTop">
+                <div class="socIcon">TG</div>
+                <div>
+                  <div class="socName">Подписка Telegram</div>
+                  <div class="socDesc">+10 🪙</div>
+                </div>
+              </div>
+              <div class="socBtns">
+                <a class="btnGhost" href="#" onclick="return false;">Открыть TG</a>
+                <button id="claimTG" class="btnPrimary" type="button">Я подписался</button>
+              </div>
+              <div class="socState" id="tgState">Не получено</div>
+            </div>
+          </div>
+
+          <div class="finePrint">
+            * Реальная проверка подписки делается через сервер/бота. Сейчас логика локальная.
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===================== -->
+  <!-- MODAL: PROMOCODES -->
+  <!-- ===================== -->
+  <div id="promoModal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="1"></div>
+
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Промокоды">
+      <div class="modal__head">
+        <div class="modal__title">Промокоды</div>
+        <button class="modal__close" id="promoClose" type="button" aria-label="Закрыть">✕</button>
+      </div>
+
+      <section class="pane">
+        <div class="promoCard">
+          <div class="promoHead">
+            <div>
+              <div class="promoTitle">Активация промокода</div>
+              <div class="promoSub">Введите код — начислим монеты в общий баланс.</div>
+            </div>
+          </div>
+
+          <div class="promoBody">
+            <div class="promoLogoSlot" aria-hidden="true"></div>
+
+            <div class="promoForm">
+              <input id="promoInput" class="promoInput" type="text" placeholder="Введите промокод" autocomplete="off" />
+              <button id="promoApply" class="promoBtn" type="button">Активировать</button>
+              <div id="promoMsg" class="promoMsg"> </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===================== -->
+  <!-- MODAL: SUPPORT -->
+  <!-- ===================== -->
+  <div id="supportModal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="1"></div>
+
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Поддержка">
+      <div class="modal__head">
+        <div class="modal__title">Поддержка</div>
+        <button class="modal__close" id="supportClose" type="button" aria-label="Закрыть">✕</button>
+      </div>
+
+      <section class="pane">
+        <div class="supportCard">
+          <div class="supportHead">
+            <div class="supportTitle">Поддержка</div>
+            <div class="supportSub">Ответим по вопросам режимов и бонусов.</div>
+          </div>
+
+          <div class="supportGrid">
+            <div class="supportItem">
+              <div class="supportIcon">TG</div>
+              <div class="supportTxt">
+                <div class="supportName">Telegram</div>
+                <div class="supportDesc">Написать в поддержку</div>
+              </div>
+              <button class="supportBtn" type="button" data-beep="1">Открыть</button>
+            </div>
+
+            <div class="supportItem">
+              <div class="supportIcon">VK</div>
+              <div class="supportTxt">
+                <div class="supportName">ВКонтакте</div>
+                <div class="supportDesc">Написать в поддержку</div>
+              </div>
+              <button class="supportBtn" type="button" data-beep="1">Открыть</button>
+            </div>
+          </div>
+
+          <div class="supportNote">
+            * Сейчас это локальная заглушка (без сервера).
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ВАЖНО: triniti.js НЕ МЕНЯЕМ -->
   <script src="./triniti.js"></script>
 </body>
 </html>
