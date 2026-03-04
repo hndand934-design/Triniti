@@ -1,1 +1,271 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+        content="width=device-width,
+                 initial-scale=1,
+                 maximum-scale=1,
+                 minimum-scale=1,
+                 viewport-fit=cover">
+  <title>Triniti</title>
 
+  <!-- shared theme + shared wallet -->
+  <link rel="stylesheet" href="./shared/theme.css">
+  <script src="./shared/wallet.js"></script>
+
+  <!-- home -->
+  <link rel="stylesheet" href="./triniti.css" />
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="sparkles" aria-hidden="true"></div>
+
+  <div class="app">
+    <!-- TOPBAR (ПК). На мобилке скрывается CSS-ом -->
+    <header class="topbar">
+      <div class="topbar__left">
+        <div class="brandTitle">
+          <span class="brandMark" aria-hidden="true">
+            <!-- TRINITI MARK (SVG) — СИММЕТРИЯ 1:1 -->
+            <svg class="brandSvg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path fill="currentColor" fill-rule="evenodd" d="
+                M 8 18
+                L 92 18
+                L 76 36
+                L 58 36
+                L 58 72
+                L 50 92
+                L 42 72
+                L 42 36
+                L 24 36
+                Z
+
+                M 30 36
+                L 42 36
+                L 42 68
+                L 34 64
+                Z
+
+                M 58 36
+                L 70 36
+                L 66 64
+                L 58 68
+                Z
+              "/>
+            </svg>
+          </span>
+
+          <div class="title">Triniti</div>
+        </div>
+      </div>
+
+      <div class="topbar__center">
+        <button class="navPill active" type="button" data-jump="#games">Игры</button>
+        <button class="navPill" type="button" data-open="promo">Промокоды</button>
+        <button class="navPill" type="button" data-open="support">Поддержка</button>
+        <button class="navPill navPill--free" type="button" data-open="free">Халява</button>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+          <span id="soundDot" class="dot"></span>
+          <span id="soundText">Звук on</span>
+        </button>
+
+        <div class="pill pill--balance">🪙 <b id="balance">1000</b></div>
+      </div>
+    </header>
+
+    <main class="home">
+      <!-- MOBILE PANEL (ТОЛЬКО МОБИЛКА) -->
+      <section class="mHeader" aria-label="Triniti mobile">
+        <div class="mBrand">
+          <span class="brandMark brandMark--mobile" aria-hidden="true">
+            <!-- тот же SVG -->
+            <svg class="brandSvg brandSvg--mobile" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path fill="currentColor" fill-rule="evenodd" d="
+                M 8 18
+                L 92 18
+                L 76 36
+                L 58 36
+                L 58 72
+                L 50 92
+                L 42 72
+                L 42 36
+                L 24 36
+                Z
+
+                M 30 36
+                L 42 36
+                L 42 68
+                L 34 64
+                Z
+
+                M 58 36
+                L 70 36
+                L 66 64
+                L 58 68
+                Z
+              "/>
+            </svg>
+          </span>
+
+          <div class="mTitle">Triniti</div>
+        </div>
+
+        <div class="mTabs" role="tablist" aria-label="Разделы">
+          <button class="mTab active" type="button" data-jump="#games">Игры</button>
+          <button class="mTab" type="button" data-open="promo">Промокоды</button>
+          <button class="mTab" type="button" data-open="support">Поддержка</button>
+          <button class="mTab mTab--free" type="button" data-open="free">Халява</button>
+        </div>
+
+        <div class="mWallet">
+          <div class="mBal">
+            <div class="mBal__name">GG</div>
+            <div class="mBal__val">🪙 <b id="balance2">1000</b></div>
+          </div>
+          <div class="mActions">
+            <button id="depositBtnMobile" class="mBtn" type="button">Пополнить</button>
+            <button id="withdrawBtnMobile" class="mBtn mBtn--ghost" type="button">Вывести</button>
+          </div>
+        </div>
+      </section>
+      <!-- /MOBILE PANEL -->
+
+      <!-- LEFT RAIL -->
+      <aside class="rail" aria-label="Быстрые режимы">
+        <div class="railCard">
+          <div class="railBal">
+            <div class="railBal__title">Баланс</div>
+            <div class="railBal__val">🪙 <b id="balanceRail">1000</b></div>
+          </div>
+
+          <nav class="railNav">
+            <a class="railBtn active" href="./dice/" title="Dice"><span>🎲</span></a>
+            <a class="railBtn" href="./mines/" title="Mines"><span>💣</span></a>
+            <a class="railBtn" href="./crash/" title="Crash"><span>🚀</span></a>
+            <a class="railBtn" href="./coinflip/" title="Coin Flip"><span>🪙</span></a>
+            <a class="railBtn" href="./rps/" title="RPS"><span>✊</span></a>
+            <a class="railBtn" href="./penalty/" title="Penalty"><span>⚽</span></a>
+            <a class="railBtn" href="./tower/" title="Tower"><span>🐉</span></a>
+            <a class="railBtn" href="./wheel/" title="Wheel"><span>🎡</span></a>
+            <button class="railBtn railBtn--gift" type="button" data-open="free" title="Халява">
+              <span>🎁</span>
+            </button>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+      <section class="content">
+        <section class="hero card" aria-label="Блок будет заполнен позже">
+          <div class="heroRow">
+            <div class="heroEmpty"></div>
+
+            <div class="heroTiles">
+              <button id="depositBtn" class="tileBtn tileBtn--primary" type="button">
+                <div class="tileTop">Пополнить</div>
+                <div class="tileSub">виртуальные монеты</div>
+              </button>
+
+              <button id="withdrawBtn" class="tileBtn tileBtn--ghost" type="button">
+                <div class="tileTop">Вывести</div>
+                <div class="tileSub">виртуальные монеты</div>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section id="games" class="grid">
+          <a class="gameCard" href="./dice/">
+            <div class="gcTop">
+              <div class="gcIcon">🎲</div>
+              <div class="gcName">Dice</div>
+            </div>
+            <div class="gcDesc">3D кубик · меньше/больше · честный RNG</div>
+            <div class="gcMeta">Моментальная игра</div>
+          </a>
+
+          <a class="gameCard" href="./coinflip/">
+            <div class="gcTop">
+              <div class="gcIcon">🪙</div>
+              <div class="gcName">Coin Flip</div>
+            </div>
+            <div class="gcDesc">Орёл/Решка · 3D монета</div>
+            <div class="gcMeta">Быстрый риск</div>
+          </a>
+
+          <a class="gameCard" href="./crash/">
+            <div class="gcTop">
+              <div class="gcIcon">🚀</div>
+              <div class="gcName">Crash</div>
+            </div>
+            <div class="gcDesc">Ракета растёт · забирай вовремя</div>
+            <div class="gcMeta">60fps график</div>
+          </a>
+
+          <a class="gameCard" href="./mines/">
+            <div class="gcTop">
+              <div class="gcIcon">💣</div>
+              <div class="gcName">Mines</div>
+            </div>
+            <div class="gcDesc">5×5 · лестница X · cashout</div>
+            <div class="gcMeta">Тактика</div>
+          </a>
+
+          <a class="gameCard" href="./rps/">
+            <div class="gcTop">
+              <div class="gcIcon">✊✌️✋</div>
+              <div class="gcName">RPS</div>
+            </div>
+            <div class="gcDesc">Серия · лестница X · cashout</div>
+            <div class="gcMeta">Скорость</div>
+          </a>
+
+          <a class="gameCard" href="./penalty/">
+            <div class="gcTop">
+              <div class="gcIcon">⚽</div>
+              <div class="gcName">Penalty</div>
+            </div>
+            <div class="gcDesc">Вратарь · сложность · лестница X</div>
+            <div class="gcMeta">Экшен</div>
+          </a>
+
+          <a class="gameCard" href="./tower/">
+            <div class="gcTop">
+              <div class="gcIcon">🐉</div>
+              <div class="gcName">Tower</div>
+            </div>
+            <div class="gcDesc">Яйцо/череп · ряды · cashout</div>
+            <div class="gcMeta">Риск по шагам</div>
+          </a>
+
+          <a class="gameCard" href="./wheel/">
+            <div class="gcTop">
+              <div class="gcIcon">🎡</div>
+              <div class="gcName">Wheel</div>
+            </div>
+            <div class="gcDesc">Выбор X · честный RNG</div>
+            <div class="gcMeta">Классика</div>
+          </a>
+        </section>
+
+        <section class="card shelf" aria-label="Полка (пусто)"></section>
+
+        <footer class="footer">
+          <div class="footCard">
+            <div class="footTitle">Важно</div>
+            <div class="footTxt">Монеты виртуальные. Вывода нет. Все режимы работают локально.</div>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <!-- Твои модалки free/promo/support оставь как были (без изменений) -->
+
+  <script src="./triniti.js"></script>
+</body>
+</html>
