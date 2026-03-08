@@ -1,0 +1,32 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="miniBg" x1="10" y1="6" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffba2b"/>
+      <stop offset="0.45" stop-color="#ff980d"/>
+      <stop offset="1" stop-color="#944100"/>
+    </linearGradient>
+
+    <linearGradient id="miniEdge" x1="22" y1="16" x2="43" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9d620f"/>
+      <stop offset="0.5" stop-color="#f0ca62"/>
+      <stop offset="1" stop-color="#7f4908"/>
+    </linearGradient>
+
+    <linearGradient id="miniFace" x1="23" y1="16" x2="40" y2="34" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff2ae"/>
+      <stop offset="0.55" stop-color="#f0c95c"/>
+      <stop offset="1" stop-color="#be7c1a"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#miniBg)"/>
+
+  <ellipse cx="33" cy="33" rx="16.5" ry="17" fill="url(#miniEdge)"/>
+  <ellipse cx="33" cy="31.5" rx="14.2" ry="14.2" fill="url(#miniFace)"/>
+
+  <circle cx="33" cy="31.5" r="11.7" stroke="#ffefb1" stroke-opacity="0.7" stroke-width="1.5"/>
+
+  <path d="M36 24.8C32 23.9 27.9 25.3 27.3 28.6C26.8 31 28.5 32.4 31.8 33.1C35.6 33.9 37.3 35 36.8 37.4C36.2 40.2 33.4 41.5 30.7 41.1C28.3 40.7 26.2 39.6 25.1 38.5"
+        stroke="#8c560f" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M30.4 22.2L29.8 42.2" stroke="#8c560f" stroke-width="2.1" stroke-linecap="round"/>
+</svg>
