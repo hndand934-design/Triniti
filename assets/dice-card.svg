@@ -1,1 +1,110 @@
+<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgMain" x1="64" y1="36" x2="430" y2="612" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2E7CFF"/>
+      <stop offset="0.46" stop-color="#173F9C"/>
+      <stop offset="1" stop-color="#0B1637"/>
+    </linearGradient>
 
+    <radialGradient id="glowTop" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(178 118) rotate(42.5) scale(233 182)">
+      <stop stop-color="#A8D8FF" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#A8D8FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="glassStroke" x1="64" y1="28" x2="448" y2="612" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8FC5FF" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#A98CFF" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <linearGradient id="cubeFront" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="1" stop-color="#C8D3E7"/>
+    </linearGradient>
+
+    <linearGradient id="cubeTop" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D9E2F2"/>
+    </linearGradient>
+
+    <linearGradient id="cubeSide" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#8C9AB3"/>
+      <stop offset="1" stop-color="#4F5D76"/>
+    </linearGradient>
+
+    <linearGradient id="shadowGrad" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop stop-color="#0B1020" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#0B1020" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#081021" flood-opacity="0.45"/>
+    </filter>
+
+    <filter id="cardShadow" x="-10%" y="-10%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#040915" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <rect x="16" y="16" width="480" height="608" rx="42" fill="url(#bgMain)" filter="url(#cardShadow)"/>
+  <rect x="16.75" y="16.75" width="478.5" height="606.5" rx="41.25" stroke="url(#glassStroke)" stroke-width="1.5"/>
+
+  <ellipse cx="176" cy="104" rx="208" ry="122" fill="url(#glowTop)"/>
+  <path d="M38 180C112 114 182 110 274 132C362 153 425 118 483 62V170C437 220 365 246 274 236C182 226 122 218 38 262V180Z"
+        fill="white" fill-opacity="0.08"/>
+  <path d="M30 252C124 210 204 218 292 246C364 270 422 261 480 218V292C411 330 348 336 270 310C180 280 117 280 30 332V252Z"
+        fill="white" fill-opacity="0.06"/>
+
+  <!-- Back cube -->
+  <g transform="translate(278 122) rotate(10)" filter="url(#softShadow)">
+    <polygon points="70,18 138,56 76,92 8,54" fill="url(#cubeTop)"/>
+    <polygon points="8,54 76,92 76,168 8,130" fill="url(#cubeFront)"/>
+    <polygon points="76,92 138,56 138,132 76,168" fill="url(#cubeSide)"/>
+
+    <circle cx="40" cy="78" r="7" fill="#111826"/>
+    <circle cx="41" cy="146" r="7" fill="#111826"/>
+    <circle cx="108" cy="94" r="8" fill="#111826"/>
+    <circle cx="104" cy="135" r="8" fill="#111826"/>
+  </g>
+
+  <!-- Front cube -->
+  <g transform="translate(116 164) rotate(-12)" filter="url(#softShadow)">
+    <polygon points="88,22 180,72 96,120 4,70" fill="url(#cubeTop)"/>
+    <polygon points="4,70 96,120 96,232 4,182" fill="url(#cubeFront)"/>
+    <polygon points="96,120 180,72 180,184 96,232" fill="url(#cubeSide)"/>
+
+    <!-- top pips = 4 -->
+    <circle cx="52" cy="58" r="8" fill="#111826"/>
+    <circle cx="93" cy="40" r="8" fill="#111826"/>
+    <circle cx="93" cy="82" r="8" fill="#111826"/>
+    <circle cx="135" cy="63" r="8" fill="#111826"/>
+
+    <!-- front pips = 2 -->
+    <circle cx="34" cy="117" r="9" fill="#111826"/>
+    <circle cx="65" cy="189" r="9" fill="#111826"/>
+
+    <!-- side pips = 3 -->
+    <circle cx="126" cy="129" r="9" fill="#111826"/>
+    <circle cx="143" cy="158" r="9" fill="#111826"/>
+    <circle cx="159" cy="187" r="9" fill="#111826"/>
+  </g>
+
+  <ellipse cx="242" cy="392" rx="156" ry="34" fill="url(#shadowGrad)" opacity="0.65"/>
+
+  <!-- Brand line -->
+  <g opacity="0.96">
+    <text x="256" y="498" text-anchor="middle"
+      font-family="Arial, Helvetica, sans-serif"
+      font-size="68"
+      font-weight="900"
+      fill="#F6F8FF">DICE</text>
+
+    <text x="256" y="548" text-anchor="middle"
+      font-family="Arial, Helvetica, sans-serif"
+      font-size="20"
+      font-weight="700"
+      letter-spacing="4"
+      fill="#D7E4FF"
+      fill-opacity="0.82">TRINITI MODE</text>
+  </g>
+</svg>
