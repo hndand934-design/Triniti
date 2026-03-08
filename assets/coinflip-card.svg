@@ -1,1 +1,66 @@
+<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="70" y1="40" x2="430" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffb326"/>
+      <stop offset="0.45" stop-color="#ff920d"/>
+      <stop offset="1" stop-color="#a84a00"/>
+    </linearGradient>
 
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(300 150) rotate(90) scale(280 280)">
+      <stop offset="0" stop-color="#fff1ab" stop-opacity="0.95"/>
+      <stop offset="0.38" stop-color="#ffd55c" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#ffd55c" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="coinFace" x1="160" y1="120" x2="348" y2="345" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff3b5"/>
+      <stop offset="0.42" stop-color="#f5cf63"/>
+      <stop offset="1" stop-color="#b97817"/>
+    </linearGradient>
+
+    <linearGradient id="coinEdge" x1="149" y1="150" x2="365" y2="365" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a96410"/>
+      <stop offset="0.5" stop-color="#f1cb62"/>
+      <stop offset="1" stop-color="#8f5309"/>
+    </linearGradient>
+
+    <linearGradient id="coinInner" x1="182" y1="150" x2="322" y2="298" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffef9f"/>
+      <stop offset="1" stop-color="#d49324"/>
+    </linearGradient>
+
+    <filter id="shadow" x="85" y="95" width="330" height="340" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="-14" dy="22" stdDeviation="18" flood-color="#4f2200" flood-opacity="0.45"/>
+    </filter>
+
+    <filter id="soft" x="60" y="40" width="392" height="340" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="640" rx="38" fill="url(#bg)"/>
+
+  <g opacity="0.85" filter="url(#soft)">
+    <ellipse cx="310" cy="138" rx="130" ry="92" fill="url(#glow)"/>
+  </g>
+
+  <path d="M70 120C145 85 222 68 310 78C372 85 427 104 465 140"
+        stroke="rgba(255,245,200,0.45)" stroke-width="18" stroke-linecap="round"/>
+
+  <g filter="url(#shadow)" transform="rotate(-18 256 230)">
+    <ellipse cx="252" cy="250" rx="110" ry="112" fill="url(#coinEdge)"/>
+    <ellipse cx="252" cy="238" rx="98" ry="98" fill="url(#coinFace)"/>
+    <ellipse cx="252" cy="238" rx="72" ry="72" fill="url(#coinInner)" opacity="0.92"/>
+
+    <circle cx="252" cy="238" r="84" stroke="rgba(255,247,191,0.75)" stroke-width="4"/>
+    <circle cx="252" cy="238" r="58" stroke="rgba(150,87,8,0.28)" stroke-width="3"/>
+
+    <!-- стилизованная монета -->
+    <path d="M275 190C248 183 218 194 214 220C211 239 224 250 248 256C273 262 284 270 281 287C278 306 256 316 233 312C215 309 199 300 190 292"
+          stroke="#9a5f11" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M229 172L223 332" stroke="#9a5f11" stroke-width="12" stroke-linecap="round"/>
+  </g>
+
+  <rect x="0" y="470" width="512" height="170" fill="url(#fade)" opacity="0"/>
+</svg>
