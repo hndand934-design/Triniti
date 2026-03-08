@@ -1,0 +1,145 @@
+<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgMain" x1="52" y1="24" x2="452" y2="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF5358"/>
+      <stop offset="0.25" stop-color="#FF6337"/>
+      <stop offset="0.58" stop-color="#FF8D35"/>
+      <stop offset="1" stop-color="#6D86FF"/>
+    </linearGradient>
+
+    <radialGradient id="warmGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(260 228) rotate(90) scale(208 194)">
+      <stop offset="0" stop-color="#FFF0BA"/>
+      <stop offset="0.52" stop-color="#FFC96D" stop-opacity="0.94"/>
+      <stop offset="1" stop-color="#FFC96D" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="coinOuter" x1="188" y1="131" x2="331" y2="279" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EEF5FF"/>
+      <stop offset="0.5" stop-color="#D2DBE8"/>
+      <stop offset="1" stop-color="#909DB2"/>
+    </linearGradient>
+
+    <linearGradient id="coinInner" x1="202" y1="147" x2="309" y2="248" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F9FCFF"/>
+      <stop offset="0.54" stop-color="#DCE3EE"/>
+      <stop offset="1" stop-color="#AAB6C8"/>
+    </linearGradient>
+
+    <linearGradient id="coinStroke" x1="208" y1="152" x2="303" y2="245" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#DCE4EF"/>
+      <stop offset="1" stop-color="#8FA0B6"/>
+    </linearGradient>
+
+    <linearGradient id="symbol" x1="226" y1="178" x2="286" y2="236" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#DFE7F2"/>
+      <stop offset="1" stop-color="#AAB8CB"/>
+    </linearGradient>
+
+    <linearGradient id="textWhite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF2F7"/>
+    </linearGradient>
+
+    <filter id="cardShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#09101C" flood-opacity="0.26"/>
+    </filter>
+
+    <filter id="coinShadow" x="147" y="112" width="219" height="223" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="-10" dy="18" stdDeviation="11" flood-color="#7A4300" flood-opacity="0.26"/>
+    </filter>
+
+    <filter id="softBlur" x="94" y="90" width="334" height="258" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+
+    <filter id="txtShadow" x="88" y="444" width="336" height="124" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#742700" flood-opacity="0.24"/>
+    </filter>
+  </defs>
+
+  <!-- внешняя карточка -->
+  <g filter="url(#cardShadow)">
+    <rect x="12" y="12" width="488" height="616" rx="36" fill="url(#bgMain)"/>
+    <rect x="16" y="16" width="480" height="608" rx="32" stroke="#1C2434" stroke-opacity="0.84" stroke-width="3"/>
+  </g>
+
+  <!-- верхняя волна -->
+  <path d="M12 18H500V72C447 49 396 47 349 59C297 72 245 71 190 51C135 31 77 26 12 48V18Z"
+        fill="#FF5863" fill-opacity="0.82"/>
+
+  <!-- теплое пятно -->
+  <g filter="url(#softBlur)">
+    <ellipse cx="258" cy="226" rx="134" ry="98" fill="url(#warmGlow)"/>
+  </g>
+
+  <!-- детали фона -->
+  <path d="M92 332C126 307 168 308 201 329C229 347 264 359 301 352C338 344 367 322 405 295"
+        stroke="#FFF1CA" stroke-opacity="0.40" stroke-width="4.6" stroke-linecap="round" stroke-dasharray="11 11"/>
+
+  <path d="M114 259C148 235 185 236 215 256"
+        stroke="#FFF1CA" stroke-opacity="0.28" stroke-width="4" stroke-linecap="round"/>
+
+  <path d="M78 359L99 380" stroke="#B95E33" stroke-opacity="0.34" stroke-width="7" stroke-linecap="round"/>
+  <path d="M99 359L78 380" stroke="#B95E33" stroke-opacity="0.34" stroke-width="7" stroke-linecap="round"/>
+
+  <circle cx="404" cy="353" r="8" fill="#9F5A2B" fill-opacity="0.28"/>
+  <circle cx="421" cy="365" r="5" fill="#9F5A2B" fill-opacity="0.22"/>
+
+  <!-- фонарь -->
+  <g opacity="0.84">
+    <path d="M420 78L453 58L475 87L443 108L420 78Z" fill="#72543F"/>
+    <path d="M429 79L451 66L465 87L444 100L429 79Z" fill="#FFE7A0"/>
+  </g>
+
+  <!-- дуга -->
+  <path d="M109 106C154 83 210 76 266 82"
+        stroke="#FFF0B8" stroke-opacity="0.60" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- монета -->
+  <g filter="url(#coinShadow)" transform="rotate(-16 256 212)">
+    <path d="M186 214L203 154L263 133L320 158L330 216L291 266L227 266L186 214Z" fill="url(#coinOuter)"/>
+    <path d="M201 213L215 168L261 152L304 170L311 214L281 249L233 249L201 213Z" fill="url(#coinInner)"/>
+    <path d="M201 213L215 168L261 152L304 170L311 214L281 249L233 249L201 213Z"
+          stroke="url(#coinStroke)" stroke-width="5" stroke-linejoin="round"/>
+
+    <path d="M250 183C260 180 271 183 277 190C282 196 282 203 275 209L262 221L278 232"
+          stroke="url(#symbol)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M236 194C245 190 253 190 260 194"
+          stroke="url(#symbol)" stroke-width="6.5" stroke-linecap="round"/>
+    <path d="M237 230C246 236 257 236 268 231"
+          stroke="url(#symbol)" stroke-width="6.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- нижнее мягкое свечение -->
+  <ellipse cx="256" cy="500" rx="152" ry="44" fill="#FF5766" fill-opacity="0.34"/>
+  <ellipse cx="256" cy="612" rx="236" ry="38" fill="#6E89FF" fill-opacity="0.34"/>
+
+  <!-- текст -->
+  <g filter="url(#txtShadow)">
+    <text x="256" y="516"
+          text-anchor="middle"
+          fill="url(#textWhite)"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="68"
+          font-weight="900"
+          letter-spacing="0">COIN</text>
+
+    <text x="256" y="586"
+          text-anchor="middle"
+          fill="url(#textWhite)"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="68"
+          font-weight="900"
+          letter-spacing="0">FLIP</text>
+  </g>
+
+  <text x="256" y="620"
+        text-anchor="middle"
+        fill="#F4EEF9"
+        fill-opacity="0.96"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="18"
+        font-weight="700"
+        letter-spacing="3.0">TRINITI MODE</text>
+</svg>
