@@ -1,0 +1,107 @@
+<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgMain" x1="72" y1="24" x2="430" y2="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFBE2E"/>
+      <stop offset="0.30" stop-color="#FFA20A"/>
+      <stop offset="0.72" stop-color="#D56700"/>
+      <stop offset="1" stop-color="#8D3B00"/>
+    </linearGradient>
+
+    <radialGradient id="bgGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(262 170) rotate(90) scale(250 250)">
+      <stop offset="0" stop-color="#FFF5C2" stop-opacity="0.95"/>
+      <stop offset="0.42" stop-color="#FFD95B" stop-opacity="0.56"/>
+      <stop offset="1" stop-color="#FFD95B" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="coinRim" x1="157" y1="123" x2="362" y2="323" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#91580D"/>
+      <stop offset="0.48" stop-color="#FFD86E"/>
+      <stop offset="1" stop-color="#7E4307"/>
+    </linearGradient>
+
+    <linearGradient id="coinFace" x1="176" y1="129" x2="336" y2="274" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF4B9"/>
+      <stop offset="0.5" stop-color="#FFD54D"/>
+      <stop offset="1" stop-color="#D28A14"/>
+    </linearGradient>
+
+    <radialGradient id="coinCenter" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(256 216) rotate(90) scale(74 74)">
+      <stop offset="0" stop-color="#FFE97B"/>
+      <stop offset="0.62" stop-color="#F6C52D"/>
+      <stop offset="1" stop-color="#D08911"/>
+    </radialGradient>
+
+    <linearGradient id="coinCut" x1="209" y1="167" x2="301" y2="251" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C37B0D"/>
+      <stop offset="1" stop-color="#8E5209"/>
+    </linearGradient>
+
+    <linearGradient id="textWhite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F2F2F2"/>
+    </linearGradient>
+
+    <filter id="coinShadow" x="108" y="103" width="310" height="304" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="-18" dy="24" stdDeviation="16" flood-color="#5A2400" flood-opacity="0.36"/>
+    </filter>
+
+    <filter id="softGlow" x="62" y="42" width="396" height="238" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+
+    <filter id="textShadow" x="22" y="464" width="468" height="122" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="7" stdDeviation="10" flood-color="#7A3200" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="640" rx="38" fill="url(#bgMain)"/>
+
+  <g filter="url(#softGlow)">
+    <ellipse cx="262" cy="165" rx="158" ry="88" fill="url(#bgGlow)"/>
+  </g>
+
+  <!-- верхняя светящаяся дуга -->
+  <path d="M102 118C153 92 213 79 279 82C337 85 388 98 427 123"
+        stroke="#FFECA9" stroke-opacity="0.86" stroke-width="13"
+        stroke-linecap="round"/>
+
+  <!-- 3D coin -->
+  <g filter="url(#coinShadow)">
+    <g transform="rotate(-18 256 218)">
+      <ellipse cx="256" cy="226" rx="100" ry="92" fill="url(#coinRim)"/>
+      <ellipse cx="256" cy="214" rx="88" ry="80" fill="url(#coinFace)"/>
+      <ellipse cx="256" cy="214" rx="68" ry="62" fill="url(#coinCenter)"/>
+
+      <ellipse cx="256" cy="214" rx="77" ry="70" stroke="#FFF2B0" stroke-opacity="0.8" stroke-width="3.4"/>
+      <ellipse cx="256" cy="214" rx="56" ry="51" stroke="#D5961A" stroke-opacity="0.42" stroke-width="2.2"/>
+
+      <!-- внутренний знак -->
+      <path d="M280 177C263 171 243 174 231 186C221 196 219 209 223 220C228 232 240 240 255 242C270 244 282 250 285 261C288 271 282 281 271 287C258 294 239 294 224 288"
+            stroke="url(#coinCut)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M254 165L248 301"
+            stroke="url(#coinCut)" stroke-width="8.4" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- нижняя подсветка под монетой -->
+  <ellipse cx="238" cy="316" rx="108" ry="28" fill="#7B3200" fill-opacity="0.18"/>
+
+  <g filter="url(#textShadow)">
+    <text x="38" y="544"
+          fill="url(#textWhite)"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="68"
+          font-weight="900"
+          letter-spacing="0.5">COINFLIP</text>
+  </g>
+
+  <text x="165" y="586"
+        fill="#FFF1D0"
+        fill-opacity="0.95"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="20"
+        font-weight="700"
+        letter-spacing="3.4">TRINITI MODE</text>
+</svg>
