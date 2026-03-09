@@ -1,0 +1,149 @@
+<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="cardClip">
+      <rect x="12" y="12" width="488" height="616" rx="36"/>
+    </clipPath>
+
+    <linearGradient id="cardBg" x1="54" y1="24" x2="454" y2="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#191C23"/>
+      <stop offset="0.30" stop-color="#12151C"/>
+      <stop offset="0.68" stop-color="#1D1114"/>
+      <stop offset="1" stop-color="#3D0F14"/>
+    </linearGradient>
+
+    <linearGradient id="redGlowLine" x1="86" y1="320" x2="420" y2="148" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF4A4A"/>
+      <stop offset="0.5" stop-color="#FF6D47"/>
+      <stop offset="1" stop-color="#FFD16B"/>
+    </linearGradient>
+
+    <radialGradient id="topGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(360 108) rotate(90) scale(120 160)">
+      <stop offset="0" stop-color="#FFF0AF"/>
+      <stop offset="0.38" stop-color="#FFB35A" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FF7A3D" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="redMist" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(202 262) rotate(90) scale(180 240)">
+      <stop offset="0" stop-color="#FF493E" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#FF493E" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="rocketBody" x1="236" y1="246" x2="323" y2="165" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F0F4FB"/>
+      <stop offset="0.45" stop-color="#D6DFEA"/>
+      <stop offset="1" stop-color="#8C98AA"/>
+    </linearGradient>
+
+    <linearGradient id="rocketDark" x1="210" y1="285" x2="288" y2="216" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2A2F38"/>
+      <stop offset="1" stop-color="#11151B"/>
+    </linearGradient>
+
+    <linearGradient id="fireGrad" x1="179" y1="331" x2="261" y2="263" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF3F3F"/>
+      <stop offset="0.45" stop-color="#FF8642"/>
+      <stop offset="1" stop-color="#FFE17A"/>
+    </linearGradient>
+
+    <linearGradient id="txtWhite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF2F7"/>
+    </linearGradient>
+
+    <filter id="shadowCard" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#05070B" flood-opacity="0.34"/>
+    </filter>
+
+    <filter id="shadowRocket" x="137" y="120" width="258" height="250" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="-8" dy="14" stdDeviation="10" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+
+    <filter id="blurGlow" x="218" y="0" width="260" height="248" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadowCard)">
+    <rect x="12" y="12" width="488" height="616" rx="36" fill="url(#cardBg)"/>
+  </g>
+
+  <g clip-path="url(#cardClip)">
+    <!-- верхний свет -->
+    <g filter="url(#blurGlow)">
+      <ellipse cx="352" cy="96" rx="74" ry="60" fill="url(#topGlow)"/>
+    </g>
+
+    <!-- красный туман -->
+    <ellipse cx="198" cy="268" rx="150" ry="112" fill="url(#redMist)"/>
+
+    <!-- дуги/скорость -->
+    <path d="M20 122C104 83 185 75 258 96C325 115 384 113 500 56V12H12V128C14 126 17 124 20 122Z"
+          fill="rgba(255,255,255,0.03)"/>
+
+    <path d="M76 316C132 291 177 264 217 229C260 191 294 153 343 117C379 91 419 74 470 58"
+          stroke="url(#redGlowLine)" stroke-opacity="0.95" stroke-width="16" stroke-linecap="round"/>
+
+    <path d="M84 346C143 317 192 286 233 246C273 207 309 166 352 131"
+          stroke="url(#redGlowLine)" stroke-opacity="0.28" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- график линии -->
+    <path d="M66 370C118 352 168 323 211 278C250 238 280 197 311 149C336 111 364 81 398 54"
+          stroke="#FF7A4A" stroke-opacity="0.34" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+
+    <!-- rocket -->
+    <g filter="url(#shadowRocket)" transform="rotate(-28 264 236)">
+      <!-- flame -->
+      <path d="M183 291C170 292 159 301 154 313C166 311 177 313 187 320C196 326 200 336 200 346C214 338 223 325 224 311C224 298 216 286 203 282L183 291Z"
+            fill="url(#fireGrad)"/>
+      <path d="M194 300C186 301 180 307 177 314C184 313 191 315 197 319C202 322 205 328 205 334C213 329 217 323 218 316C218 308 212 301 204 298L194 300Z"
+            fill="#FFF0A9"/>
+
+      <!-- body -->
+      <path d="M214 286C223 243 241 205 267 170C287 142 309 122 332 110C338 134 335 165 321 200C304 240 278 275 245 304L214 286Z"
+            fill="url(#rocketBody)"/>
+
+      <!-- glass -->
+      <ellipse cx="283" cy="183" rx="18" ry="14" fill="#A4B7D5"/>
+      <ellipse cx="283" cy="183" rx="11" ry="8" fill="#DDE9F9"/>
+
+      <!-- wing -->
+      <path d="M231 278C220 287 207 293 191 296C195 280 203 264 217 247L231 278Z"
+            fill="#D64343"/>
+
+      <!-- lower fin -->
+      <path d="M255 301C249 319 238 334 223 346C222 328 227 311 237 292L255 301Z"
+            fill="#A82F2F"/>
+
+      <!-- shadow side -->
+      <path d="M214 286C223 243 241 205 267 170C281 151 296 135 312 123C304 146 294 170 280 196C262 228 241 258 214 286Z"
+            fill="url(#rocketDark)" fill-opacity="0.22"/>
+    </g>
+
+    <!-- small stars -->
+    <circle cx="108" cy="138" r="2.2" fill="#FFFFFF" fill-opacity="0.35"/>
+    <circle cx="146" cy="104" r="1.8" fill="#FFFFFF" fill-opacity="0.26"/>
+    <circle cx="392" cy="188" r="2" fill="#FFFFFF" fill-opacity="0.22"/>
+    <circle cx="420" cy="146" r="1.5" fill="#FFFFFF" fill-opacity="0.28"/>
+
+    <!-- text -->
+    <text x="256" y="502"
+          text-anchor="middle"
+          fill="url(#txtWhite)"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="68"
+          font-weight="900">CRASH</text>
+
+    <text x="256" y="608"
+          text-anchor="middle"
+          fill="#F4EEF9"
+          fill-opacity="0.96"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="18"
+          font-weight="700"
+          letter-spacing="2.8">TRINITI MODE</text>
+  </g>
+
+  <rect x="16" y="16" width="480" height="608" rx="32" stroke="#1C2433" stroke-width="3"/>
+</svg>
