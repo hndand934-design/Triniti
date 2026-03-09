@@ -1,0 +1,146 @@
+<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="cardClip">
+      <rect x="12" y="12" width="488" height="616" rx="36"/>
+    </clipPath>
+
+    <linearGradient id="cardBg" x1="60" y1="18" x2="454" y2="624" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1DFFB7"/>
+      <stop offset="0.18" stop-color="#19D8D8"/>
+      <stop offset="0.48" stop-color="#1179FF"/>
+      <stop offset="1" stop-color="#0A3CA8"/>
+    </linearGradient>
+
+    <radialGradient id="mainGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(290 250) rotate(90) scale(180 180)">
+      <stop offset="0" stop-color="#91FFF2"/>
+      <stop offset="0.45" stop-color="#4CF4E3" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#4CF4E3" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="bombGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(305 255) rotate(90) scale(110 110)">
+      <stop offset="0" stop-color="#37EFFF"/>
+      <stop offset="1" stop-color="#37EFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="bombBody" x1="230" y1="179" x2="345" y2="344" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#123A8C"/>
+      <stop offset="0.45" stop-color="#0A2B6C"/>
+      <stop offset="1" stop-color="#081A44"/>
+    </linearGradient>
+
+    <linearGradient id="bombBody2" x1="174" y1="218" x2="255" y2="338" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#15448D"/>
+      <stop offset="0.5" stop-color="#0C2F6A"/>
+      <stop offset="1" stop-color="#081D47"/>
+    </linearGradient>
+
+    <linearGradient id="metal" x1="294" y1="142" x2="338" y2="178" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#36455F"/>
+      <stop offset="1" stop-color="#0E1828"/>
+    </linearGradient>
+
+    <linearGradient id="fuse" x1="330" y1="129" x2="346" y2="148" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#C8CDD7"/>
+      <stop offset="1" stop-color="#727E90"/>
+    </linearGradient>
+
+    <radialGradient id="shine" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(288 222) rotate(90) scale(64 54)">
+      <stop offset="0" stop-color="#4FD9FF" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#4FD9FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="starGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(387 291) rotate(90) scale(32 32)">
+      <stop offset="0" stop-color="#B7FFF6"/>
+      <stop offset="1" stop-color="#B7FFF6" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="txtWhite" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF2F7"/>
+    </linearGradient>
+
+    <filter id="shadowCard" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#07101E" flood-opacity="0.26"/>
+    </filter>
+
+    <filter id="shadowBombBig" x="180" y="120" width="216" height="262" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="-6" dy="18" stdDeviation="12" flood-color="#061022" flood-opacity="0.38"/>
+    </filter>
+
+    <filter id="shadowBombSmall" x="106" y="154" width="168" height="210" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="-5" dy="15" stdDeviation="10" flood-color="#061022" flood-opacity="0.30"/>
+    </filter>
+
+    <filter id="blurGlow" x="160" y="116" width="290" height="280" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadowCard)">
+    <rect x="12" y="12" width="488" height="616" rx="36" fill="url(#cardBg)"/>
+  </g>
+
+  <g clip-path="url(#cardClip)">
+    <path d="M12 12H500V84C458 67 413 59 362 62C306 66 257 81 205 94C148 108 88 108 12 86V12Z"
+          fill="#25D8E8" fill-opacity="0.20"/>
+
+    <g filter="url(#blurGlow)">
+      <ellipse cx="292" cy="254" rx="104" ry="96" fill="url(#mainGlow)"/>
+      <ellipse cx="300" cy="254" rx="80" ry="72" fill="url(#bombGlow)"/>
+    </g>
+
+    <g opacity="0.96">
+      <path d="M390 268L398 282L414 285L402 296L404 312L390 304L376 312L378 296L366 285L382 282L390 268Z"
+            fill="#B7FFF6"/>
+      <ellipse cx="390" cy="291" rx="28" ry="28" fill="url(#starGlow)"/>
+    </g>
+
+    <g opacity="0.72">
+      <path d="M132 265L138 275L149 277L141 285L143 296L132 290L121 296L123 285L115 277L126 275L132 265Z"
+            fill="#98FFF0"/>
+    </g>
+
+    <circle cx="223" cy="178" r="2" fill="#D7FFFF" fill-opacity="0.7"/>
+    <circle cx="248" cy="150" r="1.6" fill="#D7FFFF" fill-opacity="0.55"/>
+
+    <g filter="url(#shadowBombSmall)">
+      <ellipse cx="192" cy="279" rx="54" ry="54" fill="url(#bombBody2)"/>
+      <path d="M175 230H206L217 245H186L175 230Z" fill="url(#metal)"/>
+      <rect x="196" y="214" width="4" height="20" rx="2" transform="rotate(-46 196 214)" fill="url(#fuse)"/>
+      <ellipse cx="179" cy="258" rx="18" ry="14" fill="#3ADFFF" fill-opacity="0.18"/>
+      <path d="M192 227C218 241 235 267 235 297" stroke="#6EB9FF" stroke-opacity="0.14" stroke-width="2"/>
+    </g>
+
+    <g filter="url(#shadowBombBig)">
+      <ellipse cx="294" cy="267" rx="74" ry="74" fill="url(#bombBody)"/>
+      <path d="M270 192H313L327 213H284L270 192Z" fill="url(#metal)"/>
+      <rect x="309" y="176" width="5" height="28" rx="2.5" transform="rotate(-45 309 176)" fill="url(#fuse)"/>
+      <ellipse cx="285" cy="235" rx="22" ry="18" fill="url(#shine)"/>
+      <path d="M286 200C321 220 344 256 344 300" stroke="#89C9FF" stroke-opacity="0.14" stroke-width="2.2"/>
+      <path d="M255 230L323 302" stroke="#96C7FF" stroke-opacity="0.12" stroke-width="2"/>
+      <path d="M323 230L255 302" stroke="#96C7FF" stroke-opacity="0.12" stroke-width="2"/>
+    </g>
+
+    <text x="256" y="508"
+          text-anchor="middle"
+          fill="url(#txtWhite)"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="68"
+          font-weight="900">MINES</text>
+
+    <text x="256" y="592"
+          text-anchor="middle"
+          fill="#F4EEF9"
+          fill-opacity="0.95"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="18"
+          font-weight="700"
+          letter-spacing="2.8">TRINITI MODE</text>
+  </g>
+
+  <rect x="16" y="16" width="480" height="608" rx="32" stroke="#18305A" stroke-width="3"/>
+</svg>
