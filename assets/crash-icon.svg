@@ -1,0 +1,59 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="5" x2="57" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1A1D24"/>
+      <stop offset="0.34" stop-color="#12151C"/>
+      <stop offset="0.72" stop-color="#231116"/>
+      <stop offset="1" stop-color="#441118"/>
+    </linearGradient>
+
+    <linearGradient id="lineGrad" x1="12" y1="42" x2="52" y2="16" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF4848"/>
+      <stop offset="0.52" stop-color="#FF7C45"/>
+      <stop offset="1" stop-color="#FFD66F"/>
+    </linearGradient>
+
+    <radialGradient id="topGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(44 16) rotate(90) scale(12 14)">
+      <stop offset="0" stop-color="#FFF0AF"/>
+      <stop offset="0.45" stop-color="#FFB35A" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FF7A3D" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="rocketBody" x1="29" y1="31" x2="40" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F0F4FB"/>
+      <stop offset="0.45" stop-color="#D6DFEA"/>
+      <stop offset="1" stop-color="#8C98AA"/>
+    </linearGradient>
+
+    <linearGradient id="fireGrad" x1="21" y1="39" x2="31" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF3F3F"/>
+      <stop offset="0.45" stop-color="#FF8642"/>
+      <stop offset="1" stop-color="#FFE17A"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#bg)"/>
+
+  <ellipse cx="44" cy="16" rx="10" ry="8" fill="url(#topGlow)"/>
+
+  <path d="M13 42C20 39 25 35 30 30C35 25 39 20 45 15"
+        stroke="url(#lineGrad)" stroke-width="3.4" stroke-linecap="round"/>
+
+  <path d="M14 46C21 42 27 37 32 31C36 26 40 21 45 17"
+        stroke="url(#lineGrad)" stroke-opacity="0.25" stroke-width="1.6" stroke-linecap="round"/>
+
+  <g transform="rotate(-28 32 31)">
+    <path d="M21 38C19 38 17 40 16 42C18 42 20 43 21 44C23 45 23 47 23 48C25 47 26 45 26 43C26 41 24 39 22 38H21Z"
+          fill="url(#fireGrad)"/>
+
+    <path d="M26 37C27 30 30 25 34 20C37 16 41 13 45 11C46 15 45 20 43 25C41 31 37 36 32 40L26 37Z"
+          fill="url(#rocketBody)"/>
+
+    <ellipse cx="37" cy="23" rx="2.8" ry="2.2" fill="#DDE9F9"/>
+    <path d="M29 36C27 38 24 39 21 39C22 36 24 34 27 32L29 36Z" fill="#D64343"/>
+  </g>
+
+  <circle cx="15" cy="14" r="1.3" fill="#ffffff" fill-opacity="0.28"/>
+  <circle cx="20" cy="18" r="1" fill="#ffffff" fill-opacity="0.20"/>
+</svg>
