@@ -1,0 +1,71 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="rpsBgIcon" x1="32" y1="4" x2="32" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF0F56"/>
+      <stop offset="0.55" stop-color="#FF3A4F"/>
+      <stop offset="1" stop-color="#FFA630"/>
+    </linearGradient>
+
+    <radialGradient id="topGlowIcon" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(32 16) rotate(90) scale(15 18)">
+      <stop offset="0" stop-color="#FF8B90" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#FF8B90" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="goldCrownIcon" x1="27" y1="8" x2="37" y2="19" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE95E"/>
+      <stop offset="0.5" stop-color="#FFC52B"/>
+      <stop offset="1" stop-color="#FF9600"/>
+    </linearGradient>
+
+    <linearGradient id="whiteHandIconL" x1="18" y1="23" x2="26" y2="37" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D9DDE7"/>
+    </linearGradient>
+
+    <linearGradient id="whiteHandIconR" x1="38" y1="23" x2="46" y2="37" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D9DDE7"/>
+    </linearGradient>
+
+    <filter id="iconShadow" x="0" y="0" width="64" height="64" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#4D1020" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#iconShadow)">
+    <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#rpsBgIcon)"/>
+  </g>
+
+  <ellipse cx="32" cy="16" rx="17" ry="12" fill="url(#topGlowIcon)"/>
+
+  <!-- crown -->
+  <path d="M29 19L25.5 13L29.2 14.5L32 10.2L34.8 14.5L38.5 13L35 19H29Z" fill="url(#goldCrownIcon)"/>
+  <rect x="28" y="19" width="8" height="3.8" rx="1.9" fill="url(#goldCrownIcon)"/>
+
+  <!-- left hand -->
+  <g>
+    <path d="M19.5 31.5C19.5 28.4 21.7 26.2 24.7 26.2C27.7 26.2 29.9 28.4 29.9 31.5V37.8C29.9 40.5 27.9 42.5 25.2 42.5H24.2C21.5 42.5 19.5 40.5 19.5 37.8V31.5Z"
+          fill="url(#whiteHandIconL)"/>
+    <path d="M14.5 37.2C14.5 34.8 16.4 33 18.8 33H21.2V43H18.4C16.2 43 14.5 41.3 14.5 39.1V37.2Z"
+          fill="url(#whiteHandIconL)"/>
+    <path d="M21 24.4C21 21.7 22.9 19.8 25.6 19.8C28.2 19.8 30.2 21.7 30.2 24.4V31.1H21V24.4Z"
+          fill="url(#whiteHandIconL)"/>
+    <path d="M25.2 22.5C25.2 19.7 27.3 17.7 30 17.7C32.8 17.7 34.8 19.7 34.8 22.5V31.7H25.2V22.5Z"
+          fill="url(#whiteHandIconL)"/>
+  </g>
+
+  <!-- right hand -->
+  <g>
+    <path d="M44.5 31.5C44.5 28.4 42.3 26.2 39.3 26.2C36.3 26.2 34.1 28.4 34.1 31.5V37.8C34.1 40.5 36.1 42.5 38.8 42.5H39.8C42.5 42.5 44.5 40.5 44.5 37.8V31.5Z"
+          fill="url(#whiteHandIconR)"/>
+    <path d="M49.5 37.2C49.5 34.8 47.6 33 45.2 33H42.8V43H45.6C47.8 43 49.5 41.3 49.5 39.1V37.2Z"
+          fill="url(#whiteHandIconR)"/>
+    <path d="M33.8 24.4C33.8 21.7 35.8 19.8 38.4 19.8C41.1 19.8 43 21.7 43 24.4V31.1H33.8V24.4Z"
+          fill="url(#whiteHandIconR)"/>
+    <path d="M29.2 22.5C29.2 19.7 31.2 17.7 34 17.7C36.7 17.7 38.8 19.7 38.8 22.5V31.7H29.2V22.5Z"
+          fill="url(#whiteHandIconR)"/>
+  </g>
+
+  <rect x="4.5" y="4.5" width="55" height="55" rx="15.5" stroke="#7C2740"/>
+</svg>
