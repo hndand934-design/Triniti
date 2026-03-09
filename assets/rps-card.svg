@@ -1,151 +1,132 @@
 <svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <clipPath id="clipRps">
+    <clipPath id="clipRpsCard">
       <rect x="12" y="12" width="488" height="616" rx="36"/>
     </clipPath>
 
-    <linearGradient id="rpsBg" x1="256" y1="12" x2="256" y2="628" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FF0F56"/>
-      <stop offset="0.55" stop-color="#FF3A4F"/>
-      <stop offset="1" stop-color="#FFA630"/>
+    <linearGradient id="rpsBg" x1="54" y1="20" x2="458" y2="624" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF165D"/>
+      <stop offset="0.48" stop-color="#FF4B49"/>
+      <stop offset="1" stop-color="#FFB13B"/>
     </linearGradient>
 
-    <radialGradient id="topGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
-      gradientTransform="translate(256 126) rotate(90) scale(146 180)">
-      <stop offset="0" stop-color="#FF8B90" stop-opacity="0.38"/>
-      <stop offset="1" stop-color="#FF8B90" stop-opacity="0"/>
+    <radialGradient id="rpsGlowTop" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(256 126) rotate(90) scale(170 190)">
+      <stop offset="0" stop-color="#FF9AA4" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#FF9AA4" stop-opacity="0"/>
     </radialGradient>
 
-    <filter id="shadowCard" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#2B0614" flood-opacity="0.35"/>
+    <linearGradient id="goldTop" x1="226" y1="42" x2="287" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE96C"/>
+      <stop offset="0.5" stop-color="#FFC933"/>
+      <stop offset="1" stop-color="#FF9800"/>
+    </linearGradient>
+
+    <linearGradient id="handWhite" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D9DEE8"/>
+    </linearGradient>
+
+    <linearGradient id="handStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#C8CFDB"/>
+      <stop offset="1" stop-color="#9FA8BA"/>
+    </linearGradient>
+
+    <filter id="cardShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#44111E" flood-opacity="0.30"/>
     </filter>
 
-    <filter id="shadowSoft" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#571520" flood-opacity="0.22"/>
+    <filter id="softShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#661E25" flood-opacity="0.20"/>
     </filter>
 
-    <linearGradient id="goldCrown" x1="224" y1="44" x2="288" y2="118" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FFE95E"/>
-      <stop offset="0.5" stop-color="#FFC52B"/>
-      <stop offset="1" stop-color="#FF9600"/>
-    </linearGradient>
-
-    <linearGradient id="whiteHand" x1="148" y1="190" x2="215" y2="304" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#D9DDE7"/>
-    </linearGradient>
-
-    <linearGradient id="whiteHand2" x1="292" y1="190" x2="360" y2="304" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#D9DDE7"/>
-    </linearGradient>
-
-    <linearGradient id="darkStroke" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#B9BFCF"/>
-      <stop offset="1" stop-color="#9BA3B8"/>
-    </linearGradient>
-
-    <filter id="textShadow" x="40" y="350" width="432" height="190" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="5" stdDeviation="2.5" flood-color="#7A1D23" flood-opacity="0.35"/>
+    <filter id="txtShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="4" stdDeviation="2" flood-color="#7E2328" flood-opacity="0.25"/>
     </filter>
   </defs>
 
-  <g filter="url(#shadowCard)">
+  <g filter="url(#cardShadow)">
     <rect x="12" y="12" width="488" height="616" rx="36" fill="url(#rpsBg)"/>
   </g>
 
-  <g clip-path="url(#clipRps)">
-    <ellipse cx="256" cy="126" rx="174" ry="124" fill="url(#topGlow)"/>
+  <g clip-path="url(#clipRpsCard)">
+    <ellipse cx="256" cy="126" rx="176" ry="122" fill="url(#rpsGlowTop)"/>
 
-    <!-- crown -->
-    <g filter="url(#shadowSoft)">
-      <path d="M232 109L210 69L234 79L256 49L278 79L302 69L280 109H232Z" fill="url(#goldCrown)"/>
-      <rect x="226" y="109" width="60" height="18" rx="9" fill="url(#goldCrown)"/>
-      <circle cx="256" cy="47" r="7" fill="#FFD83B"/>
+    <!-- верхний знак -->
+    <g filter="url(#softShadow)">
+      <path d="M232 111L211 72L235 82L256 49L277 82L301 72L280 111H232Z" fill="url(#goldTop)"/>
+      <rect x="226" y="111" width="60" height="16" rx="8" fill="url(#goldTop)"/>
     </g>
 
-    <!-- left hand -->
-    <g filter="url(#shadowSoft)">
-      <path d="M160 214C160 199 171 188 185 188C199 188 210 199 210 214V245C210 258 200 268 187 268H183C170 268 160 258 160 245V214Z"
-            fill="url(#whiteHand)"/>
-      <path d="M134 245C134 232 144 223 157 223H169V283H155C143 283 134 274 134 262V245Z"
-            fill="url(#whiteHand)"/>
-      <path d="M164 268H200C216 268 229 281 229 297V303H164V268Z"
-            fill="url(#whiteHand)"/>
-      <path d="M170 178C170 164 180 154 193 154C206 154 216 164 216 178V214H170V178Z"
-            fill="url(#whiteHand)"/>
-      <path d="M193 168C193 153 204 142 218 142C232 142 243 153 243 168V217H193V168Z"
-            fill="url(#whiteHand)"/>
-      <path d="M217 176C217 161 228 150 242 150C256 150 267 161 267 176V220H217V176Z"
-            fill="url(#whiteHand)"/>
-      <path d="M241 189C241 176 251 166 264 166C276 166 286 176 286 189V223H241V189Z"
-            fill="url(#whiteHand)"/>
+    <!-- КАМЕНЬ -->
+    <g filter="url(#softShadow)">
+      <g transform="translate(108 154)">
+        <path d="M30 106C14 106 4 96 4 81V57C4 46 12 38 23 38C27 38 31 39 34 41C37 31 44 24 54 24C61 24 67 27 71 32C75 26 82 22 90 22C98 22 105 26 109 33C113 28 119 25 126 25C139 25 149 36 149 49V89C149 99 141 106 131 106H30Z"
+              fill="url(#handWhite)" stroke="url(#handStroke)" stroke-width="2.2"/>
+        <path d="M36 42V20C36 10 43 4 52 4C62 4 69 11 69 20V42" fill="url(#handWhite)" stroke="url(#handStroke)" stroke-width="2.2"/>
+        <path d="M70 34V16C70 7 77 0 86 0C96 0 103 7 103 16V34" fill="url(#handWhite)" stroke="url(#handStroke)" stroke-width="2.2"/>
+        <path d="M103 38V21C103 12 110 5 119 5C128 5 135 12 135 21V42" fill="url(#handWhite)" stroke="url(#handStroke)" stroke-width="2.2"/>
+      </g>
     </g>
 
-    <!-- right hand -->
-    <g filter="url(#shadowSoft)">
-      <path d="M352 214C352 199 341 188 327 188C313 188 302 199 302 214V245C302 258 312 268 325 268H329C342 268 352 258 352 245V214Z"
-            fill="url(#whiteHand2)"/>
-      <path d="M378 245C378 232 368 223 355 223H343V283H357C369 283 378 274 378 262V245Z"
-            fill="url(#whiteHand2)"/>
-      <path d="M322 268H348C364 268 377 281 377 297V303H322V268Z"
-            fill="url(#whiteHand2)"/>
-      <path d="M296 178C296 164 306 154 319 154C332 154 342 164 342 178V214H296V178Z"
-            fill="url(#whiteHand2)"/>
-      <path d="M269 168C269 153 280 142 294 142C308 142 319 153 319 168V217H269V168Z"
-            fill="url(#whiteHand2)"/>
-      <path d="M245 176C245 161 256 150 270 150C284 150 295 161 295 176V220H245V176Z"
-            fill="url(#whiteHand2)"/>
-      <path d="M226 189C226 176 236 166 249 166C261 166 271 176 271 189V223H226V189Z"
-            fill="url(#whiteHand2)"/>
+    <!-- НОЖНИЦЫ -->
+    <g filter="url(#softShadow)">
+      <g transform="translate(214 130)">
+        <circle cx="38" cy="92" r="16" fill="url(#handWhite)" stroke="url(#handStroke)" stroke-width="2.2"/>
+        <circle cx="72" cy="92" r="16" fill="url(#handWhite)" stroke="url(#handStroke)" stroke-width="2.2"/>
+        <path d="M49 82L89 20C93 14 101 13 107 17C112 21 113 29 109 35L71 93" fill="url(#handWhite)" stroke="url(#handStroke)" stroke-width="2.2"/>
+        <path d="M63 82L38 22C35 15 38 8 45 5C52 2 59 5 62 12L85 72" fill="url(#handWhite)" stroke="url(#handStroke)" stroke-width="2.2"/>
+        <path d="M54 93L82 120" stroke="#AEB7C7" stroke-width="3" stroke-linecap="round"/>
+      </g>
     </g>
 
-    <!-- hand outlines -->
-    <g opacity="0.55" stroke="url(#darkStroke)" stroke-width="2">
-      <path d="M170 214V178"/>
-      <path d="M193 214V168"/>
-      <path d="M217 220V176"/>
-      <path d="M241 223V189"/>
-
-      <path d="M342 214V178"/>
-      <path d="M319 217V168"/>
-      <path d="M295 220V176"/>
-      <path d="M271 223V189"/>
+    <!-- БУМАГА -->
+    <g filter="url(#softShadow)">
+      <g transform="translate(322 150)">
+        <path d="M20 116C9 116 0 107 0 96V59C0 48 9 39 20 39C24 39 28 40 31 42V24C31 13 40 4 51 4C62 4 71 13 71 24V40C74 38 79 37 83 37C91 37 98 41 102 47C106 43 112 41 119 41C131 41 140 50 140 62V99C140 108 132 116 122 116H20Z"
+              fill="url(#handWhite)" stroke="url(#handStroke)" stroke-width="2.2"/>
+        <path d="M53 4V74" stroke="#B7BFCE" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M77 37V74" stroke="#B7BFCE" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M101 41V76" stroke="#B7BFCE" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
     </g>
 
-    <!-- text -->
-    <g filter="url(#textShadow)">
-      <text x="256" y="445"
+    <!-- ТЕКСТ -->
+    <g filter="url(#txtShadow)">
+      <text x="256" y="430"
             text-anchor="middle"
             fill="#FFFFFF"
             font-family="Arial, Helvetica, sans-serif"
-            font-size="54"
-            font-weight="900">КАМЕНЬ</text>
+            font-size="49"
+            font-weight="900"
+            letter-spacing="0.6">КАМЕНЬ</text>
 
-      <text x="256" y="502"
+      <text x="256" y="487"
             text-anchor="middle"
             fill="#FFFFFF"
             font-family="Arial, Helvetica, sans-serif"
-            font-size="54"
-            font-weight="900">НОЖНИЦЫ</text>
+            font-size="49"
+            font-weight="900"
+            letter-spacing="0.6">НОЖНИЦЫ</text>
 
-      <text x="256" y="559"
+      <text x="256" y="544"
             text-anchor="middle"
             fill="#FFFFFF"
             font-family="Arial, Helvetica, sans-serif"
-            font-size="54"
-            font-weight="900">БУМАГА</text>
+            font-size="49"
+            font-weight="900"
+            letter-spacing="0.6">БУМАГА</text>
     </g>
 
-    <text x="256" y="596"
+    <text x="256" y="592"
           text-anchor="middle"
           fill="#F4EEF9"
-          fill-opacity="0.95"
+          fill-opacity="0.96"
           font-family="Arial, Helvetica, sans-serif"
           font-size="18"
           font-weight="700"
           letter-spacing="2.8">TRINITI MODE</text>
   </g>
 
-  <rect x="16" y="16" width="480" height="608" rx="32" stroke="#7C2740" stroke-width="3"/>
+  <rect x="16" y="16" width="480" height="608" rx="32" stroke="#7A2941" stroke-width="3"/>
 </svg>
