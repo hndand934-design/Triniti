@@ -1,0 +1,83 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="towerIconPremBg" x1="32" y1="4" x2="32" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07111B"/>
+      <stop offset="0.55" stop-color="#0B1B2B"/>
+      <stop offset="1" stop-color="#2B1630"/>
+    </linearGradient>
+
+    <linearGradient id="towerIconPremDragon" x1="32" y1="13" x2="32" y2="39" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#A3B2C3"/>
+      <stop offset="1" stop-color="#4A5668"/>
+    </linearGradient>
+
+    <linearGradient id="towerIconPremWall" x1="32" y1="36" x2="32" y2="55" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8090A0"/>
+      <stop offset="1" stop-color="#525C69"/>
+    </linearGradient>
+
+    <filter id="towerIconPremShadow" x="0" y="0" width="64" height="64" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#05080D" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#towerIconPremShadow)">
+    <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#towerIconPremBg)"/>
+  </g>
+
+  <!-- moon glow -->
+  <circle cx="45" cy="17" r="9" fill="#C8DDF7" fill-opacity="0.08"/>
+
+  <!-- wings -->
+  <path d="M19 27C14.8 23.8 13.6 18.6 15.5 14.2C20 16.4 24.6 20.5 26.8 28C24.3 28.8 21.1 28.7 19 27Z" fill="#657385"/>
+  <path d="M45 27C49.2 23.8 50.4 18.6 48.5 14.2C44 16.4 39.4 20.5 37.2 28C39.7 28.8 42.9 28.7 45 27Z" fill="#657385"/>
+
+  <!-- horns -->
+  <path d="M28.2 17L24.8 11.5L28.9 14.2Z" fill="#C1CCD7"/>
+  <path d="M35.8 17L39.2 11.5L35.1 14.2Z" fill="#C1CCD7"/>
+
+  <!-- head -->
+  <path d="M32 15.7
+           C25 15.7 20.2 20.7 20.2 27.4
+           C20.2 32 23.3 36 26 39.4
+           C27.7 41.6 29 43.1 32 47
+           C35 43.1 36.3 41.6 38 39.4
+           C40.7 36 43.8 32 43.8 27.4
+           C43.8 20.7 39 15.7 32 15.7Z"
+        fill="url(#towerIconPremDragon)"/>
+
+  <!-- face -->
+  <path d="M27.1 28L29.8 26.8L29.2 29.9L26.4 30.3Z" fill="#E9F0F6"/>
+  <path d="M36.9 28L34.2 26.8L34.8 29.9L37.6 30.3Z" fill="#E9F0F6"/>
+  <circle cx="27.8" cy="28.9" r="0.95" fill="#0A0F15"/>
+  <circle cx="36.2" cy="28.9" r="0.95" fill="#0A0F15"/>
+
+  <!-- fire -->
+  <path d="M32 25.8
+           C29.9 28.8 26.8 30.1 26.8 33.4
+           C26.8 36.3 29 38.5 32 38.5
+           C35 38.5 37.2 36.3 37.2 33.5
+           C37.2 30.6 35.5 29 34.4 27.4
+           C34.2 29.2 33.1 29.8 32.2 30.7
+           C31.6 29.8 31.5 27.9 32 25.8Z"
+        fill="#FF8A30"/>
+  <path d="M32 29.5
+           C30.9 31.1 30 31.9 30 33.6
+           C30 35.1 30.9 36.2 32 36.2
+           C33.1 36.2 34 35.1 34 33.7
+           C34 32.3 33.3 31.4 32.7 30.7
+           C32.6 31.4 32.2 31.8 31.9 32.2
+           C31.7 31.6 31.7 30.5 32 29.5Z"
+        fill="#FFD65F"/>
+
+  <!-- wall -->
+  <rect x="10" y="37" width="44" height="8" rx="2" fill="url(#towerIconPremWall)"/>
+  <rect x="8" y="43" width="48" height="12" rx="3" fill="#596372"/>
+
+  <path d="M17 37V55" stroke="#46515F" stroke-width="1.7"/>
+  <path d="M25 37V55" stroke="#46515F" stroke-width="1.7"/>
+  <path d="M39 37V55" stroke="#46515F" stroke-width="1.7"/>
+  <path d="M47 37V55" stroke="#46515F" stroke-width="1.7"/>
+
+  <rect x="4.5" y="4.5" width="55" height="55" rx="15.5" stroke="#212A35"/>
+</svg>
