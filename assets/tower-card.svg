@@ -1,0 +1,207 @@
+<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clipTowerCard">
+      <rect x="12" y="12" width="488" height="616" rx="36"/>
+    </clipPath>
+
+    <linearGradient id="towerCardBg" x1="256" y1="12" x2="256" y2="628" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#09111A"/>
+      <stop offset="0.42" stop-color="#0D1622"/>
+      <stop offset="0.76" stop-color="#181423"/>
+      <stop offset="1" stop-color="#2D1730"/>
+    </linearGradient>
+
+    <radialGradient id="towerMoon" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(382 116) rotate(90) scale(80 80)">
+      <stop offset="0" stop-color="#D7E5FF" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#D7E5FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="towerDragonGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(248 226) rotate(90) scale(170 170)">
+      <stop offset="0" stop-color="#B9C9DA" stop-opacity="0.20"/>
+      <stop offset="0.55" stop-color="#7A8EA7" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#7A8EA7" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="wallTopGrad" x1="256" y1="318" x2="256" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8B98A8"/>
+      <stop offset="1" stop-color="#697584"/>
+    </linearGradient>
+
+    <linearGradient id="wallFrontGrad" x1="256" y1="350" x2="256" y2="432" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#687382"/>
+      <stop offset="1" stop-color="#49525E"/>
+    </linearGradient>
+
+    <linearGradient id="towerTitleGrad" x1="256" y1="460" x2="256" y2="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F1E7F3"/>
+    </linearGradient>
+
+    <filter id="towerCardShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#03070D" flood-opacity="0.45"/>
+    </filter>
+
+    <filter id="dragonBigShadow" x="54" y="44" width="404" height="380" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="16" stdDeviation="14" flood-color="#000000" flood-opacity="0.46"/>
+    </filter>
+
+    <filter id="towerTextShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#140915" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#towerCardShadow)">
+    <rect x="12" y="12" width="488" height="616" rx="36" fill="url(#towerCardBg)"/>
+  </g>
+
+  <g clip-path="url(#clipTowerCard)">
+    <!-- background -->
+    <ellipse cx="382" cy="116" rx="66" ry="66" fill="url(#towerMoon)"/>
+    <ellipse cx="248" cy="226" rx="170" ry="150" fill="url(#towerDragonGlow)"/>
+
+    <!-- stars -->
+    <g fill="#EAF3FF" fill-opacity="0.8">
+      <circle cx="84" cy="92" r="1.3"/>
+      <circle cx="118" cy="118" r="1.1"/>
+      <circle cx="156" cy="86" r="1.2"/>
+      <circle cx="326" cy="80" r="1.2"/>
+      <circle cx="426" cy="152" r="1.35"/>
+    </g>
+
+    <!-- mountains -->
+    <path d="M-20 260L72 188L154 260H-20Z" fill="#0D1822"/>
+    <path d="M110 256L214 178L306 256H110Z" fill="#0A141D"/>
+    <path d="M274 260L388 180L500 260H274Z" fill="#0C1620"/>
+
+    <!-- DRAGON -->
+    <g filter="url(#dragonBigShadow)">
+      <path d="M249 108
+               C221 107 197 117 178 136
+               C159 155 148 179 147 204
+               C146 229 154 251 171 272
+               C180 283 193 294 210 304
+               C194 310 180 318 167 329
+               C145 348 129 371 120 398
+               C140 384 162 374 186 369
+               C177 389 176 410 184 430
+               C196 462 224 488 268 507
+               C243 478 232 449 235 420
+               C237 397 249 375 268 357
+               C277 348 289 339 305 331
+               C326 321 342 309 352 295
+               C363 280 369 264 369 247
+               C368 228 360 212 346 198
+               C334 186 320 177 302 171
+               C317 168 332 160 345 147
+               C361 130 370 111 372 91
+               C349 103 326 111 303 114
+               C317 100 323 85 323 68
+               C305 85 285 96 263 101
+               C275 82 281 62 282 44
+               C266 69 255 90 249 108Z"
+            fill="#050607"/>
+
+      <!-- wing -->
+      <path d="M302 176
+               C340 165 377 168 414 187
+               C389 196 367 210 349 230
+               C332 250 321 274 315 304
+               C298 280 292 244 294 197
+               C294 190 297 183 302 176Z"
+            fill="#050607"/>
+
+      <!-- lower tail -->
+      <path d="M221 412
+               C203 430 193 451 191 473
+               C190 496 201 518 223 539
+               C187 530 160 512 143 486
+               C128 461 125 433 133 403
+               C143 367 166 340 202 321
+               C232 304 266 296 305 298
+               C282 308 263 321 248 339
+               C232 359 223 383 221 412Z"
+            fill="#050607"/>
+
+      <!-- head refine -->
+      <path d="M183 165
+               C190 152 201 141 216 132
+               C232 123 248 118 266 118
+               C255 126 247 136 241 149
+               C252 148 263 150 273 156
+               C259 157 248 162 239 170
+               C248 172 256 177 263 184
+               C250 183 239 186 229 192
+               C218 198 207 200 195 198
+               C188 190 184 179 183 165Z"
+            fill="#1C222A"/>
+
+      <!-- jaw / mouth -->
+      <path d="M177 189
+               C165 190 154 196 144 207
+               C136 216 127 221 117 224
+               C126 228 137 229 149 226
+               C142 234 136 244 132 256
+               C149 250 164 241 177 228
+               C187 218 191 205 189 191L177 189Z"
+            fill="#050607"/>
+
+      <!-- horns -->
+      <path d="M226 128L237 84L236 130Z" fill="#050607"/>
+      <path d="M249 113L275 66L262 118Z" fill="#050607"/>
+      <path d="M272 112L313 83L283 123Z" fill="#050607"/>
+
+      <!-- whisker -->
+      <path d="M129 226C102 244 82 268 68 296C83 288 100 274 118 256C124 249 128 237 129 226Z"
+            fill="#050607"/>
+
+      <!-- eye -->
+      <path d="M202 161L226 153L217 171L197 173Z" fill="#EEF4FA"/>
+    </g>
+
+    <!-- wall -->
+    <rect x="58" y="318" width="396" height="48" rx="8" fill="url(#wallTopGrad)"/>
+    <rect x="42" y="350" width="428" height="82" rx="10" fill="url(#wallFrontGrad)"/>
+
+    <g stroke="#4B5664" stroke-width="3" stroke-opacity="0.6">
+      <path d="M94 318V432"/>
+      <path d="M150 318V432"/>
+      <path d="M208 318V432"/>
+      <path d="M270 318V432"/>
+      <path d="M334 318V432"/>
+      <path d="M396 318V432"/>
+      <path d="M70 382H442"/>
+    </g>
+
+    <!-- title -->
+    <g filter="url(#towerTextShadow)">
+      <text x="256" y="506"
+            text-anchor="middle"
+            fill="url(#towerTitleGrad)"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="58"
+            font-weight="900"
+            letter-spacing="0.8">DRAGON</text>
+
+      <text x="256" y="568"
+            text-anchor="middle"
+            fill="url(#towerTitleGrad)"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="58"
+            font-weight="900"
+            letter-spacing="0.8">TOWER</text>
+    </g>
+
+    <text x="256" y="604"
+          text-anchor="middle"
+          fill="#F8EEF6"
+          fill-opacity="0.96"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="18"
+          font-weight="700"
+          letter-spacing="2.8">TRINITI MODE</text>
+  </g>
+
+  <rect x="16" y="16" width="480" height="608" rx="32" stroke="#1F2833" stroke-width="3"/>
+</svg>
