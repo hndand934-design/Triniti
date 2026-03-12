@@ -1,0 +1,86 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wheelMiniBg" x1="10" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E56EF8"/>
+      <stop offset="0.38" stop-color="#B53EF4"/>
+      <stop offset="0.74" stop-color="#93E342"/>
+      <stop offset="1" stop-color="#EDD45A"/>
+    </linearGradient>
+
+    <linearGradient id="wheelMiniOuter" x1="17" y1="16" x2="48" y2="47" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF173"/>
+      <stop offset="0.55" stop-color="#D6FF42"/>
+      <stop offset="1" stop-color="#90CF26"/>
+    </linearGradient>
+
+    <linearGradient id="wheelMiniRim" x1="18" y1="17" x2="47" y2="46" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6F6F6F"/>
+      <stop offset="1" stop-color="#484848"/>
+    </linearGradient>
+
+    <linearGradient id="wheelMiniRed" x1="22" y1="21" x2="42" y2="41" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF7C67"/>
+      <stop offset="1" stop-color="#E95644"/>
+    </linearGradient>
+
+    <linearGradient id="wheelMiniBlue" x1="22" y1="21" x2="42" y2="41" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#82EEFF"/>
+      <stop offset="1" stop-color="#58C8DE"/>
+    </linearGradient>
+
+    <linearGradient id="wheelMiniGreen" x1="22" y1="21" x2="42" y2="41" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9BC85F"/>
+      <stop offset="1" stop-color="#6F9944"/>
+    </linearGradient>
+
+    <linearGradient id="wheelMiniGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF1B2"/>
+      <stop offset="0.5" stop-color="#FFD94B"/>
+      <stop offset="1" stop-color="#D59C18"/>
+    </linearGradient>
+
+    <filter id="wheelMiniShadow" x="0" y="0" width="64" height="64" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#06070D" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#wheelMiniShadow)">
+    <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#wheelMiniBg)"/>
+  </g>
+
+  <path d="M6 38C18 35 46 35 58 38V60H6V38Z" fill="#B7EF53" fill-opacity="0.16"/>
+
+  <!-- wheel -->
+  <circle cx="34" cy="31" r="17.5" fill="url(#wheelMiniOuter)"/>
+  <circle cx="34" cy="31" r="15.7" fill="url(#wheelMiniRim)"/>
+
+  <path d="M34 31L34 17.2A13.8 13.8 0 0 1 45 22.6L34 31Z" fill="url(#wheelMiniBlue)"/>
+  <path d="M34 31L45 22.6A13.8 13.8 0 0 1 46.6 35.4L34 31Z" fill="url(#wheelMiniRed)"/>
+  <path d="M34 31L46.6 35.4A13.8 13.8 0 0 1 38.8 43.6L34 31Z" fill="url(#wheelMiniGreen)"/>
+  <path d="M34 31L38.8 43.6A13.8 13.8 0 0 1 25.4 41.2L34 31Z" fill="url(#wheelMiniBlue)"/>
+  <path d="M34 31L25.4 41.2A13.8 13.8 0 0 1 20.2 27.4L34 31Z" fill="url(#wheelMiniRed)"/>
+  <path d="M34 31L20.2 27.4A13.8 13.8 0 0 1 34 17.2L34 31Z" fill="url(#wheelMiniGreen)"/>
+
+  <circle cx="34" cy="31" r="13.9" stroke="#F5D953" stroke-width="1.8"/>
+  <circle cx="34" cy="31" r="7.5" fill="#B63FF4"/>
+  <circle cx="34" cy="31" r="7.5" stroke="#F0D14E" stroke-width="2"/>
+
+  <!-- pegs -->
+  <g fill="url(#wheelMiniGold)">
+    <circle cx="34" cy="16.4" r="1.8"/>
+    <circle cx="45.1" cy="21" r="1.8"/>
+    <circle cx="49" cy="31.2" r="1.8"/>
+    <circle cx="44" cy="41.6" r="1.8"/>
+    <circle cx="33.7" cy="45.5" r="1.8"/>
+    <circle cx="23.3" cy="41.2" r="1.8"/>
+    <circle cx="19.1" cy="31" r="1.8"/>
+    <circle cx="23.4" cy="20.9" r="1.8"/>
+  </g>
+
+  <!-- pointer -->
+  <path d="M10 40.5C10 37.8 12.2 35.6 14.9 35.6H25.2C27.9 35.6 30.1 37.8 30.1 40.5C30.1 43.2 27.9 45.4 25.2 45.4H18.4L12.1 51C11 52 9.2 51.2 9.2 49.8V45.2C7.6 44.6 6.8 42.8 6.8 40.9C6.8 38.5 8 36.6 10 35.9Z" fill="url(#wheelMiniGold)"/>
+  <circle cx="14.4" cy="40.6" r="3.2" fill="#8E6E11" fill-opacity="0.35"/>
+  <circle cx="14.4" cy="40.6" r="2" fill="#FFF2A4" fill-opacity="0.45"/>
+
+  <rect x="4.5" y="4.5" width="55" height="55" rx="15.5" stroke="#1D2531"/>
+</svg>
