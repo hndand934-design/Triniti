@@ -1,0 +1,70 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="towerMiniPremiumBgClean4" x1="32" y1="4" x2="32" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#091119"/>
+      <stop offset="0.58" stop-color="#101822"/>
+      <stop offset="1" stop-color="#2C162D"/>
+    </linearGradient>
+
+    <linearGradient id="towerMiniStoneFrontClean4" x1="32" y1="19" x2="32" y2="45" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8C98A7"/>
+      <stop offset="1" stop-color="#57616F"/>
+    </linearGradient>
+
+    <linearGradient id="towerMiniWindowClean4" x1="32" y1="24" x2="32" y2="39" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFD97A"/>
+      <stop offset="1" stop-color="#FF9A52"/>
+    </linearGradient>
+
+    <linearGradient id="towerMiniGoldClean4" x1="32" y1="11" x2="32" y2="18" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE7A4"/>
+      <stop offset="1" stop-color="#FFAE59"/>
+    </linearGradient>
+
+    <filter id="towerMiniPremiumShadowClean4" x="0" y="0" width="64" height="64" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#04080D" flood-opacity="0.36"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#towerMiniPremiumShadowClean4)">
+    <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#towerMiniPremiumBgClean4)"/>
+  </g>
+
+  <!-- полосы -->
+  <rect x="12" y="45" width="40" height="2.8" rx="1.4" fill="#7F8B99"/>
+  <rect x="10" y="48" width="44" height="4.2" rx="1.8" fill="#535C69"/>
+
+  <!-- roof -->
+  <path d="M32 15L39 21H25L32 15Z" fill="#262D37"/>
+  <path d="M32 17L36.8 21H27.2L32 17Z" fill="#414A58"/>
+
+  <!-- crown -->
+  <rect x="25" y="20.2" width="14" height="3.2" rx="1.4" fill="#8A95A5"/>
+  <path d="M25 20.2H27V18.3L28 20.2H30V17.9L32 20.2H34V17.9L36 20.2H38L39 18.3V20.2V23.4H25V20.2Z" fill="#98A4B3"/>
+
+  <!-- top -->
+  <path d="M32 12.2L33.5 16.8H30.5L32 12.2Z" fill="url(#towerMiniGoldClean4)"/>
+  <circle cx="32" cy="11.6" r="1.3" fill="#FFE6A1"/>
+
+  <!-- sides -->
+  <path d="M23 25.5L24.6 23.8H26.6V45H21V29L23 25.5Z" fill="#47515E"/>
+  <path d="M37.4 23.8H39.4L41 25.5V45H35.4V23.8H37.4Z" fill="#4E5866"/>
+
+  <!-- center -->
+  <rect x="26.6" y="23.8" width="10.8" height="21.2" rx="2.2" fill="url(#towerMiniStoneFrontClean4)"/>
+
+  <!-- bands -->
+  <rect x="26.6" y="28.2" width="10.8" height="1.5" rx="0.75" fill="#5C6674"/>
+  <rect x="26.6" y="32.9" width="10.8" height="1.5" rx="0.75" fill="#5C6674"/>
+  <rect x="26.6" y="37.6" width="10.8" height="1.5" rx="0.75" fill="#5C6674"/>
+
+  <!-- windows -->
+  <rect x="29" y="25.1" width="6" height="5.1" rx="1.5" fill="url(#towerMiniWindowClean4)"/>
+  <rect x="29" y="29.8" width="6" height="5.1" rx="1.5" fill="url(#towerMiniWindowClean4)"/>
+  <rect x="29" y="34.5" width="6" height="5.1" rx="1.5" fill="url(#towerMiniWindowClean4)"/>
+
+  <!-- gate -->
+  <path d="M28.8 45C28.8 42 30.1 40.5 32 40.5C33.9 40.5 35.2 42 35.2 45H28.8Z" fill="#12171E"/>
+
+  <rect x="4.5" y="4.5" width="55" height="55" rx="15.5" stroke="#1E2731"/>
+</svg>
