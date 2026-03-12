@@ -1,0 +1,198 @@
+<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="towerCardClipPremiumClean2">
+      <rect x="12" y="12" width="488" height="616" rx="36"/>
+    </clipPath>
+
+    <linearGradient id="towerPremiumBgClean2" x1="256" y1="12" x2="256" y2="628" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#081019"/>
+      <stop offset="0.34" stop-color="#0D1520"/>
+      <stop offset="0.7" stop-color="#171420"/>
+      <stop offset="1" stop-color="#2A1630"/>
+    </linearGradient>
+
+    <radialGradient id="towerPremiumAuraClean2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(256 222) rotate(90) scale(160 148)">
+      <stop offset="0" stop-color="#BB8FFF" stop-opacity="0.16"/>
+      <stop offset="0.46" stop-color="#7B9EFF" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#7B9EFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="stoneFrontPremiumClean2" x1="256" y1="170" x2="256" y2="378" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#909CAC"/>
+      <stop offset="0.3" stop-color="#768293"/>
+      <stop offset="0.72" stop-color="#576170"/>
+      <stop offset="1" stop-color="#3F4653"/>
+    </linearGradient>
+
+    <linearGradient id="stoneLeftPremiumClean2" x1="184" y1="248" x2="226" y2="248" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#303743"/>
+      <stop offset="1" stop-color="#596373"/>
+    </linearGradient>
+
+    <linearGradient id="stoneRightPremiumClean2" x1="286" y1="248" x2="328" y2="248" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5A6474"/>
+      <stop offset="1" stop-color="#313844"/>
+    </linearGradient>
+
+    <linearGradient id="roofPremiumClean2" x1="256" y1="136" x2="256" y2="208" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#313846"/>
+      <stop offset="1" stop-color="#161B23"/>
+    </linearGradient>
+
+    <linearGradient id="goldAccentPremiumClean2" x1="256" y1="132" x2="256" y2="198" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE6A2"/>
+      <stop offset="0.52" stop-color="#FFC86A"/>
+      <stop offset="1" stop-color="#FF9E53"/>
+    </linearGradient>
+
+    <linearGradient id="windowPremiumClean2" x1="256" y1="208" x2="256" y2="328" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFD97A"/>
+      <stop offset="0.58" stop-color="#FFB95D"/>
+      <stop offset="1" stop-color="#FF8F52"/>
+    </linearGradient>
+
+    <linearGradient id="titlePremiumClean2" x1="256" y1="488" x2="256" y2="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F2E7F4"/>
+    </linearGradient>
+
+    <filter id="towerPremiumCardShadowClean2" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#02060B" flood-opacity="0.44"/>
+    </filter>
+
+    <filter id="towerPremiumBodyShadowClean2" x="140" y="114" width="232" height="304" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#000000" flood-opacity="0.32"/>
+    </filter>
+
+    <filter id="towerPremiumWindowGlowClean2" x="198" y="194" width="116" height="174" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#FFB261" flood-opacity="0.24"/>
+    </filter>
+
+    <filter id="towerPremiumTextShadowClean2" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#140915" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#towerPremiumCardShadowClean2)">
+    <rect x="12" y="12" width="488" height="616" rx="36" fill="url(#towerPremiumBgClean2)"/>
+  </g>
+
+  <g clip-path="url(#towerCardClipPremiumClean2)">
+    <ellipse cx="256" cy="222" rx="160" ry="148" fill="url(#towerPremiumAuraClean2)"/>
+
+    <g fill="#EAF3FF" fill-opacity="0.72">
+      <circle cx="82" cy="90" r="1.3"/>
+      <circle cx="108" cy="120" r="1.1"/>
+      <circle cx="148" cy="84" r="1.2"/>
+      <circle cx="320" cy="80" r="1.15"/>
+      <circle cx="426" cy="150" r="1.35"/>
+    </g>
+
+    <path d="M-20 294L74 220L158 294H-20Z" fill="#0C1822"/>
+    <path d="M112 286L214 210L308 286H112Z" fill="#0A141C"/>
+    <path d="M274 294L394 212L506 294H274Z" fill="#0C1620"/>
+
+    <!-- башня -->
+    <g filter="url(#towerPremiumBodyShadowClean2)">
+      <!-- боковые части -->
+      <path d="M190 222L206 201H226V390H184V236L190 222Z" fill="url(#stoneLeftPremiumClean2)"/>
+      <path d="M322 222L328 236V390H286V201H306L322 222Z" fill="url(#stoneRightPremiumClean2)"/>
+
+      <!-- центр -->
+      <rect x="226" y="178" width="60" height="212" rx="10" fill="url(#stoneFrontPremiumClean2)"/>
+
+      <!-- крыша -->
+      <path d="M256 136L304 178H208L256 136Z" fill="url(#roofPremiumClean2)"/>
+      <path d="M256 147L289 178H223L256 147Z" fill="#414A58"/>
+
+      <!-- корона -->
+      <rect x="214" y="170" width="84" height="14" rx="5" fill="#8994A4"/>
+      <path d="M214 170H226V159L232 170H245V157L256 170H267V157L279 170H290V159L298 170V184H214V170Z" fill="#98A4B3"/>
+
+      <!-- верхушка -->
+      <path d="M256 126L264 154H248L256 126Z" fill="url(#goldAccentPremiumClean2)"/>
+      <circle cx="256" cy="122" r="5" fill="#FFD77C"/>
+      <circle cx="256" cy="122" r="2.4" fill="#FFF2C8"/>
+
+      <!-- декоративные шпили -->
+      <path d="M224 171L230 151L236 171H224Z" fill="#262D37"/>
+      <path d="M276 171L282 151L288 171H276Z" fill="#262D37"/>
+
+      <!-- полосы сегментов -->
+      <rect x="226" y="212" width="60" height="8" rx="4" fill="#5F6977"/>
+      <rect x="226" y="260" width="60" height="8" rx="4" fill="#5F6977"/>
+      <rect x="226" y="308" width="60" height="8" rx="4" fill="#5F6977"/>
+
+      <!-- кладка -->
+      <g stroke="#4D5663" stroke-width="2.6" stroke-opacity="0.58">
+        <path d="M226 238H286"/>
+        <path d="M226 286H286"/>
+        <path d="M226 334H286"/>
+        <path d="M190 250H226"/>
+        <path d="M190 298H226"/>
+        <path d="M286 250H322"/>
+        <path d="M286 298H322"/>
+      </g>
+    </g>
+
+    <!-- окна -->
+    <g filter="url(#towerPremiumWindowGlowClean2)">
+      <rect x="238" y="196" width="36" height="36" rx="10" fill="url(#windowPremiumClean2)"/>
+      <rect x="238" y="244" width="36" height="36" rx="10" fill="url(#windowPremiumClean2)"/>
+      <rect x="238" y="292" width="36" height="36" rx="10" fill="url(#windowPremiumClean2)"/>
+    </g>
+
+    <!-- соединённое основание -->
+    <path d="M232 390H280L292 410H220L232 390Z" fill="#616B78"/>
+    <path d="M222 410H290L302 430H210L222 410Z" fill="#555E6A"/>
+
+    <!-- ворота -->
+    <path d="M232 390C232 364 242 351 256 351C270 351 280 364 280 390H232Z" fill="#262C35"/>
+    <path d="M241 390C241 371 247 361 256 361C265 361 271 371 271 390H241Z" fill="#11161D"/>
+
+    <!-- площадка -->
+    <rect x="82" y="430" width="348" height="14" rx="7" fill="#6B7685"/>
+    <rect x="66" y="444" width="380" height="20" rx="9" fill="#4B5460"/>
+
+    <g stroke="#495360" stroke-width="2.8" stroke-opacity="0.58">
+      <path d="M106 430V464"/>
+      <path d="M156 430V464"/>
+      <path d="M206 430V464"/>
+      <path d="M256 430V464"/>
+      <path d="M306 430V464"/>
+      <path d="M356 430V464"/>
+      <path d="M406 430V464"/>
+    </g>
+
+    <!-- текст -->
+    <g filter="url(#towerPremiumTextShadowClean2)">
+      <text x="256" y="528"
+            text-anchor="middle"
+            fill="url(#titlePremiumClean2)"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="52"
+            font-weight="900"
+            letter-spacing="0.8">DRAGON</text>
+
+      <text x="256" y="584"
+            text-anchor="middle"
+            fill="url(#titlePremiumClean2)"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="52"
+            font-weight="900"
+            letter-spacing="0.8">TOWER</text>
+    </g>
+
+    <text x="256" y="611"
+          text-anchor="middle"
+          fill="#F8EEF6"
+          fill-opacity="0.96"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="17"
+          font-weight="700"
+          letter-spacing="2.5">TRINITI MODE</text>
+  </g>
+
+  <rect x="16" y="16" width="480" height="608" rx="32" stroke="#1F2833" stroke-width="3"/>
+</svg>
