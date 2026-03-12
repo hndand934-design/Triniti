@@ -1,0 +1,196 @@
+<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clipTowerCardOnly">
+      <rect x="12" y="12" width="488" height="616" rx="36"/>
+    </clipPath>
+
+    <linearGradient id="towerOnlyBg" x1="256" y1="12" x2="256" y2="628" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#08111A"/>
+      <stop offset="0.38" stop-color="#0D1621"/>
+      <stop offset="0.72" stop-color="#181522"/>
+      <stop offset="1" stop-color="#2A1830"/>
+    </linearGradient>
+
+    <radialGradient id="moonGlowTower" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(382 110) rotate(90) scale(86 86)">
+      <stop offset="0" stop-color="#DFE8FF" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#DFE8FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="towerAura" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(256 266) rotate(90) scale(185 180)">
+      <stop offset="0" stop-color="#B989FF" stop-opacity="0.16"/>
+      <stop offset="0.5" stop-color="#74A7FF" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#74A7FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="towerStoneFront" x1="256" y1="188" x2="256" y2="424" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8C95A5"/>
+      <stop offset="0.42" stop-color="#687384"/>
+      <stop offset="1" stop-color="#434B58"/>
+    </linearGradient>
+
+    <linearGradient id="towerStoneSide" x1="142" y1="256" x2="216" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#343C48"/>
+      <stop offset="1" stop-color="#576171"/>
+    </linearGradient>
+
+    <linearGradient id="towerStoneSideR" x1="296" y1="256" x2="370" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5A6474"/>
+      <stop offset="1" stop-color="#353D49"/>
+    </linearGradient>
+
+    <linearGradient id="windowGlow" x1="256" y1="226" x2="256" y2="356" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFD978"/>
+      <stop offset="1" stop-color="#FF964D"/>
+    </linearGradient>
+
+    <linearGradient id="roofGrad" x1="256" y1="132" x2="256" y2="236" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2D3340"/>
+      <stop offset="1" stop-color="#141922"/>
+    </linearGradient>
+
+    <linearGradient id="titleGradTower" x1="256" y1="470" x2="256" y2="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F2E8F4"/>
+    </linearGradient>
+
+    <filter id="towerCardShadowOnly" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#02060B" flood-opacity="0.44"/>
+    </filter>
+
+    <filter id="towerBodyShadow" x="96" y="108" width="320" height="344" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="14" flood-color="#000000" flood-opacity="0.40"/>
+    </filter>
+
+    <filter id="windowShadow" x="180" y="190" width="152" height="194" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="0" stdDeviation="14" flood-color="#FFB15D" flood-opacity="0.28"/>
+    </filter>
+
+    <filter id="towerTextShadowOnly" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#140915" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#towerCardShadowOnly)">
+    <rect x="12" y="12" width="488" height="616" rx="36" fill="url(#towerOnlyBg)"/>
+  </g>
+
+  <g clip-path="url(#clipTowerCardOnly)">
+    <!-- sky -->
+    <ellipse cx="382" cy="110" rx="72" ry="72" fill="url(#moonGlowTower)"/>
+    <ellipse cx="256" cy="266" rx="176" ry="160" fill="url(#towerAura)"/>
+
+    <!-- stars -->
+    <g fill="#EAF3FF" fill-opacity="0.78">
+      <circle cx="78" cy="90" r="1.3"/>
+      <circle cx="112" cy="120" r="1.1"/>
+      <circle cx="150" cy="84" r="1.2"/>
+      <circle cx="320" cy="78" r="1.15"/>
+      <circle cx="426" cy="150" r="1.35"/>
+    </g>
+
+    <!-- mountains -->
+    <path d="M-20 282L72 206L158 282H-20Z" fill="#0D1822"/>
+    <path d="M112 276L214 196L308 276H112Z" fill="#0A141D"/>
+    <path d="M274 282L392 198L504 282H274Z" fill="#0C1620"/>
+
+    <!-- tower -->
+    <g filter="url(#towerBodyShadow)">
+      <!-- roof -->
+      <path d="M256 132L334 190H178L256 132Z" fill="url(#roofGrad)"/>
+      <path d="M256 148L312 190H200L256 148Z" fill="#3A4351"/>
+
+      <!-- spires -->
+      <path d="M198 186L214 150L230 186H198Z" fill="#202732"/>
+      <path d="M282 186L298 150L314 186H282Z" fill="#202732"/>
+      <path d="M246 180L256 146L266 180H246Z" fill="#2A313D"/>
+
+      <!-- left side -->
+      <path d="M178 190H216V420H142V224L178 190Z" fill="url(#towerStoneSide)"/>
+
+      <!-- right side -->
+      <path d="M296 190H334L370 224V420H296V190Z" fill="url(#towerStoneSideR)"/>
+
+      <!-- main body -->
+      <rect x="216" y="186" width="80" height="238" rx="10" fill="url(#towerStoneFront)"/>
+
+      <!-- top crown -->
+      <rect x="202" y="176" width="108" height="20" rx="6" fill="#7A8392"/>
+      <path d="M204 176H222V164L232 176H250V162L256 176H274V164L284 176H308V196H204V176Z" fill="#8E98A8"/>
+
+      <!-- segment bands -->
+      <rect x="216" y="224" width="80" height="10" rx="5" fill="#596372"/>
+      <rect x="216" y="274" width="80" height="10" rx="5" fill="#596372"/>
+      <rect x="216" y="324" width="80" height="10" rx="5" fill="#596372"/>
+
+      <!-- brick lines -->
+      <g stroke="#4D5664" stroke-width="3" stroke-opacity="0.56">
+        <path d="M216 248H296"/>
+        <path d="M216 298H296"/>
+        <path d="M216 348H296"/>
+        <path d="M216 398H296"/>
+        <path d="M178 236H216"/>
+        <path d="M178 286H216"/>
+        <path d="M178 336H216"/>
+        <path d="M296 236H334"/>
+        <path d="M296 286H334"/>
+        <path d="M296 336H334"/>
+      </g>
+    </g>
+
+    <!-- glowing windows / segments -->
+    <g filter="url(#windowShadow)">
+      <rect x="238" y="210" width="36" height="36" rx="10" fill="url(#windowGlow)"/>
+      <rect x="238" y="260" width="36" height="36" rx="10" fill="url(#windowGlow)"/>
+      <rect x="238" y="310" width="36" height="36" rx="10" fill="url(#windowGlow)"/>
+    </g>
+
+    <!-- lower gate -->
+    <path d="M228 424C228 395 241 380 256 380C271 380 284 395 284 424H228Z" fill="#252B35"/>
+    <path d="M238 424C238 401 246 390 256 390C266 390 274 401 274 424H238Z" fill="#10151D"/>
+
+    <!-- ground wall -->
+    <rect x="54" y="422" width="404" height="18" rx="8" fill="#697483"/>
+    <rect x="42" y="440" width="428" height="26" rx="10" fill="#4A535F"/>
+
+    <g stroke="#495360" stroke-width="3" stroke-opacity="0.58">
+      <path d="M92 422V466"/>
+      <path d="M148 422V466"/>
+      <path d="M206 422V466"/>
+      <path d="M270 422V466"/>
+      <path d="M334 422V466"/>
+      <path d="M392 422V466"/>
+    </g>
+
+    <!-- title -->
+    <g filter="url(#towerTextShadowOnly)">
+      <text x="256" y="516"
+            text-anchor="middle"
+            fill="url(#titleGradTower)"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="58"
+            font-weight="900"
+            letter-spacing="0.8">DRAGON</text>
+
+      <text x="256" y="578"
+            text-anchor="middle"
+            fill="url(#titleGradTower)"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="58"
+            font-weight="900"
+            letter-spacing="0.8">TOWER</text>
+    </g>
+
+    <text x="256" y="610"
+          text-anchor="middle"
+          fill="#F8EEF6"
+          fill-opacity="0.96"
+          font-family="Arial, Helvetica, sans-serif"
+          font-size="18"
+          font-weight="700"
+          letter-spacing="2.8">TRINITI MODE</text>
+  </g>
+
+  <rect x="16" y="16" width="480" height="608" rx="32" stroke="#1F2833" stroke-width="3"/>
+</svg>
