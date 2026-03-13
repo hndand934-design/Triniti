@@ -1,0 +1,155 @@
+<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clipCard">
+      <rect x="12" y="12" width="488" height="616" rx="36"/>
+    </clipPath>
+
+    <linearGradient id="bgMain" x1="40" y1="36" x2="472" y2="608" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#131C34"/>
+      <stop offset="0.48" stop-color="#10182B"/>
+      <stop offset="1" stop-color="#0A1120"/>
+    </linearGradient>
+
+    <radialGradient id="bgGlowLeft" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(176 214) rotate(90) scale(170 170)">
+      <stop offset="0" stop-color="#F5B321" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#F5B321" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="bgGlowRight" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(330 198) rotate(90) scale(170 170)">
+      <stop offset="0" stop-color="#76A7FF" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#76A7FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="goldEdge" x1="132" y1="122" x2="298" y2="288" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF0A0"/>
+      <stop offset="0.24" stop-color="#FFD74A"/>
+      <stop offset="0.58" stop-color="#F8B400"/>
+      <stop offset="1" stop-color="#D96D10"/>
+    </linearGradient>
+
+    <linearGradient id="goldFace" x1="146" y1="126" x2="274" y2="248" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF17A"/>
+      <stop offset="0.36" stop-color="#FFD52F"/>
+      <stop offset="0.72" stop-color="#F7B400"/>
+      <stop offset="1" stop-color="#E19400"/>
+    </linearGradient>
+
+    <linearGradient id="silverEdge" x1="262" y1="106" x2="418" y2="266" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F4F8FF"/>
+      <stop offset="0.22" stop-color="#DCE6F5"/>
+      <stop offset="0.6" stop-color="#9EB0CA"/>
+      <stop offset="1" stop-color="#677891"/>
+    </linearGradient>
+
+    <linearGradient id="silverFace" x1="278" y1="114" x2="394" y2="228" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7FBFF"/>
+      <stop offset="0.32" stop-color="#DDE7F4"/>
+      <stop offset="0.68" stop-color="#AAB9D0"/>
+      <stop offset="1" stop-color="#7A8BA5"/>
+    </linearGradient>
+
+    <radialGradient id="shineGold" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(178 145) rotate(45) scale(92 70)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.70"/>
+      <stop offset="0.45" stop-color="#FFF4BF" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#FFF4BF" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="shineSilver" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(313 136) rotate(45) scale(82 62)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.72"/>
+      <stop offset="0.42" stop-color="#EDF5FF" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#EDF5FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="cardShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="20" stdDeviation="18" flood-color="#050607" flood-opacity="0.45"/>
+    </filter>
+
+    <filter id="coinShadow" x="70" y="70" width="380" height="330" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="16" flood-color="#000000" flood-opacity="0.34"/>
+    </filter>
+
+    <filter id="textShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="8" stdDeviation="4" flood-color="#000000" flood-opacity="0.30"/>
+    </filter>
+
+    <linearGradient id="textFill" x1="256" y1="430" x2="256" y2="610" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF3FF"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#cardShadow)">
+    <rect x="12" y="12" width="488" height="616" rx="36" fill="url(#bgMain)"/>
+  </g>
+
+  <g clip-path="url(#clipCard)">
+    <ellipse cx="176" cy="214" rx="170" ry="170" fill="url(#bgGlowLeft)"/>
+    <ellipse cx="330" cy="198" rx="170" ry="170" fill="url(#bgGlowRight)"/>
+
+    <path d="M54 84C132 48 214 42 310 70" stroke="white" stroke-opacity="0.05" stroke-width="18" stroke-linecap="round"/>
+    <path d="M206 62C302 46 386 72 450 116" stroke="white" stroke-opacity="0.04" stroke-width="14" stroke-linecap="round"/>
+
+    <g filter="url(#coinShadow)">
+      <!-- gold coin back -->
+      <g transform="translate(0 12)">
+        <ellipse cx="194" cy="248" rx="86" ry="96" fill="url(#goldEdge)"/>
+      </g>
+      <ellipse cx="178" cy="214" rx="88" ry="88" fill="url(#goldFace)"/>
+      <ellipse cx="178" cy="214" rx="69" ry="69" fill="#F8BC09"/>
+      <ellipse cx="178" cy="214" rx="54" ry="54" fill="url(#goldFace)"/>
+      <ellipse cx="178" cy="214" rx="77" ry="77" stroke="#FFF3AF" stroke-opacity="0.55" stroke-width="4"/>
+      <ellipse cx="178" cy="214" rx="58" ry="58" stroke="#E79300" stroke-opacity="0.50" stroke-width="3"/>
+      <ellipse cx="178" cy="214" rx="88" ry="88" fill="url(#shineGold)"/>
+
+      <!-- simple mark -->
+      <path d="M165 189C170 183 180 181 190 184C200 187 207 194 208 203C209 211 204 218 194 222L165 233"
+            stroke="#C87400" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity="0.72"/>
+      <path d="M159 242C165 248 177 251 189 249C201 247 210 240 212 231"
+            stroke="#C87400" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity="0.72"/>
+
+      <!-- silver coin front -->
+      <g transform="translate(0 10)">
+        <ellipse cx="334" cy="222" rx="76" ry="84" fill="url(#silverEdge)"/>
+      </g>
+      <ellipse cx="316" cy="192" rx="78" ry="78" fill="url(#silverFace)"/>
+      <ellipse cx="316" cy="192" rx="61" ry="61" fill="#C4D1E3"/>
+      <ellipse cx="316" cy="192" rx="47" ry="47" fill="url(#silverFace)"/>
+      <ellipse cx="316" cy="192" rx="68" ry="68" stroke="#F8FCFF" stroke-opacity="0.52" stroke-width="4"/>
+      <ellipse cx="316" cy="192" rx="50" ry="50" stroke="#8396B2" stroke-opacity="0.55" stroke-width="3"/>
+      <ellipse cx="316" cy="192" rx="78" ry="78" fill="url(#shineSilver)"/>
+
+      <!-- simple mark -->
+      <path d="M301 171C306 166 313 164 321 166C329 168 334 173 335 179C336 185 332 190 324 193L300 202"
+            stroke="#6C7D97" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.78"/>
+      <path d="M296 210C301 215 310 217 319 216C328 214 335 209 337 202"
+            stroke="#6C7D97" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.78"/>
+    </g>
+
+    <g filter="url(#textShadow)">
+      <text x="256" y="520"
+            text-anchor="middle"
+            fill="url(#textFill)"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="66"
+            font-weight="900"
+            letter-spacing="1">COIN FLIP</text>
+    </g>
+
+    <g opacity="0.98">
+      <path d="M160 560H352L372 580L352 600H160L140 580L160 560Z" fill="none" stroke="#EEF3FF" stroke-opacity="0.82" stroke-width="2.2"/>
+      <text x="256" y="587"
+            text-anchor="middle"
+            fill="#F7FBFF"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="22"
+            font-weight="700"
+            letter-spacing="2.2">TRINITI MODE</text>
+    </g>
+  </g>
+
+  <rect x="16" y="16" width="480" height="608" rx="32" stroke="#1B2434" stroke-width="3"/>
+</svg>
