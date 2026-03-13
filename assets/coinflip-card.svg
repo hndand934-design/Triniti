@@ -1,0 +1,177 @@
+<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clipCard">
+      <rect x="12" y="12" width="488" height="616" rx="36"/>
+    </clipPath>
+
+    <linearGradient id="bgMain" x1="40" y1="36" x2="470" y2="608" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#121A30"/>
+      <stop offset="0.44" stop-color="#10182A"/>
+      <stop offset="1" stop-color="#09101D"/>
+    </linearGradient>
+
+    <radialGradient id="bgGlowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(208 178) rotate(90) scale(170 170)">
+      <stop offset="0" stop-color="#FFD449" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FFD449" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="bgGlowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(315 190) rotate(90) scale(170 170)">
+      <stop offset="0" stop-color="#C9D6EA" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#C9D6EA" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="coinEdge" x1="148" y1="130" x2="366" y2="346" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF0A8"/>
+      <stop offset="0.16" stop-color="#F6D46A"/>
+      <stop offset="0.32" stop-color="#B79F77"/>
+      <stop offset="0.48" stop-color="#C6CDD8"/>
+      <stop offset="0.66" stop-color="#8B9DB5"/>
+      <stop offset="0.84" stop-color="#D7A93D"/>
+      <stop offset="1" stop-color="#F2C428"/>
+    </linearGradient>
+
+    <linearGradient id="goldOuter" x1="150" y1="122" x2="274" y2="262" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF4A6"/>
+      <stop offset="0.26" stop-color="#FFDE52"/>
+      <stop offset="0.58" stop-color="#F8B700"/>
+      <stop offset="1" stop-color="#D87A12"/>
+    </linearGradient>
+
+    <linearGradient id="goldInner" x1="166" y1="142" x2="252" y2="236" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF17F"/>
+      <stop offset="0.34" stop-color="#FFD42D"/>
+      <stop offset="0.72" stop-color="#F8B200"/>
+      <stop offset="1" stop-color="#E29400"/>
+    </linearGradient>
+
+    <linearGradient id="silverOuter" x1="242" y1="118" x2="368" y2="252" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FCFEFF"/>
+      <stop offset="0.26" stop-color="#E0E9F5"/>
+      <stop offset="0.6" stop-color="#AABAD0"/>
+      <stop offset="1" stop-color="#72849E"/>
+    </linearGradient>
+
+    <linearGradient id="silverInner" x1="258" y1="138" x2="346" y2="228" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F7FBFF"/>
+      <stop offset="0.34" stop-color="#DEE7F2"/>
+      <stop offset="0.72" stop-color="#A9B8CC"/>
+      <stop offset="1" stop-color="#8192AA"/>
+    </linearGradient>
+
+    <radialGradient id="topShine" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(202 146) rotate(40) scale(116 78)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="0.34" stop-color="#FFFFFF" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="botShine" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(318 254) rotate(220) scale(124 86)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="faceBloom" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(258 204) rotate(90) scale(104 104)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="cardShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#050607" flood-opacity="0.46"/>
+    </filter>
+
+    <filter id="coinShadow" x="78" y="78" width="356" height="346" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="30" stdDeviation="18" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+
+    <filter id="textShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="8" stdDeviation="4" flood-color="#000000" flood-opacity="0.34"/>
+    </filter>
+
+    <linearGradient id="textFill" x1="256" y1="432" x2="256" y2="604" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EDF3FF"/>
+    </linearGradient>
+  </defs>
+
+  <g filter="url(#cardShadow)">
+    <rect x="12" y="12" width="488" height="616" rx="36" fill="url(#bgMain)"/>
+  </g>
+
+  <g clip-path="url(#clipCard)">
+    <ellipse cx="208" cy="178" rx="170" ry="170" fill="url(#bgGlowA)"/>
+    <ellipse cx="315" cy="190" rx="170" ry="170" fill="url(#bgGlowB)"/>
+
+    <path d="M52 86C130 48 232 34 340 68" stroke="white" stroke-opacity="0.05" stroke-width="18" stroke-linecap="round"/>
+    <path d="M210 56C308 42 392 72 454 118" stroke="white" stroke-opacity="0.04" stroke-width="14" stroke-linecap="round"/>
+
+    <g filter="url(#coinShadow)">
+      <!-- depth / body -->
+      <g transform="translate(0 18)">
+        <ellipse cx="256" cy="238" rx="106" ry="118" fill="url(#coinEdge)"/>
+      </g>
+
+      <!-- front face base -->
+      <ellipse cx="256" cy="204" rx="108" ry="108" fill="#10151E"/>
+
+      <!-- left gold half -->
+      <path d="M148 204C148 144.4 196.4 96 256 96V312C196.4 312 148 263.6 148 204Z" fill="url(#goldOuter)"/>
+
+      <!-- right silver half -->
+      <path d="M256 96C315.6 96 364 144.4 364 204C364 263.6 315.6 312 256 312V96Z" fill="url(#silverOuter)"/>
+
+      <!-- inner ring -->
+      <ellipse cx="256" cy="204" rx="83" ry="83" fill="#111723"/>
+      <path d="M173 204C173 158.2 210.2 121 256 121V287C210.2 287 173 249.8 173 204Z" fill="url(#goldInner)"/>
+      <path d="M256 121C301.8 121 339 158.2 339 204C339 249.8 301.8 287 256 287V121Z" fill="url(#silverInner)"/>
+
+      <!-- center band -->
+      <rect x="247.5" y="104" width="17" height="200" rx="8.5" fill="url(#coinEdge)"/>
+
+      <!-- premium bevel rings -->
+      <ellipse cx="256" cy="204" rx="97" ry="97" stroke="#FFF4BF" stroke-opacity="0.34" stroke-width="4"/>
+      <ellipse cx="256" cy="204" rx="72" ry="72" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="3"/>
+
+      <!-- face bloom -->
+      <ellipse cx="256" cy="204" rx="108" ry="108" fill="url(#faceBloom)"/>
+
+      <!-- highlight passes -->
+      <ellipse cx="256" cy="204" rx="108" ry="108" fill="url(#topShine)"/>
+      <ellipse cx="256" cy="204" rx="108" ry="108" fill="url(#botShine)"/>
+
+      <!-- small studio highlight -->
+      <path d="M186 144C204 132 228 124 248 122" stroke="white" stroke-opacity="0.52" stroke-width="12" stroke-linecap="round"/>
+      <path d="M282 126C304 129 324 138 340 153" stroke="white" stroke-opacity="0.28" stroke-width="8" stroke-linecap="round"/>
+    </g>
+
+    <g filter="url(#textShadow)">
+      <text x="256" y="520"
+            text-anchor="middle"
+            fill="url(#textFill)"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="66"
+            font-weight="900"
+            letter-spacing="1">COIN FLIP</text>
+    </g>
+
+    <g opacity="0.98">
+      <path d="M160 560H352L372 580L352 600H160L140 580L160 560Z"
+            fill="none"
+            stroke="#EEF3FF"
+            stroke-opacity="0.82"
+            stroke-width="2.2"/>
+      <text x="256" y="587"
+            text-anchor="middle"
+            fill="#F7FBFF"
+            font-family="Arial, Helvetica, sans-serif"
+            font-size="22"
+            font-weight="700"
+            letter-spacing="2.2">TRINITI MODE</text>
+    </g>
+  </g>
+
+  <rect x="16" y="16" width="480" height="608" rx="32" stroke="#1B2434" stroke-width="3"/>
+</svg>
