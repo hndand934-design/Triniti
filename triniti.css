@@ -367,7 +367,6 @@ button{font:inherit}
 .gameCard:hover{filter:brightness(1.05);border-color:rgba(255,255,255,.18);}
 .gameCard:active{transform:translateY(1px) scale(.99);}
 
-/* DESKTOP POSTERS */
 .gameCard--poster{
   padding:0;
   overflow:hidden;
@@ -392,7 +391,6 @@ button{font:inherit}
   pointer-events:none;
 }
 
-/* MOBILE CUSTOM STRUCTURE */
 .mPosterMeta,
 .mBottomNav,
 .mCardArt,
@@ -875,7 +873,6 @@ button{font:inherit}
     background:rgba(255,255,255,.04);
   }
 
-  /* карточка */
   .gameCard--poster{
     min-height:auto;
     padding:0;
@@ -928,10 +925,11 @@ button{font:inherit}
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:10px;
+    gap:0;
     position:relative;
     z-index:2;
     text-align:center;
+    width:100%;
   }
 
   .mCardIcon{
@@ -943,25 +941,10 @@ button{font:inherit}
     filter:drop-shadow(0 16px 26px rgba(0,0,0,.24));
   }
 
-  .mCardLogoTitle{
-    display:block;
-    font-size:24px;
-    line-height:1;
-    font-weight:1000;
-    letter-spacing:.5px;
-    color:#fff;
-    text-transform:uppercase;
-    text-shadow:0 4px 18px rgba(0,0,0,.22);
-  }
-
+  /* убрали текст внутри верхней части */
+  .mCardLogoTitle,
   .mCardLogoSub{
-    display:block;
-    font-size:11px;
-    line-height:1;
-    font-weight:900;
-    letter-spacing:2.4px;
-    color:rgba(255,255,255,.82);
-    text-transform:uppercase;
+    display:none !important;
   }
 
   .mPosterMeta{
@@ -1014,7 +997,6 @@ button{font:inherit}
       inset 0 1px 0 rgba(255,255,255,.18);
   }
 
-  /* индивидуальные фоны */
   .gameCard--dice{
     background:
       radial-gradient(circle at 26% 12%, rgba(255,255,255,.18) 0 120px, transparent 121px),
@@ -1052,10 +1034,11 @@ button{font:inherit}
       linear-gradient(180deg, #6cda56 0%, #338f36 48%, #245923 100%);
   }
 
+  /* новый фон для tower */
   .gameCard--tower{
     background:
-      radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
-      linear-gradient(180deg, #ffd85e 0%, #ff9b61 48%, #c85b86 100%);
+      radial-gradient(circle at 24% 12%, rgba(255,255,255,.09) 0 110px, transparent 111px),
+      linear-gradient(180deg, #6f7f98 0%, #4a556b 46%, #2b3140 100%);
   }
 
   .gameCard--wheel{
@@ -1064,7 +1047,6 @@ button{font:inherit}
       linear-gradient(180deg, #d85eff 0%, #8ee45e 52%, #f0d65a 100%);
   }
 
-  /* нижняя карусель */
   .mBottomNav{
     position:fixed;
     left:8px;
