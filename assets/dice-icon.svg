@@ -1,67 +1,84 @@
 <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="ibg" x1="12" y1="10" x2="116" y2="120" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#4C95FF"/>
-      <stop offset="0.4" stop-color="#2B68D5"/>
-      <stop offset="0.76" stop-color="#17398D"/>
-      <stop offset="1" stop-color="#0A1637"/>
+    <linearGradient id="tileBg" x1="14" y1="10" x2="112" y2="118" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2D7CFF"/>
+      <stop offset="0.5" stop-color="#173F9C"/>
+      <stop offset="1" stop-color="#0B1637"/>
     </linearGradient>
 
-    <linearGradient id="itop" x1="0.2" y1="0" x2="0.85" y2="1">
-      <stop offset="0" stop-color="#FFFFFF"/>
+    <linearGradient id="miniFront" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="0.36" stop-color="#E9EEF8"/>
+      <stop offset="0.8" stop-color="#ADB8CC"/>
+      <stop offset="1" stop-color="#6E7A92"/>
+    </linearGradient>
+
+    <linearGradient id="miniTop" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop stop-color="#FFFFFF"/>
       <stop offset="0.58" stop-color="#EEF3FA"/>
-      <stop offset="1" stop-color="#BCC8DA"/>
+      <stop offset="1" stop-color="#CBD5E7"/>
     </linearGradient>
 
-    <linearGradient id="ifront" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FDFEFF"/>
-      <stop offset="0.35" stop-color="#E4EAF6"/>
-      <stop offset="0.8" stop-color="#AAB5CA"/>
-      <stop offset="1" stop-color="#69758E"/>
+    <linearGradient id="miniSide" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3D475C"/>
+      <stop offset="0.42" stop-color="#222A3C"/>
+      <stop offset="1" stop-color="#0B1120"/>
     </linearGradient>
 
-    <linearGradient id="iside" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#3E495F"/>
-      <stop offset="0.48" stop-color="#232C40"/>
-      <stop offset="1" stop-color="#0F1627"/>
-    </linearGradient>
-
-    <filter id="ishadow" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#050B16" flood-opacity="0.48"/>
+    <filter id="miniShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#070F20" flood-opacity="0.5"/>
     </filter>
   </defs>
 
-  <rect x="6" y="6" width="116" height="116" rx="28" fill="url(#ibg)"/>
-  <rect x="6.75" y="6.75" width="114.5" height="114.5" rx="27.25" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
+  <rect x="6" y="6" width="116" height="116" rx="28" fill="url(#tileBg)"/>
+  <rect x="6.75" y="6.75" width="114.5" height="114.5" rx="27.25" stroke="rgba(255,255,255,.16)" stroke-width="1.5"/>
 
-  <path d="M0 30C24 14 46 14 70 20C92 26 110 22 128 8V28C112 42 92 46 68 40C46 35 24 35 0 50V30Z"
+  <path d="M2 28C26 14 46 14 68 20C90 26 108 22 126 10V28C110 40 92 44 70 39C48 34 26 34 2 48V28Z"
         fill="white" fill-opacity="0.08"/>
-  <path d="M0 58C28 42 52 42 78 50C98 56 113 55 128 45V63C111 74 95 76 74 69C48 61 26 61 0 78V58Z"
+  <path d="M0 56C26 42 50 42 74 48C96 54 112 52 128 42V60C112 72 96 74 72 68C48 62 24 62 0 76V56Z"
         fill="white" fill-opacity="0.05"/>
 
-  <!-- small die -->
-  <g transform="translate(67 24) rotate(10)" filter="url(#ishadow)">
-    <polygon points="12,4 34,17 14,28 -8,15" fill="url(#itop)"/>
-    <polygon points="-8,15 14,28 14,54 -8,41" fill="url(#ifront)"/>
-    <polygon points="14,28 34,17 34,43 14,54" fill="url(#iside)"/>
+  <!-- back cube -->
+  <g filter="url(#miniShadow)">
+    <g transform="translate(66 22) rotate(9)">
+      <polygon points="14,4 40,18 16,32 -10,18" fill="url(#miniTop)"/>
+      <polygon points="-10,18 16,32 16,62 -10,48" fill="url(#miniFront)"/>
+      <polygon points="16,32 40,18 40,48 16,62" fill="url(#miniSide)"/>
 
-    <circle cx="4" cy="25" r="3.2" fill="#111826"/>
-    <circle cx="24" cy="31" r="3.2" fill="#111826"/>
-    <circle cx="24" cy="42" r="3.2" fill="#111826"/>
+      <circle cx="14" cy="18" r="3.4" fill="#121927"/>
+      <circle cx="0" cy="29" r="3.4" fill="#121927"/>
+      <circle cx="7" cy="49" r="3.4" fill="#121927"/>
+      <circle cx="24" cy="38" r="3.4" fill="#101622"/>
+      <circle cx="32" cy="33" r="3.4" fill="#101622"/>
+      <circle cx="24" cy="52" r="3.4" fill="#101622"/>
+      <circle cx="32" cy="47" r="3.4" fill="#101622"/>
+    </g>
   </g>
 
-  <!-- big die -->
-  <g transform="translate(22 44) rotate(-12)" filter="url(#ishadow)">
-    <polygon points="26,6 64,27 30,47 -8,26" fill="url(#itop)"/>
-    <polygon points="-8,26 30,47 30,98 -8,77" fill="url(#ifront)"/>
-    <polygon points="30,47 64,27 64,78 30,98" fill="url(#iside)"/>
+  <!-- front cube -->
+  <g filter="url(#miniShadow)">
+    <g transform="translate(22 42) rotate(-12)">
+      <polygon points="28,6 68,28 32,50 -8,28" fill="url(#miniTop)"/>
+      <polygon points="-8,28 32,50 32,102 -8,80" fill="url(#miniFront)"/>
+      <polygon points="32,50 68,28 68,80 32,102" fill="url(#miniSide)"/>
 
-    <circle cx="2" cy="49" r="4" fill="#111826"/>
-    <circle cx="15" cy="84" r="4" fill="#111826"/>
+      <!-- top 6 -->
+      <circle cx="2" cy="35" r="4" fill="#121927"/>
+      <circle cx="18" cy="26" r="4" fill="#121927"/>
+      <circle cx="36" cy="16" r="4" fill="#121927"/>
+      <circle cx="18" cy="46" r="4" fill="#121927"/>
+      <circle cx="36" cy="36" r="4" fill="#121927"/>
+      <circle cx="52" cy="27" r="4" fill="#121927"/>
 
-    <circle cx="44" cy="60" r="3.8" fill="#101622"/>
-    <circle cx="56" cy="53" r="3.8" fill="#101622"/>
-    <circle cx="45" cy="86" r="3.8" fill="#101622"/>
-    <circle cx="57" cy="78" r="3.8" fill="#101622"/>
+      <!-- front 2 -->
+      <circle cx="4" cy="54" r="4.2" fill="#111826"/>
+      <circle cx="20" cy="92" r="4.2" fill="#111826"/>
+
+      <!-- side 4 -->
+      <circle cx="44" cy="62" r="4" fill="#0E1421"/>
+      <circle cx="58" cy="54" r="4" fill="#0E1421"/>
+      <circle cx="46" cy="86" r="4" fill="#0E1421"/>
+      <circle cx="60" cy="78" r="4" fill="#0E1421"/>
+    </g>
   </g>
 </svg>
