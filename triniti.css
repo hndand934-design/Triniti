@@ -401,6 +401,12 @@ button{font:inherit}
   display:none;
 }
 
+.gameCard--dice{
+  background:
+    radial-gradient(circle at 26% 12%, rgba(255,255,255,.18) 0 120px, transparent 121px),
+    linear-gradient(180deg, #6ea6ff 0%, #2558df 36%, #102a95 100%);
+}
+
 /* MODALS */
 .modal{position:fixed;inset:0;display:none;z-index:50;}
 .modal.open{display:block;}
@@ -898,7 +904,7 @@ button{font:inherit}
     align-items:center;
     justify-content:center;
     min-height:250px;
-    padding:24px 18px 12px;
+    padding:18px 14px 8px;
     position:relative;
     overflow:hidden;
   }
@@ -934,11 +940,37 @@ button{font:inherit}
 
   .mCardIcon{
     display:block;
-    width:min(58vw, 220px);
-    max-height:148px;
+    width:min(62vw, 236px);
+    max-height:168px;
     object-fit:contain;
     object-position:center;
     filter:drop-shadow(0 16px 26px rgba(0,0,0,.24));
+  }
+
+  .mCardIcon--dice{
+    width:min(88vw, 360px);
+    max-width:360px;
+    max-height:none;
+    height:auto;
+    object-fit:contain;
+    object-position:center;
+    filter:
+      drop-shadow(0 20px 30px rgba(0,0,0,.28))
+      drop-shadow(0 8px 14px rgba(255,255,255,.05));
+    transform:translateY(2px);
+  }
+
+  .gameCard--dice .mCardArt{
+    min-height:286px;
+    padding:10px 6px 0;
+  }
+
+  .gameCard--dice .mCardCenter{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
 
   /* убрали текст внутри верхней части */
@@ -955,6 +987,10 @@ button{font:inherit}
     padding:16px;
     border-top:1px solid rgba(255,255,255,.08);
     background:linear-gradient(180deg, rgba(10,14,25,.18), rgba(10,14,25,.28));
+  }
+
+  .gameCard--dice .mPosterMeta{
+    padding:15px 16px 16px;
   }
 
   .mPosterInfo{
@@ -1034,7 +1070,6 @@ button{font:inherit}
       linear-gradient(180deg, #6cda56 0%, #338f36 48%, #245923 100%);
   }
 
-  /* новый фон для tower */
   .gameCard--tower{
     background:
       radial-gradient(circle at 24% 12%, rgba(255,255,255,.09) 0 110px, transparent 111px),
