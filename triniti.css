@@ -79,6 +79,7 @@ button{font:inherit}
   }
 }
 
+/* TOPBAR */
 .topbar{
   display:grid;
   grid-template-columns:1fr auto auto;
@@ -196,6 +197,7 @@ button{font:inherit}
   box-shadow:0 0 0 3px rgba(38,212,123,.14);
 }
 
+/* LAYOUT */
 .home{
   margin-top:12px;
   display:grid;
@@ -214,6 +216,7 @@ button{font:inherit}
   }
 }
 
+/* RAIL */
 .rail{
   position:sticky;
   top:12px;
@@ -287,6 +290,7 @@ button{font:inherit}
   overflow:hidden;
 }
 
+/* HERO */
 .hero{padding:14px;}
 .heroRow{
   display:grid;
@@ -331,6 +335,7 @@ button{font:inherit}
 .tileTop{font-weight:950;font-size:18px;}
 .tileSub{margin-top:6px;font-size:12px;color:var(--muted);}
 
+/* GRID */
 .grid{
   margin-top:12px;
   display:grid;
@@ -370,19 +375,33 @@ button{font:inherit}
   background:rgba(0,0,0,.12);
 }
 .gameCard--poster > img:first-child{
-  display:none !important;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
 }
 .gameCard--poster::after{
-  display:none;
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    inset 0 -40px 60px rgba(0,0,0,.10);
+  pointer-events:none;
 }
 
 .mPosterMeta,
+.mBottomNav,
 .mCardArt,
+.mCardCenter,
 .mCardIcon,
-.mBottomNav{
+.mCardLogoTitle,
+.mCardLogoSub{
   display:none;
 }
 
+/* MODALS */
 .modal{position:fixed;inset:0;display:none;z-index:50;}
 .modal.open{display:block;}
 .modal__backdrop{
@@ -692,6 +711,7 @@ button{font:inherit}
 .supportBtn:active{transform:scale(.99);}
 .supportNote{margin-top:10px;font-size:12px;color:var(--muted);}
 
+/* MOBILE */
 .mHeader{display:none;}
 
 @media (max-width:520px){
@@ -865,12 +885,20 @@ button{font:inherit}
       inset 0 1px 0 rgba(255,255,255,.04);
   }
 
+  .gameCard--poster > img:first-child{
+    display:none !important;
+  }
+
+  .gameCard--poster::after{
+    display:none;
+  }
+
   .mCardArt{
     display:flex;
     align-items:center;
     justify-content:center;
-    min-height:255px;
-    padding:18px 18px 10px;
+    min-height:250px;
+    padding:24px 18px 12px;
     position:relative;
     overflow:hidden;
   }
@@ -892,15 +920,31 @@ button{font:inherit}
     pointer-events:none;
   }
 
+  .mCardCenter{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:0;
+    position:relative;
+    z-index:2;
+    text-align:center;
+    width:100%;
+  }
+
   .mCardIcon{
     display:block;
     width:min(58vw, 220px);
-    max-height:150px;
+    max-height:148px;
     object-fit:contain;
     object-position:center;
-    position:relative;
-    z-index:2;
-    filter:drop-shadow(0 18px 28px rgba(0,0,0,.22));
+    filter:drop-shadow(0 16px 26px rgba(0,0,0,.24));
+  }
+
+  /* убрали текст внутри верхней части */
+  .mCardLogoTitle,
+  .mCardLogoSub{
+    display:none !important;
   }
 
   .mPosterMeta{
@@ -910,7 +954,7 @@ button{font:inherit}
     gap:14px;
     padding:16px;
     border-top:1px solid rgba(255,255,255,.08);
-    background:linear-gradient(180deg, rgba(245,247,255,.98), rgba(240,243,252,.98));
+    background:linear-gradient(180deg, rgba(10,14,25,.18), rgba(10,14,25,.28));
   }
 
   .mPosterInfo{
@@ -924,14 +968,14 @@ button{font:inherit}
     font-size:18px;
     line-height:1;
     font-weight:950;
-    color:#3c63ef;
+    color:#f2f4ff;
     text-transform:uppercase;
   }
 
   .mPosterSub{
     font-size:12px;
     line-height:1.22;
-    color:#5f667a;
+    color:#b8c0d8;
     font-weight:700;
   }
 
@@ -944,7 +988,7 @@ button{font:inherit}
     height:50px;
     padding:0 18px;
     border-radius:17px;
-    background:linear-gradient(180deg, #5d7cff, #4361ec);
+    background:linear-gradient(180deg, #7088ff, #5067eb);
     color:#fff;
     font-size:15px;
     font-weight:950;
@@ -954,35 +998,53 @@ button{font:inherit}
   }
 
   .gameCard--dice{
-    background:linear-gradient(135deg, #9be7db 0%, #28d2df 50%, #0ebbe2 100%);
+    background:
+      radial-gradient(circle at 26% 12%, rgba(255,255,255,.18) 0 120px, transparent 121px),
+      linear-gradient(180deg, #6ea6ff 0%, #2558df 36%, #102a95 100%);
   }
 
   .gameCard--coinflip{
-    background:linear-gradient(135deg, #17203d 0%, #0f1831 50%, #09101f 100%);
+    background:
+      radial-gradient(circle at 26% 14%, rgba(255,255,255,.08) 0 110px, transparent 111px),
+      linear-gradient(180deg, #0f1b3d 0%, #09142f 42%, #060c1f 100%);
   }
 
   .gameCard--crash{
-    background:linear-gradient(135deg, #131a2a 0%, #231722 45%, #57141c 100%);
+    background:
+      radial-gradient(circle at 80% 16%, rgba(255,211,128,.34) 0 46px, transparent 47px),
+      radial-gradient(circle at 50% 42%, rgba(124,28,28,.22) 0 86px, transparent 87px),
+      linear-gradient(180deg, #121827 0%, #1d141b 42%, #4d0f18 100%);
   }
 
   .gameCard--mines{
-    background:linear-gradient(135deg, #efb4dd 0%, #c88ce9 50%, #8a67df 100%);
+    background:
+      radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
+      linear-gradient(180deg, #50e5d7 0%, #309ef1 46%, #2064e8 100%);
   }
 
   .gameCard--rps{
-    background:linear-gradient(135deg, #ffcb63 0%, #ff9158 50%, #ff5e7d 100%);
+    background:
+      radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
+      linear-gradient(180deg, #ffc158 0%, #ff8d57 48%, #ff6278 100%);
   }
 
   .gameCard--penalty{
-    background:linear-gradient(135deg, #7ee567 0%, #3ba540 48%, #2d6929 100%);
+    background:
+      radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
+      linear-gradient(180deg, #6cda56 0%, #338f36 48%, #245923 100%);
   }
 
+  /* новый фон для tower */
   .gameCard--tower{
-    background:linear-gradient(135deg, #8b96ab 0%, #5f687d 50%, #333a49 100%);
+    background:
+      radial-gradient(circle at 24% 12%, rgba(255,255,255,.09) 0 110px, transparent 111px),
+      linear-gradient(180deg, #6f7f98 0%, #4a556b 46%, #2b3140 100%);
   }
 
   .gameCard--wheel{
-    background:linear-gradient(135deg, #d86cff 0%, #9ddd5d 52%, #f0d45a 100%);
+    background:
+      radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
+      linear-gradient(180deg, #d85eff 0%, #8ee45e 52%, #f0d65a 100%);
   }
 
   .mBottomNav{
