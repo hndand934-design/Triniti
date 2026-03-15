@@ -1,89 +1,91 @@
 <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="iFrontA" x1="8" y1="10" x2="54" y2="70" gradientUnits="userSpaceOnUse">
+    <linearGradient id="miniFront1" x1="0" y1="0" x2="1" y2="1">
       <stop stop-color="#FCFEFF"/>
       <stop offset="1" stop-color="#CBD6E8"/>
     </linearGradient>
 
-    <linearGradient id="iTopA" x1="30" y1="0" x2="30" y2="28" gradientUnits="userSpaceOnUse">
+    <linearGradient id="miniTop1" x1="0.5" y1="0" x2="0.5" y2="1">
       <stop stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#E2E9F5"/>
+      <stop offset="1" stop-color="#E1E9F5"/>
     </linearGradient>
 
-    <linearGradient id="iSideA" x1="40" y1="22" x2="68" y2="68" gradientUnits="userSpaceOnUse">
+    <linearGradient id="miniSide1" x1="0" y1="0" x2="1" y2="1">
       <stop stop-color="#96A4BD"/>
-      <stop offset="1" stop-color="#56647D"/>
+      <stop offset="1" stop-color="#57647D"/>
     </linearGradient>
 
-    <linearGradient id="iFrontB" x1="6" y1="8" x2="44" y2="56" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FDFEFF"/>
-      <stop offset="1" stop-color="#D0D9EA"/>
+    <linearGradient id="miniFront2" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FCFEFF"/>
+      <stop offset="1" stop-color="#D1DBEB"/>
     </linearGradient>
 
-    <linearGradient id="iTopB" x1="25" y1="0" x2="25" y2="24" gradientUnits="userSpaceOnUse">
+    <linearGradient id="miniTop2" x1="0.5" y1="0" x2="0.5" y2="1">
       <stop stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#E3EAF6"/>
+      <stop offset="1" stop-color="#E4EBF6"/>
     </linearGradient>
 
-    <linearGradient id="iSideB" x1="33" y1="18" x2="54" y2="54" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#97A5BE"/>
-      <stop offset="1" stop-color="#596780"/>
+    <linearGradient id="miniSide2" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#9BA8BF"/>
+      <stop offset="1" stop-color="#5B6880"/>
     </linearGradient>
 
-    <radialGradient id="iShineA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
-      gradientTransform="translate(39 18) rotate(40) scale(20 9)">
-      <stop stop-color="white" stop-opacity="0.8"/>
+    <radialGradient id="miniSpec1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(37 17) rotate(35) scale(18 7)">
+      <stop stop-color="white" stop-opacity="0.78"/>
       <stop offset="1" stop-color="white" stop-opacity="0"/>
     </radialGradient>
 
-    <radialGradient id="iShineB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
-      gradientTransform="translate(30 15) rotate(38) scale(16 7)">
-      <stop stop-color="white" stop-opacity="0.68"/>
+    <radialGradient id="miniSpec2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(29 13) rotate(35) scale(13 5)">
+      <stop stop-color="white" stop-opacity="0.66"/>
       <stop offset="1" stop-color="white" stop-opacity="0"/>
     </radialGradient>
 
-    <filter id="iShadowA" x="8" y="24" width="72" height="72" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <filter id="miniShadowBig" x="8" y="22" width="76" height="78" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#07101F" flood-opacity="0.36"/>
     </filter>
 
-    <filter id="iShadowB" x="54" y="20" width="60" height="60" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <filter id="miniShadowBack" x="56" y="22" width="52" height="54" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="5" stdDeviation="4.5" flood-color="#07101F" flood-opacity="0.3"/>
     </filter>
   </defs>
 
-  <ellipse cx="53" cy="94" rx="28" ry="6" fill="#091224" fill-opacity="0.22"/>
+  <ellipse cx="52" cy="94" rx="28" ry="6" fill="#091224" fill-opacity="0.22"/>
 
-  <g transform="translate(58 30) rotate(9)" filter="url(#iShadowB)">
-    <polygon points="24,4 48,18 25,31 2,18" fill="url(#iTopB)"/>
-    <polygon points="2,18 25,31 25,60 2,47" fill="url(#iFrontB)"/>
-    <polygon points="25,31 48,18 48,47 25,60" fill="url(#iSideB)"/>
+  <!-- back -->
+  <g transform="translate(59 28) rotate(8)" filter="url(#miniShadowBack)">
+    <polygon points="24,4 46,17 25,29 3,17" fill="url(#miniTop2)"/>
+    <polygon points="3,17 25,29 25,57 3,44" fill="url(#miniFront2)"/>
+    <polygon points="25,29 46,17 46,45 25,57" fill="url(#miniSide2)"/>
 
-    <ellipse cx="30" cy="14" rx="12" ry="5" fill="url(#iShineB)"/>
+    <ellipse cx="30" cy="13" rx="10" ry="4" fill="url(#miniSpec2)"/>
 
-    <circle cx="25" cy="17" r="2.5" fill="#111827"/>
-    <circle cx="11" cy="31" r="2.7" fill="#111827"/>
-    <circle cx="18" cy="47" r="2.7" fill="#111827"/>
-    <circle cx="35" cy="38" r="2.7" fill="#111827"/>
-    <circle cx="41" cy="49" r="2.7" fill="#111827"/>
+    <circle cx="25" cy="16" r="2.3" fill="#111827"/>
+    <circle cx="11" cy="31" r="2.5" fill="#111827"/>
+    <circle cx="18" cy="47" r="2.5" fill="#111827"/>
+    <circle cx="35" cy="35" r="2.5" fill="#111827"/>
+    <circle cx="40" cy="46" r="2.5" fill="#111827"/>
   </g>
 
-  <g transform="translate(20 34) rotate(-11)" filter="url(#iShadowA)">
-    <polygon points="28,5 56,21 30,36 2,20" fill="url(#iTopA)"/>
-    <polygon points="2,20 30,36 30,72 2,56" fill="url(#iFrontA)"/>
-    <polygon points="30,36 56,21 56,58 30,72" fill="url(#iSideA)"/>
+  <!-- front -->
+  <g transform="translate(19 34) rotate(-11)" filter="url(#miniShadowBig)">
+    <polygon points="29,5 58,21 31,37 2,20" fill="url(#miniTop1)"/>
+    <polygon points="2,20 31,37 31,74 2,57" fill="url(#miniFront1)"/>
+    <polygon points="31,37 58,21 58,58 31,74" fill="url(#miniSide1)"/>
 
-    <ellipse cx="36" cy="17" rx="15" ry="6" fill="url(#iShineA)"/>
+    <ellipse cx="38" cy="17" rx="14" ry="5.5" fill="url(#miniSpec1)"/>
 
-    <circle cx="17" cy="15" r="2.9" fill="#111827"/>
-    <circle cx="29" cy="10" r="2.9" fill="#111827"/>
-    <circle cx="33" cy="22" r="2.9" fill="#111827"/>
-    <circle cx="45" cy="17" r="2.9" fill="#111827"/>
+    <circle cx="18" cy="17" r="2.9" fill="#111827"/>
+    <circle cx="30" cy="11" r="2.9" fill="#111827"/>
+    <circle cx="34" cy="24" r="2.9" fill="#111827"/>
+    <circle cx="46" cy="18" r="2.9" fill="#111827"/>
 
-    <circle cx="11" cy="38" r="3.1" fill="#111827"/>
-    <circle cx="21" cy="60" r="3.1" fill="#111827"/>
+    <circle cx="12" cy="39" r="3" fill="#111827"/>
+    <circle cx="22" cy="62" r="3" fill="#111827"/>
 
-    <circle cx="39" cy="41" r="3.1" fill="#111827"/>
-    <circle cx="46" cy="50" r="3.1" fill="#111827"/>
-    <circle cx="52" cy="59" r="3.1" fill="#111827"/>
+    <circle cx="41" cy="42" r="3" fill="#111827"/>
+    <circle cx="48" cy="51" r="3" fill="#111827"/>
+    <circle cx="54" cy="60" r="3" fill="#111827"/>
   </g>
 </svg>
