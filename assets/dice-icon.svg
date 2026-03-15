@@ -1,85 +1,107 @@
-<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="if1" x1="6" y1="8" x2="54" y2="72" gradientUnits="userSpaceOnUse">
+    <linearGradient id="f1" x1="20" y1="18" x2="150" y2="190" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#CED8E9"/>
+      <stop offset="1" stop-color="#CDD7E8"/>
     </linearGradient>
-    <linearGradient id="it1" x1="30" y1="0" x2="30" y2="28" gradientUnits="userSpaceOnUse">
+    <linearGradient id="t1" x1="84" y1="0" x2="84" y2="78" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#E8EEF8"/>
+      <stop offset="1" stop-color="#E7EEF8"/>
     </linearGradient>
-    <linearGradient id="is1" x1="40" y1="22" x2="68" y2="70" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#9CA8BF"/>
-      <stop offset="1" stop-color="#5C6981"/>
+    <linearGradient id="s1" x1="104" y1="64" x2="176" y2="190" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9DAAC0"/>
+      <stop offset="1" stop-color="#5B6880"/>
     </linearGradient>
 
-    <linearGradient id="if2" x1="4" y1="4" x2="38" y2="50" gradientUnits="userSpaceOnUse">
+    <linearGradient id="f2" x1="14" y1="14" x2="122" y2="158" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#D5DEEC"/>
+      <stop offset="1" stop-color="#D4DDEC"/>
     </linearGradient>
-    <linearGradient id="it2" x1="20" y1="0" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+    <linearGradient id="t2" x1="64" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FFFFFF"/>
-      <stop offset="1" stop-color="#E6EDF7"/>
+      <stop offset="1" stop-color="#E7EDF7"/>
     </linearGradient>
-    <linearGradient id="is2" x1="28" y1="16" x2="46" y2="48" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#A1ACC1"/>
+    <linearGradient id="s2" x1="84" y1="48" x2="144" y2="152" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A3AEC3"/>
       <stop offset="1" stop-color="#647086"/>
     </linearGradient>
 
-    <radialGradient id="ihl1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
-      gradientTransform="translate(38 16) rotate(32) scale(18 7)">
-      <stop stop-color="white" stop-opacity="0.86"/>
+    <radialGradient id="hl1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(116 48) rotate(32) scale(64 24)">
+      <stop stop-color="white" stop-opacity="0.88"/>
       <stop offset="1" stop-color="white" stop-opacity="0"/>
     </radialGradient>
 
-    <radialGradient id="ihl2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
-      gradientTransform="translate(28 12) rotate(30) scale(12 5)">
-      <stop stop-color="white" stop-opacity="0.78"/>
+    <radialGradient id="hl2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(84 38) rotate(30) scale(46 18)">
+      <stop stop-color="white" stop-opacity="0.8"/>
       <stop offset="1" stop-color="white" stop-opacity="0"/>
     </radialGradient>
 
-    <filter id="ids1" x="8" y="22" width="78" height="82" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#081121" flood-opacity="0.38"/>
+    <filter id="ds1" x="30" y="92" width="286" height="282" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="20" stdDeviation="18" flood-color="#081121" flood-opacity="0.4"/>
     </filter>
 
-    <filter id="ids2" x="58" y="24" width="48" height="50" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="5" stdDeviation="4.5" flood-color="#081121" flood-opacity="0.3"/>
+    <filter id="ds2" x="214" y="84" width="210" height="212" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#081121" flood-opacity="0.32"/>
+    </filter>
+
+    <filter id="ground" x="96" y="300" width="276" height="56" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="10"/>
     </filter>
   </defs>
 
-  <ellipse cx="52" cy="95" rx="28" ry="6" fill="#091224" fill-opacity="0.22"/>
+  <ellipse cx="234" cy="326" rx="118" ry="18" fill="#091224" fill-opacity="0.28" filter="url(#ground)"/>
 
-  <g transform="translate(60 30) rotate(9)" filter="url(#ids2)">
-    <polygon points="20,3 39,14 21,25 2,14" fill="url(#it2)"/>
-    <polygon points="2,14 21,25 21,49 2,38" fill="url(#if2)"/>
-    <polygon points="21,25 39,14 39,38 21,49" fill="url(#is2)"/>
+  <!-- back cube -->
+  <g transform="translate(244 118) rotate(9)" filter="url(#ds2)">
+    <polygon points="64,10 126,46 68,80 6,45" fill="url(#t2)"/>
+    <polygon points="6,45 68,80 68,158 6,123" fill="url(#f2)"/>
+    <polygon points="68,80 126,46 126,124 68,158" fill="url(#s2)"/>
 
-    <ellipse cx="27" cy="11" rx="8" ry="3.5" fill="url(#ihl2)"/>
+    <ellipse cx="82" cy="36" rx="24" ry="10" fill="url(#hl2)"/>
 
-    <circle cx="20" cy="14" r="2.2" fill="#111827"/>
-    <circle cx="8" cy="26" r="2.4" fill="#111827"/>
-    <circle cx="15" cy="42" r="2.4" fill="#111827"/>
-    <circle cx="30" cy="27" r="2.4" fill="#111827"/>
-    <circle cx="34" cy="37" r="2.4" fill="#111827"/>
+    <path d="M14 50L68 82" stroke="#AEBAD0" stroke-opacity="0.36" stroke-width="2"/>
+    <path d="M68 82L120 50" stroke="#7F8EA9" stroke-opacity="0.28" stroke-width="2"/>
+
+    <!-- top 1 -->
+    <circle cx="67" cy="43" r="6.4" fill="#111827"/>
+
+    <!-- front 4 -->
+    <circle cx="25" cy="82" r="6.8" fill="#111827"/>
+    <circle cx="47" cy="96" r="6.8" fill="#111827"/>
+    <circle cx="24" cy="128" r="6.8" fill="#111827"/>
+    <circle cx="47" cy="141" r="6.8" fill="#111827"/>
+
+    <!-- side 2 -->
+    <circle cx="96" cy="96" r="6.8" fill="#111827"/>
+    <circle cx="110" cy="128" r="6.8" fill="#111827"/>
   </g>
 
-  <g transform="translate(19 35) rotate(-11)" filter="url(#ids1)">
-    <polygon points="29,5 58,22 31,38 2,21" fill="url(#it1)"/>
-    <polygon points="2,21 31,38 31,75 2,58" fill="url(#if1)"/>
-    <polygon points="31,38 58,22 58,59 31,75" fill="url(#is1)"/>
+  <!-- front cube -->
+  <g transform="translate(86 138) rotate(-12)" filter="url(#ds1)">
+    <polygon points="84,14 166,61 90,106 8,59" fill="url(#t1)"/>
+    <polygon points="8,59 90,106 90,214 8,167" fill="url(#f1)"/>
+    <polygon points="90,106 166,61 166,168 90,214" fill="url(#s1)"/>
 
-    <ellipse cx="38" cy="16" rx="14" ry="5.5" fill="url(#ihl1)"/>
+    <ellipse cx="110" cy="46" rx="36" ry="14" fill="url(#hl1)"/>
 
-    <circle cx="18" cy="17" r="2.9" fill="#111827"/>
-    <circle cx="30" cy="11" r="2.9" fill="#111827"/>
-    <circle cx="34" cy="23" r="2.9" fill="#111827"/>
-    <circle cx="46" cy="18" r="2.9" fill="#111827"/>
+    <path d="M16 64L90 108" stroke="#B2BED2" stroke-opacity="0.36" stroke-width="2.2"/>
+    <path d="M90 108L159 67" stroke="#8190AA" stroke-opacity="0.28" stroke-width="2.2"/>
 
-    <circle cx="12" cy="39" r="3" fill="#111827"/>
-    <circle cx="22" cy="63" r="3" fill="#111827"/>
+    <!-- top 4 -->
+    <circle cx="48" cy="45" r="7.5" fill="#111827"/>
+    <circle cx="80" cy="29" r="7.5" fill="#111827"/>
+    <circle cx="88" cy="61" r="7.5" fill="#111827"/>
+    <circle cx="120" cy="46" r="7.5" fill="#111827"/>
 
-    <circle cx="41" cy="42" r="3" fill="#111827"/>
-    <circle cx="48" cy="51" r="3" fill="#111827"/>
-    <circle cx="54" cy="60" r="3" fill="#111827"/>
+    <!-- front 2 -->
+    <circle cx="32" cy="111" r="8.1" fill="#111827"/>
+    <circle cx="62" cy="185" r="8.1" fill="#111827"/>
+
+    <!-- side 3 -->
+    <circle cx="118" cy="121" r="8.1" fill="#111827"/>
+    <circle cx="136" cy="145" r="8.1" fill="#111827"/>
+    <circle cx="152" cy="171" r="8.1" fill="#111827"/>
   </g>
 </svg>
