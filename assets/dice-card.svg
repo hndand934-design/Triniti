@@ -1,148 +1,107 @@
-<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bgMain" x1="64" y1="36" x2="430" y2="612" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#2F7FFF"/>
-      <stop offset="0.45" stop-color="#1742A1"/>
-      <stop offset="1" stop-color="#0B173C"/>
-    </linearGradient>
-
-    <radialGradient id="glowTop" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
-      gradientTransform="translate(344 118) rotate(141) scale(250 166)">
-      <stop stop-color="#9FD4FF" stop-opacity="0.72"/>
-      <stop offset="1" stop-color="#9FD4FF" stop-opacity="0"/>
-    </radialGradient>
-
-    <radialGradient id="glowBottom" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
-      gradientTransform="translate(180 470) rotate(-18) scale(240 140)">
-      <stop stop-color="#5E9CFF" stop-opacity="0.28"/>
-      <stop offset="1" stop-color="#5E9CFF" stop-opacity="0"/>
-    </radialGradient>
-
-    <linearGradient id="glassStroke" x1="64" y1="28" x2="448" y2="612" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#8FC5FF" stop-opacity="0.68"/>
-      <stop offset="1" stop-color="#A98CFF" stop-opacity="0.16"/>
-    </linearGradient>
-
-    <linearGradient id="cubeFront" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="f1" x1="20" y1="18" x2="150" y2="190" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FFFFFF"/>
-      <stop offset="0.38" stop-color="#E8EEF9"/>
-      <stop offset="0.78" stop-color="#AEB9CD"/>
-      <stop offset="1" stop-color="#6F7C95"/>
+      <stop offset="1" stop-color="#CDD7E8"/>
     </linearGradient>
-
-    <linearGradient id="cubeTop" x1="0.5" y1="0" x2="0.5" y2="1">
+    <linearGradient id="t1" x1="84" y1="0" x2="84" y2="78" gradientUnits="userSpaceOnUse">
       <stop stop-color="#FFFFFF"/>
-      <stop offset="0.58" stop-color="#EEF3FB"/>
-      <stop offset="1" stop-color="#C9D4E6"/>
+      <stop offset="1" stop-color="#E7EEF8"/>
+    </linearGradient>
+    <linearGradient id="s1" x1="104" y1="64" x2="176" y2="190" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9DAAC0"/>
+      <stop offset="1" stop-color="#5B6880"/>
     </linearGradient>
 
-    <linearGradient id="cubeSide" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#3C465C"/>
-      <stop offset="0.4" stop-color="#21293C"/>
-      <stop offset="1" stop-color="#0B1120"/>
+    <linearGradient id="f2" x1="14" y1="14" x2="122" y2="158" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D4DDEC"/>
+    </linearGradient>
+    <linearGradient id="t2" x1="64" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E7EDF7"/>
+    </linearGradient>
+    <linearGradient id="s2" x1="84" y1="48" x2="144" y2="152" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A3AEC3"/>
+      <stop offset="1" stop-color="#647086"/>
     </linearGradient>
 
-    <radialGradient id="frontGloss" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
-      gradientTransform="translate(54 28) rotate(44) scale(86 60)">
-      <stop stop-color="#FFFFFF" stop-opacity="0.88"/>
-      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    <radialGradient id="hl1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(116 48) rotate(32) scale(64 24)">
+      <stop stop-color="white" stop-opacity="0.88"/>
+      <stop offset="1" stop-color="white" stop-opacity="0"/>
     </radialGradient>
 
-    <linearGradient id="shadowGrad" x1="0.5" y1="0" x2="0.5" y2="1">
-      <stop stop-color="#0B1020" stop-opacity="0.44"/>
-      <stop offset="1" stop-color="#0B1020" stop-opacity="0"/>
-    </linearGradient>
+    <radialGradient id="hl2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(84 38) rotate(30) scale(46 18)">
+      <stop stop-color="white" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
 
-    <filter id="softShadow" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#081021" flood-opacity="0.46"/>
+    <filter id="ds1" x="30" y="92" width="286" height="282" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="20" stdDeviation="18" flood-color="#081121" flood-opacity="0.4"/>
     </filter>
 
-    <filter id="cardShadow" x="-10%" y="-10%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#040915" flood-opacity="0.45"/>
+    <filter id="ds2" x="214" y="84" width="210" height="212" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#081121" flood-opacity="0.32"/>
+    </filter>
+
+    <filter id="ground" x="96" y="300" width="276" height="56" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="10"/>
     </filter>
   </defs>
 
-  <rect x="16" y="16" width="480" height="608" rx="42" fill="url(#bgMain)" filter="url(#cardShadow)"/>
-  <rect x="16.75" y="16.75" width="478.5" height="606.5" rx="41.25" stroke="url(#glassStroke)" stroke-width="1.5"/>
-
-  <ellipse cx="336" cy="110" rx="208" ry="128" fill="url(#glowTop)"/>
-  <ellipse cx="168" cy="490" rx="190" ry="112" fill="url(#glowBottom)"/>
-
-  <path d="M34 176C114 118 182 116 278 136C364 154 425 124 484 70V160C438 208 366 234 274 224C182 214 120 214 34 256V176Z"
-        fill="white" fill-opacity="0.08"/>
-  <path d="M30 248C124 208 204 214 296 242C366 264 422 256 480 216V286C414 322 350 326 272 302C182 274 116 276 30 326V248Z"
-        fill="white" fill-opacity="0.05"/>
+  <ellipse cx="234" cy="326" rx="118" ry="18" fill="#091224" fill-opacity="0.28" filter="url(#ground)"/>
 
   <!-- back cube -->
-  <g filter="url(#softShadow)">
-    <animateTransform attributeName="transform" type="translate" values="276 146; 276 138; 276 146" dur="4.3s" repeatCount="indefinite"/>
-    <g transform="rotate(9 72 90)">
-      <polygon points="70,18 146,60 78,100 2,58" fill="url(#cubeTop)"/>
-      <polygon points="2,58 78,100 78,186 2,144" fill="url(#cubeFront)"/>
-      <polygon points="78,100 146,60 146,146 78,186" fill="url(#cubeSide)"/>
+  <g transform="translate(244 118) rotate(9)" filter="url(#ds2)">
+    <polygon points="64,10 126,46 68,80 6,45" fill="url(#t2)"/>
+    <polygon points="6,45 68,80 68,158 6,123" fill="url(#f2)"/>
+    <polygon points="68,80 126,46 126,124 68,158" fill="url(#s2)"/>
 
-      <ellipse cx="52" cy="36" rx="44" ry="16" fill="url(#frontGloss)" opacity="0.78"/>
+    <ellipse cx="82" cy="36" rx="24" ry="10" fill="url(#hl2)"/>
 
-      <!-- top 1 -->
-      <circle cx="74" cy="58" r="7" fill="#121927"/>
+    <path d="M14 50L68 82" stroke="#AEBAD0" stroke-opacity="0.36" stroke-width="2"/>
+    <path d="M68 82L120 50" stroke="#7F8EA9" stroke-opacity="0.28" stroke-width="2"/>
 
-      <!-- front 2 -->
-      <circle cx="28" cy="92" r="7.2" fill="#121927"/>
-      <circle cx="46" cy="150" r="7.2" fill="#121927"/>
+    <!-- top 1 -->
+    <circle cx="67" cy="43" r="6.4" fill="#111827"/>
 
-      <!-- side 4 -->
-      <circle cx="98" cy="112" r="7.2" fill="#0E1421"/>
-      <circle cx="120" cy="98" r="7.2" fill="#0E1421"/>
-      <circle cx="102" cy="154" r="7.2" fill="#0E1421"/>
-      <circle cx="124" cy="140" r="7.2" fill="#0E1421"/>
-    </g>
+    <!-- front 4 -->
+    <circle cx="25" cy="82" r="6.8" fill="#111827"/>
+    <circle cx="47" cy="96" r="6.8" fill="#111827"/>
+    <circle cx="24" cy="128" r="6.8" fill="#111827"/>
+    <circle cx="47" cy="141" r="6.8" fill="#111827"/>
+
+    <!-- side 2 -->
+    <circle cx="96" cy="96" r="6.8" fill="#111827"/>
+    <circle cx="110" cy="128" r="6.8" fill="#111827"/>
   </g>
 
   <!-- front cube -->
-  <g filter="url(#softShadow)">
-    <animateTransform attributeName="transform" type="translate" values="110 182; 110 172; 110 182" dur="4.8s" repeatCount="indefinite"/>
-    <g transform="rotate(-12 94 132)">
-      <polygon points="90,18 206,82 102,144 -14,80" fill="url(#cubeTop)"/>
-      <polygon points="-14,80 102,144 102,298 -14,234" fill="url(#cubeFront)"/>
-      <polygon points="102,144 206,82 206,236 102,298" fill="url(#cubeSide)"/>
+  <g transform="translate(86 138) rotate(-12)" filter="url(#ds1)">
+    <polygon points="84,14 166,61 90,106 8,59" fill="url(#t1)"/>
+    <polygon points="8,59 90,106 90,214 8,167" fill="url(#f1)"/>
+    <polygon points="90,106 166,61 166,168 90,214" fill="url(#s1)"/>
 
-      <ellipse cx="62" cy="36" rx="66" ry="20" fill="url(#frontGloss)" opacity="0.84"/>
+    <ellipse cx="110" cy="46" rx="36" ry="14" fill="url(#hl1)"/>
 
-      <!-- top 6 -->
-      <circle cx="20" cy="96" r="8.8" fill="#121927"/>
-      <circle cx="66" cy="70" r="8.8" fill="#121927"/>
-      <circle cx="116" cy="44" r="8.8" fill="#121927"/>
-      <circle cx="68" cy="124" r="8.8" fill="#121927"/>
-      <circle cx="118" cy="96" r="8.8" fill="#121927"/>
-      <circle cx="162" cy="72" r="8.8" fill="#121927"/>
+    <path d="M16 64L90 108" stroke="#B2BED2" stroke-opacity="0.36" stroke-width="2.2"/>
+    <path d="M90 108L159 67" stroke="#8190AA" stroke-opacity="0.28" stroke-width="2.2"/>
 
-      <!-- front 2 -->
-      <circle cx="24" cy="154" r="9.4" fill="#111826"/>
-      <circle cx="66" cy="266" r="9.4" fill="#111826"/>
+    <!-- top 4 -->
+    <circle cx="48" cy="45" r="7.5" fill="#111827"/>
+    <circle cx="80" cy="29" r="7.5" fill="#111827"/>
+    <circle cx="88" cy="61" r="7.5" fill="#111827"/>
+    <circle cx="120" cy="46" r="7.5" fill="#111827"/>
 
-      <!-- side 4 -->
-      <circle cx="132" cy="176" r="9" fill="#0E1421"/>
-      <circle cx="172" cy="154" r="9" fill="#0E1421"/>
-      <circle cx="138" cy="248" r="9" fill="#0E1421"/>
-      <circle cx="178" cy="224" r="9" fill="#0E1421"/>
-    </g>
-  </g>
+    <!-- front 2 -->
+    <circle cx="32" cy="111" r="8.1" fill="#111827"/>
+    <circle cx="62" cy="185" r="8.1" fill="#111827"/>
 
-  <ellipse cx="244" cy="402" rx="162" ry="32" fill="url(#shadowGrad)" opacity="0.72"/>
-
-  <g opacity="0.98">
-    <text x="256" y="506" text-anchor="middle"
-      font-family="Arial, Helvetica, sans-serif"
-      font-size="68"
-      font-weight="900"
-      fill="#F6F8FF">DICE</text>
-
-    <text x="256" y="556" text-anchor="middle"
-      font-family="Arial, Helvetica, sans-serif"
-      font-size="20"
-      font-weight="700"
-      letter-spacing="4"
-      fill="#D7E4FF"
-      fill-opacity="0.84">TRINITI MODE</text>
+    <!-- side 3 -->
+    <circle cx="118" cy="121" r="8.1" fill="#111827"/>
+    <circle cx="136" cy="145" r="8.1" fill="#111827"/>
+    <circle cx="152" cy="171" r="8.1" fill="#111827"/>
   </g>
 </svg>
