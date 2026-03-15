@@ -1,0 +1,187 @@
+<svg width="512" height="640" viewBox="0 0 512 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clipCard">
+      <rect x="12" y="12" width="488" height="616" rx="36"/>
+    </clipPath>
+
+    <linearGradient id="bgMain" x1="40" y1="34" x2="474" y2="612" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3C8FFF"/>
+      <stop offset="0.42" stop-color="#1D57D2"/>
+      <stop offset="1" stop-color="#0B1C63"/>
+    </linearGradient>
+
+    <linearGradient id="glassStroke" x1="30" y1="18" x2="484" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9BCAFF" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#C6D7FF" stop-opacity="0.18"/>
+    </linearGradient>
+
+    <radialGradient id="glowTop" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(208 116) rotate(28) scale(220 110)">
+      <stop stop-color="#DFF1FF" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#DFF1FF" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glowMid" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(334 196) rotate(90) scale(166 126)">
+      <stop stop-color="#7ACBFF" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#7ACBFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="cubeFrontBig" x1="8" y1="18" x2="114" y2="170" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D5DDEC"/>
+    </linearGradient>
+
+    <linearGradient id="cubeTopBig" x1="72" y1="0" x2="72" y2="78" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E9EFF8"/>
+    </linearGradient>
+
+    <linearGradient id="cubeSideBig" x1="84" y1="58" x2="152" y2="178" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8E9BB0"/>
+      <stop offset="1" stop-color="#4B5972"/>
+    </linearGradient>
+
+    <linearGradient id="cubeFrontSmall" x1="4" y1="10" x2="76" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D9E1EE"/>
+    </linearGradient>
+
+    <linearGradient id="cubeTopSmall" x1="44" y1="0" x2="44" y2="54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EAF0F8"/>
+    </linearGradient>
+
+    <linearGradient id="cubeSideSmall" x1="50" y1="34" x2="94" y2="108" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#97A4B9"/>
+      <stop offset="1" stop-color="#55637B"/>
+    </linearGradient>
+
+    <radialGradient id="shineBig" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(88 34) rotate(28) scale(52 18)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="shineSmall" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+      gradientTransform="translate(48 22) rotate(28) scale(30 10)">
+      <stop stop-color="#FFFFFF" stop-opacity="0.82"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="textFill" x1="256" y1="470" x2="256" y2="602" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EDF4FF"/>
+    </linearGradient>
+
+    <filter id="cardShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#050A17" flood-opacity="0.42"/>
+    </filter>
+
+    <filter id="cubeShadowBig" x="56" y="106" width="264" height="254" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="26" stdDeviation="16" flood-color="#08111F" flood-opacity="0.42"/>
+    </filter>
+
+    <filter id="cubeShadowSmall" x="234" y="112" width="178" height="178" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="14" flood-color="#08111F" flood-opacity="0.30"/>
+    </filter>
+
+    <filter id="groundBlur" x="96" y="308" width="292" height="70" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+
+    <filter id="textShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="4" flood-color="#071120" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#cardShadow)">
+    <rect x="12" y="12" width="488" height="616" rx="36" fill="url(#bgMain)"/>
+    <rect x="12.75" y="12.75" width="486.5" height="614.5" rx="35.25" stroke="url(#glassStroke)" stroke-width="1.5"/>
+  </g>
+
+  <g clip-path="url(#clipCard)">
+    <ellipse cx="208" cy="116" rx="220" ry="110" fill="url(#glowTop)"/>
+    <ellipse cx="334" cy="196" rx="166" ry="126" fill="url(#glowMid)"/>
+
+    <path d="M22 170C110 118 182 116 270 136C354 155 419 128 490 76V160C424 208 354 222 270 210C182 198 108 208 22 252V170Z"
+      fill="white" fill-opacity="0.085"/>
+    <path d="M18 246C108 210 194 214 286 242C364 266 426 262 492 218V288C422 326 354 332 274 308C182 280 104 286 18 332V246Z"
+      fill="white" fill-opacity="0.06"/>
+
+    <ellipse cx="244" cy="342" rx="134" ry="18" fill="#091224" fill-opacity="0.24" filter="url(#groundBlur)"/>
+
+    <!-- back cube -->
+    <g transform="translate(258 138) rotate(9)" filter="url(#cubeShadowSmall)">
+      <polygon points="44,6 86,30 46,54 4,30" fill="url(#cubeTopSmall)"/>
+      <polygon points="4,30 46,54 46,110 4,86" fill="url(#cubeFrontSmall)"/>
+      <polygon points="46,54 86,30 86,86 46,110" fill="url(#cubeSideSmall)"/>
+
+      <ellipse cx="58" cy="24" rx="18" ry="6" fill="url(#shineSmall)"/>
+
+      <!-- top 1 -->
+      <circle cx="44" cy="29" r="4.6" fill="#111827"/>
+
+      <!-- front 2 -->
+      <circle cx="17" cy="60" r="5.2" fill="#111827"/>
+      <circle cx="30" cy="95" r="5.2" fill="#111827"/>
+
+      <!-- side 4 -->
+      <circle cx="59" cy="60" r="5.2" fill="#111827"/>
+      <circle cx="72" cy="66" r="5.2" fill="#111827"/>
+      <circle cx="58" cy="89" r="5.2" fill="#111827"/>
+      <circle cx="72" cy="96" r="5.2" fill="#111827"/>
+    </g>
+
+    <!-- front cube -->
+    <g transform="translate(92 156) rotate(-12)" filter="url(#cubeShadowBig)">
+      <polygon points="58,8 116,42 62,74 4,40" fill="url(#cubeTopBig)"/>
+      <polygon points="4,40 62,74 62,150 4,116" fill="url(#cubeFrontBig)"/>
+      <polygon points="62,74 116,42 116,118 62,150" fill="url(#cubeSideBig)"/>
+
+      <ellipse cx="78" cy="28" rx="28" ry="10" fill="url(#shineBig)"/>
+
+      <!-- top 4 -->
+      <circle cx="31" cy="30" r="5.8" fill="#111827"/>
+      <circle cx="54" cy="18" r="5.8" fill="#111827"/>
+      <circle cx="60" cy="40" r="5.8" fill="#111827"/>
+      <circle cx="84" cy="28" r="5.8" fill="#111827"/>
+
+      <!-- front 1 -->
+      <circle cx="31" cy="98" r="6.3" fill="#111827"/>
+
+      <!-- side 4 -->
+      <circle cx="78" cy="86" r="6.3" fill="#111827"/>
+      <circle cx="97" cy="94" r="6.3" fill="#111827"/>
+      <circle cx="77" cy="126" r="6.3" fill="#111827"/>
+      <circle cx="96" cy="134" r="6.3" fill="#111827"/>
+    </g>
+
+    <g filter="url(#textShadow)">
+      <text x="256" y="516"
+        text-anchor="middle"
+        fill="url(#textFill)"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="68"
+        font-weight="900"
+        letter-spacing="1">DICE</text>
+    </g>
+
+    <g opacity="0.98">
+      <path d="M160 560H352L372 580L352 600H160L140 580L160 560Z"
+        fill="none"
+        stroke="#EEF3FF"
+        stroke-opacity="0.82"
+        stroke-width="2.2"/>
+      <text x="256" y="587"
+        text-anchor="middle"
+        fill="#F7FBFF"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="22"
+        font-weight="700"
+        letter-spacing="2.2">TRINITI MODE</text>
+    </g>
+  </g>
+
+  <rect x="16" y="16" width="480" height="608" rx="32" stroke="#1A2748" stroke-width="3"/>
+</svg>
