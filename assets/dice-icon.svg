@@ -50,17 +50,14 @@
 
     <ellipse cx="58" cy="50" rx="18" ry="7" fill="url(#shine)"/>
 
-    <!-- top pips -->
     <circle cx="40" cy="47" r="2.9" fill="#111827"/>
     <circle cx="51" cy="40" r="2.9" fill="#111827"/>
     <circle cx="60" cy="52" r="2.9" fill="#111827"/>
     <circle cx="70" cy="45" r="2.9" fill="#111827"/>
 
-    <!-- front pips -->
     <circle cx="36" cy="64" r="3.2" fill="#111827"/>
     <circle cx="44" cy="87" r="3.2" fill="#111827"/>
 
-    <!-- side pips -->
     <circle cx="63" cy="76" r="3.2" fill="#111827"/>
     <circle cx="68" cy="82" r="3.2" fill="#111827"/>
     <circle cx="73" cy="88" r="3.2" fill="#111827"/>
