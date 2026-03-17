@@ -50,10 +50,6 @@
     <filter id="cubeShadow" x="82" y="120" width="296" height="320" filterUnits="userSpaceOnUse">
       <feDropShadow dx="0" dy="24" stdDeviation="16" flood-color="#081325" flood-opacity="0.38"/>
     </filter>
-
-    <filter id="textShadow" x="0" y="0" width="512" height="640" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#091121" flood-opacity="0.28"/>
-    </filter>
   </defs>
 
   <g filter="url(#cardShadow)">
@@ -70,44 +66,27 @@
         fill="url(#wave2)"/>
 
   <g filter="url(#cubeShadow)">
-    <!-- top -->
     <polygon points="208,156 300,210 212,260 122,208" fill="url(#cubeTop)"/>
-    <!-- front -->
     <polygon points="122,208 212,260 212,386 122,332" fill="url(#cubeFront)"/>
-    <!-- side -->
     <polygon points="212,260 300,210 300,336 212,386" fill="url(#cubeSide)"/>
 
-    <!-- shine -->
     <ellipse cx="222" cy="206" rx="62" ry="24" fill="url(#cubeShine)"/>
 
-    <!-- edges -->
     <path d="M122 208L212 260L300 210" stroke="rgba(124,141,170,.28)" stroke-width="2.2"/>
     <path d="M212 260V386" stroke="rgba(82,93,116,.22)" stroke-width="2"/>
 
-    <!-- top pips 4 -->
     <circle cx="166" cy="202" r="8.2" fill="#111827"/>
     <circle cx="202" cy="182" r="8.2" fill="#111827"/>
     <circle cx="232" cy="220" r="8.2" fill="#111827"/>
     <circle cx="266" cy="198" r="8.2" fill="#111827"/>
 
-    <!-- front pips 2 -->
     <circle cx="154" cy="250" r="9" fill="#111827"/>
     <circle cx="182" cy="332" r="9" fill="#111827"/>
 
-    <!-- side pips 3 -->
     <circle cx="242" cy="284" r="9" fill="#111827"/>
     <circle cx="258" cy="304" r="9" fill="#111827"/>
     <circle cx="274" cy="324" r="9" fill="#111827"/>
   </g>
 
   <ellipse cx="218" cy="412" rx="114" ry="22" fill="#091224" fill-opacity="0.22"/>
-
-  <g filter="url(#textShadow)">
-    <text x="256" y="520"
-          text-anchor="middle"
-          font-family="Arial, Helvetica, sans-serif"
-          font-size="72"
-          font-weight="900"
-          fill="#F8FBFF">DICE</text>
-  </g>
 </svg>
