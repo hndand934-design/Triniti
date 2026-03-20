@@ -1,1 +1,753 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+        content="width=device-width,
+                 initial-scale=1,
+                 maximum-scale=1,
+                 minimum-scale=1,
+                 viewport-fit=cover">
+  <title>Triniti</title>
 
+  <link rel="stylesheet" href="./shared/theme.css">
+  <script src="./shared/wallet.js"></script>
+  <link rel="stylesheet" href="./triniti.css" />
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="sparkles" aria-hidden="true"></div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar__left">
+        <div class="brandRow">
+          <div class="brandLogo" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="trinitiGoldDesktop" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f8e8b2"/>
+                  <stop offset="48%" stop-color="#e0c26f"/>
+                  <stop offset="100%" stop-color="#b78f46"/>
+                </linearGradient>
+              </defs>
+              <rect x="10" y="10" width="44" height="44" rx="14"
+                    fill="rgba(255,255,255,.04)"
+                    stroke="url(#trinitiGoldDesktop)"
+                    stroke-width="2.2"/>
+              <path d="M21 20H43L39.5 25H34V41L32 45L30 41V25H24.5L21 20Z"
+                    fill="url(#trinitiGoldDesktop)"/>
+            </svg>
+          </div>
+          <div class="brandText">
+            <div class="title">Triniti</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topbar__center">
+        <button class="navPill active" type="button" data-jump="#games">Игры</button>
+        <button class="navPill" type="button" data-open="promo">Промокоды</button>
+        <button class="navPill" type="button" data-open="support">Поддержка</button>
+        <button class="navPill navPill--free" type="button" data-open="free">Халява</button>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+          <span id="soundDot" class="dot"></span>
+          <span id="soundText">Звук on</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="home">
+      <section class="mHeader" aria-label="Triniti mobile">
+        <div class="mBrandTop">
+          <div class="mBrandRow">
+            <div class="mBrandLogo" aria-hidden="true">
+              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="trinitiGoldMobile" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#f8e8b2"/>
+                    <stop offset="48%" stop-color="#e0c26f"/>
+                    <stop offset="100%" stop-color="#b78f46"/>
+                  </linearGradient>
+                </defs>
+                <rect x="10" y="10" width="44" height="44" rx="14"
+                      fill="rgba(255,255,255,.04)"
+                      stroke="url(#trinitiGoldMobile)"
+                      stroke-width="2.2"/>
+                <path d="M21 20H43L39.5 25H34V41L32 45L30 41V25H24.5L21 20Z"
+                      fill="url(#trinitiGoldMobile)"/>
+              </svg>
+            </div>
+            <div class="mTitle">Triniti</div>
+          </div>
+
+          <button id="soundBtnMobile" class="mSound" type="button" aria-label="Звук">
+            <span class="dot"></span>
+            <span>Звук on</span>
+          </button>
+        </div>
+
+        <div class="mTabs" role="tablist" aria-label="Разделы">
+          <button class="mTab active" type="button" data-jump="#games">Игры</button>
+          <button class="mTab" type="button" data-open="promo">Промокоды</button>
+          <button class="mTab" type="button" data-open="support">Поддержка</button>
+          <button class="mTab mTab--free" type="button" data-open="free">Халява</button>
+        </div>
+
+        <div class="mWallet">
+          <div class="mBal">
+            <div class="mBal__name">GG</div>
+            <div class="mBal__val">🪙 <b id="balance2">1000</b></div>
+          </div>
+          <div class="mActions">
+            <button id="depositBtnMobile" class="mBtn" type="button">Пополнить</button>
+            <button id="withdrawBtnMobile" class="mBtn mBtn--ghost" type="button">Вывести</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="rail" aria-label="Быстрые режимы">
+        <div class="railCard">
+          <div class="railBal">
+            <div class="railBal__title">Баланс</div>
+            <div class="railBal__val">🪙 <b id="balanceRail">1000</b></div>
+          </div>
+
+          <nav class="railNav">
+            <a class="railBtn railBtn--dice" href="./dice/" title="Dice" aria-label="Dice">
+              <span class="navIcon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <g transform="translate(7 12) rotate(-18 18 20)">
+                    <polygon points="18,3 34,12 19,21 3,12" fill="#ffffff"/>
+                    <polygon points="3,12 19,21 19,40 3,31" fill="#e8eef8"/>
+                    <polygon points="19,21 34,12 34,31 19,40" fill="#8392ab"/>
+                    <circle cx="11" cy="22" r="2.4" fill="#111827"/>
+                    <circle cx="11" cy="31" r="2.4" fill="#111827"/>
+                    <circle cx="25" cy="24" r="2.4" fill="#111827"/>
+                    <circle cx="29" cy="30" r="2.4" fill="#111827"/>
+                  </g>
+                  <g transform="translate(27 8) rotate(16 14 16)">
+                    <polygon points="14,2 26,9 15,16 3,9" fill="#ffffff"/>
+                    <polygon points="3,9 15,16 15,31 3,24" fill="#eef3fb"/>
+                    <polygon points="15,16 26,9 26,24 15,31" fill="#9aa8bf"/>
+                    <circle cx="9" cy="16" r="2.2" fill="#111827"/>
+                    <circle cx="20" cy="19" r="2.2" fill="#111827"/>
+                  </g>
+                </svg>
+              </span>
+            </a>
+
+            <a class="railBtn railBtn--coinflip" href="./coinflip/" title="Coin Flip" aria-label="Coin Flip">
+              <span class="navIcon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <ellipse cx="32" cy="36" rx="15" ry="17" fill="url(#coinEdgeMini)"/>
+                  <ellipse cx="32" cy="31" rx="16" ry="16" fill="#10151e"/>
+                  <path d="M16 31C16 22.2 23.2 15 32 15V47C23.2 47 16 39.8 16 31Z" fill="#f7c41f"/>
+                  <path d="M32 15C40.8 15 48 22.2 48 31C48 39.8 40.8 47 32 47V15Z" fill="#c6d2e4"/>
+                  <rect x="30.3" y="17" width="3.4" height="28" rx="1.7" fill="#f4ebd0"/>
+                </svg>
+              </span>
+            </a>
+
+            <a class="railBtn railBtn--crash" href="./crash/" title="Crash" aria-label="Crash">
+              <span class="navIcon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <g transform="translate(8 8)">
+                    <path d="M18 35L30 22L36 25L29 35L34 39L19 41L13 28L18 31Z" fill="#f3f6ff"/>
+                    <path d="M11 42C16 38 19 37 24 37C22 41 20 44 16 47C13 49 8 49 5 47C7 45 9 44 11 42Z" fill="#ffb34d"/>
+                    <path d="M18 40C23 36 28 35 33 36C30 41 27 44 22 47C18 49 13 48 10 46C13 44 15 42 18 40Z" fill="#ff694f"/>
+                  </g>
+                </svg>
+              </span>
+            </a>
+
+            <a class="railBtn railBtn--mines" href="./mines/" title="Mines" aria-label="Mines">
+              <span class="navIcon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <rect x="16" y="16" width="32" height="32" rx="7" fill="#1f2f48"/>
+                  <circle cx="32" cy="32" r="10" fill="#121923"/>
+                  <g stroke="#d9eef8" stroke-width="2.2" stroke-linecap="round">
+                    <path d="M32 14V20"/>
+                    <path d="M32 44V50"/>
+                    <path d="M14 32H20"/>
+                    <path d="M44 32H50"/>
+                    <path d="M20 20L24 24"/>
+                    <path d="M40 40L44 44"/>
+                    <path d="M20 44L24 40"/>
+                    <path d="M40 24L44 20"/>
+                  </g>
+                </svg>
+              </span>
+            </a>
+
+            <a class="railBtn railBtn--rps" href="./rps/" title="Камень Ножницы Бумага" aria-label="Камень Ножницы Бумага">
+              <span class="navIcon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M17 40C17 33 21 28 26 28C31 28 34 31 34 37V43H20C18 43 17 42 17 40Z" fill="#f4c85a"/>
+                  <path d="M34 41L42 28C44 25 47 24 49 26C51 28 51 31 49 34L42 45H34V41Z" fill="#ecedf6"/>
+                  <path d="M26 43H44C46 43 48 45 48 47C48 49 46 51 43 51H28C24 51 21 49 20 45L26 43Z" fill="#ff7a7a"/>
+                </svg>
+              </span>
+            </a>
+
+            <a class="railBtn railBtn--penalty" href="./penalty/" title="Penalty" aria-label="Penalty">
+              <span class="navIcon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <rect x="16" y="16" width="32" height="20" rx="4" fill="none" stroke="#eef3ff" stroke-width="2.5"/>
+                  <path d="M20 36L24 48M32 36V48M44 36L40 48" stroke="#eef3ff" stroke-width="2.5" stroke-linecap="round"/>
+                  <circle cx="32" cy="44" r="6" fill="#ffffff"/>
+                  <path d="M32 38L35 41L34 46H30L29 41L32 38Z" fill="#111827"/>
+                </svg>
+              </span>
+            </a>
+
+            <a class="railBtn railBtn--tower" href="./tower/" title="Tower" aria-label="Tower">
+              <span class="navIcon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M22 50V28L32 18L42 28V50H22Z" fill="#eef3ff"/>
+                  <path d="M22 28L32 34L42 28" fill="none" stroke="#9da8ba" stroke-width="2"/>
+                  <rect x="28" y="38" width="8" height="12" rx="2" fill="#5f6b7b"/>
+                  <path d="M22 28L32 18L42 28" fill="#c7d1df"/>
+                </svg>
+              </span>
+            </a>
+
+            <a class="railBtn railBtn--wheel" href="./wheel/" title="Wheel" aria-label="Wheel">
+              <span class="navIcon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <circle cx="32" cy="34" r="16" fill="#1a2231"/>
+                  <path d="M32 18A16 16 0 0 1 46 26L32 34Z" fill="#ff6d7b"/>
+                  <path d="M46 26A16 16 0 0 1 45 42L32 34Z" fill="#67d36f"/>
+                  <path d="M45 42A16 16 0 0 1 28 49L32 34Z" fill="#f2cd5b"/>
+                  <path d="M28 49A16 16 0 0 1 18 35L32 34Z" fill="#64d7ff"/>
+                  <path d="M18 35A16 16 0 0 1 22 22L32 34Z" fill="#a876ff"/>
+                  <path d="M22 22A16 16 0 0 1 32 18L32 34Z" fill="#ff8e5a"/>
+                  <circle cx="32" cy="34" r="4.5" fill="#eef3ff"/>
+                  <path d="M32 11L36 18H28L32 11Z" fill="#eef3ff"/>
+                </svg>
+              </span>
+            </a>
+
+            <button class="railBtn railBtn--gift" type="button" data-open="free" title="Халява"><span>🎁</span></button>
+          </nav>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="hero card" aria-label="Блок будет заполнен позже">
+          <div class="heroRow">
+            <div class="heroEmpty"></div>
+
+            <div class="heroTiles">
+              <button id="depositBtn" class="tileBtn tileBtn--primary" type="button">
+                <div class="tileTop">Пополнить</div>
+                <div class="tileSub">виртуальные монеты</div>
+              </button>
+
+              <button id="withdrawBtn" class="tileBtn tileBtn--ghost" type="button">
+                <div class="tileTop">Вывести</div>
+                <div class="tileSub">виртуальные монеты</div>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section id="games" class="grid">
+          <a class="gameCard gameCard--poster gameCard--dice" href="./dice/" aria-label="Dice">
+            <div class="posterTop">
+              <div class="posterIconWrap">
+                <span class="posterIcon">
+                  <svg viewBox="0 0 128 128" aria-hidden="true">
+                    <g transform="translate(14 28) rotate(-16 32 36)">
+                      <polygon points="30,6 58,22 32,38 4,22" fill="#ffffff"/>
+                      <polygon points="4,22 32,38 32,74 4,58" fill="#edf3fb"/>
+                      <polygon points="32,38 58,22 58,58 32,74" fill="#7f8ea8"/>
+                      <circle cx="16" cy="41" r="4" fill="#111827"/>
+                      <circle cx="16" cy="58" r="4" fill="#111827"/>
+                      <circle cx="40" cy="46" r="4" fill="#111827"/>
+                      <circle cx="47" cy="56" r="4" fill="#111827"/>
+                      <ellipse cx="34" cy="18" rx="13" ry="5" fill="rgba(255,255,255,.42)"/>
+                    </g>
+                    <g transform="translate(56 14) rotate(14 22 24)">
+                      <polygon points="22,4 42,15 24,26 4,15" fill="#ffffff"/>
+                      <polygon points="4,15 24,26 24,50 4,39" fill="#eef3fb"/>
+                      <polygon points="24,26 42,15 42,39 24,50" fill="#9eabc0"/>
+                      <circle cx="15" cy="26" r="3.5" fill="#111827"/>
+                      <circle cx="31" cy="31" r="3.5" fill="#111827"/>
+                      <ellipse cx="25" cy="13" rx="9" ry="4" fill="rgba(255,255,255,.38)"/>
+                    </g>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Dice</div>
+                <div class="posterSub">Бросок кубика</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--coinflip" href="./coinflip/" aria-label="Coin Flip">
+            <div class="posterTop">
+              <div class="posterIconWrap">
+                <span class="posterIcon">
+                  <svg viewBox="0 0 128 128" aria-hidden="true">
+                    <ellipse cx="64" cy="72" rx="30" ry="34" fill="#d3b25a"/>
+                    <ellipse cx="64" cy="62" rx="32" ry="32" fill="#111722"/>
+                    <path d="M32 62C32 44.3 46.3 30 64 30V94C46.3 94 32 79.7 32 62Z" fill="#f7c41f"/>
+                    <path d="M64 30C81.7 30 96 44.3 96 62C96 79.7 81.7 94 64 94V30Z" fill="#ccd6e6"/>
+                    <rect x="61" y="34" width="6" height="56" rx="3" fill="#f1ead8"/>
+                    <ellipse cx="54" cy="48" rx="14" ry="8" fill="rgba(255,255,255,.22)"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Coin Flip</div>
+                <div class="posterSub">Монетка 50 на 50</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--crash" href="./crash/" aria-label="Crash">
+            <div class="posterTop">
+              <div class="posterIconWrap">
+                <span class="posterIcon">
+                  <svg viewBox="0 0 128 128" aria-hidden="true">
+                    <path d="M41 74L66 47L79 54L64 75L74 84L43 88L31 61L41 67Z" fill="#eef4ff"/>
+                    <path d="M25 91C36 82 42 80 52 80C47 89 43 95 35 100C28 104 18 104 12 100C17 96 21 94 25 91Z" fill="#ffaf47"/>
+                    <path d="M40 87C52 78 62 76 73 78C67 89 60 97 49 102C40 106 29 104 22 99C28 96 33 92 40 87Z" fill="#ff5b4f"/>
+                    <circle cx="80" cy="39" r="6" fill="rgba(255,255,255,.18)"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Crash</div>
+                <div class="posterSub">Ракета растёт · забирай вовремя</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--mines" href="./mines/" aria-label="Mines">
+            <div class="posterTop">
+              <div class="posterIconWrap">
+                <span class="posterIcon">
+                  <svg viewBox="0 0 128 128" aria-hidden="true">
+                    <rect x="34" y="34" width="60" height="60" rx="12" fill="#21314a"/>
+                    <circle cx="64" cy="64" r="18" fill="#111823"/>
+                    <g stroke="#dff2ff" stroke-width="4" stroke-linecap="round">
+                      <path d="M64 25V36"/>
+                      <path d="M64 92V103"/>
+                      <path d="M25 64H36"/>
+                      <path d="M92 64H103"/>
+                      <path d="M37 37L44 44"/>
+                      <path d="M84 84L91 91"/>
+                      <path d="M37 91L44 84"/>
+                      <path d="M84 44L91 37"/>
+                    </g>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Mines</div>
+                <div class="posterSub">5×5 · лестница X · cashout</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--rps" href="./rps/" aria-label="Камень Ножницы Бумага">
+            <div class="posterTop">
+              <div class="posterIconWrap">
+                <span class="posterIcon">
+                  <svg viewBox="0 0 128 128" aria-hidden="true">
+                    <path d="M28 80C28 66 36 56 47 56C58 56 64 62 64 73V86H35C30 86 28 84 28 80Z" fill="#f2c75a"/>
+                    <path d="M64 80L80 54C84 48 90 47 94 51C98 55 98 61 94 66L80 88H64V80Z" fill="#f0f2fb"/>
+                    <path d="M48 86H84C90 86 94 90 94 95C94 101 90 104 83 104H52C43 104 36 99 34 91L48 86Z" fill="#ff7272"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">КНБ</div>
+                <div class="posterSub">Серия · лестница X · cashout</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--penalty" href="./penalty/" aria-label="Penalty">
+            <div class="posterTop">
+              <div class="posterIconWrap">
+                <span class="posterIcon">
+                  <svg viewBox="0 0 128 128" aria-hidden="true">
+                    <rect x="32" y="28" width="64" height="34" rx="7" fill="none" stroke="#eef3ff" stroke-width="5"/>
+                    <path d="M40 62L47 86M64 62V88M88 62L81 86" stroke="#eef3ff" stroke-width="5" stroke-linecap="round"/>
+                    <circle cx="64" cy="82" r="11" fill="#ffffff"/>
+                    <path d="M64 71L70 76L68 85H60L58 76L64 71Z" fill="#111827"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Penalty</div>
+                <div class="posterSub">Вратарь · сложность · лестница X</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--tower" href="./tower/" aria-label="Tower">
+            <div class="posterTop">
+              <div class="posterIconWrap">
+                <span class="posterIcon">
+                  <svg viewBox="0 0 128 128" aria-hidden="true">
+                    <path d="M44 98V50L64 30L84 50V98H44Z" fill="#edf3ff"/>
+                    <path d="M44 50L64 61L84 50" fill="none" stroke="#95a3ba" stroke-width="4"/>
+                    <path d="M44 50L64 30L84 50" fill="#cad4e2"/>
+                    <rect x="56" y="72" width="16" height="26" rx="4" fill="#59677a"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Tower</div>
+                <div class="posterSub">Риск по шагам · cashout</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--wheel" href="./wheel/" aria-label="Wheel">
+            <div class="posterTop">
+              <div class="posterIconWrap">
+                <span class="posterIcon">
+                  <svg viewBox="0 0 128 128" aria-hidden="true">
+                    <circle cx="64" cy="68" r="34" fill="#1a2231"/>
+                    <path d="M64 34A34 34 0 0 1 94 51L64 68Z" fill="#ff6d7b"/>
+                    <path d="M94 51A34 34 0 0 1 92 84L64 68Z" fill="#67d36f"/>
+                    <path d="M92 84A34 34 0 0 1 56 101L64 68Z" fill="#f2cd5b"/>
+                    <path d="M56 101A34 34 0 0 1 30 71L64 68Z" fill="#64d7ff"/>
+                    <path d="M30 71A34 34 0 0 1 42 42L64 68Z" fill="#a876ff"/>
+                    <path d="M42 42A34 34 0 0 1 64 34L64 68Z" fill="#ff9a55"/>
+                    <circle cx="64" cy="68" r="10" fill="#eef3ff"/>
+                    <path d="M64 16L71 28H57L64 16Z" fill="#eef3ff"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Wheel</div>
+                <div class="posterSub">Выбор X · честный RNG</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mBottomNav" aria-label="Навигация по режимам">
+    <a class="mBottomNav__item railBtn--dice" href="./dice/" title="Dice">
+      <span class="navIcon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <g transform="translate(7 12) rotate(-18 18 20)">
+            <polygon points="18,3 34,12 19,21 3,12" fill="#ffffff"/>
+            <polygon points="3,12 19,21 19,40 3,31" fill="#e8eef8"/>
+            <polygon points="19,21 34,12 34,31 19,40" fill="#8392ab"/>
+            <circle cx="11" cy="22" r="2.4" fill="#111827"/>
+            <circle cx="11" cy="31" r="2.4" fill="#111827"/>
+            <circle cx="25" cy="24" r="2.4" fill="#111827"/>
+            <circle cx="29" cy="30" r="2.4" fill="#111827"/>
+          </g>
+          <g transform="translate(27 8) rotate(16 14 16)">
+            <polygon points="14,2 26,9 15,16 3,9" fill="#ffffff"/>
+            <polygon points="3,9 15,16 15,31 3,24" fill="#eef3fb"/>
+            <polygon points="15,16 26,9 26,24 15,31" fill="#9aa8bf"/>
+            <circle cx="9" cy="16" r="2.2" fill="#111827"/>
+            <circle cx="20" cy="19" r="2.2" fill="#111827"/>
+          </g>
+        </svg>
+      </span>
+    </a>
+
+    <a class="mBottomNav__item railBtn--coinflip" href="./coinflip/" title="Coin Flip">
+      <span class="navIcon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <ellipse cx="32" cy="36" rx="15" ry="17" fill="#d3b25a"/>
+          <ellipse cx="32" cy="31" rx="16" ry="16" fill="#10151e"/>
+          <path d="M16 31C16 22.2 23.2 15 32 15V47C23.2 47 16 39.8 16 31Z" fill="#f7c41f"/>
+          <path d="M32 15C40.8 15 48 22.2 48 31C48 39.8 40.8 47 32 47V15Z" fill="#c6d2e4"/>
+          <rect x="30.3" y="17" width="3.4" height="28" rx="1.7" fill="#f4ebd0"/>
+        </svg>
+      </span>
+    </a>
+
+    <a class="mBottomNav__item railBtn--crash" href="./crash/" title="Crash">
+      <span class="navIcon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <g transform="translate(8 8)">
+            <path d="M18 35L30 22L36 25L29 35L34 39L19 41L13 28L18 31Z" fill="#f3f6ff"/>
+            <path d="M11 42C16 38 19 37 24 37C22 41 20 44 16 47C13 49 8 49 5 47C7 45 9 44 11 42Z" fill="#ffb34d"/>
+            <path d="M18 40C23 36 28 35 33 36C30 41 27 44 22 47C18 49 13 48 10 46C13 44 15 42 18 40Z" fill="#ff694f"/>
+          </g>
+        </svg>
+      </span>
+    </a>
+
+    <a class="mBottomNav__item railBtn--mines" href="./mines/" title="Mines">
+      <span class="navIcon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="16" y="16" width="32" height="32" rx="7" fill="#1f2f48"/>
+          <circle cx="32" cy="32" r="10" fill="#121923"/>
+          <g stroke="#d9eef8" stroke-width="2.2" stroke-linecap="round">
+            <path d="M32 14V20"/>
+            <path d="M32 44V50"/>
+            <path d="M14 32H20"/>
+            <path d="M44 32H50"/>
+            <path d="M20 20L24 24"/>
+            <path d="M40 40L44 44"/>
+            <path d="M20 44L24 40"/>
+            <path d="M40 24L44 20"/>
+          </g>
+        </svg>
+      </span>
+    </a>
+
+    <a class="mBottomNav__item railBtn--rps" href="./rps/" title="Камень Ножницы Бумага">
+      <span class="navIcon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M17 40C17 33 21 28 26 28C31 28 34 31 34 37V43H20C18 43 17 42 17 40Z" fill="#f4c85a"/>
+          <path d="M34 41L42 28C44 25 47 24 49 26C51 28 51 31 49 34L42 45H34V41Z" fill="#ecedf6"/>
+          <path d="M26 43H44C46 43 48 45 48 47C48 49 46 51 43 51H28C24 51 21 49 20 45L26 43Z" fill="#ff7a7a"/>
+        </svg>
+      </span>
+    </a>
+
+    <a class="mBottomNav__item railBtn--penalty" href="./penalty/" title="Penalty">
+      <span class="navIcon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect x="16" y="16" width="32" height="20" rx="4" fill="none" stroke="#eef3ff" stroke-width="2.5"/>
+          <path d="M20 36L24 48M32 36V48M44 36L40 48" stroke="#eef3ff" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="32" cy="44" r="6" fill="#ffffff"/>
+          <path d="M32 38L35 41L34 46H30L29 41L32 38Z" fill="#111827"/>
+        </svg>
+      </span>
+    </a>
+
+    <a class="mBottomNav__item railBtn--tower" href="./tower/" title="Tower">
+      <span class="navIcon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M22 50V28L32 18L42 28V50H22Z" fill="#eef3ff"/>
+          <path d="M22 28L32 34L42 28" fill="none" stroke="#9da8ba" stroke-width="2"/>
+          <rect x="28" y="38" width="8" height="12" rx="2" fill="#5f6b7b"/>
+          <path d="M22 28L32 18L42 28" fill="#c7d1df"/>
+        </svg>
+      </span>
+    </a>
+
+    <a class="mBottomNav__item railBtn--wheel" href="./wheel/" title="Wheel">
+      <span class="navIcon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="34" r="16" fill="#1a2231"/>
+          <path d="M32 18A16 16 0 0 1 46 26L32 34Z" fill="#ff6d7b"/>
+          <path d="M46 26A16 16 0 0 1 45 42L32 34Z" fill="#67d36f"/>
+          <path d="M45 42A16 16 0 0 1 28 49L32 34Z" fill="#f2cd5b"/>
+          <path d="M28 49A16 16 0 0 1 18 35L32 34Z" fill="#64d7ff"/>
+          <path d="M18 35A16 16 0 0 1 22 22L32 34Z" fill="#a876ff"/>
+          <path d="M22 22A16 16 0 0 1 32 18L32 34Z" fill="#ff8e5a"/>
+          <circle cx="32" cy="34" r="4.5" fill="#eef3ff"/>
+          <path d="M32 11L36 18H28L32 11Z" fill="#eef3ff"/>
+        </svg>
+      </span>
+    </a>
+
+    <button class="mBottomNav__item mBottomNav__item--gift" type="button" data-open="free" title="Халява"><span>🎁</span></button>
+  </nav>
+
+  <div id="freeModal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Халява">
+      <div class="modal__head">
+        <div class="modal__title">Халява 🎁</div>
+        <button class="modal__close" id="freeClose" type="button" aria-label="Закрыть">✕</button>
+      </div>
+
+      <div class="tabs">
+        <button id="tabDaily" class="tab active" type="button">Ежедневное колесо</button>
+        <button id="tabSocial" class="tab" type="button">Подписки</button>
+      </div>
+
+      <section id="paneDaily" class="pane">
+        <div class="dailyTopRow">
+          <div>
+            <div class="dailyTitle">Ежедневное колесо</div>
+            <div class="dailyHint">1 попытка в сутки. Приз сразу в кошелёк.</div>
+          </div>
+          <div class="timerBox">
+            <div class="timerLabel">Следующая попытка через</div>
+            <div class="timerVal" id="dailyTimer">00:00:00</div>
+          </div>
+        </div>
+
+        <div class="dailyWrap">
+          <div class="dailyLeft">
+            <div class="wheelBox">
+              <div class="pointer"></div>
+              <canvas id="dailyWheel" width="520" height="520"></canvas>
+              <div class="wheelCenter">
+                <div class="centerBig" id="wheelCenterTxt">SPIN</div>
+                <div class="centerSmall" id="wheelCenterSub">сегодня</div>
+              </div>
+            </div>
+
+            <button id="spinBtn" class="btnPrimary" type="button">Крутить</button>
+            <div class="dailyMsg" id="dailyMsg">Жми “Крутить” и забирай приз.</div>
+          </div>
+
+          <div class="dailyRight">
+            <div class="listCard">
+              <div class="listTitle">Призы</div>
+              <div id="prizeList" class="prizeList"></div>
+              <div class="listNote">RNG: <code>crypto.getRandomValues</code></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="paneSocial" class="pane hidden">
+        <div class="socialCard">
+          <div class="dailyTitle">Бонусы за подписку</div>
+          <div class="dailyHint">Один раз на браузер (локально).</div>
+
+          <div class="socialGrid">
+            <div class="socItem">
+              <div class="socTop">
+                <div class="socIcon">VK</div>
+                <div>
+                  <div class="socName">Подписка ВК</div>
+                  <div class="socDesc">+10 🪙</div>
+                </div>
+              </div>
+              <div class="socBtns">
+                <a class="btnGhost" href="#" onclick="return false;">Открыть ВК</a>
+                <button id="claimVK" class="btnPrimary" type="button">Я подписался</button>
+              </div>
+              <div class="socState" id="vkState">Не получено</div>
+            </div>
+
+            <div class="socItem">
+              <div class="socTop">
+                <div class="socIcon">TG</div>
+                <div>
+                  <div class="socName">Подписка Telegram</div>
+                  <div class="socDesc">+10 🪙</div>
+                </div>
+              </div>
+              <div class="socBtns">
+                <a class="btnGhost" href="#" onclick="return false;">Открыть TG</a>
+                <button id="claimTG" class="btnPrimary" type="button">Я подписался</button>
+              </div>
+              <div class="socState" id="tgState">Не получено</div>
+            </div>
+          </div>
+
+          <div class="finePrint">
+            * Реальная проверка подписки делается через сервер/бота. Сейчас логика локальная.
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div id="promoModal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Промокоды">
+      <div class="modal__head">
+        <div class="modal__title">Промокоды</div>
+        <button class="modal__close" id="promoClose" type="button" aria-label="Закрыть">✕</button>
+      </div>
+
+      <section class="pane">
+        <div class="promoCard">
+          <div>
+            <div class="promoTitle">Активация промокода</div>
+            <div class="promoSub">Введите код — начислим монеты в общий баланс.</div>
+          </div>
+
+          <div class="promoBody">
+            <div class="promoLogoSlot" aria-hidden="true"></div>
+            <div class="promoForm">
+              <input id="promoInput" class="promoInput" type="text" placeholder="Введите промокод" autocomplete="off" />
+              <button id="promoApply" class="promoBtn" type="button">Активировать</button>
+              <div id="promoMsg" class="promoMsg"> </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div id="supportModal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Поддержка">
+      <div class="modal__head">
+        <div class="modal__title">Поддержка</div>
+        <button class="modal__close" id="supportClose" type="button" aria-label="Закрыть">✕</button>
+      </div>
+
+      <section class="pane">
+        <div class="supportCard">
+          <div>
+            <div class="supportTitle">Поддержка</div>
+            <div class="supportSub">Ответим по вопросам режимов и бонусов.</div>
+          </div>
+
+          <div class="supportGrid">
+            <div class="supportItem">
+              <div class="supportIcon">TG</div>
+              <div class="supportTxt">
+                <div class="supportName">Telegram</div>
+                <div class="supportDesc">Написать в поддержку</div>
+              </div>
+              <button class="supportBtn" type="button" data-beep="1">Открыть</button>
+            </div>
+
+            <div class="supportItem">
+              <div class="supportIcon">VK</div>
+              <div class="supportTxt">
+                <div class="supportName">ВКонтакте</div>
+                <div class="supportDesc">Написать в поддержку</div>
+              </div>
+              <button class="supportBtn" type="button" data-beep="1">Открыть</button>
+            </div>
+          </div>
+
+          <div class="supportNote">
+            * Сейчас это локальная заглушка (без сервера).
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="./triniti.js"></script>
+</body>
+</html>
