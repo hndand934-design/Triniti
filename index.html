@@ -1,1 +1,425 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+        content="width=device-width,
+                 initial-scale=1,
+                 maximum-scale=1,
+                 minimum-scale=1,
+                 viewport-fit=cover">
+  <title>Triniti</title>
 
+  <link rel="stylesheet" href="./shared/theme.css">
+  <script src="./shared/wallet.js"></script>
+  <link rel="stylesheet" href="./triniti.css" />
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="sparkles" aria-hidden="true"></div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar__left">
+        <div class="brandRow">
+          <div class="brandLogo" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="trinitiGoldDesktop" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f8e8b2"/>
+                  <stop offset="48%" stop-color="#e0c26f"/>
+                  <stop offset="100%" stop-color="#b78f46"/>
+                </linearGradient>
+              </defs>
+              <rect x="10" y="10" width="44" height="44" rx="14"
+                    fill="rgba(255,255,255,.04)"
+                    stroke="url(#trinitiGoldDesktop)"
+                    stroke-width="2.2"/>
+              <path d="M21 20H43L39.5 25H34V41L32 45L30 41V25H24.5L21 20Z"
+                    fill="url(#trinitiGoldDesktop)"/>
+            </svg>
+          </div>
+          <div class="brandText">
+            <div class="title">Triniti</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topbar__center">
+        <button class="navPill active" type="button" data-jump="#games">Игры</button>
+        <button class="navPill" type="button" data-open="promo">Промокоды</button>
+        <button class="navPill" type="button" data-open="support">Поддержка</button>
+        <button class="navPill navPill--free" type="button" data-open="free">Халява</button>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+          <span id="soundDot" class="dot"></span>
+          <span id="soundText">Звук on</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="home">
+      <section class="mHeader" aria-label="Triniti mobile">
+        <div class="mBrandTop">
+          <div class="mBrandRow">
+            <div class="mBrandLogo" aria-hidden="true">
+              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="trinitiGoldMobile" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#f8e8b2"/>
+                    <stop offset="48%" stop-color="#e0c26f"/>
+                    <stop offset="100%" stop-color="#b78f46"/>
+                  </linearGradient>
+                </defs>
+                <rect x="10" y="10" width="44" height="44" rx="14"
+                      fill="rgba(255,255,255,.04)"
+                      stroke="url(#trinitiGoldMobile)"
+                      stroke-width="2.2"/>
+                <path d="M21 20H43L39.5 25H34V41L32 45L30 41V25H24.5L21 20Z"
+                      fill="url(#trinitiGoldMobile)"/>
+              </svg>
+            </div>
+            <div class="mTitle">Triniti</div>
+          </div>
+
+          <button id="soundBtnMobile" class="mSound" type="button" aria-label="Звук">
+            <span class="dot"></span>
+            <span>Звук on</span>
+          </button>
+        </div>
+
+        <div class="mTabs" role="tablist" aria-label="Разделы">
+          <button class="mTab active" type="button" data-jump="#games">Игры</button>
+          <button class="mTab" type="button" data-open="promo">Промокоды</button>
+          <button class="mTab" type="button" data-open="support">Поддержка</button>
+          <button class="mTab mTab--free" type="button" data-open="free">Халява</button>
+        </div>
+
+        <div class="mWallet">
+          <div class="mBal">
+            <div class="mBal__name">GG</div>
+            <div class="mBal__val">🪙 <b id="balance2">1000</b></div>
+          </div>
+          <div class="mActions">
+            <button id="depositBtnMobile" class="mBtn" type="button">Пополнить</button>
+            <button id="withdrawBtnMobile" class="mBtn mBtn--ghost" type="button">Вывести</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="rail" aria-label="Быстрые режимы">
+        <div class="railCard">
+          <div class="railBal">
+            <div class="railBal__title">Баланс</div>
+            <div class="railBal__val">🪙 <b id="balanceRail">1000</b></div>
+          </div>
+
+          <nav class="railNav">
+            <a class="railBtn" href="./dice/" title="Dice"><span>D</span></a>
+            <a class="railBtn" href="./coinflip/" title="Coin Flip"><span>C</span></a>
+            <a class="railBtn" href="./crash/" title="Crash"><span>R</span></a>
+            <a class="railBtn" href="./mines/" title="Mines"><span>M</span></a>
+            <a class="railBtn" href="./rps/" title="Камень Ножницы Бумага"><span>R</span></a>
+            <a class="railBtn" href="./penalty/" title="Penalty"><span>P</span></a>
+            <a class="railBtn" href="./tower/" title="Tower"><span>T</span></a>
+            <a class="railBtn" href="./wheel/" title="Wheel"><span>W</span></a>
+            <button class="railBtn railBtn--gift" type="button" data-open="free" title="Халява"><span>🎁</span></button>
+          </nav>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="hero card" aria-label="Блок будет заполнен позже">
+          <div class="heroRow">
+            <div class="heroEmpty"></div>
+
+            <div class="heroTiles">
+              <button id="depositBtn" class="tileBtn tileBtn--primary" type="button">
+                <div class="tileTop">Пополнить</div>
+                <div class="tileSub">виртуальные монеты</div>
+              </button>
+
+              <button id="withdrawBtn" class="tileBtn tileBtn--ghost" type="button">
+                <div class="tileTop">Вывести</div>
+                <div class="tileSub">виртуальные монеты</div>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section id="games" class="grid">
+          <a class="gameCard gameCard--poster gameCard--dice" href="./dice/" aria-label="Dice">
+            <div class="posterTop"></div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Dice</div>
+                <div class="posterSub">Бросок кубика</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--coinflip" href="./coinflip/" aria-label="Coin Flip">
+            <div class="posterTop"></div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Coin Flip</div>
+                <div class="posterSub">Монетка 50 на 50</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--crash" href="./crash/" aria-label="Crash">
+            <div class="posterTop"></div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Crash</div>
+                <div class="posterSub">Ракета растёт · забирай вовремя</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--mines" href="./mines/" aria-label="Mines">
+            <div class="posterTop"></div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Mines</div>
+                <div class="posterSub">5×5 · лестница X · cashout</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--rps" href="./rps/" aria-label="Камень Ножницы Бумага">
+            <div class="posterTop"></div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">КНБ</div>
+                <div class="posterSub">Серия · лестница X · cashout</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--penalty" href="./penalty/" aria-label="Penalty">
+            <div class="posterTop"></div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Penalty</div>
+                <div class="posterSub">Вратарь · сложность · лестница X</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--tower" href="./tower/" aria-label="Tower">
+            <div class="posterTop"></div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Tower</div>
+                <div class="posterSub">Риск по шагам · cashout</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--wheel" href="./wheel/" aria-label="Wheel">
+            <div class="posterTop"></div>
+            <div class="posterMeta">
+              <div class="posterInfo">
+                <div class="posterTitle">Wheel</div>
+                <div class="posterSub">Выбор X · честный RNG</div>
+              </div>
+              <div class="posterBtn">Играть</div>
+            </div>
+          </a>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mBottomNav" aria-label="Навигация по режимам">
+    <a class="mBottomNav__item" href="./dice/" title="Dice"><span>D</span></a>
+    <a class="mBottomNav__item" href="./coinflip/" title="Coin Flip"><span>C</span></a>
+    <a class="mBottomNav__item" href="./crash/" title="Crash"><span>R</span></a>
+    <a class="mBottomNav__item" href="./mines/" title="Mines"><span>M</span></a>
+    <a class="mBottomNav__item" href="./rps/" title="Камень Ножницы Бумага"><span>R</span></a>
+    <a class="mBottomNav__item" href="./penalty/" title="Penalty"><span>P</span></a>
+    <a class="mBottomNav__item" href="./tower/" title="Tower"><span>T</span></a>
+    <a class="mBottomNav__item" href="./wheel/" title="Wheel"><span>W</span></a>
+    <button class="mBottomNav__item mBottomNav__item--gift" type="button" data-open="free" title="Халява"><span>🎁</span></button>
+  </nav>
+
+  <div id="freeModal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Халява">
+      <div class="modal__head">
+        <div class="modal__title">Халява 🎁</div>
+        <button class="modal__close" id="freeClose" type="button" aria-label="Закрыть">✕</button>
+      </div>
+
+      <div class="tabs">
+        <button id="tabDaily" class="tab active" type="button">Ежедневное колесо</button>
+        <button id="tabSocial" class="tab" type="button">Подписки</button>
+      </div>
+
+      <section id="paneDaily" class="pane">
+        <div class="dailyTopRow">
+          <div>
+            <div class="dailyTitle">Ежедневное колесо</div>
+            <div class="dailyHint">1 попытка в сутки. Приз сразу в кошелёк.</div>
+          </div>
+          <div class="timerBox">
+            <div class="timerLabel">Следующая попытка через</div>
+            <div class="timerVal" id="dailyTimer">00:00:00</div>
+          </div>
+        </div>
+
+        <div class="dailyWrap">
+          <div class="dailyLeft">
+            <div class="wheelBox">
+              <div class="pointer"></div>
+              <canvas id="dailyWheel" width="520" height="520"></canvas>
+              <div class="wheelCenter">
+                <div class="centerBig" id="wheelCenterTxt">SPIN</div>
+                <div class="centerSmall" id="wheelCenterSub">сегодня</div>
+              </div>
+            </div>
+
+            <button id="spinBtn" class="btnPrimary" type="button">Крутить</button>
+            <div class="dailyMsg" id="dailyMsg">Жми “Крутить” и забирай приз.</div>
+          </div>
+
+          <div class="dailyRight">
+            <div class="listCard">
+              <div class="listTitle">Призы</div>
+              <div id="prizeList" class="prizeList"></div>
+              <div class="listNote">RNG: <code>crypto.getRandomValues</code></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="paneSocial" class="pane hidden">
+        <div class="socialCard">
+          <div class="dailyTitle">Бонусы за подписку</div>
+          <div class="dailyHint">Один раз на браузер (локально).</div>
+
+          <div class="socialGrid">
+            <div class="socItem">
+              <div class="socTop">
+                <div class="socIcon">VK</div>
+                <div>
+                  <div class="socName">Подписка ВК</div>
+                  <div class="socDesc">+10 🪙</div>
+                </div>
+              </div>
+              <div class="socBtns">
+                <a class="btnGhost" href="#" onclick="return false;">Открыть ВК</a>
+                <button id="claimVK" class="btnPrimary" type="button">Я подписался</button>
+              </div>
+              <div class="socState" id="vkState">Не получено</div>
+            </div>
+
+            <div class="socItem">
+              <div class="socTop">
+                <div class="socIcon">TG</div>
+                <div>
+                  <div class="socName">Подписка Telegram</div>
+                  <div class="socDesc">+10 🪙</div>
+                </div>
+              </div>
+              <div class="socBtns">
+                <a class="btnGhost" href="#" onclick="return false;">Открыть TG</a>
+                <button id="claimTG" class="btnPrimary" type="button">Я подписался</button>
+              </div>
+              <div class="socState" id="tgState">Не получено</div>
+            </div>
+          </div>
+
+          <div class="finePrint">
+            * Реальная проверка подписки делается через сервер/бота. Сейчас логика локальная.
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div id="promoModal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Промокоды">
+      <div class="modal__head">
+        <div class="modal__title">Промокоды</div>
+        <button class="modal__close" id="promoClose" type="button" aria-label="Закрыть">✕</button>
+      </div>
+
+      <section class="pane">
+        <div class="promoCard">
+          <div>
+            <div class="promoTitle">Активация промокода</div>
+            <div class="promoSub">Введите код — начислим монеты в общий баланс.</div>
+          </div>
+
+          <div class="promoBody">
+            <div class="promoLogoSlot" aria-hidden="true"></div>
+            <div class="promoForm">
+              <input id="promoInput" class="promoInput" type="text" placeholder="Введите промокод" autocomplete="off" />
+              <button id="promoApply" class="promoBtn" type="button">Активировать</button>
+              <div id="promoMsg" class="promoMsg"> </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div id="supportModal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Поддержка">
+      <div class="modal__head">
+        <div class="modal__title">Поддержка</div>
+        <button class="modal__close" id="supportClose" type="button" aria-label="Закрыть">✕</button>
+      </div>
+
+      <section class="pane">
+        <div class="supportCard">
+          <div>
+            <div class="supportTitle">Поддержка</div>
+            <div class="supportSub">Ответим по вопросам режимов и бонусов.</div>
+          </div>
+
+          <div class="supportGrid">
+            <div class="supportItem">
+              <div class="supportIcon">TG</div>
+              <div class="supportTxt">
+                <div class="supportName">Telegram</div>
+                <div class="supportDesc">Написать в поддержку</div>
+              </div>
+              <button class="supportBtn" type="button" data-beep="1">Открыть</button>
+            </div>
+
+            <div class="supportItem">
+              <div class="supportIcon">VK</div>
+              <div class="supportTxt">
+                <div class="supportName">ВКонтакте</div>
+                <div class="supportDesc">Написать в поддержку</div>
+              </div>
+              <button class="supportBtn" type="button" data-beep="1">Открыть</button>
+            </div>
+          </div>
+
+          <div class="supportNote">
+            * Сейчас это локальная заглушка (без сервера).
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="./triniti.js"></script>
+</body>
+</html>
