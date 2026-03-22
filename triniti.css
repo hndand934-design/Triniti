@@ -1,1 +1,225 @@
+:root{
+  --bg0:#070b14;
+  --bg1:#0b1120;
+  --text:#eef2ff;
+  --muted:rgba(238,242,255,.66);
 
+  --stroke:rgba(255,255,255,.10);
+  --stroke2:rgba(255,255,255,.08);
+
+  --glass:rgba(255,255,255,.07);
+  --glass2:rgba(255,255,255,.03);
+
+  --r:18px;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  height:100%;
+  font-family:system-ui, Arial;
+  color:var(--text);
+  background:
+    radial-gradient(1000px 600px at 10% 10%, rgba(80,120,255,.15), transparent),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+a{text-decoration:none;color:inherit}
+
+/* ====== APP ====== */
+
+.app{
+  width:min(1120px, calc(100% - 20px));
+  margin:14px auto;
+}
+
+/* ====== TOPBAR ====== */
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px;
+  border-radius:var(--r);
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--stroke2);
+}
+
+.title{
+  font-weight:900;
+  font-size:22px;
+}
+
+/* ====== GRID ====== */
+
+.grid{
+  margin-top:14px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:520px){
+  .grid{grid-template-columns:1fr;}
+}
+
+/* ====== CARD ====== */
+
+.gameCard{
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid var(--stroke2);
+  background:#111827;
+  box-shadow:0 20px 40px rgba(0,0,0,.4);
+}
+
+/* ====== TOP PART ====== */
+
+.posterTop{
+  height:210px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+/* цвета режимов */
+
+.gameCard--dice .posterTop{
+  background:linear-gradient(135deg,#8af0ff,#2748cb);
+}
+.gameCard--coinflip .posterTop{
+  background:linear-gradient(135deg,#2a3140,#0a0f17);
+}
+.gameCard--crash .posterTop{
+  background:linear-gradient(135deg,#4d2430,#7a1625);
+}
+.gameCard--mines .posterTop{
+  background:linear-gradient(135deg,#7affdf,#1d71e2);
+}
+.gameCard--rps .posterTop{
+  background:linear-gradient(135deg,#ffde6c,#ff6687);
+}
+.gameCard--penalty .posterTop{
+  background:linear-gradient(135deg,#8fee68,#1e6637);
+}
+.gameCard--tower .posterTop{
+  background:linear-gradient(135deg,#a0aec7,#384251);
+}
+.gameCard--wheel .posterTop{
+  background:linear-gradient(135deg,#df72ff,#56dfd0,#f7dd64);
+}
+
+/* ====== ICON ====== */
+
+.posterIcon{
+  width:120px;
+  height:120px;
+}
+
+.posterIcon svg{
+  width:100%;
+  height:100%;
+  filter:drop-shadow(0 15px 20px rgba(0,0,0,.4));
+}
+
+/* ====== BOTTOM ====== */
+
+.posterMeta{
+  padding:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#0f172a;
+}
+
+.posterTitle{
+  font-weight:900;
+  font-size:16px;
+}
+
+.posterSub{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.posterBtn{
+  padding:10px 14px;
+  border-radius:12px;
+  background:linear-gradient(180deg,#6d86ff,#4d66ec);
+  font-weight:900;
+}
+
+/* ====== LEFT NAV ====== */
+
+.rail{
+  position:fixed;
+  left:10px;
+  top:80px;
+}
+
+.railNav{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.railBtn{
+  width:50px;
+  height:50px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--stroke2);
+}
+
+/* цвета */
+
+.railBtn--dice{background:#3b82f6;}
+.railBtn--coinflip{background:#111827;}
+.railBtn--crash{background:#7f1d1d;}
+.railBtn--mines{background:#0ea5e9;}
+.railBtn--rps{background:#fb7185;}
+.railBtn--penalty{background:#22c55e;}
+.railBtn--tower{background:#64748b;}
+.railBtn--wheel{background:#a855f7;}
+
+.navIcon svg{
+  width:28px;
+  height:28px;
+}
+
+/* ====== MOBILE ====== */
+
+@media(max-width:520px){
+
+  .topbar{display:none;}
+  .rail{display:none;}
+
+  .mBottomNav{
+    position:fixed;
+    bottom:10px;
+    left:10px;
+    right:10px;
+    display:flex;
+    gap:8px;
+    padding:10px;
+    border-radius:20px;
+    background:#0f172a;
+  }
+
+  .mBottomNav__item{
+    flex:1;
+    height:50px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+}
