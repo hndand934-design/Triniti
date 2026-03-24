@@ -3,15 +3,20 @@
   --bg1:#0b1120;
   --text:#eef2ff;
   --muted:rgba(238,242,255,.66);
+
   --stroke:rgba(255,255,255,.10);
   --stroke2:rgba(255,255,255,.08);
+
   --blue1:#6d86ff;
   --blue2:#4d66ec;
+
   --glass:rgba(255,255,255,.07);
   --glass2:rgba(255,255,255,.03);
+
   --gold1:#f8e8b2;
   --gold2:#e0c26f;
   --gold3:#b78f46;
+
   --r:18px;
 }
 
@@ -70,7 +75,7 @@ button{font:inherit}
 @media (max-width:520px){
   .app{
     width:calc(100% - 14px);
-    margin:8px auto 18px;
+    margin:8px auto 98px;
   }
 }
 
@@ -80,12 +85,12 @@ button{font:inherit}
   align-items:center;
   gap:12px;
   padding:12px 14px;
-  border-radius:22px;
+  border-radius:var(--r);
   background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
   border:1px solid var(--stroke2);
   box-shadow:
-    0 18px 46px rgba(0,0,0,.30),
-    inset 0 1px 0 rgba(255,255,255,.05);
+    0 16px 40px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.04);
 }
 .topbar__left{min-width:240px;}
 .topbar__center{
@@ -139,8 +144,9 @@ button{font:inherit}
   z-index:1;
   filter:drop-shadow(0 1px 1px rgba(0,0,0,.25));
 }
+.brandText{min-width:0;}
 .title{
-  font-weight:1000;
+  font-weight:950;
   font-size:24px;
   line-height:1;
   letter-spacing:.24px;
@@ -155,10 +161,7 @@ button{font:inherit}
   cursor:pointer;
   font-weight:950;
   white-space:nowrap;
-  transition:transform .15s ease, filter .15s ease;
 }
-.navPill:hover{filter:brightness(1.05)}
-.navPill:active{transform:translateY(1px)}
 .navPill.active{
   border-color:rgba(76,125,255,.55);
   background:rgba(76,125,255,.18);
@@ -189,330 +192,241 @@ button{font:inherit}
 
 .home{
   margin-top:12px;
-  display:block;
+  display:grid;
+  grid-template-columns:98px 1fr;
+  gap:12px;
+  align-items:start;
+}
+@media (max-width:900px){
+  .home{ grid-template-columns:78px 1fr; }
+}
+@media (max-width:520px){
+  .home{
+    margin-top:0;
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+}
+
+.rail{
+  position:sticky;
+  top:12px;
+  height:fit-content;
+}
+.railCard{
+  border-radius:var(--r);
+  background:linear-gradient(180deg, var(--glass), var(--glass2));
+  border:1px solid var(--stroke2);
+  overflow:hidden;
+  padding:10px;
+}
+.railBal{
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.18);
+  padding:10px;
+}
+.railBal__title{font-size:12px;color:var(--muted);}
+.railBal__val{margin-top:6px;font-weight:950;font-size:16px;}
+
+.railNav{
+  margin-top:10px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  align-items:center;
+}
+.railBtn{
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(95,95,95,.22);
+  cursor:pointer;
+  user-select:none;
+}
+.railBtn span{
+  font-size:16px;
+  font-weight:900;
+  color:#d8dde8;
+}
+.railBtn--gift{
+  border-color:rgba(224,194,111,.20);
+  background:linear-gradient(180deg, rgba(224,194,111,.08), rgba(76,125,255,.08));
 }
 
 .content{min-width:0;}
-.content--full{width:100%;}
 
 .card{
-  border-radius:22px;
-  background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+  border-radius:var(--r);
+  background:linear-gradient(180deg, var(--glass), var(--glass2));
   border:1px solid var(--stroke2);
   overflow:hidden;
 }
 
-.hero{
-  padding:18px;
+.hero{padding:14px;}
+.heroRow{
+  display:grid;
+  grid-template-columns:1fr 380px;
+  gap:12px;
 }
-
-.walletDesk{
-  border-radius:34px;
-  min-height:290px;
-  padding:34px 36px 38px;
-  border:1px solid rgba(120,145,255,.18);
-  background:
-    radial-gradient(700px 240px at 18% 12%, rgba(96,132,255,.14), transparent 58%),
-    linear-gradient(180deg, rgba(14,24,48,.96), rgba(8,14,28,.94));
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.05),
-    0 20px 40px rgba(0,0,0,.22);
+@media (max-width:980px){
+  .heroRow{grid-template-columns:1fr;}
 }
-
-.walletDesk__top{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:18px;
+.heroEmpty{
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.16);
+  min-height:160px;
 }
-
-.walletDesk__name{
-  font-size:40px;
-  line-height:1;
-  font-weight:1000;
-  letter-spacing:.3px;
-  color:#f1f4ff;
-}
-
-.walletDesk__balance{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  font-size:68px;
-  line-height:1;
-  font-weight:1000;
-  color:#f6f8ff;
-}
-
-.walletDesk__coin{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:74px;
-  height:74px;
-  font-size:40px;
-  border-radius:999px;
-  background:
-    radial-gradient(circle at 32% 28%, rgba(255,255,255,.95), rgba(210,219,236,.64) 42%, rgba(112,126,148,.9) 100%);
-  box-shadow:
-    inset 0 2px 6px rgba(255,255,255,.35),
-    0 10px 18px rgba(0,0,0,.22);
-}
-
-.walletDesk__actions{
-  margin-top:34px;
+.heroTiles{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:22px;
+  gap:12px;
 }
-
-.walletDesk__btn{
-  height:126px;
-  border-radius:34px;
-  border:1px solid rgba(255,255,255,.10);
+.tileBtn{
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.18);
   cursor:pointer;
-  font-size:40px;
-  font-weight:1000;
-  color:#f4f7ff;
-  transition:transform .15s ease, filter .15s ease;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
-    0 12px 22px rgba(0,0,0,.20);
+  padding:14px;
+  text-align:left;
+  min-height:160px;
 }
-.walletDesk__btn:hover{filter:brightness(1.04)}
-.walletDesk__btn:active{transform:translateY(1px)}
-
-.walletDesk__btn--primary{
-  background:linear-gradient(180deg, rgba(40,52,105,.96), rgba(27,35,76,.92));
-  border-color:rgba(110,130,255,.24);
+.tileBtn--primary{
+  border-color:rgba(76,125,255,.55);
+  background:linear-gradient(180deg, rgba(76,125,255,.22), rgba(0,0,0,.18));
 }
-.walletDesk__btn--ghost{
-  background:linear-gradient(180deg, rgba(27,31,52,.96), rgba(19,24,42,.92));
-}
+.tileTop{font-weight:950;font-size:18px;}
+.tileSub{margin-top:6px;font-size:12px;color:var(--muted);}
 
 .grid{
-  margin-top:14px;
+  margin-top:12px;
   display:grid;
   grid-template-columns:repeat(4, minmax(0, 1fr));
-  gap:14px;
+  gap:12px;
 }
 @media (max-width:980px){
   .grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
 }
 @media (max-width:520px){
   .grid{
-    margin-top:14px;
+    margin-top:0;
     grid-template-columns:1fr;
     gap:16px;
   }
 }
 
 .gameCard{
-  border-radius:28px;
+  border-radius:var(--r);
+  border:1px solid var(--stroke2);
   overflow:hidden;
-  min-height:320px;
+}
+
+.gameCard--poster{
+  min-height:260px;
   position:relative;
   box-shadow:
-    0 20px 40px rgba(0,0,0,.24),
-    inset 0 1px 0 rgba(255,255,255,.06);
-  transition:transform .16s ease, filter .16s ease;
-}
-.gameCard:hover{
-  transform:translateY(-2px);
-  filter:brightness(1.03);
-}
-.gameCard:active{transform:translateY(0)}
-
-.cardPoster{
-  min-height:230px;
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    0 18px 34px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.04);
 }
 
-.cardPoster::before{
-  content:"";
-  position:absolute;
-  inset:0;
+.gameCard--dice{
   background:
-    radial-gradient(circle at 18% 16%, rgba(255,255,255,.18) 0 44px, transparent 74px),
-    radial-gradient(circle at 84% 74%, rgba(255,255,255,.08) 0 28px, transparent 54px),
-    linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,0) 42%);
-  pointer-events:none;
+    radial-gradient(circle at 26% 12%, rgba(255,255,255,.18) 0 120px, transparent 121px),
+    linear-gradient(180deg, #6ea6ff 0%, #2558df 36%, #102a95 100%);
 }
-
-.cardPattern{
-  position:absolute;
-  inset:0;
-  opacity:.18;
-  pointer-events:none;
-}
-
-.pattern-dice{
+.gameCard--coinflip{
   background:
-    radial-gradient(circle at 12% 80%, rgba(255,255,255,.90) 0 10px, transparent 11px),
-    radial-gradient(circle at 86% 70%, rgba(255,255,255,.90) 0 14px, transparent 15px),
-    linear-gradient(rgba(255,255,255,.86), rgba(255,255,255,.86)) 18% 50% / 3px 118px no-repeat,
-    linear-gradient(rgba(255,255,255,.86), rgba(255,255,255,.86)) 82% 28% / 3px 108px no-repeat,
-    linear-gradient(45deg, transparent 0 47%, rgba(255,255,255,.86) 47% 53%, transparent 53%) 68% 10% / 74px 74px no-repeat,
-    linear-gradient(45deg, transparent 0 47%, rgba(255,255,255,.86) 47% 53%, transparent 53%) 8% 18% / 84px 84px no-repeat;
+    radial-gradient(circle at 26% 14%, rgba(255,255,255,.08) 0 110px, transparent 111px),
+    linear-gradient(180deg, #0f1b3d 0%, #09142f 42%, #060c1f 100%);
 }
-
-.pattern-coinflip{
+.gameCard--crash{
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,.88) 0 18px, transparent 19px),
-    radial-gradient(circle at 82% 78%, rgba(255,255,255,.88) 0 12px, transparent 13px),
-    linear-gradient(rgba(255,255,255,.84), rgba(255,255,255,.84)) 18% 62% / 3px 104px no-repeat,
-    linear-gradient(rgba(255,255,255,.84), rgba(255,255,255,.84)) 72% 30% / 3px 112px no-repeat,
-    radial-gradient(circle at 66% 26%, rgba(255,255,255,.34) 0 34px, transparent 35px),
-    radial-gradient(circle at 78% 54%, rgba(255,255,255,.18) 0 24px, transparent 25px);
+    radial-gradient(circle at 80% 16%, rgba(255,211,128,.34) 0 46px, transparent 47px),
+    radial-gradient(circle at 50% 42%, rgba(124,28,28,.22) 0 86px, transparent 87px),
+    linear-gradient(180deg, #121827 0%, #1d141b 42%, #4d0f18 100%);
 }
-
-.pattern-crash{
+.gameCard--mines{
   background:
-    radial-gradient(circle at 14% 18%, rgba(255,255,255,.88) 0 14px, transparent 15px),
-    radial-gradient(circle at 82% 70%, rgba(255,255,255,.88) 0 13px, transparent 14px),
-    linear-gradient(rgba(255,255,255,.82), rgba(255,255,255,.82)) 22% 60% / 3px 106px no-repeat,
-    linear-gradient(rgba(255,255,255,.82), rgba(255,255,255,.82)) 72% 22% / 3px 112px no-repeat,
-    linear-gradient(45deg, transparent 0 47%, rgba(255,255,255,.82) 47% 53%, transparent 53%) 18% 40% / 82px 82px no-repeat,
-    linear-gradient(45deg, transparent 0 47%, rgba(255,255,255,.82) 47% 53%, transparent 53%) 6% 18% / 70px 70px no-repeat;
+    radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
+    linear-gradient(180deg, #50e5d7 0%, #309ef1 46%, #2064e8 100%);
 }
-
-.pattern-mines{
+.gameCard--rps{
   background:
-    radial-gradient(circle at 20% 18%, rgba(255,255,255,.90) 0 18px, transparent 19px),
-    radial-gradient(circle at 84% 72%, rgba(255,255,255,.90) 0 14px, transparent 15px),
-    linear-gradient(rgba(255,255,255,.84), rgba(255,255,255,.84)) 18% 70% / 3px 112px no-repeat,
-    linear-gradient(rgba(255,255,255,.84), rgba(255,255,255,.84)) 72% 16% / 3px 102px no-repeat,
-    linear-gradient(45deg, transparent 0 47%, rgba(255,255,255,.84) 47% 53%, transparent 53%) 84% 8% / 68px 68px no-repeat,
-    linear-gradient(45deg, transparent 0 47%, rgba(255,255,255,.84) 47% 53%, transparent 53%) 56% 84% / 54px 54px no-repeat,
-    radial-gradient(circle at 94% 34%, rgba(255,255,255,.74) 0 10px, transparent 11px),
-    radial-gradient(circle at 8% 82%, rgba(255,255,255,.74) 0 10px, transparent 11px);
+    radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
+    linear-gradient(180deg, #ffc158 0%, #ff8d57 48%, #ff6278 100%);
 }
-
-.pattern-rps{
+.gameCard--penalty{
   background:
-    radial-gradient(circle at 16% 18%, rgba(255,255,255,.88) 0 16px, transparent 17px),
-    radial-gradient(circle at 86% 72%, rgba(255,255,255,.88) 0 13px, transparent 14px),
-    linear-gradient(rgba(255,255,255,.84), rgba(255,255,255,.84)) 20% 62% / 3px 112px no-repeat,
-    linear-gradient(rgba(255,255,255,.84), rgba(255,255,255,.84)) 76% 24% / 3px 106px no-repeat,
-    linear-gradient(45deg, transparent 0 47%, rgba(255,255,255,.82) 47% 53%, transparent 53%) 10% 70% / 82px 82px no-repeat;
+    radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
+    linear-gradient(180deg, #6cda56 0%, #338f36 48%, #245923 100%);
 }
-
-.pattern-penalty{
+.gameCard--tower{
   background:
-    radial-gradient(circle at 18% 18%, rgba(255,255,255,.86) 0 16px, transparent 17px),
-    radial-gradient(circle at 84% 72%, rgba(255,255,255,.86) 0 14px, transparent 15px),
-    linear-gradient(rgba(255,255,255,.82), rgba(255,255,255,.82)) 18% 68% / 3px 108px no-repeat,
-    linear-gradient(rgba(255,255,255,.82), rgba(255,255,255,.82)) 82% 20% / 3px 112px no-repeat,
-    radial-gradient(circle at 68% 30%, rgba(255,255,255,.18) 0 34px, transparent 35px),
-    radial-gradient(circle at 30% 36%, rgba(255,255,255,.14) 0 28px, transparent 29px);
+    radial-gradient(circle at 24% 12%, rgba(255,255,255,.09) 0 110px, transparent 111px),
+    linear-gradient(180deg, #6f7f98 0%, #4a556b 46%, #2b3140 100%);
 }
-
-.pattern-tower{
+.gameCard--wheel{
   background:
-    radial-gradient(circle at 18% 18%, rgba(255,255,255,.88) 0 16px, transparent 17px),
-    radial-gradient(circle at 84% 72%, rgba(255,255,255,.88) 0 13px, transparent 14px),
-    linear-gradient(rgba(255,255,255,.82), rgba(255,255,255,.82)) 18% 76% / 3px 126px no-repeat,
-    linear-gradient(rgba(255,255,255,.82), rgba(255,255,255,.82)) 76% 18% / 3px 116px no-repeat,
-    linear-gradient(45deg, transparent 0 47%, rgba(255,255,255,.82) 47% 53%, transparent 53%) 8% 64% / 72px 72px no-repeat;
+    radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
+    linear-gradient(180deg, #d85eff 0%, #8ee45e 52%, #f0d65a 100%);
 }
 
-.pattern-wheel{
-  background:
-    radial-gradient(circle at 18% 18%, rgba(255,255,255,.88) 0 16px, transparent 17px),
-    radial-gradient(circle at 82% 74%, rgba(255,255,255,.88) 0 14px, transparent 15px),
-    linear-gradient(rgba(255,255,255,.82), rgba(255,255,255,.82)) 18% 68% / 3px 108px no-repeat,
-    linear-gradient(rgba(255,255,255,.82), rgba(255,255,255,.82)) 80% 22% / 3px 112px no-repeat,
-    radial-gradient(circle at 72% 24%, rgba(255,255,255,.20) 0 42px, transparent 43px),
-    radial-gradient(circle at 64% 74%, rgba(255,255,255,.14) 0 34px, transparent 35px);
+.mCardArt{
+  min-height:210px;
 }
 
-.cardTitleCenter{
-  position:relative;
-  z-index:2;
-  font-size:34px;
-  line-height:1.08;
-  font-weight:1000;
-  letter-spacing:1.1px;
-  text-transform:uppercase;
-  text-align:center;
-  color:#f7faff;
-  text-shadow:
-    0 3px 16px rgba(0,0,0,.30),
-    0 1px 0 rgba(255,255,255,.10);
-  padding:0 20px;
-  max-width:88%;
-}
-
-.cardTitleCenter--long{
-  font-size:23px;
-  line-height:1.18;
-  max-width:78%;
-}
-
-.cardMeta{
+.mPosterMeta{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
-  padding:16px 18px;
-  background:#ececf0;
-  border-top:1px solid rgba(0,0,0,.05);
-  min-height:90px;
+  gap:14px;
+  padding:16px;
+  border-top:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(180deg, rgba(10,14,25,.18), rgba(10,14,25,.28));
 }
 
-.cardMetaEmpty{
-  flex:1 1 auto;
-  min-width:20px;
+.mPosterInfo{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  gap:4px;
 }
 
-.cardPlay{
-  flex:0 0 auto;
-  min-width:128px;
-  height:58px;
-  padding:0 18px;
-  border-radius:16px;
+.mPosterTitle{
+  font-size:18px;
+  line-height:1;
+  font-weight:950;
+  color:#f2f4ff;
+  text-transform:uppercase;
+}
+
+.mPosterSub{
+  font-size:12px;
+  line-height:1.22;
+  color:#b8c0d8;
+  font-weight:700;
+}
+
+.mPosterBtn{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(180deg, #5f7cff 0%, #4562e7 100%);
-  color:#ffffff;
+  min-width:108px;
+  height:50px;
+  padding:0 18px;
+  border-radius:17px;
+  background:linear-gradient(180deg, #7088ff, #5067eb);
+  color:#fff;
   font-size:15px;
-  font-weight:1000;
+  font-weight:950;
   box-shadow:
-    0 12px 22px rgba(69,98,231,.24),
+    0 12px 24px rgba(79,103,235,.22),
     inset 0 1px 0 rgba(255,255,255,.18);
 }
-
-.gameCard--dice .cardPoster{
-  background:linear-gradient(135deg, #8ad9ff 0%, #4e9cff 46%, #2750dc 100%);
-}
-.gameCard--coinflip .cardPoster{
-  background:linear-gradient(135deg, #24304e 0%, #171f31 48%, #0b111b 100%);
-}
-.gameCard--crash .cardPoster{
-  background:linear-gradient(135deg, #454968 0%, #582734 48%, #81182a 100%);
-}
-.gameCard--mines .cardPoster{
-  background:linear-gradient(135deg, #f0b6ef 0%, #c894f0 46%, #8f75eb 100%);
-}
-.gameCard--rps .cardPoster{
-  background:linear-gradient(135deg, #ffd96e 0%, #ffb15c 48%, #ff6e7f 100%);
-}
-.gameCard--penalty .cardPoster{
-  background:linear-gradient(135deg, #9bf06f 0%, #49b95b 48%, #206f3b 100%);
-}
-.gameCard--tower .cardPoster{
-  background:linear-gradient(135deg, #ffd06b 0%, #f4a04a 48%, #ef6d4d 100%);
-}
-.gameCard--wheel .cardPoster{
-  background:linear-gradient(135deg, #df78ff 0%, #8d73ff 34%, #58ddd1 66%, #f6dd68 100%);
-}
-
-.mHeader{display:none;}
 
 .modal{position:fixed;inset:0;display:none;z-index:50;}
 .modal.open{display:block;}
@@ -773,42 +687,11 @@ button{font:inherit}
 }
 .promoMsg{margin-top:10px;font-size:12px;color:rgba(234,240,255,.78);min-height:16px;}
 
-@media (max-width:760px){
-  .walletDesk{
-    padding:24px;
-    min-height:220px;
-  }
-
-  .walletDesk__name{
-    font-size:30px;
-  }
-
-  .walletDesk__balance{
-    font-size:48px;
-    gap:14px;
-  }
-
-  .walletDesk__coin{
-    width:56px;
-    height:56px;
-    font-size:28px;
-  }
-
-  .walletDesk__actions{
-    grid-template-columns:1fr;
-    gap:16px;
-    margin-top:24px;
-  }
-
-  .walletDesk__btn{
-    height:88px;
-    font-size:28px;
-    border-radius:26px;
-  }
-}
+.mHeader{display:none;}
 
 @media (max-width:520px){
   .topbar{display:none !important;}
+  .rail{display:none !important;}
   .hero{display:none !important;}
 
   .mHeader{
@@ -947,35 +830,66 @@ button{font:inherit}
     background:rgba(255,255,255,.04);
   }
 
-  .gameCard{
+  .gameCard--poster{
     min-height:auto;
+    padding:0;
     border-radius:28px;
+    overflow:hidden;
+    position:relative;
+    border:1px solid rgba(255,255,255,.10);
+    box-shadow:
+      0 20px 36px rgba(0,0,0,.26),
+      inset 0 1px 0 rgba(255,255,255,.04);
   }
 
-  .cardPoster{
+  .mCardArt{
     min-height:220px;
   }
 
-  .cardTitleCenter{
-    font-size:30px;
-    padding:0 16px;
+  .mBottomNav{
+    display:flex;
+    position:fixed;
+    left:8px;
+    right:8px;
+    bottom:8px;
+    z-index:60;
+    gap:9px;
+    overflow-x:auto;
+    padding:10px 12px;
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.09);
+    background:linear-gradient(180deg, rgba(17,23,38,.96), rgba(10,14,25,.95));
+    backdrop-filter:blur(14px);
+    box-shadow:
+      0 18px 36px rgba(0,0,0,.34),
+      inset 0 1px 0 rgba(255,255,255,.04);
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .mBottomNav::-webkit-scrollbar{width:0;height:0;}
+
+  .mBottomNav__item{
+    flex:0 0 auto;
+    width:52px;
+    height:52px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(95,95,95,.22);
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    overflow:hidden;
   }
 
-  .cardTitleCenter--long{
-    font-size:22px;
-    max-width:86%;
+  .mBottomNav__item span{
+    font-size:16px;
+    font-weight:900;
+    color:#d8dde8;
   }
 
-  .cardMeta{
-    padding:14px 16px;
-    min-height:84px;
-  }
-
-  .cardPlay{
-    min-width:118px;
-    height:50px;
-    border-radius:15px;
-    font-size:14px;
+  .mBottomNav__item--gift{
+    border-color:rgba(224,194,111,.22);
+    background:linear-gradient(180deg, rgba(224,194,111,.10), rgba(76,125,255,.08));
   }
 
   .modal__panel{
