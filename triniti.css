@@ -75,7 +75,7 @@ button{font:inherit}
 @media (max-width:520px){
   .app{
     width:calc(100% - 14px);
-    margin:8px auto 98px;
+    margin:8px auto 18px;
   }
 }
 
@@ -243,7 +243,7 @@ button{font:inherit}
   place-items:center;
   border-radius:16px;
   border:1px solid rgba(255,255,255,.10);
-  background:rgba(95,95,95,.22);
+  background:rgba(95,95,95,.20);
   cursor:pointer;
   user-select:none;
 }
@@ -299,8 +299,8 @@ button{font:inherit}
   border-color:rgba(76,125,255,.55);
   background:linear-gradient(180deg, rgba(76,125,255,.22), rgba(0,0,0,.18));
 }
-.tileTop{font-weight:950;font-size:18px;}
 .tileSub{margin-top:6px;font-size:12px;color:var(--muted);}
+.tileTop{font-weight:950;font-size:18px;}
 
 .grid{
   margin-top:12px;
@@ -333,82 +333,75 @@ button{font:inherit}
     inset 0 1px 0 rgba(255,255,255,.04);
 }
 
-.gameCard--dice{
-  background:
-    radial-gradient(circle at 26% 12%, rgba(255,255,255,.18) 0 120px, transparent 121px),
-    linear-gradient(180deg, #6ea6ff 0%, #2558df 36%, #102a95 100%);
-}
-.gameCard--coinflip{
-  background:
-    radial-gradient(circle at 26% 14%, rgba(255,255,255,.08) 0 110px, transparent 111px),
-    linear-gradient(180deg, #0f1b3d 0%, #09142f 42%, #060c1f 100%);
-}
-.gameCard--crash{
-  background:
-    radial-gradient(circle at 80% 16%, rgba(255,211,128,.34) 0 46px, transparent 47px),
-    radial-gradient(circle at 50% 42%, rgba(124,28,28,.22) 0 86px, transparent 87px),
-    linear-gradient(180deg, #121827 0%, #1d141b 42%, #4d0f18 100%);
-}
-.gameCard--mines{
-  background:
-    radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
-    linear-gradient(180deg, #50e5d7 0%, #309ef1 46%, #2064e8 100%);
-}
-.gameCard--rps{
-  background:
-    radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
-    linear-gradient(180deg, #ffc158 0%, #ff8d57 48%, #ff6278 100%);
-}
-.gameCard--penalty{
-  background:
-    radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
-    linear-gradient(180deg, #6cda56 0%, #338f36 48%, #245923 100%);
-}
-.gameCard--tower{
-  background:
-    radial-gradient(circle at 24% 12%, rgba(255,255,255,.09) 0 110px, transparent 111px),
-    linear-gradient(180deg, #6f7f98 0%, #4a556b 46%, #2b3140 100%);
-}
-.gameCard--wheel{
-  background:
-    radial-gradient(circle at 24% 12%, rgba(255,255,255,.10) 0 120px, transparent 121px),
-    linear-gradient(180deg, #d85eff 0%, #8ee45e 52%, #f0d65a 100%);
+.mCardArt{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:220px;
+  padding:24px 18px 12px;
+  position:relative;
+  overflow:hidden;
 }
 
-.mCardArt{
-  min-height:210px;
+.mCardCenter{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  position:relative;
+  z-index:2;
+}
+
+.mCardTitleCenter{
+  font-size:21px;
+  line-height:1.15;
+  font-weight:1000;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  color:#f4f7ff;
+  text-align:center;
+  text-shadow:
+    0 8px 24px rgba(0,0,0,.28),
+    0 1px 0 rgba(255,255,255,.10);
+  max-width:82%;
+}
+
+.mCardTitleCenter--long{
+  font-size:16px;
+  line-height:1.22;
+  max-width:76%;
 }
 
 .mPosterMeta{
-  display:flex;
+  display:grid;
+  grid-template-columns:1fr auto;
   align-items:center;
-  justify-content:space-between;
   gap:14px;
   padding:16px;
+  min-height:86px;
   border-top:1px solid rgba(255,255,255,.08);
-  background:linear-gradient(180deg, rgba(10,14,25,.18), rgba(10,14,25,.28));
+  background:linear-gradient(180deg, #f0f0f3 0%, #ececf0 100%);
 }
 
 .mPosterInfo{
   display:flex;
-  flex-direction:column;
+  align-items:center;
+  justify-content:center;
   min-width:0;
-  gap:4px;
-}
-
-.mPosterTitle{
-  font-size:18px;
-  line-height:1;
-  font-weight:950;
-  color:#f2f4ff;
-  text-transform:uppercase;
+  text-align:center;
 }
 
 .mPosterSub{
   font-size:12px;
-  line-height:1.22;
-  color:#b8c0d8;
-  font-weight:700;
+  line-height:1.25;
+  color:#6a7289;
+  font-weight:800;
+}
+
+.mPosterSub--only{
+  width:100%;
+  text-align:center;
 }
 
 .mPosterBtn{
@@ -418,7 +411,7 @@ button{font:inherit}
   min-width:108px;
   height:50px;
   padding:0 18px;
-  border-radius:17px;
+  border-radius:16px;
   background:linear-gradient(180deg, #7088ff, #5067eb);
   color:#fff;
   font-size:15px;
@@ -426,6 +419,72 @@ button{font:inherit}
   box-shadow:
     0 12px 24px rgba(79,103,235,.22),
     inset 0 1px 0 rgba(255,255,255,.18);
+  flex:0 0 auto;
+}
+
+.gameCard--dice .mCardArt{
+  background:
+    radial-gradient(circle at 18% 14%, rgba(255,255,255,.18) 0 20px, transparent 58px),
+    radial-gradient(circle at 86% 70%, rgba(255,255,255,.12) 0 16px, transparent 48px),
+    linear-gradient(rgba(255,255,255,.14), rgba(255,255,255,.14)) 16% 62% / 3px 116px no-repeat,
+    linear-gradient(rgba(255,255,255,.14), rgba(255,255,255,.14)) 82% 28% / 3px 108px no-repeat,
+    linear-gradient(135deg, #91d4ff 0%, #5d99ff 44%, #3558eb 100%);
+}
+.gameCard--coinflip .mCardArt{
+  background:
+    radial-gradient(circle at 24% 16%, rgba(255,255,255,.14) 0 18px, transparent 54px),
+    radial-gradient(circle at 82% 74%, rgba(255,255,255,.10) 0 14px, transparent 48px),
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 18% 66% / 3px 110px no-repeat,
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 72% 22% / 3px 104px no-repeat,
+    linear-gradient(135deg, #2a3140 0%, #161c27 48%, #0a0f17 100%);
+}
+.gameCard--crash .mCardArt{
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,.14) 0 18px, transparent 54px),
+    radial-gradient(circle at 86% 72%, rgba(255,255,255,.10) 0 14px, transparent 48px),
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 20% 64% / 3px 112px no-repeat,
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 80% 22% / 3px 108px no-repeat,
+    linear-gradient(135deg, #434868 0%, #572535 48%, #7e182a 100%);
+}
+.gameCard--mines .mCardArt{
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,.14) 0 18px, transparent 54px),
+    radial-gradient(circle at 86% 72%, rgba(255,255,255,.10) 0 14px, transparent 48px),
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 20% 68% / 3px 116px no-repeat,
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 78% 20% / 3px 106px no-repeat,
+    linear-gradient(135deg, #7cf0cc 0%, #33c6d8 50%, #1d74e1 100%);
+}
+.gameCard--rps .mCardArt{
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,.14) 0 18px, transparent 54px),
+    radial-gradient(circle at 86% 72%, rgba(255,255,255,.10) 0 14px, transparent 48px),
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 20% 66% / 3px 112px no-repeat,
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 80% 22% / 3px 106px no-repeat,
+    linear-gradient(135deg, #ffde6c 0%, #ffab5d 46%, #ff717f 100%);
+}
+.gameCard--penalty .mCardArt{
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,.14) 0 18px, transparent 54px),
+    radial-gradient(circle at 86% 72%, rgba(255,255,255,.10) 0 14px, transparent 48px),
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 20% 66% / 3px 110px no-repeat,
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 80% 22% / 3px 104px no-repeat,
+    linear-gradient(135deg, #94ee72 0%, #44b35a 48%, #216d3e 100%);
+}
+.gameCard--tower .mCardArt{
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,.14) 0 18px, transparent 54px),
+    radial-gradient(circle at 86% 72%, rgba(255,255,255,.10) 0 14px, transparent 48px),
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 20% 68% / 3px 114px no-repeat,
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 80% 20% / 3px 106px no-repeat,
+    linear-gradient(135deg, #aab6c9 0%, #707c90 48%, #3b4554 100%);
+}
+.gameCard--wheel .mCardArt{
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,255,255,.14) 0 18px, transparent 54px),
+    radial-gradient(circle at 86% 72%, rgba(255,255,255,.10) 0 14px, transparent 48px),
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 20% 68% / 3px 114px no-repeat,
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)) 80% 22% / 3px 108px no-repeat,
+    linear-gradient(135deg, #de78ff 0%, #8d73ff 34%, #58ddd1 66%, #f6dd68 100%);
 }
 
 .modal{position:fixed;inset:0;display:none;z-index:50;}
@@ -688,6 +747,7 @@ button{font:inherit}
 .promoMsg{margin-top:10px;font-size:12px;color:rgba(234,240,255,.78);min-height:16px;}
 
 .mHeader{display:none;}
+.mBottomNav{display:none;}
 
 @media (max-width:520px){
   .topbar{display:none !important;}
@@ -832,18 +892,38 @@ button{font:inherit}
 
   .gameCard--poster{
     min-height:auto;
-    padding:0;
     border-radius:28px;
-    overflow:hidden;
-    position:relative;
-    border:1px solid rgba(255,255,255,.10);
-    box-shadow:
-      0 20px 36px rgba(0,0,0,.26),
-      inset 0 1px 0 rgba(255,255,255,.04);
   }
 
   .mCardArt{
-    min-height:220px;
+    min-height:230px;
+    padding:20px 16px 12px;
+  }
+
+  .mCardTitleCenter{
+    font-size:28px;
+    max-width:86%;
+  }
+
+  .mCardTitleCenter--long{
+    font-size:18px;
+    max-width:80%;
+  }
+
+  .mPosterMeta{
+    grid-template-columns:1fr auto;
+    min-height:84px;
+    padding:14px 16px;
+  }
+
+  .mPosterSub{
+    font-size:12px;
+  }
+
+  .mPosterBtn{
+    min-width:112px;
+    height:48px;
+    font-size:14px;
   }
 
   .mBottomNav{
