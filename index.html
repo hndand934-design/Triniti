@@ -109,116 +109,149 @@
         </div>
       </section>
 
-      <section class="content content--full">
-        <section class="hero card" aria-label="Кошелек">
-          <div class="walletDesk">
-            <div class="walletDesk__top">
-              <div class="walletDesk__name">GG</div>
-              <div class="walletDesk__balance">
-                <span class="walletDesk__coin">🪙</span>
-                <b id="balance">1000</b>
-              </div>
-            </div>
+      <aside class="rail" aria-label="Быстрые режимы">
+        <div class="railCard">
+          <div class="railBal">
+            <div class="railBal__title">Баланс</div>
+            <div class="railBal__val">🪙 <b id="balanceRail">1000</b></div>
+          </div>
 
-            <div class="walletDesk__actions">
-              <button id="depositBtn" class="walletDesk__btn walletDesk__btn--primary" type="button">Пополнить</button>
-              <button id="withdrawBtn" class="walletDesk__btn walletDesk__btn--ghost" type="button">Вывести</button>
+          <nav class="railNav">
+            <a class="railBtn" href="./dice/" title="Dice"><span>D</span></a>
+            <a class="railBtn" href="./coinflip/" title="Coin Flip"><span>C</span></a>
+            <a class="railBtn" href="./crash/" title="Crash"><span>R</span></a>
+            <a class="railBtn" href="./mines/" title="Mines"><span>M</span></a>
+            <a class="railBtn" href="./rps/" title="Камень Ножницы Бумага"><span>R</span></a>
+            <a class="railBtn" href="./penalty/" title="Penalty"><span>P</span></a>
+            <a class="railBtn" href="./tower/" title="Tower"><span>T</span></a>
+            <a class="railBtn" href="./wheel/" title="Wheel"><span>W</span></a>
+            <button class="railBtn railBtn--gift" type="button" data-open="free" title="Халява"><span>🎁</span></button>
+          </nav>
+        </div>
+      </aside>
+
+      <section class="content">
+        <section class="hero card" aria-label="Блок будет заполнен позже">
+          <div class="heroRow">
+            <div class="heroEmpty"></div>
+            <div class="heroTiles">
+              <button id="depositBtn" class="tileBtn tileBtn--primary" type="button">
+                <div class="tileTop">Пополнить</div>
+                <div class="tileSub">виртуальные монеты</div>
+              </button>
+
+              <button id="withdrawBtn" class="tileBtn tileBtn--ghost" type="button">
+                <div class="tileTop">Вывести</div>
+                <div class="tileSub">виртуальные монеты</div>
+              </button>
             </div>
           </div>
         </section>
 
         <section id="games" class="grid">
-          <a class="gameCard gameCard--dice" href="./dice/" aria-label="Dice">
-            <div class="cardPoster">
-              <div class="cardPattern pattern-dice"></div>
-              <div class="cardTitleCenter">DICE</div>
-            </div>
-            <div class="cardMeta">
-              <div class="cardMetaEmpty"></div>
-              <div class="cardPlay">ИГРАТЬ</div>
-            </div>
-          </a>
-
-          <a class="gameCard gameCard--coinflip" href="./coinflip/" aria-label="Coin Flip">
-            <div class="cardPoster">
-              <div class="cardPattern pattern-coinflip"></div>
-              <div class="cardTitleCenter">COIN FLIP</div>
-            </div>
-            <div class="cardMeta">
-              <div class="cardMetaEmpty"></div>
-              <div class="cardPlay">ИГРАТЬ</div>
+          <a class="gameCard gameCard--poster gameCard--dice" href="./dice/" aria-label="Dice">
+            <div class="mCardArt"></div>
+            <div class="mPosterMeta">
+              <div class="mPosterInfo">
+                <div class="mPosterTitle">Dice</div>
+                <div class="mPosterSub">Бросок кубика</div>
+              </div>
+              <div class="mPosterBtn btnPrimary">Играть</div>
             </div>
           </a>
 
-          <a class="gameCard gameCard--crash" href="./crash/" aria-label="Crash">
-            <div class="cardPoster">
-              <div class="cardPattern pattern-crash"></div>
-              <div class="cardTitleCenter">CRASH</div>
-            </div>
-            <div class="cardMeta">
-              <div class="cardMetaEmpty"></div>
-              <div class="cardPlay">ИГРАТЬ</div>
-            </div>
-          </a>
-
-          <a class="gameCard gameCard--mines" href="./mines/" aria-label="Mines">
-            <div class="cardPoster">
-              <div class="cardPattern pattern-mines"></div>
-              <div class="cardTitleCenter">MINES</div>
-            </div>
-            <div class="cardMeta">
-              <div class="cardMetaEmpty"></div>
-              <div class="cardPlay">ИГРАТЬ</div>
+          <a class="gameCard gameCard--poster gameCard--coinflip" href="./coinflip/" aria-label="Coin Flip">
+            <div class="mCardArt"></div>
+            <div class="mPosterMeta">
+              <div class="mPosterInfo">
+                <div class="mPosterTitle">Coin Flip</div>
+                <div class="mPosterSub">Монетка 50 на 50</div>
+              </div>
+              <div class="mPosterBtn btnPrimary">Играть</div>
             </div>
           </a>
 
-          <a class="gameCard gameCard--rps" href="./rps/" aria-label="Камень Ножницы Бумага">
-            <div class="cardPoster">
-              <div class="cardPattern pattern-rps"></div>
-              <div class="cardTitleCenter cardTitleCenter--long">КАМЕНЬ НОЖНИЦЫ БУМАГА</div>
-            </div>
-            <div class="cardMeta">
-              <div class="cardMetaEmpty"></div>
-              <div class="cardPlay">ИГРАТЬ</div>
-            </div>
-          </a>
-
-          <a class="gameCard gameCard--penalty" href="./penalty/" aria-label="Penalty">
-            <div class="cardPoster">
-              <div class="cardPattern pattern-penalty"></div>
-              <div class="cardTitleCenter">PENALTY</div>
-            </div>
-            <div class="cardMeta">
-              <div class="cardMetaEmpty"></div>
-              <div class="cardPlay">ИГРАТЬ</div>
+          <a class="gameCard gameCard--poster gameCard--crash" href="./crash/" aria-label="Crash">
+            <div class="mCardArt"></div>
+            <div class="mPosterMeta">
+              <div class="mPosterInfo">
+                <div class="mPosterTitle">Crash</div>
+                <div class="mPosterSub">Ракета растёт · забирай вовремя</div>
+              </div>
+              <div class="mPosterBtn btnPrimary">Играть</div>
             </div>
           </a>
 
-          <a class="gameCard gameCard--tower" href="./tower/" aria-label="Tower">
-            <div class="cardPoster">
-              <div class="cardPattern pattern-tower"></div>
-              <div class="cardTitleCenter">TOWER</div>
-            </div>
-            <div class="cardMeta">
-              <div class="cardMetaEmpty"></div>
-              <div class="cardPlay">ИГРАТЬ</div>
+          <a class="gameCard gameCard--poster gameCard--mines" href="./mines/" aria-label="Mines">
+            <div class="mCardArt"></div>
+            <div class="mPosterMeta">
+              <div class="mPosterInfo">
+                <div class="mPosterTitle">Mines</div>
+                <div class="mPosterSub">5×5 · лестница X · cashout</div>
+              </div>
+              <div class="mPosterBtn btnPrimary">Играть</div>
             </div>
           </a>
 
-          <a class="gameCard gameCard--wheel" href="./wheel/" aria-label="Wheel">
-            <div class="cardPoster">
-              <div class="cardPattern pattern-wheel"></div>
-              <div class="cardTitleCenter">WHEEL</div>
+          <a class="gameCard gameCard--poster gameCard--rps" href="./rps/" aria-label="Камень Ножницы Бумага">
+            <div class="mCardArt"></div>
+            <div class="mPosterMeta">
+              <div class="mPosterInfo">
+                <div class="mPosterTitle">Камень Ножницы Бумага</div>
+                <div class="mPosterSub">Серия · лестница X · cashout</div>
+              </div>
+              <div class="mPosterBtn btnPrimary">Играть</div>
             </div>
-            <div class="cardMeta">
-              <div class="cardMetaEmpty"></div>
-              <div class="cardPlay">ИГРАТЬ</div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--penalty" href="./penalty/" aria-label="Penalty">
+            <div class="mCardArt"></div>
+            <div class="mPosterMeta">
+              <div class="mPosterInfo">
+                <div class="mPosterTitle">Penalty</div>
+                <div class="mPosterSub">Вратарь · сложность · лестница X</div>
+              </div>
+              <div class="mPosterBtn btnPrimary">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--tower" href="./tower/" aria-label="Tower">
+            <div class="mCardArt"></div>
+            <div class="mPosterMeta">
+              <div class="mPosterInfo">
+                <div class="mPosterTitle">Tower</div>
+                <div class="mPosterSub">Риск по шагам · cashout</div>
+              </div>
+              <div class="mPosterBtn btnPrimary">Играть</div>
+            </div>
+          </a>
+
+          <a class="gameCard gameCard--poster gameCard--wheel" href="./wheel/" aria-label="Wheel">
+            <div class="mCardArt"></div>
+            <div class="mPosterMeta">
+              <div class="mPosterInfo">
+                <div class="mPosterTitle">Wheel</div>
+                <div class="mPosterSub">Выбор X · честный RNG</div>
+              </div>
+              <div class="mPosterBtn btnPrimary">Играть</div>
             </div>
           </a>
         </section>
       </section>
     </main>
   </div>
+
+  <nav class="mBottomNav" aria-label="Навигация по режимам">
+    <a class="mBottomNav__item" href="./dice/" title="Dice"><span>D</span></a>
+    <a class="mBottomNav__item" href="./coinflip/" title="Coin Flip"><span>C</span></a>
+    <a class="mBottomNav__item" href="./crash/" title="Crash"><span>R</span></a>
+    <a class="mBottomNav__item" href="./mines/" title="Mines"><span>M</span></a>
+    <a class="mBottomNav__item" href="./rps/" title="Камень Ножницы Бумага"><span>R</span></a>
+    <a class="mBottomNav__item" href="./penalty/" title="Penalty"><span>P</span></a>
+    <a class="mBottomNav__item" href="./tower/" title="Tower"><span>T</span></a>
+    <a class="mBottomNav__item" href="./wheel/" title="Wheel"><span>W</span></a>
+    <button class="mBottomNav__item mBottomNav__item--gift" type="button" data-open="free" title="Халява"><span>🎁</span></button>
+  </nav>
 
   <div id="freeModal" class="modal" aria-hidden="true">
     <div class="modal__backdrop" data-close="1"></div>
