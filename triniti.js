@@ -194,7 +194,28 @@
         return;
       }
 
-      alert("Тестовый вывод пока не подключен в backend. Следующий шаг — добавить withdraw API.");
+      const requisites = prompt("Введите реквизиты для тестового вывода:", "test-card");
+      if (requisites === null) return;
+
+      const created = await api("/withdraw/create", {
+        method: "POST",
+        body: JSON.stringify({
+          amount,
+          requisites
+        })
+      });
+
+      await api("/withdraw/confirm-test", {
+        method: "POST",
+        body: JSON.stringify({
+          withdrawalId: created.withdrawalId
+        })
+      });
+
+      await syncBalanceUI();
+      beep(760, 70, 0.03);
+      setTimeout(() => beep(520, 70, 0.03), 90);
+      alert(`Вывод на ${amount} 🪙 выполнен`);
     } catch (e) {
       console.error(e);
       alert("Ошибка вывода: " + e.message);
