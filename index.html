@@ -69,36 +69,31 @@
             <span class="sideItem__icon">⌂</span>
             <span>Главная</span>
           </button>
+
           <button class="sideItem" type="button" data-jump="#featuredSec">
             <span class="sideItem__icon">★</span>
             <span>Популярные</span>
           </button>
+
           <button class="sideItem" type="button" data-jump="#gamesSec">
             <span class="sideItem__icon">◼</span>
             <span>Все игры</span>
           </button>
+
           <button class="sideItem" type="button" data-open="promo">
             <span class="sideItem__icon">%</span>
             <span>Промокоды</span>
           </button>
+
           <button class="sideItem" type="button" data-open="free">
             <span class="sideItem__icon">🎁</span>
             <span>Халява</span>
           </button>
+
           <button class="sideItem" type="button" data-open="support">
             <span class="sideItem__icon">?</span>
             <span>Поддержка</span>
           </button>
-        </div>
-
-        <div class="sideCard sideCard--wallet">
-          <div class="sideLabel">Общий баланс</div>
-          <div class="sideBalance">🪙 <b id="balanceRail">1000</b></div>
-
-          <div class="sideActions">
-            <button id="depositBtnSide" class="sideAction sideAction--primary" type="button">Пополнить</button>
-            <button id="withdrawBtnSide" class="sideAction" type="button">Вывести</button>
-          </div>
         </div>
       </aside>
 
@@ -150,18 +145,25 @@
           <div class="heroGrid">
             <div class="heroMain">
               <div class="heroMain__overlay"></div>
+
               <div class="heroMain__content">
                 <div class="heroKicker">TRINITI / SELECTED MODES</div>
-                <h1 class="heroTitle">Сильный старт.<br>Чистый интерфейс.<br>Все режимы рядом.</h1>
+
+                <h1 class="heroTitle">
+                  Сильный старт.<br>
+                  Чистый интерфейс.<br>
+                  Все режимы рядом.
+                </h1>
+
                 <p class="heroText">
                   Один входной экран для Crash, Mines, Dice, Coin Flip, Wheel, Tower,
                   Penalty и Камень Ножницы Бумага. Без перегруза, с общим балансом,
-                  промокодами, халявой и быстрым доступом к режимам.
+                  промокодами и быстрым доступом к режимам.
                 </p>
 
                 <div class="heroActions">
                   <button class="heroBtn heroBtn--primary" type="button" data-jump="#gamesSec">Играть сейчас</button>
-                  <button class="heroBtn heroBtn--ghost" type="button" data-open="free">Забрать бонус</button>
+                  <button class="heroBtn heroBtn--ghost" type="button" data-open="promo">Открыть промокоды</button>
                 </div>
 
                 <div class="heroStats">
@@ -185,7 +187,7 @@
               </div>
             </div>
 
-            <div class="heroSide heroSide--balance">
+            <div class="heroSide heroSide--balance heroSide--wide">
               <div class="heroSide__label">Общий баланс</div>
               <div class="heroSide__value">🪙 <b id="balance">1000</b></div>
             </div>
@@ -200,14 +202,9 @@
               <span class="heroSide__desc">запрос на вывод</span>
             </button>
 
-            <button class="heroSide heroSide--bonus" type="button" data-open="free">
-              <span class="heroSide__title">Free money</span>
-              <span class="heroSide__desc">ежедневное колесо и бонусы</span>
-            </button>
-
-            <button class="heroSide heroSide--promo" type="button" data-open="promo">
+            <button class="heroSide heroSide--promo heroSide--wide" type="button" data-open="promo">
               <span class="heroSide__title">Промокоды</span>
-              <span class="heroSide__desc">активация кодов в 1 клик</span>
+              <span class="heroSide__desc">активация кодов и быстрые бонусы</span>
             </button>
           </div>
         </section>
@@ -222,7 +219,7 @@
 
           <div class="toolbar__search">
             <span class="toolbar__searchIcon">⌕</span>
-            <input class="toolbar__input" type="text" placeholder="Поиск режима" />
+            <input class="toolbar__input" type="text" placeholder="Поиск режима">
           </div>
         </section>
 
@@ -518,9 +515,9 @@
           <div class="promoBody">
             <div class="promoLogoSlot" aria-hidden="true"></div>
             <div class="promoForm">
-              <input id="promoInput" class="promoInput" type="text" placeholder="Введите промокод" autocomplete="off" />
+              <input id="promoInput" class="promoInput" type="text" placeholder="Введите промокод" autocomplete="off">
               <button id="promoApply" class="promoBtn" type="button">Активировать</button>
-              <div id="promoMsg" class="promoMsg"> </div>
+              <div id="promoMsg" class="promoMsg"></div>
             </div>
           </div>
         </div>
