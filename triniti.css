@@ -463,6 +463,11 @@ button{font:inherit}
   color:rgba(255,255,255,.88);
 }
 
+/* MOBILE PANEL */
+.mobileWalletPanel{
+  display:none;
+}
+
 .toolbar{
   margin-top:16px;
   display:grid;
@@ -1268,19 +1273,66 @@ button{font:inherit}
     min-width:88px;
   }
 
-  .heroSide{
+  /* скрываем desktop-блоки на мобиле */
+  .heroSide--balance,
+  .heroSide--deposit,
+  .heroSide--withdraw,
+  .heroSide--promo{
+    display:none !important;
+  }
+
+  /* показываем единственный моб-блок баланса */
+  .mobileWalletPanel{
+    display:block;
+    margin-top:12px;
+  }
+
+  .mobileWalletPanel__balance{
+    border-radius:20px;
+    border:1px solid #000;
+    background:linear-gradient(180deg, rgba(20,28,40,.98), rgba(14,20,31,.98));
+    padding:14px;
+    box-shadow:var(--shadow-md);
+  }
+
+  .mobileWalletPanel__label{
+    font-size:12px;
+    color:var(--muted);
+    font-weight:800;
+  }
+
+  .mobileWalletPanel__value{
+    margin-top:8px;
+    font-size:26px;
+    font-weight:1000;
+    line-height:1;
+  }
+
+  .mobileWalletPanel__actions{
+    margin-top:12px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .mobileWalletPanel__btn{
     min-height:118px;
     padding:16px;
     border-radius:20px;
-  }
-
-  .heroSide__title{
+    border:1px solid #000;
+    background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    color:#fff;
+    text-align:left;
     font-size:22px;
+    font-weight:1000;
+    box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.04);
+    cursor:pointer;
   }
 
-  /* УБИРАЕМ ПЛАШКУ БАЛАНСА НА МОБ ВЕРСИИ */
-  .heroSide--balance{
-    display:none !important;
+  .mobileWalletPanel__btn--primary{
+    background:
+      radial-gradient(220px 140px at 0% 0%, rgba(95,122,255,.22), transparent 72%),
+      linear-gradient(180deg, rgba(95,122,255,.14), rgba(255,255,255,.03));
   }
 
   .toolbar{
