@@ -189,7 +189,6 @@ button,input{font:inherit}
   margin-top:14px;
 }
 
-.card,
 .panel{
   border-radius:24px;
   background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.024));
@@ -197,116 +196,7 @@ button,input{font:inherit}
   box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.04);
 }
 
-.hero{
-  padding:16px;
-  display:grid;
-  grid-template-columns:minmax(0,1.4fr) 280px;
-  gap:14px;
-  align-items:stretch;
-}
-
-.hero__main{
-  min-height:210px;
-  border-radius:22px;
-  border:1px solid var(--line);
-  background:
-    radial-gradient(520px 300px at 16% 20%, rgba(106,126,255,.24), transparent 70%),
-    radial-gradient(340px 220px at 78% 76%, rgba(255,255,255,.06), transparent 70%),
-    linear-gradient(135deg, #0f1622 0%, #0a0f17 100%);
-  box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.04);
-  padding:24px;
-}
-
-.hero__side{
-  display:flex;
-  align-items:stretch;
-}
-
-.heroKicker{
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:#9cabcb;
-}
-
-.heroTitle{
-  margin:12px 0 0;
-  font-size:42px;
-  line-height:.96;
-  letter-spacing:-1px;
-  font-weight:1000;
-}
-
-.heroText{
-  max-width:720px;
-  margin:14px 0 0;
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.55;
-  font-weight:700;
-}
-
-.heroStats{
-  margin-top:18px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-
-.heroStat{
-  min-width:120px;
-  padding:12px 14px;
-  border-radius:16px;
-  border:1px solid rgba(0,0,0,.92);
-  background:rgba(255,255,255,.04);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
-}
-
-.heroStat__n{
-  font-size:18px;
-  line-height:1;
-  font-weight:1000;
-}
-
-.heroStat__t{
-  margin-top:6px;
-  font-size:11px;
-  color:var(--muted);
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.9px;
-}
-
-.heroBalanceCard{
-  width:100%;
-  border-radius:22px;
-  border:1px solid var(--line);
-  background:
-    radial-gradient(220px 140px at 0% 0%, rgba(95,122,255,.22), transparent 72%),
-    linear-gradient(180deg, rgba(95,122,255,.14), rgba(255,255,255,.03));
-  padding:18px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.04);
-}
-
-.heroBalanceLabel{
-  font-size:12px;
-  color:var(--muted);
-  font-weight:800;
-}
-
-.heroBalanceValue{
-  margin-top:10px;
-  font-size:34px;
-  line-height:1;
-  font-weight:1000;
-}
-
 .layout{
-  margin-top:14px;
   display:grid;
   grid-template-columns:minmax(0,1.18fr) 360px;
   gap:14px;
@@ -616,21 +506,13 @@ button,input{font:inherit}
   line-height:1.45;
 }
 
+.compatHidden{
+  display:none !important;
+}
+
 @media (max-width: 1080px){
   .layout{
     grid-template-columns:1fr;
-  }
-
-  .hero{
-    grid-template-columns:1fr;
-  }
-
-  .hero__side{
-    display:block;
-  }
-
-  .heroBalanceCard{
-    min-height:120px;
   }
 }
 
@@ -675,43 +557,6 @@ button,input{font:inherit}
   .subtitle{
     font-size:10px;
     letter-spacing:1.4px;
-  }
-
-  .hero{
-    padding:12px;
-  }
-
-  .hero__main{
-    min-height:auto;
-    padding:20px 18px;
-  }
-
-  .heroTitle{
-    font-size:34px;
-    line-height:.98;
-  }
-
-  .heroText{
-    font-size:13px;
-    line-height:1.5;
-  }
-
-  .heroStats{
-    gap:8px;
-  }
-
-  .heroStat{
-    min-width:calc(50% - 4px);
-    flex:1 1 calc(50% - 4px);
-    padding:10px 12px;
-  }
-
-  .heroStat__n{
-    font-size:16px;
-  }
-
-  .heroBalanceValue{
-    font-size:28px;
   }
 
   .panel{
@@ -774,15 +619,6 @@ button,input{font:inherit}
   .pill{
     font-size:12px;
     padding:0 10px;
-  }
-
-  .heroTitle{
-    font-size:30px;
-  }
-
-  .heroStat{
-    min-width:100%;
-    flex:1 1 100%;
   }
 
   .grid{
