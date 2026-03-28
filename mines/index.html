@@ -1,1 +1,209 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>TRINITI — Mines</title>
 
+  <link rel="stylesheet" href="../shared/theme.css" />
+  <link rel="stylesheet" href="./style.css" />
+
+  <script src="../shared/wallet.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar__left">
+        <a class="backBtn" href="../index.html" aria-label="Назад">
+          <span>←</span>
+        </a>
+
+        <div class="brandBox">
+          <div class="brandLogo" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="trinitiGoldMines" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f8e8b2"/>
+                  <stop offset="48%" stop-color="#e0c26f"/>
+                  <stop offset="100%" stop-color="#b78f46"/>
+                </linearGradient>
+              </defs>
+              <rect x="10" y="10" width="44" height="44" rx="14"
+                    fill="rgba(255,255,255,.04)"
+                    stroke="url(#trinitiGoldMines)"
+                    stroke-width="2.2"/>
+              <path d="M21 20H43L39.5 25H34V41L32 45L30 41V25H24.5L21 20Z"
+                    fill="url(#trinitiGoldMines)"/>
+            </svg>
+          </div>
+
+          <div class="brandText">
+            <div class="title">Mines</div>
+            <div id="subTitle" class="subtitle">TRINITI • единый кошелёк</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+          <span class="dot"></span>
+          <span id="soundText">Звук</span>
+        </button>
+
+        <button id="bonusBtn" class="pill pill--bonus" type="button">+1000 🪙</button>
+
+        <div class="pill pill--balance">🪙 <b id="balance">0</b></div>
+      </div>
+    </header>
+
+    <main class="hero">
+      <section class="heroMain">
+        <div class="heroMain__overlay"></div>
+
+        <div class="heroMain__content">
+          <div class="heroKicker">TRINITI / MINES MODE</div>
+
+          <h1 class="heroTitle">Открывай safe клетки. Расти по X. Забирай вовремя.</h1>
+
+          <p class="heroText">
+            Чем больше мин ты ставишь, тем выше риск и тем сильнее растёт множитель.
+            Поле, лесенка и контроль ставок собраны в одном чистом экране без лишнего шума.
+          </p>
+
+          <div class="heroMiniStats">
+            <div class="heroMiniStat">
+              <span class="heroMiniStat__num" id="openedView">0</span>
+              <span class="heroMiniStat__txt">safe открыто</span>
+            </div>
+
+            <div class="heroMiniStat">
+              <span class="heroMiniStat__num" id="multView">x1.00</span>
+              <span class="heroMiniStat__txt">текущий X</span>
+            </div>
+
+            <div class="heroMiniStat">
+              <span class="heroMiniStat__num" id="cashNowView">—</span>
+              <span class="heroMiniStat__txt">забрать сейчас</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="heroSide">
+        <div class="heroSide__label">Общий баланс</div>
+        <div class="heroSide__value">🪙 <b id="balanceMobileMirror">0</b></div>
+        <div class="heroSide__sub">единый кошелёк Triniti</div>
+      </section>
+    </main>
+
+    <main class="layout">
+      <section class="panel panel--left">
+        <div class="panelHead panelHead--board">
+          <div>
+            <div class="h1">Поле 5×5</div>
+            <div class="hint">Нажимай по клеткам после старта раунда.</div>
+          </div>
+
+          <div class="panelHead__badges">
+            <div class="miniBadge">safe max <b id="safeMaxView">22</b></div>
+            <div class="miniBadge">mines <b id="minesViewHead">3</b></div>
+          </div>
+        </div>
+
+        <div class="boardWrap">
+          <div id="grid" class="grid" aria-label="mines grid"></div>
+        </div>
+
+        <div class="statsRow">
+          <div class="statBox">
+            <div class="label">Открыто</div>
+            <div class="value"><b id="openedView2">0</b></div>
+          </div>
+
+          <div class="statBox">
+            <div class="label">Множитель</div>
+            <div class="value"><b id="multView2">x1.00</b></div>
+          </div>
+
+          <div class="statBox">
+            <div class="label">Выплата</div>
+            <div class="value"><b id="cashNowView2">—</b></div>
+          </div>
+        </div>
+
+        <div class="actionsRow">
+          <button id="cashoutBtn" class="btnPrimary" type="button" disabled>Забрать</button>
+          <button id="resetBtn" class="btnGhost" type="button">Сброс</button>
+        </div>
+
+        <div id="msg" class="msg">Выбери ставку и количество мин, затем нажми Start.</div>
+      </section>
+
+      <aside class="panel panel--right">
+        <div class="panelHead">
+          <div>
+            <div class="h2">Управление раундом</div>
+            <div class="hint">Ставка списывается только на старте.</div>
+          </div>
+        </div>
+
+        <div class="controlBlock">
+          <div class="rowTop">
+            <div class="rowTitle">Ставка</div>
+            <div class="rowBalance">🪙 <b id="balance2">0</b></div>
+          </div>
+
+          <div class="chips" role="group" aria-label="chips">
+            <button class="chip" data-bet="10" type="button">10</button>
+            <button class="chip" data-bet="50" type="button">50</button>
+            <button class="chip" data-bet="100" type="button">100</button>
+            <button class="chip" data-bet="250" type="button">250</button>
+            <button class="chip" data-bet="500" type="button">500</button>
+            <button class="chip" data-bet="max" type="button">MAX</button>
+          </div>
+
+          <div class="betRow">
+            <button id="betMinus" class="btnSmall" type="button">−</button>
+            <input id="betInput" class="betInput" type="number" min="1" step="1" value="100" />
+            <button id="betPlus" class="btnSmall" type="button">+</button>
+          </div>
+        </div>
+
+        <div class="controlBlock">
+          <div class="rangeTitle">
+            <div class="rowTitle">Количество мин</div>
+            <div class="pill pill--mini"><b id="minesView">3</b></div>
+          </div>
+
+          <input id="minesRange" class="range" type="range" min="3" max="24" value="3" />
+
+          <div class="rangeMeta">
+            Больше мин — выше риск и выше X. Во время активного раунда значение не меняется.
+          </div>
+        </div>
+
+        <button id="startBtn" class="btnPrimary btnPrimary--start" type="button">Start</button>
+
+        <div class="ladderWrap">
+          <div class="ladderTitle">
+            <span>Лесенка X</span>
+            <span class="ladderHint">видна заранее</span>
+          </div>
+
+          <div class="ladderBox">
+            <div id="ladderGrid" class="ladderGrid"></div>
+          </div>
+        </div>
+
+        <div class="footerNote">
+          Честный RNG: <code>crypto.getRandomValues</code>. Монеты виртуальные.
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
