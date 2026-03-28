@@ -1,1 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>TRINITI</title>
 
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="noise"></div>
+
+  <div class="shell">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="brandRow">
+        <div class="brandLogo">
+          <!-- ТВОЙ ЛОГО -->
+          <svg viewBox="0 0 100 100">
+            <polygon points="50,10 90,90 10,90" fill="#ffd54f"/>
+            <text x="50" y="65" text-anchor="middle" font-size="42" fill="#111">T</text>
+          </svg>
+        </div>
+        <div>
+          <div class="title">TRINITI</div>
+          <div class="brandSub">CASINO</div>
+        </div>
+      </div>
+
+      <div class="topbar__center">
+        <button class="navPill active" data-jump="#gamesSec">Игры</button>
+        <button class="navPill" data-open="free">FREE</button>
+        <button class="navPill" data-open="promo">Промо</button>
+        <button class="navPill" data-open="support">Поддержка</button>
+      </div>
+
+      <div class="topbar__right">
+        <button id="depositBtn" class="authBtn authBtn--primary pressable">Пополнить</button>
+        <button id="withdrawBtn" class="authBtn authBtn--ghost pressable">Вывести</button>
+        <div class="authBtn authBtn--ghost">🪙 <b id="balance">0</b></div>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+      <!-- HERO -->
+      <section id="heroTop" class="heroBoard">
+        <div class="heroGrid">
+
+          <div class="heroMain">
+            <div class="heroMain__content">
+              <div class="heroKicker">TRINITI CASINO</div>
+              <h1 class="heroTitle">Играй. Побеждай.</h1>
+              <p class="heroText">
+                Лучшие мини-игры с честным RNG и мгновенными результатами.
+              </p>
+
+              <div class="heroActions">
+                <button class="heroBtn heroBtn--primary pressable" data-jump="#gamesSec">
+                  Играть
+                </button>
+                <button class="heroBtn heroBtn--ghost pressable" data-open="free">
+                  Бесплатные бонусы
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- баланс -->
+          <div class="heroSide heroSide--balance">
+            <div class="heroSide__label">Баланс</div>
+            <div class="heroSide__value"><b id="balance2">0</b> 🪙</div>
+          </div>
+
+          <button id="depositBtn2" class="heroSide heroSide--action heroSide--deposit pressable">
+            Пополнить
+          </button>
+
+          <button id="withdrawBtn2" class="heroSide heroSide--action heroSide--withdraw pressable">
+            Вывести
+          </button>
+
+        </div>
+      </section>
+
+      <!-- GAMES -->
+      <section id="gamesSec" class="section">
+        <div class="sectionHead">
+          <div>
+            <div class="sectionEyebrow">Игры</div>
+            <div class="sectionTitle">Популярное</div>
+          </div>
+        </div>
+
+        <div class="grid">
+
+          <a href="./mines/index.html" class="gameCard gameCard--mines pressable">
+            <div class="mCardArt">
+              <div class="mCardCenter">
+                <div class="mCardTitleCenter">MINES</div>
+              </div>
+            </div>
+            <div class="mPosterMeta">
+              <div class="mPosterSub">Открывай safe клетки</div>
+              <div class="mPosterBtn">Играть</div>
+            </div>
+          </a>
+
+          <a href="./crash/index.html" class="gameCard gameCard--crash pressable">
+            <div class="mCardArt">
+              <div class="mCardCenter">
+                <div class="mCardTitleCenter">CRASH</div>
+              </div>
+            </div>
+            <div class="mPosterMeta">
+              <div class="mPosterSub">Успей забрать X</div>
+              <div class="mPosterBtn">Играть</div>
+            </div>
+          </a>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- FREE MODAL -->
+  <div id="freeModal" class="modal">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__panel">
+      <div class="modal__head">
+        <div class="modal__title">Бонусы</div>
+        <button id="freeClose" class="modal__close">✕</button>
+      </div>
+
+      <div class="pane">
+        <button id="spinBtn" class="btnPrimary">Крутить колесо</button>
+        <div id="dailyMsg" class="dailyMsg"></div>
+
+        <canvas id="dailyWheel" width="400" height="400"></canvas>
+        <div class="wheelCenter">
+          <div id="wheelCenterTxt">SPIN</div>
+          <div id="wheelCenterSub">бонус</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMO -->
+  <div id="promoModal" class="modal">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__panel">
+      <div class="modal__head">
+        <div class="modal__title">Промокод</div>
+        <button id="promoClose" class="modal__close">✕</button>
+      </div>
+
+      <div class="pane">
+        <input id="promoInput" class="promoInput" placeholder="Введите код" />
+        <button id="promoApply" class="promoBtn">Активировать</button>
+        <div id="promoMsg" class="dailyMsg"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPORT -->
+  <div id="supportModal" class="modal">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__panel">
+      <div class="modal__head">
+        <div class="modal__title">Поддержка</div>
+        <button id="supportClose" class="modal__close">✕</button>
+      </div>
+
+      <div class="pane">
+        <p>Свяжись с нами через Telegram или Discord.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="./app.js"></script>
+</body>
+</html>
