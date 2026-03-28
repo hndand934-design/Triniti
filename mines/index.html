@@ -59,43 +59,6 @@
     </header>
 
     <main class="shell">
-      <section class="hero card">
-        <div class="hero__main">
-          <div class="heroKicker">TRINITI / MINES</div>
-          <h1 class="heroTitle">Риск, темп и быстрый cashout.</h1>
-          <p class="heroText">
-            Открывай safe клетки, избегай мин и забирай выигрыш в нужный момент.
-            Чем выше риск — тем выше множитель.
-          </p>
-
-          <div class="heroStats">
-            <div class="heroStat">
-              <div class="heroStat__n"><span id="openedView2">0 / 22</span></div>
-              <div class="heroStat__t">safe открыто</div>
-            </div>
-            <div class="heroStat">
-              <div class="heroStat__n"><span id="multView2">x1.00</span></div>
-              <div class="heroStat__t">множитель</div>
-            </div>
-            <div class="heroStat">
-              <div class="heroStat__n"><span id="cashNowView2">—</span></div>
-              <div class="heroStat__t">забрать сейчас</div>
-            </div>
-            <div class="heroStat">
-              <div class="heroStat__n"><span id="minesViewHead">3</span></div>
-              <div class="heroStat__t">мин</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero__side">
-          <div class="heroBalanceCard">
-            <div class="heroBalanceLabel">Баланс режима</div>
-            <div class="heroBalanceValue">🪙 <b id="balance2">0</b></div>
-          </div>
-        </div>
-      </section>
-
       <section class="layout">
         <section class="panel panel--field">
           <div class="panelHead">
@@ -188,6 +151,15 @@
           </div>
         </aside>
       </section>
+
+      <!-- Скрытые элементы совместимости для JS -->
+      <div class="compatHidden" aria-hidden="true">
+        <span id="openedView2">0 / 22</span>
+        <span id="multView2">x1.00</span>
+        <span id="cashNowView2">—</span>
+        <span id="minesViewHead">3</span>
+        <span id="balance2">0</span>
+      </div>
     </main>
   </div>
 </body>
