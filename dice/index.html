@@ -3,114 +3,166 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Mini Games — Dice</title>
+  <title>Triniti — Dice</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
   <div class="bg"></div>
+  <div class="noise" aria-hidden="true"></div>
 
   <div class="app">
     <header class="topbar">
       <div class="topbar__left">
-        <div class="title">Mini Games</div>
-        <div id="subTitle" class="subtitle">Открыто вне Telegram</div>
+        <a class="backBtn pressable" href="../">← Назад</a>
+
+        <div class="brandWrap">
+          <div class="brandLogo" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="diceGoldDesktop" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f8e8b2"/>
+                  <stop offset="48%" stop-color="#e0c26f"/>
+                  <stop offset="100%" stop-color="#b78f46"/>
+                </linearGradient>
+              </defs>
+              <rect x="10" y="10" width="44" height="44" rx="14"
+                    fill="rgba(255,255,255,.04)"
+                    stroke="url(#diceGoldDesktop)"
+                    stroke-width="2.2"/>
+              <path d="M21 20H43L39.5 25H34V41L32 45L30 41V25H24.5L21 20Z"
+                    fill="url(#diceGoldDesktop)"/>
+            </svg>
+          </div>
+
+          <div class="brandText">
+            <div class="brandTitle">Triniti</div>
+            <div class="brandSub">premium dice mode</div>
+          </div>
+        </div>
       </div>
 
       <div class="topbar__right">
-        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
+        <button id="soundBtn" class="circleBtn pressable" type="button" aria-label="Звук">
           <span class="dot"></span>
-          <span id="soundText">Звук on</span>
+          <span id="soundText">Sound</span>
         </button>
 
-        <button id="bonusBtn" class="pill pill--bonus" type="button">+1000 🪙</button>
-
-        <div class="pill pill--balance">🪙 <b id="balance">1000</b></div>
+        <div class="balancePill">
+          <span class="balancePill__label">Общий баланс</span>
+          <span class="balancePill__value">🪙 <b id="balance">1000</b></span>
+        </div>
       </div>
     </header>
 
-    <main class="card">
-      <div class="cardHead">
-        <div class="cardHead__left">
-          <div class="h1">Dice</div>
-          <div class="hint">3D кубик. Выпало число — на верхней грани точки. Честный RNG.</div>
+    <main class="layout">
+      <section class="hero card">
+        <div class="hero__overlay"></div>
 
-          <div class="modeRow">
-            <button id="btnLess" class="seg active" type="button">Меньше</button>
-            <button id="btnMore" class="seg" type="button">Больше</button>
+        <div class="hero__head">
+          <div>
+            <div class="eyebrow">TRINITI / DICE MODE</div>
+            <h1 class="hero__title">Dice</h1>
+            <div id="subTitle" class="hero__sub">Премиальный режим броска кубика</div>
+          </div>
+
+          <div class="hero__right">
+            <div class="gameBadge">Честный RNG</div>
+            <div class="gameBadge gameBadge--muted">3D кубик</div>
           </div>
         </div>
 
-        <div class="cardHead__right">
-          <div class="pill pill--ghost" id="rulePill">Выигрыш если выпало ≤ 1</div>
+        <div class="hero__description">
+          Выбирай направление, настраивай порог и бросай. Визуал — в стиле Triniti, логика — прежняя и рабочая.
         </div>
-      </div>
 
-      <section class="grid3">
-        <div class="stat">
-          <div class="label">Множитель</div>
-          <div class="value"><b id="multView">x1.18</b></div>
-        </div>
-        <div class="stat">
-          <div class="label">Возможный выигрыш</div>
-          <div class="value"><b id="profitView">+0</b> 🪙</div>
-        </div>
-        <div class="stat">
-          <div class="label">Шанс</div>
-          <div class="value"><b id="chanceView">83.3%</b></div>
+        <div class="hero__controls">
+          <div class="modeRow">
+            <button id="btnLess" class="seg pressable active" type="button">Меньше</button>
+            <button id="btnMore" class="seg pressable" type="button">Больше</button>
+          </div>
+
+          <div id="rulePill" class="rulePill">Выигрыш если выпало ≤ 1</div>
         </div>
       </section>
 
-      <section class="threshold">
-        <div class="thresholdHead">
-          <div class="h2">Порог: <b><span id="thrView">2</span></b> из 6</div>
-          <div class="pill pill--ghost">Выпало: <b id="rolledView">—</b></div>
+      <section class="statsGrid">
+        <div class="statCard">
+          <div class="statCard__label">Множитель</div>
+          <div class="statCard__value"><b id="multView">x1.18</b></div>
         </div>
-        <input id="thrRange" class="range" type="range" min="2" max="6" step="1" value="2" />
+
+        <div class="statCard">
+          <div class="statCard__label">Возможный выигрыш</div>
+          <div class="statCard__value"><b id="profitView">+0</b> 🪙</div>
+        </div>
+
+        <div class="statCard">
+          <div class="statCard__label">Шанс</div>
+          <div class="statCard__value"><b id="chanceView">83.3%</b></div>
+        </div>
       </section>
 
-      <section class="arena">
-        <div class="arenaBox">
-          <div class="cubeStage">
-            <div class="cubeView">
-              <div id="cube" class="cube">
-                <div class="face face--front"  data-face="front"></div>
-                <div class="face face--back"   data-face="back"></div>
-                <div class="face face--right"  data-face="right"></div>
-                <div class="face face--left"   data-face="left"></div>
-                <div class="face face--top"    data-face="top"></div>
-                <div class="face face--bottom" data-face="bottom"></div>
+      <section class="mainGrid">
+        <section class="arenaCard card">
+          <div class="sectionTop">
+            <div class="sectionTitle">Игровая сцена</div>
+            <div class="rolledPill">Выпало: <b id="rolledView">—</b></div>
+          </div>
+
+          <div class="arenaPanel">
+            <div class="cubeStage">
+              <div class="cubeView">
+                <div id="cube" class="cube">
+                  <div class="face face--front"  data-face="front"></div>
+                  <div class="face face--back"   data-face="back"></div>
+                  <div class="face face--right"  data-face="right"></div>
+                  <div class="face face--left"   data-face="left"></div>
+                  <div class="face face--top"    data-face="top"></div>
+                  <div class="face face--bottom" data-face="bottom"></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="bet">
-        <div class="betHead">
-          <div class="h2">Ставка</div>
-          <button id="bonusBtn2" class="pill pill--bonus pill--small" type="button">+1000 🪙</button>
-        </div>
+        <aside class="sideCol">
+          <section class="thresholdCard card">
+            <div class="sectionTop">
+              <div class="sectionTitle">Порог</div>
+              <div class="thresholdValue"><span id="thrView">2</span> / 6</div>
+            </div>
 
-        <div class="chips">
-          <button class="chip" data-bet="10" type="button">10</button>
-          <button class="chip" data-bet="50" type="button">50</button>
-          <button class="chip" data-bet="100" type="button">100</button>
-          <button class="chip" data-bet="250" type="button">250</button>
-          <button class="chip" data-bet="500" type="button">500</button>
-          <button class="chip" data-bet="max" type="button">MAX</button>
-        </div>
+            <input id="thrRange" class="range" type="range" min="2" max="6" step="1" value="2" />
+          </section>
 
-        <div class="betRow">
-          <button id="betMinus" class="btnSmall" type="button">−</button>
-          <input id="betInput" class="betInput" type="number" min="1" step="1" value="100" />
-          <button id="betPlus" class="btnSmall" type="button">+</button>
-        </div>
+          <section class="betCard card">
+            <div class="sectionTop">
+              <div class="sectionTitle">Ставка</div>
+              <button id="bonusBtn2" class="miniBonus pressable" type="button">+1000 🪙</button>
+            </div>
 
-        <button id="rollBtn" class="btnPrimary" type="button">Бросить</button>
+            <div class="chips">
+              <button class="chip pressable" data-bet="10" type="button">10</button>
+              <button class="chip pressable" data-bet="50" type="button">50</button>
+              <button class="chip pressable" data-bet="100" type="button">100</button>
+              <button class="chip pressable" data-bet="250" type="button">250</button>
+              <button class="chip pressable" data-bet="500" type="button">500</button>
+              <button class="chip pressable" data-bet="max" type="button">MAX</button>
+            </div>
 
-        <div class="footNote">
-          Честный RNG: <code>crypto.getRandomValues</code>. Монеты виртуальные.
-        </div>
+            <div class="betRow">
+              <button id="betMinus" class="btnSmall pressable" type="button">−</button>
+              <input id="betInput" class="betInput" type="number" min="1" step="1" value="100" />
+              <button id="betPlus" class="btnSmall pressable" type="button">+</button>
+            </div>
+
+            <button id="rollBtn" class="btnPrimary pressable" type="button">Бросить</button>
+
+            <div class="footNote">
+              Честный RNG: <code>crypto.getRandomValues</code>. Баланс общий для всех режимов Triniti.
+            </div>
+          </section>
+        </aside>
       </section>
     </main>
   </div>
