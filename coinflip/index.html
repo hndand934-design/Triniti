@@ -3,109 +3,128 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Mini Games — Coin Flip</title>
+  <title>Triniti — Coin Flip</title>
 
-  <!-- shared theme + shared wallet -->
   <link rel="stylesheet" href="../shared/theme.css">
   <script src="../shared/wallet.js" defer></script>
 
-  <!-- game styles -->
   <link rel="stylesheet" href="./style.css" />
-
-  <!-- game logic -->
   <script src="./app.js" defer></script>
 </head>
 <body>
   <div class="bg"></div>
+  <div class="noise" aria-hidden="true"></div>
 
   <div class="app">
     <header class="topbar">
-      <div class="topbar__left">
-        <div class="title">Mini Games</div>
-        <div id="subTitle" class="subtitle">Открыто вне Telegram</div>
+      <a class="backBtn pressable" href="../">←</a>
+
+      <div class="brandWrap">
+        <div class="brandLogo" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="coinflipGoldDesktop" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#f8e8b2"/>
+                <stop offset="48%" stop-color="#e0c26f"/>
+                <stop offset="100%" stop-color="#b78f46"/>
+              </linearGradient>
+            </defs>
+            <rect x="10" y="10" width="44" height="44" rx="14"
+                  fill="rgba(255,255,255,.04)"
+                  stroke="url(#coinflipGoldDesktop)"
+                  stroke-width="2.2"/>
+            <path d="M21 20H43L39.5 25H34V41L32 45L30 41V25H24.5L21 20Z"
+                  fill="url(#coinflipGoldDesktop)"/>
+          </svg>
+        </div>
+
+        <div class="brandText">
+          <div class="brandTitle">Triniti</div>
+          <div class="brandSub">Coin Flip</div>
+        </div>
       </div>
 
-      <div class="topbar__right">
-        <button id="soundBtn" class="pill" type="button" aria-label="Звук">
-          <span class="dot"></span>
-          <span id="soundText">Звук on</span>
-        </button>
+      <button id="soundBtn" class="iconBtn pressable" type="button" aria-label="Звук">
+        <span class="dot"></span>
+      </button>
 
-        <button id="bonusBtn" class="pill pill--bonus" type="button">+1000 🪙</button>
-
-        <div class="pill pill--balance">🪙 <b id="balance">1000</b></div>
-      </div>
+      <div class="balancePill">🪙 <b id="balance">1000</b></div>
     </header>
 
-    <main class="card">
-      <div class="cardHead">
-        <div>
-          <div class="h1">Coin Flip</div>
-          <div class="hint">До броска монета фиолетовая. Орёл — золото, решка — серебро.</div>
-        </div>
-      </div>
+    <main class="screen">
+      <section class="hero card">
+        <div class="heroTop">
+          <div class="pickRow">
+            <button id="pickEagle" class="pick pick--gold pressable active" type="button">
+              <span class="mark mark--gold"></span>
+              <span>Орёл</span>
+            </button>
 
-      <section class="arena">
-        <div class="coinPanel">
-          <div class="coinWrap" aria-label="coin arena">
-            <!-- 3D coin -->
-            <div id="coin" class="coin3d coin3d--purple" aria-label="coin">
-              <div class="coinFace coinFace--front"></div>
-              <div class="coinEdge"></div>
-              <div class="coinFace coinFace--back"></div>
+            <button id="pickTail" class="pick pick--silver pressable" type="button">
+              <span class="mark mark--silver"></span>
+              <span>Решка</span>
+            </button>
+          </div>
+
+          <div class="rulePill"><b id="statusView">Готов</b></div>
+        </div>
+
+        <section class="statsGrid">
+          <div class="statCard">
+            <div class="statCard__value"><b id="pickView">Орёл</b></div>
+            <div class="statCard__label">Выбор</div>
+          </div>
+
+          <div class="statCard">
+            <div class="statCard__value"><b id="betView">50</b></div>
+            <div class="statCard__label">Ставка</div>
+          </div>
+
+          <div class="statCard">
+            <div class="statCard__value"><b id="winView">+50</b></div>
+            <div class="statCard__label">Выигрыш</div>
+          </div>
+        </section>
+
+        <section class="arenaCard">
+          <div class="arenaTop">
+            <div class="miniInfo">Выбор: <b id="miniPickView">Орёл</b></div>
+            <div class="miniInfo">Монета: <b id="coinStateView">Фиолетовая</b></div>
+          </div>
+
+          <div class="coinStage">
+            <div class="coinGlow coinGlow--left"></div>
+            <div class="coinGlow coinGlow--right"></div>
+
+            <div class="coinWrap" aria-label="coin arena">
+              <div id="coin" class="coin3d coin3d--purple" aria-label="coin">
+                <div class="coinFace coinFace--front"></div>
+                <div class="coinEdge"></div>
+                <div class="coinFace coinFace--back"></div>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <button id="flipBtn" class="btnPrimary" type="button">Ставка</button>
-
-        <section class="controls">
-          <div class="rowTitle">
-            <div class="h2">Сумма ставки</div>
-            <div class="muted">Баланс: <b>🪙 <span id="balance2">1000</span></b></div>
+        <section class="betCard">
+          <div class="chips">
+            <button class="chip pressable" data-bet="10" type="button">10</button>
+            <button class="chip pressable" data-bet="50" type="button">50</button>
+            <button class="chip pressable" data-bet="100" type="button">100</button>
+            <button class="chip pressable" data-bet="250" type="button">250</button>
+            <button class="chip pressable" data-bet="500" type="button">500</button>
+            <button class="chip pressable" data-bet="max" type="button">MAX</button>
           </div>
 
           <div class="betRow">
-            <button id="betMinus" class="btnSmall" type="button">−</button>
+            <button id="betMinus" class="btnSmall pressable" type="button">−</button>
             <input id="betInput" class="betInput" type="number" min="1" step="1" value="50" />
-            <button id="betPlus" class="btnSmall" type="button">+</button>
+            <button id="betPlus" class="btnSmall pressable" type="button">+</button>
           </div>
 
-          <div class="chips" role="group" aria-label="chips">
-            <button class="chip" data-bet="10" type="button">10</button>
-            <button class="chip" data-bet="50" type="button">50</button>
-            <button class="chip" data-bet="100" type="button">100</button>
-            <button class="chip" data-bet="250" type="button">250</button>
-            <button class="chip" data-bet="500" type="button">500</button>
-            <button class="chip" data-bet="max" type="button">MAX</button>
-          </div>
-
-          <div class="pickRow">
-            <button id="pickEagle" class="pick pick--gold active" type="button">
-              <span class="mark mark--gold"></span> Орёл
-            </button>
-            <button id="pickTail" class="pick pick--silver" type="button">
-              <span class="mark mark--silver"></span> Решка
-            </button>
-          </div>
-
-          <div class="stats">
-            <div class="stat">
-              <div class="label">Ставка</div>
-              <div class="value"><b id="betView">50</b> 🪙</div>
-            </div>
-            <div class="stat">
-              <div class="label">Выигрыш</div>
-              <div class="value"><b id="winView">+0</b> 🪙</div>
-            </div>
-            <div class="stat">
-              <div class="label">Статус</div>
-              <div class="value"><b id="statusView">Готов</b></div>
-            </div>
-          </div>
-
-          <div class="footNote">
-            При изменении ставки — монета снова становится фиолетовой до следующего броска.
+          <div class="actionRow">
+            <button id="bonusBtn2" class="bonusMini pressable" type="button">+1000</button>
+            <button id="flipBtn" class="btnPrimary pressable" type="button">Бросить</button>
           </div>
         </section>
       </section>
