@@ -26,7 +26,8 @@
 
     const KEY = "mines_wallet_fallback_v1";
     const get = () => Math.floor(Number(localStorage.getItem(KEY) || 1000));
-    const set = (v) => localStorage.setItem(KEY, String(Math.max(0, Math.floor(Number(v) || 0))));
+    const set = (v) =>
+      localStorage.setItem(KEY, String(Math.max(0, Math.floor(Number(v) || 0))));
     const add = (d) => set(get() + Math.floor(Number(d) || 0));
     return { get, set, add };
   })();
@@ -84,7 +85,6 @@
 
   const subTitle = $("subTitle");
   const balanceEl = $("balance");
-  const balance2El = $("balance2");
 
   const soundBtn = $("soundBtn");
   const soundText = $("soundText");
@@ -96,11 +96,6 @@
   const safeMaxView = $("safeMaxView");
   const multView = $("multView");
   const cashNowView = $("cashNowView");
-
-  const openedView2 = $("openedView2");
-  const multView2 = $("multView2");
-  const cashNowView2 = $("cashNowView2");
-  const minesViewHead = $("minesViewHead");
 
   const cashoutBtn = $("cashoutBtn");
   const resetBtn = $("resetBtn");
@@ -120,7 +115,6 @@
     if (subTitle) subTitle.textContent = "MINES • единый кошелёк";
     const coins = Wallet.get();
     if (balanceEl) balanceEl.textContent = String(coins);
-    if (balance2El) balance2El.textContent = String(coins);
   }
 
   function addCoins(d) {
@@ -134,6 +128,7 @@
   soundBtn?.addEventListener("click", () => {
     soundOn = !soundOn;
     if (soundText) soundText.textContent = "Звук";
+
     const dot = soundBtn.querySelector(".dot");
     if (dot) {
       dot.style.background = soundOn ? "#26d47b" : "#ff5a6a";
@@ -141,6 +136,7 @@
         ? "0 0 0 3px rgba(38,212,123,.14)"
         : "0 0 0 3px rgba(255,90,106,.14)";
     }
+
     tone(soundOn ? 640 : 240, 70, 0.03);
   });
 
@@ -169,12 +165,15 @@
   function comb(n, k) {
     if (k < 0 || k > n) return 0;
     k = Math.min(k, n - k);
+
     let num = 1;
     let den = 1;
+
     for (let i = 1; i <= k; i++) {
-      num *= (n - (k - i));
+      num *= n - (k - i);
       den *= i;
     }
+
     return num / den;
   }
 
@@ -189,23 +188,27 @@
   }
 
   function clampBet() {
+    if (!betInput) return;
+
     const coins = Wallet.get();
-    let v = Math.floor(Number(betInput?.value) || 0);
+    let v = Math.floor(Number(betInput.value) || 0);
 
     if (v < 1) v = 1;
     if (coins > 0 && v > coins) v = coins;
     if (coins <= 0) v = 1;
 
-    if (betInput) betInput.value = String(v);
+    betInput.value = String(v);
     renderStats();
   }
 
   betInput?.addEventListener("input", clampBet);
+
   betMinus?.addEventListener("click", () => {
     if (!betInput) return;
     betInput.value = String((Number(betInput.value) || 1) - 10);
     clampBet();
   });
+
   betPlus?.addEventListener("click", () => {
     if (!betInput) return;
     betInput.value = String((Number(betInput.value) || 1) + 10);
@@ -217,6 +220,7 @@
       const coins = Wallet.get();
       const val = b.dataset.bet;
       if (!betInput) return;
+
       betInput.value = val === "max" ? String(coins) : String(val);
       clampBet();
       tone(540, 55, 0.02);
@@ -238,6 +242,7 @@
       const m = calcMultiplier(s, minesCount);
       const xTxt = `x${m.toFixed(m >= 100 ? 0 : m >= 10 ? 1 : 2)}`;
       const active = st && st.active && !st.over && safeOpened === s ? " active" : "";
+
       items.push(`
         <div class="lstep${active}">
           #${s} · ${xTxt}
@@ -257,7 +262,6 @@
 
     minesRange.value = String(m);
     if (minesView) minesView.textContent = String(m);
-    if (minesViewHead) minesViewHead.textContent = String(m);
 
     const safeOpened = st && st.active && !st.over ? st.safeOpened : 0;
     renderLadder(m, safeOpened);
@@ -295,7 +299,7 @@
       }
 
       html += `
-        <button class="${cls}" data-i="${i}" ${(!isActive || over) ? "disabled" : ""}>
+        <button class="${cls}" data-i="${i}" ${!isActive || over ? "disabled" : ""}>
           <span class="icon">${icon}</span>
         </button>
       `;
@@ -319,10 +323,6 @@
       if (multView) multView.textContent = "x1.00";
       if (cashNowView) cashNowView.textContent = "—";
 
-      if (openedView2) openedView2.textContent = `0 / ${safeMax}`;
-      if (multView2) multView2.textContent = "x1.00";
-      if (cashNowView2) cashNowView2.textContent = "—";
-
       if (cashoutBtn) cashoutBtn.disabled = true;
       return;
     }
@@ -332,10 +332,6 @@
     if (openedView) openedView.textContent = String(st.safeOpened);
     if (multView) multView.textContent = `x${st.multiplier.toFixed(2)}`;
     if (cashNowView) cashNowView.textContent = money(cashNow);
-
-    if (openedView2) openedView2.textContent = `${st.safeOpened} / ${safeMax}`;
-    if (multView2) multView2.textContent = `x${st.multiplier.toFixed(2)}`;
-    if (cashNowView2) cashNowView2.textContent = money(cashNow);
 
     if (cashoutBtn) {
       cashoutBtn.disabled = st.over || st.safeOpened <= 0 || st.cashed;
