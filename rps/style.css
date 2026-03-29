@@ -1,0 +1,196 @@
+:root{
+  --bg:#0f141d;
+  --card:#1a2230;
+  --line:#000;
+  --text:#fff;
+  --muted:#9aa4b2;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* APP */
+.app{
+  max-width:520px;
+  margin:auto;
+  padding:8px;
+}
+
+/* TOP */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:6px 8px;
+  background:#141b26;
+  border-radius:12px;
+}
+
+.brand{
+  font-size:14px;
+}
+
+.backBtn{
+  font-size:18px;
+}
+
+.topRight{
+  display:flex;
+  gap:6px;
+}
+
+.pill{
+  padding:6px 10px;
+  background:#1e2735;
+  border-radius:999px;
+  font-size:12px;
+}
+
+.dot{
+  width:6px;
+  height:6px;
+  background:#2ecc71;
+  display:inline-block;
+  border-radius:50%;
+}
+
+/* GAME */
+.game{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:8px;
+}
+
+/* STATS */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:4px;
+  font-size:12px;
+  text-align:center;
+}
+
+/* VS */
+.vs{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.card{
+  flex:1;
+  height:70px;
+  background:var(--card);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+}
+
+.vsMid{
+  width:40px;
+  text-align:center;
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* RESULT */
+.result{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  font-size:12px;
+  text-align:center;
+}
+
+/* PICKS */
+.picks{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+}
+
+.pickBtn{
+  height:50px;
+  font-size:20px;
+  border-radius:10px;
+  background:#1e2735;
+  border:none;
+  color:#fff;
+}
+
+.pickBtn.active{
+  background:#4c6ef5;
+}
+
+/* LADDER */
+.ladder{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:3px;
+}
+
+.step{
+  font-size:10px;
+  text-align:center;
+  padding:4px;
+  background:#1e2735;
+  border-radius:6px;
+}
+
+.step.active{
+  background:#4c6ef5;
+}
+
+/* BET */
+.bet{
+  display:grid;
+  grid-template-columns:40px 1fr 40px;
+  gap:6px;
+}
+
+.bet input{
+  text-align:center;
+  background:#1e2735;
+  border:none;
+  color:#fff;
+  border-radius:8px;
+}
+
+/* ACTIONS */
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+}
+
+.play{
+  background:#4c6ef5;
+}
+
+.actions button{
+  height:44px;
+  border:none;
+  border-radius:10px;
+  color:#fff;
+  background:#1e2735;
+}
+
+/* WIN */
+.win{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+}
+
+/* MOBILE */
+@media(max-height:750px){
+  .card{height:60px}
+  .pickBtn{height:45px}
+}
