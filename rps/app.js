@@ -30,7 +30,8 @@
     const KEY = "rps_wallet_fallback_v1";
 
     const get = () => Math.floor(Number(localStorage.getItem(KEY) || 1000));
-    const set = (v) => localStorage.setItem(KEY, String(Math.max(0, Math.floor(Number(v) || 0))));
+    const set = (v) =>
+      localStorage.setItem(KEY, String(Math.max(0, Math.floor(Number(v) || 0))));
     const add = (d) => set(get() + Math.floor(Number(d) || 0));
 
     return { get, set, add };
@@ -39,7 +40,8 @@
   // =========================
   // Sound
   // =========================
-  let soundOn = true;
+  const SOUND_KEY = "triniti_rps_sound_v1";
+  let soundOn = (localStorage.getItem(SOUND_KEY) ?? "1") === "1";
   let audioCtx = null;
 
   function getAudioCtx() {
@@ -102,7 +104,6 @@
 
   const soundBtn = $("soundBtn");
   const soundText = $("soundText");
-  const bonusBtn = $("bonusBtn");
 
   const statusView = $("statusView");
   const youPickView = $("youPickView");
@@ -128,19 +129,19 @@
   // =========================
   // Config
   // =========================
-  const STEPS = [1.00, 1.20, 1.50, 2.00, 3.00, 5.00, 10.00];
+  const STEPS = [1.0, 1.2, 1.5, 2.0, 3.0, 5.0, 10.0];
   const MAX_STEP = STEPS.length - 1;
 
   const MOVES = ["rock", "scissors", "paper"];
   const MOVE_RU = {
     rock: "Камень",
     scissors: "Ножницы",
-    paper: "Бумага"
+    paper: "Бумага",
   };
   const ICON = {
     rock: "✊🏻",
     scissors: "✌🏻",
-    paper: "✋🏻"
+    paper: "✋🏻",
   };
 
   // =========================
@@ -174,10 +175,24 @@
     return Math.floor(lockedBet * currentX());
   }
 
+  function renderSoundUI() {
+    if (soundText) {
+      soundText.textContent = soundOn ? "Звук on" : "Звук off";
+    }
+
+    const dot = soundBtn?.querySelector(".dot");
+    if (dot) {
+      dot.style.background = soundOn ? "#26d47b" : "#ff5a6a";
+      dot.style.boxShadow = soundOn
+        ? "0 0 0 3px rgba(38,212,123,.14)"
+        : "0 0 0 3px rgba(255,90,106,.14)";
+    }
+  }
+
   function resetRoundViews() {
     if (botPickView) botPickView.textContent = "—";
     if (resultView) resultView.textContent = "—";
-    if (botIcon) botIcon.textContent = "✊🏻";
+    if (botIcon) botIcon.textContent = ICON.rock;
   }
 
   function renderLadder() {
@@ -210,15 +225,13 @@
       : Math.floor(Number(betInput?.value) || 0);
 
     if (potentialView) {
-      potentialView.textContent = baseBet > 0
-        ? `${Math.floor(baseBet * currentX())} 🪙`
-        : "0 🪙";
+      potentialView.textContent =
+        baseBet > 0 ? `${Math.floor(baseBet * currentX())} 🪙` : "0 🪙";
     }
 
     if (winView) {
-      winView.textContent = inSeries && series > 0
-        ? `${currentPayout()} 🪙`
-        : "0 🪙";
+      winView.textContent =
+        inSeries && series > 0 ? `${currentPayout()} 🪙` : "0 🪙";
     }
   }
 
@@ -232,7 +245,7 @@
     });
   }
 
-  function setPicked(v) {
+  function setPicked(v, silent = false) {
     picked = v;
 
     document.querySelectorAll(".pickBtn").forEach((b) => {
@@ -242,7 +255,7 @@
     if (youIcon) youIcon.textContent = ICON[v];
     if (youPickView) youPickView.textContent = MOVE_RU[v];
 
-    beep(520, 45, 0.02);
+    if (!silent) beep(520, 45, 0.02);
   }
 
   function clampBet() {
@@ -285,6 +298,23 @@
     if (resultView) resultView.textContent = "—";
   }
 
+  function setIdleState() {
+    if (statusView) statusView.textContent = "Ожидание";
+    if (resultView) resultView.textContent = "—";
+    if (cashoutBtn) cashoutBtn.disabled = true;
+    renderLadder();
+    renderStats();
+  }
+
+  function endSeriesResetToIdle() {
+    inSeries = false;
+    series = 0;
+    lockedBet = 0;
+    busy = false;
+    lockBetUI(false);
+    setIdleState();
+  }
+
   function doCashout(auto = false) {
     if (!inSeries) return;
     if (series <= 0) return;
@@ -304,28 +334,19 @@
       winView.textContent = `${payout} 🪙`;
     }
 
-    inSeries = false;
-    series = 0;
-    lockedBet = 0;
-    busy = false;
-
-    if (cashoutBtn) cashoutBtn.disabled = true;
-    lockBetUI(false);
-
-    renderLadder();
-    renderStats();
     soundCash();
+    endSeriesResetToIdle();
   }
 
   // =========================
   // Init base UI
   // =========================
   syncBalanceUI();
+  renderSoundUI();
   renderLadder();
   renderStats();
   resetRoundViews();
-  setPicked("rock");
-
+  setPicked("rock", true);
   if (statusView) statusView.textContent = "Ожидание";
   if (resultView) resultView.textContent = "—";
 
@@ -334,18 +355,7 @@
   // =========================
   soundBtn?.addEventListener("click", async () => {
     soundOn = !soundOn;
-
-    if (soundText) {
-      soundText.textContent = soundOn ? "Звук on" : "Звук off";
-    }
-
-    const dot = soundBtn.querySelector(".dot");
-    if (dot) {
-      dot.style.background = soundOn ? "#26d47b" : "#ff5a6a";
-      dot.style.boxShadow = soundOn
-        ? "0 0 0 3px rgba(38,212,123,.14)"
-        : "0 0 0 3px rgba(255,90,106,.14)";
-    }
+    localStorage.setItem(SOUND_KEY, soundOn ? "1" : "0");
 
     if (soundOn && audioCtx && audioCtx.state === "suspended") {
       try {
@@ -353,12 +363,8 @@
       } catch {}
     }
 
+    renderSoundUI();
     beep(soundOn ? 640 : 240, 60, 0.03);
-  });
-
-  bonusBtn?.addEventListener("click", () => {
-    addCoins(1000);
-    beep(760, 70, 0.03);
   });
 
   document.querySelectorAll(".chip").forEach((b) => {
@@ -444,6 +450,10 @@
       if (resultView) resultView.textContent = "Ничья";
       if (statusView) statusView.textContent = "Ничья";
       soundDraw();
+      renderLadder();
+      renderStats();
+      busy = false;
+      return;
     }
 
     if (outcome === "win") {
@@ -466,30 +476,24 @@
         doCashout(true);
         return;
       }
+
+      busy = false;
+      return;
     }
 
     if (outcome === "lose") {
       if (resultView) resultView.textContent = "Поражение";
       if (statusView) statusView.textContent = "Серия в ноль";
-
-      soundLose();
-
       if (winView) winView.textContent = "0 🪙";
 
-      inSeries = false;
-      series = 0;
-      lockedBet = 0;
-
-      if (cashoutBtn) cashoutBtn.disabled = true;
-      lockBetUI(false);
+      soundLose();
+      endSeriesResetToIdle();
+      return;
     }
-
-    renderLadder();
-    renderStats();
-
-    busy = false;
   });
 
-  // final sync
+  // =========================
+  // Final sync
+  // =========================
   clampBet();
 })();
