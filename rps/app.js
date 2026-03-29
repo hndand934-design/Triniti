@@ -1,304 +1,495 @@
 (() => {
+  // =========================
   // RNG
+  // =========================
   function randFloat() {
     const a = new Uint32Array(1);
     crypto.getRandomValues(a);
     return a[0] / 2 ** 32;
   }
 
+  // =========================
   // Wallet
+  // =========================
   const Wallet = (() => {
     const sw = window.SharedWallet;
-    if (sw && typeof sw.getCoins === "function" && typeof sw.setCoins === "function" && typeof sw.addCoins === "function") {
+
+    if (
+      sw &&
+      typeof sw.getCoins === "function" &&
+      typeof sw.setCoins === "function" &&
+      typeof sw.addCoins === "function"
+    ) {
       return {
         get: () => Math.floor(Number(sw.getCoins()) || 0),
         set: (v) => sw.setCoins(Math.max(0, Math.floor(Number(v) || 0))),
         add: (d) => sw.addCoins(Math.floor(Number(d) || 0)),
       };
     }
-    // fallback
+
     const KEY = "rps_wallet_fallback_v1";
+
     const get = () => Math.floor(Number(localStorage.getItem(KEY) || 1000));
-    const set = (v) => localStorage.setItem(KEY, String(Math.max(0, Math.floor(Number(v)||0))));
-    const add = (d) => set(get() + Math.floor(Number(d)||0));
+    const set = (v) => localStorage.setItem(KEY, String(Math.max(0, Math.floor(Number(v) || 0))));
+    const add = (d) => set(get() + Math.floor(Number(d) || 0));
+
     return { get, set, add };
   })();
 
+  // =========================
   // Sound
+  // =========================
   let soundOn = true;
-  function beep(freq=520, ms=55, vol=0.03){
-    if(!soundOn) return;
-    try{
-      const AC = window.AudioContext || window.webkitAudioContext;
-      const ctx = new AC();
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.type="sine"; o.frequency.value=freq; g.gain.value=vol;
-      o.connect(g); g.connect(ctx.destination);
-      o.start();
-      setTimeout(()=>{ o.stop(); ctx.close(); }, ms);
-    }catch{}
+  let audioCtx = null;
+
+  function getAudioCtx() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    if (!audioCtx) audioCtx = new AC();
+    return audioCtx;
   }
 
-  // UI
-  const balanceEl = document.getElementById("balance");
-  const soundBtn = document.getElementById("soundBtn");
-  const soundText = document.getElementById("soundText");
-  const bonusBtn = document.getElementById("bonusBtn");
+  function beep(freq = 520, ms = 55, vol = 0.03, type = "sine") {
+    if (!soundOn) return;
 
-  const statusView = document.getElementById("statusView");
-  const youPickView = document.getElementById("youPickView");
-  const botPickView = document.getElementById("botPickView");
-  const resultView = document.getElementById("resultView");
+    try {
+      const ctx = getAudioCtx();
+      if (!ctx) return;
 
-  const ladderEl = document.getElementById("ladder");
-  const seriesView = document.getElementById("seriesView");
-  const multView = document.getElementById("multView");
-  const potentialView = document.getElementById("potentialView");
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const now = ctx.currentTime;
 
-  const botIcon = document.getElementById("botIcon");
-  const youIcon = document.getElementById("youIcon");
+      osc.type = type;
+      osc.frequency.value = freq;
 
-  const betInput = document.getElementById("betInput");
-  const betMinus = document.getElementById("betMinus");
-  const betPlus = document.getElementById("betPlus");
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(vol, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + ms / 1000);
 
-  const playBtn = document.getElementById("playBtn");
-  const cashoutBtn = document.getElementById("cashoutBtn");
-  const winView = document.getElementById("winView");
+      osc.connect(gain);
+      gain.connect(ctx.destination);
 
-  // Game config
+      osc.start(now);
+      osc.stop(now + ms / 1000 + 0.02);
+    } catch {}
+  }
+
+  function soundWin() {
+    beep(760, 60, 0.03);
+    setTimeout(() => beep(920, 60, 0.03), 75);
+  }
+
+  function soundLose() {
+    beep(220, 85, 0.03);
+  }
+
+  function soundDraw() {
+    beep(420, 55, 0.02);
+  }
+
+  function soundCash() {
+    beep(820, 70, 0.03);
+    setTimeout(() => beep(980, 60, 0.025), 75);
+  }
+
+  // =========================
+  // UI refs
+  // =========================
+  const $ = (id) => document.getElementById(id);
+
+  const balanceEl = $("balance");
+
+  const soundBtn = $("soundBtn");
+  const soundText = $("soundText");
+  const bonusBtn = $("bonusBtn");
+
+  const statusView = $("statusView");
+  const youPickView = $("youPickView");
+  const botPickView = $("botPickView");
+  const resultView = $("resultView");
+
+  const ladderEl = $("ladder");
+  const seriesView = $("seriesView");
+  const multView = $("multView");
+  const potentialView = $("potentialView");
+
+  const botIcon = $("botIcon");
+  const youIcon = $("youIcon");
+
+  const betInput = $("betInput");
+  const betMinus = $("betMinus");
+  const betPlus = $("betPlus");
+
+  const playBtn = $("playBtn");
+  const cashoutBtn = $("cashoutBtn");
+  const winView = $("winView");
+
+  // =========================
+  // Config
+  // =========================
   const STEPS = [1.00, 1.20, 1.50, 2.00, 3.00, 5.00, 10.00];
   const MAX_STEP = STEPS.length - 1;
 
-  const MOVES = ["rock","scissors","paper"];
-  const MOVE_RU = { rock:"Камень", scissors:"Ножницы", paper:"Бумага" };
-  const ICON = { rock:"✊🏻", scissors:"✌🏻", paper:"✋🏻" };
+  const MOVES = ["rock", "scissors", "paper"];
+  const MOVE_RU = {
+    rock: "Камень",
+    scissors: "Ножницы",
+    paper: "Бумага"
+  };
+  const ICON = {
+    rock: "✊🏻",
+    scissors: "✌🏻",
+    paper: "✋🏻"
+  };
 
+  // =========================
   // State
+  // =========================
   let picked = "rock";
   let inSeries = false;
   let series = 0;
   let lockedBet = 0;
   let busy = false;
 
+  // =========================
   // Helpers
-  function syncBalanceUI(){ balanceEl.textContent = String(Wallet.get()); }
-  function addCoins(d){ Wallet.add(d); syncBalanceUI(); clampBet(); }
+  // =========================
+  function syncBalanceUI() {
+    if (balanceEl) balanceEl.textContent = String(Wallet.get());
+  }
 
-  function currentX(){ return STEPS[Math.min(series, MAX_STEP)]; }
+  function addCoins(d) {
+    Wallet.add(d);
+    syncBalanceUI();
+    clampBet();
+  }
 
-  function renderLadder(){
+  function currentX() {
+    return STEPS[Math.min(series, MAX_STEP)];
+  }
+
+  function currentPayout() {
+    if (!inSeries || lockedBet <= 0) return 0;
+    return Math.floor(lockedBet * currentX());
+  }
+
+  function resetRoundViews() {
+    if (botPickView) botPickView.textContent = "—";
+    if (resultView) resultView.textContent = "—";
+    if (botIcon) botIcon.textContent = "✊🏻";
+  }
+
+  function renderLadder() {
+    if (!ladderEl) return;
+
     ladderEl.innerHTML = "";
+
     STEPS.forEach((x, i) => {
       const box = document.createElement("div");
       box.className = "step" + (i === series ? " active" : "");
       box.innerHTML = `
-        <div class="sTitle">${i===0 ? "Старт" : `Шаг ${i}`}</div>
+        <div class="sTitle">${i === 0 ? "Старт" : `Шаг ${i}`}</div>
         <div class="sX">x${x.toFixed(2)}</div>
       `;
       ladderEl.appendChild(box);
     });
   }
 
-  function renderStats(){
-    seriesView.textContent = `${series} побед`;
-    multView.textContent = `x${currentX().toFixed(2)}`;
-    const baseBet = inSeries ? lockedBet : Math.floor(Number(betInput.value)||0);
-    potentialView.textContent = baseBet > 0 ? `${Math.floor(baseBet * currentX())} 🪙` : `0 🪙`;
+  function renderStats() {
+    if (seriesView) {
+      seriesView.textContent = `${series} побед`;
+    }
+
+    if (multView) {
+      multView.textContent = `x${currentX().toFixed(2)}`;
+    }
+
+    const baseBet = inSeries
+      ? lockedBet
+      : Math.floor(Number(betInput?.value) || 0);
+
+    if (potentialView) {
+      potentialView.textContent = baseBet > 0
+        ? `${Math.floor(baseBet * currentX())} 🪙`
+        : "0 🪙";
+    }
+
+    if (winView) {
+      winView.textContent = inSeries && series > 0
+        ? `${currentPayout()} 🪙`
+        : "0 🪙";
+    }
   }
 
-  function lockBetUI(lock){
-    betInput.disabled = lock;
-    betMinus.disabled = lock;
-    betPlus.disabled = lock;
-    document.querySelectorAll(".chip").forEach(b => (b.disabled = lock));
+  function lockBetUI(lock) {
+    if (betInput) betInput.disabled = lock;
+    if (betMinus) betMinus.disabled = lock;
+    if (betPlus) betPlus.disabled = lock;
+
+    document.querySelectorAll(".chip").forEach((b) => {
+      b.disabled = lock;
+    });
   }
 
-  function setPicked(v){
+  function setPicked(v) {
     picked = v;
-    document.querySelectorAll(".pickBtn").forEach(b => b.classList.toggle("active", b.dataset.move === v));
-    youIcon.textContent = ICON[v];
-    youPickView.textContent = MOVE_RU[v];
+
+    document.querySelectorAll(".pickBtn").forEach((b) => {
+      b.classList.toggle("active", b.dataset.move === v);
+    });
+
+    if (youIcon) youIcon.textContent = ICON[v];
+    if (youPickView) youPickView.textContent = MOVE_RU[v];
+
     beep(520, 45, 0.02);
   }
 
-  // Init
-  syncBalanceUI();
-  renderLadder();
-  renderStats();
-  setPicked("rock");
-
-  // sound toggle
-  soundBtn.onclick = () => {
-    soundOn = !soundOn;
-    soundText.textContent = soundOn ? "Звук on" : "Звук off";
-    const dot = soundBtn.querySelector(".dot");
-    dot.style.background = soundOn ? "#26d47b" : "#ff5a6a";
-    dot.style.boxShadow = soundOn
-      ? "0 0 0 3px rgba(38,212,123,.14)"
-      : "0 0 0 3px rgba(255,90,106,.14)";
-    beep(soundOn ? 640 : 240, 60, 0.03);
-  };
-
-  // bonus
-  bonusBtn.onclick = () => { addCoins(1000); beep(760, 70, 0.03); };
-
-  // chips
-  document.querySelectorAll(".chip").forEach((b) => {
-    b.onclick = () => {
-      if (inSeries) return;
-      const val = b.dataset.bet;
-      const coins = Wallet.get();
-      betInput.value = (val === "max") ? String(coins) : String(val);
-      clampBet();
-      beep(540, 55, 0.02);
-    };
-  });
-
-  // bet
-  function clampBet(){
+  function clampBet() {
+    if (!betInput) return;
     if (inSeries) return;
+
     let v = Math.floor(Number(betInput.value) || 0);
-    if (v < 1) v = 1;
     const coins = Wallet.get();
-    if (v > coins) v = coins;
+
+    if (v < 1) v = 1;
+    if (coins > 0 && v > coins) v = coins;
+    if (coins <= 0) v = 1;
+
     betInput.value = String(v);
     renderStats();
   }
-  betInput.addEventListener("input", clampBet);
-  betMinus.onclick = () => { if(inSeries) return; betInput.value = String((Number(betInput.value)||1) - 10); clampBet(); };
-  betPlus.onclick  = () => { if(inSeries) return; betInput.value = String((Number(betInput.value)||1) + 10); clampBet(); };
-  clampBet();
 
-  // picks
-  document.querySelectorAll(".pickBtn").forEach(btn=>{
-    btn.onclick = () => setPicked(btn.dataset.move);
-  });
-
-  // game logic
-  function botMove(){
+  function botMove() {
     const i = Math.floor(randFloat() * 3);
     return MOVES[i];
   }
-  function decide(you, bot){
+
+  function decide(you, bot) {
     if (you === bot) return "draw";
+
     if (
-      (you==="rock" && bot==="scissors") ||
-      (you==="scissors" && bot==="paper") ||
-      (you==="paper" && bot==="rock")
-    ) return "win";
+      (you === "rock" && bot === "scissors") ||
+      (you === "scissors" && bot === "paper") ||
+      (you === "paper" && bot === "rock")
+    ) {
+      return "win";
+    }
+
     return "lose";
   }
 
-  function setRoundUI(bot){
-    botIcon.textContent = ICON[bot];
-    botPickView.textContent = MOVE_RU[bot];
-    resultView.textContent = "—";
+  function setRoundUI(bot) {
+    if (botIcon) botIcon.textContent = ICON[bot];
+    if (botPickView) botPickView.textContent = MOVE_RU[bot];
+    if (resultView) resultView.textContent = "—";
   }
 
-  function doCashout(auto=false){
+  function doCashout(auto = false) {
     if (!inSeries) return;
     if (series <= 0) return;
 
-    const payout = Math.floor(lockedBet * currentX());
+    const payout = currentPayout();
     addCoins(payout);
 
-    statusView.textContent = auto ? "Авто-кэшаут" : "Кэшаут";
-    resultView.textContent = "Забрано";
-    winView.textContent = `${payout} 🪙`;
+    if (statusView) {
+      statusView.textContent = auto ? "Авто-кэшаут" : "Кэшаут";
+    }
+
+    if (resultView) {
+      resultView.textContent = "Забрано";
+    }
+
+    if (winView) {
+      winView.textContent = `${payout} 🪙`;
+    }
 
     inSeries = false;
     series = 0;
     lockedBet = 0;
-    cashoutBtn.disabled = true;
+    busy = false;
+
+    if (cashoutBtn) cashoutBtn.disabled = true;
     lockBetUI(false);
 
     renderLadder();
     renderStats();
-    beep(820, 70, 0.03);
+    soundCash();
   }
 
-  cashoutBtn.onclick = () => { if (!busy) doCashout(false); };
+  // =========================
+  // Init base UI
+  // =========================
+  syncBalanceUI();
+  renderLadder();
+  renderStats();
+  resetRoundViews();
+  setPicked("rock");
 
-  playBtn.onclick = async () => {
+  if (statusView) statusView.textContent = "Ожидание";
+  if (resultView) resultView.textContent = "—";
+
+  // =========================
+  // Events
+  // =========================
+  soundBtn?.addEventListener("click", async () => {
+    soundOn = !soundOn;
+
+    if (soundText) {
+      soundText.textContent = soundOn ? "Звук on" : "Звук off";
+    }
+
+    const dot = soundBtn.querySelector(".dot");
+    if (dot) {
+      dot.style.background = soundOn ? "#26d47b" : "#ff5a6a";
+      dot.style.boxShadow = soundOn
+        ? "0 0 0 3px rgba(38,212,123,.14)"
+        : "0 0 0 3px rgba(255,90,106,.14)";
+    }
+
+    if (soundOn && audioCtx && audioCtx.state === "suspended") {
+      try {
+        await audioCtx.resume();
+      } catch {}
+    }
+
+    beep(soundOn ? 640 : 240, 60, 0.03);
+  });
+
+  bonusBtn?.addEventListener("click", () => {
+    addCoins(1000);
+    beep(760, 70, 0.03);
+  });
+
+  document.querySelectorAll(".chip").forEach((b) => {
+    b.addEventListener("click", () => {
+      if (inSeries || !betInput) return;
+
+      const val = b.dataset.bet;
+      const coins = Wallet.get();
+
+      betInput.value = val === "max" ? String(coins) : String(val);
+      clampBet();
+      beep(540, 55, 0.02);
+    });
+  });
+
+  betInput?.addEventListener("input", clampBet);
+
+  betMinus?.addEventListener("click", () => {
+    if (inSeries || !betInput) return;
+    betInput.value = String((Number(betInput.value) || 1) - 10);
+    clampBet();
+  });
+
+  betPlus?.addEventListener("click", () => {
+    if (inSeries || !betInput) return;
+    betInput.value = String((Number(betInput.value) || 1) + 10);
+    clampBet();
+  });
+
+  document.querySelectorAll(".pickBtn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      setPicked(btn.dataset.move);
+    });
+  });
+
+  cashoutBtn?.addEventListener("click", () => {
+    if (busy) return;
+    doCashout(false);
+  });
+
+  playBtn?.addEventListener("click", async () => {
     if (busy) return;
     busy = true;
 
-    // старт серии: списываем ставку один раз
     if (!inSeries) {
-      const bet = Math.floor(Number(betInput.value) || 0);
+      const bet = Math.floor(Number(betInput?.value) || 0);
       const coins = Wallet.get();
-      if (bet <= 0) { busy=false; return; }
-      if (bet > coins) { alert("Недостаточно монет"); busy=false; return; }
+
+      if (bet <= 0) {
+        busy = false;
+        return;
+      }
+
+      if (bet > coins) {
+        alert("Недостаточно монет");
+        busy = false;
+        return;
+      }
 
       lockedBet = bet;
       addCoins(-lockedBet);
+
       inSeries = true;
       lockBetUI(true);
 
-      winView.textContent = `0 🪙`;
-      cashoutBtn.disabled = true;
-      statusView.textContent = "Серия";
+      if (cashoutBtn) cashoutBtn.disabled = true;
+      if (statusView) statusView.textContent = "Серия";
+      if (winView) winView.textContent = "0 🪙";
     }
 
-    statusView.textContent = "Раунд...";
-    youPickView.textContent = MOVE_RU[picked];
-    youIcon.textContent = ICON[picked];
+    if (statusView) statusView.textContent = "Раунд...";
+    if (youPickView) youPickView.textContent = MOVE_RU[picked];
+    if (youIcon) youIcon.textContent = ICON[picked];
 
     const bot = botMove();
     setRoundUI(bot);
 
-    await new Promise(r => setTimeout(r, 140));
+    await new Promise((resolve) => setTimeout(resolve, 140));
 
     const outcome = decide(picked, bot);
 
     if (outcome === "draw") {
-      resultView.textContent = "Ничья";
-      statusView.textContent = "Ничья";
-      beep(420, 55, 0.02);
+      if (resultView) resultView.textContent = "Ничья";
+      if (statusView) statusView.textContent = "Ничья";
+      soundDraw();
     }
 
     if (outcome === "win") {
       series = Math.min(series + 1, MAX_STEP);
-      resultView.textContent = "Победа";
-      statusView.textContent = "Серия растёт";
-      beep(760, 60, 0.03);
-      beep(920, 60, 0.03);
 
-      cashoutBtn.disabled = (series === 0);
+      if (resultView) resultView.textContent = "Победа";
+      if (statusView) statusView.textContent = "Серия растёт";
+
+      soundWin();
+
+      if (cashoutBtn) {
+        cashoutBtn.disabled = series === 0;
+      }
+
+      renderLadder();
+      renderStats();
 
       if (series === MAX_STEP) {
-        await new Promise(r => setTimeout(r, 140));
+        await new Promise((resolve) => setTimeout(resolve, 140));
         doCashout(true);
-        busy = false;
         return;
       }
     }
 
     if (outcome === "lose") {
-      resultView.textContent = "Поражение";
-      statusView.textContent = "Серия в ноль";
-      beep(220, 85, 0.03);
+      if (resultView) resultView.textContent = "Поражение";
+      if (statusView) statusView.textContent = "Серия в ноль";
 
-      winView.textContent = `0 🪙`;
+      soundLose();
+
+      if (winView) winView.textContent = "0 🪙";
 
       inSeries = false;
       series = 0;
       lockedBet = 0;
-      cashoutBtn.disabled = true;
+
+      if (cashoutBtn) cashoutBtn.disabled = true;
       lockBetUI(false);
     }
 
     renderLadder();
     renderStats();
 
-    if (inSeries && series > 0) {
-      winView.textContent = `${Math.floor(lockedBet * currentX())} 🪙`;
-    } else if (!inSeries) {
-      winView.textContent = `0 🪙`;
-    }
-
     busy = false;
-  };
+  });
+
+  // final sync
+  clampBet();
 })();
