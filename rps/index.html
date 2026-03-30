@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>TRINITI — RPS</title>
 
+  <link rel="stylesheet" href="./style.css" />
+
+  <script src="../shared/wallet.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <div class="app">
+
+    <header class="topbar">
+      <div class="topbar__left">
+        <a class="backBtn" href="../index.html" aria-label="Назад">←</a>
+
+        <div class="brandRow">
+          <div class="brandLogo" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="trinitiGoldRpsCompact" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f8e8b2"/>
+                  <stop offset="48%" stop-color="#e0c26f"/>
+                  <stop offset="100%" stop-color="#b78f46"/>
+                </linearGradient>
+              </defs>
+              <rect x="10" y="10" width="44" height="44" rx="14"
+                    fill="rgba(255,255,255,.04)"
+                    stroke="url(#trinitiGoldRpsCompact)"
+                    stroke-width="2.2"/>
+              <path d="M21 20H43L39.5 25H34V41L32 45L30 41V25H24.5L21 20Z"
+                    fill="url(#trinitiGoldRpsCompact)"/>
+            </svg>
+          </div>
+
+          <div class="brand">
+            <div class="title">Triniti</div>
+            <div class="subtitle">RPS • КАМЕНЬ НОЖНИЦЫ БУМАГА</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill pill--sound" type="button" aria-label="Звук">
+          <span class="dot"></span>
+          <span id="soundText">Звук</span>
+        </button>
+
+        <div class="pill pill--balance">🪙 <b id="balance">0</b></div>
+      </div>
+    </header>
+
+    <main class="layout">
+
+      <section class="panel game">
+
+        <div class="stats">
+          <div>
+            <div class="label">Статус</div>
+            <div id="statusView">Ожидание</div>
+          </div>
+          <div>
+            <div class="label">Серия</div>
+            <div id="seriesView">0</div>
+          </div>
+          <div>
+            <div class="label">X</div>
+            <div id="multView">x1.00</div>
+          </div>
+          <div>
+            <div class="label">Профит</div>
+            <div id="potentialView">0</div>
+          </div>
+        </div>
+
+        <div class="vs">
+          <div class="card card--bot">
+            <div class="small">Бот</div>
+            <div id="botIcon" class="icon">✊🏻</div>
+            <div id="botPickView">—</div>
+          </div>
+
+          <div class="vsText">VS</div>
+
+          <div class="card card--you">
+            <div class="small">Ты</div>
+            <div id="youIcon" class="icon">✊🏻</div>
+            <div id="youPickView">Камень</div>
+          </div>
+        </div>
+
+        <div class="result" id="resultView">—</div>
+
+        <div class="picks">
+          <button class="pickBtn active" data-move="rock" type="button">
+            <span class="pickBtn__icon">✊🏻</span>
+          </button>
+          <button class="pickBtn" data-move="scissors" type="button">
+            <span class="pickBtn__icon">✌🏻</span>
+          </button>
+          <button class="pickBtn" data-move="paper" type="button">
+            <span class="pickBtn__icon">✋🏻</span>
+          </button>
+        </div>
+
+        <div id="ladder" class="ladder"></div>
+      </section>
+
+      <aside class="panel control">
+        <div class="chips">
+          <button class="chip" data-bet="10" type="button">10</button>
+          <button class="chip" data-bet="50" type="button">50</button>
+          <button class="chip" data-bet="100" type="button">100</button>
+          <button class="chip" data-bet="max" type="button">MAX</button>
+        </div>
+
+        <div class="bet">
+          <button id="betMinus" type="button">−</button>
+          <input id="betInput" type="number" value="100" />
+          <button id="betPlus" type="button">+</button>
+        </div>
+
+        <div class="actions">
+          <button id="playBtn" class="play" type="button">Играть</button>
+          <button id="cashoutBtn" type="button" disabled>Забрать</button>
+        </div>
+
+        <div class="win">
+          <span>Выигрыш</span>
+          <b id="winView">0</b>
+        </div>
+      </aside>
+
+    </main>
+  </div>
+</body>
+</html>
