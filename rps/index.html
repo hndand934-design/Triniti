@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>TRINITI — RPS</title>
+
+  <link rel="stylesheet" href="./style.css" />
+
+  <script src="../shared/wallet.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="app">
+
+    <!-- TOP -->
+    <header class="topbar">
+      <div class="topbar__left">
+        <a class="backBtn" href="../index.html">←</a>
+
+        <div class="brand">
+          <div class="title">Triniti</div>
+          <div class="subtitle">RPS</div>
+        </div>
+      </div>
+
+      <div class="topbar__right">
+        <button id="soundBtn" class="pill">
+          <span class="dot"></span>
+          <span id="soundText">Звук</span>
+        </button>
+
+        <div class="pill">🪙 <b id="balance">0</b></div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="layout">
+
+      <!-- GAME -->
+      <section class="panel game">
+
+        <!-- STATS -->
+        <div class="stats">
+          <div>
+            <div class="label">Статус</div>
+            <div id="statusView">Ожидание</div>
+          </div>
+          <div>
+            <div class="label">Серия</div>
+            <div id="seriesView">0</div>
+          </div>
+          <div>
+            <div class="label">X</div>
+            <div id="multView">x1.00</div>
+          </div>
+          <div>
+            <div class="label">Профит</div>
+            <div id="potentialView">0</div>
+          </div>
+        </div>
+
+        <!-- VS -->
+        <div class="vs">
+          <div class="card">
+            <div class="small">Бот</div>
+            <div id="botIcon" class="icon">✊🏻</div>
+            <div id="botPickView">—</div>
+          </div>
+
+          <div class="vsText">VS</div>
+
+          <div class="card">
+            <div class="small">Ты</div>
+            <div id="youIcon" class="icon">✊🏻</div>
+            <div id="youPickView">Камень</div>
+          </div>
+        </div>
+
+        <!-- RESULT -->
+        <div class="result" id="resultView">—</div>
+
+        <!-- PICKS -->
+        <div class="picks">
+          <button class="pickBtn active" data-move="rock">✊🏻</button>
+          <button class="pickBtn" data-move="scissors">✌🏻</button>
+          <button class="pickBtn" data-move="paper">✋🏻</button>
+        </div>
+
+        <!-- LADDER -->
+        <div id="ladder" class="ladder"></div>
+
+      </section>
+
+      <!-- CONTROL -->
+      <aside class="panel control">
+
+        <div class="chips">
+          <button class="chip" data-bet="10">10</button>
+          <button class="chip" data-bet="50">50</button>
+          <button class="chip" data-bet="100">100</button>
+          <button class="chip" data-bet="max">MAX</button>
+        </div>
+
+        <div class="bet">
+          <button id="betMinus">−</button>
+          <input id="betInput" type="number" value="100" />
+          <button id="betPlus">+</button>
+        </div>
+
+        <div class="actions">
+          <button id="playBtn" class="play">Играть</button>
+          <button id="cashoutBtn" disabled>Забрать</button>
+        </div>
+
+        <div class="win">
+          <span>Выигрыш</span>
+          <b id="winView">0</b>
+        </div>
+
+      </aside>
+
+    </main>
+  </div>
+</body>
+</html>
