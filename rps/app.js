@@ -1,16 +1,10 @@
 (() => {
-  // =========================
-  // RNG
-  // =========================
   function randFloat() {
     const a = new Uint32Array(1);
     crypto.getRandomValues(a);
     return a[0] / 2 ** 32;
   }
 
-  // =========================
-  // WALLET
-  // =========================
   const Wallet = (() => {
     const sw = window.SharedWallet;
 
@@ -50,9 +44,6 @@
     return { get, set, add };
   })();
 
-  // =========================
-  // SOUND
-  // =========================
   const SOUND_KEY = "triniti_rps_sound_v1";
   let soundOn = (localStorage.getItem(SOUND_KEY) ?? "1") === "1";
   let audioCtx = null;
@@ -108,13 +99,9 @@
     setTimeout(() => beep(980, 60, 0.025), 75);
   }
 
-  // =========================
-  // DOM
-  // =========================
   const $ = (id) => document.getElementById(id);
 
   const balanceEl = $("balance");
-
   const soundBtn = $("soundBtn");
   const soundText = $("soundText");
 
@@ -140,9 +127,6 @@
 
   const ladderEl = $("ladder");
 
-  // =========================
-  // CONFIG
-  // =========================
   const STEPS = [1.0, 1.2, 1.5, 2.0, 3.0, 5.0, 10.0];
   const MAX_STEP = STEPS.length - 1;
 
@@ -160,26 +144,18 @@
     paper: "✋🏻"
   };
 
-  // =========================
-  // STATE
-  // =========================
   let picked = "rock";
   let inSeries = false;
   let series = 0;
   let lockedBet = 0;
   let busy = false;
 
-  // =========================
-  // HELPERS
-  // =========================
   function syncBalanceUI() {
-    if (balanceEl) {
-      balanceEl.textContent = String(Wallet.get());
-    }
+    if (balanceEl) balanceEl.textContent = String(Wallet.get());
   }
 
-  function addCoins(delta) {
-    Wallet.add(delta);
+  function addCoins(d) {
+    Wallet.add(d);
     syncBalanceUI();
     clampBet();
   }
@@ -274,9 +250,7 @@
     if (youIcon) youIcon.textContent = ICON[move];
     if (youPickView) youPickView.textContent = MOVE_RU[move];
 
-    if (!silent) {
-      beep(520, 45, 0.02);
-    }
+    if (!silent) beep(520, 45, 0.02);
   }
 
   function clampBet() {
@@ -326,9 +300,7 @@
 
     lockBetUI(false);
 
-    if (cashoutBtn) {
-      cashoutBtn.disabled = true;
-    }
+    if (cashoutBtn) cashoutBtn.disabled = true;
 
     renderIdleViews();
     renderLadder();
@@ -390,9 +362,6 @@
     }, auto ? 120 : 80);
   }
 
-  // =========================
-  // INIT
-  // =========================
   syncBalanceUI();
   renderSoundUI();
   renderLadder();
@@ -400,9 +369,6 @@
   renderIdleViews();
   setPicked("rock", true);
 
-  // =========================
-  // EVENTS
-  // =========================
   soundBtn?.addEventListener("click", async () => {
     soundOn = !soundOn;
     localStorage.setItem(SOUND_KEY, soundOn ? "1" : "0");
@@ -528,8 +494,5 @@
     }
   });
 
-  // =========================
-  // FINAL SYNC
-  // =========================
   clampBet();
 })();
