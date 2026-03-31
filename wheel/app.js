@@ -1,331 +1,458 @@
 (() => {
   // ================================
-  // SHARED WALLET (единый баланс)
-  // Ожидается window.SharedWallet из ../shared/wallet.js
+  // TRINITI — Wheel
+  // финальная логика под новый макет
   // ================================
+
+  // ===== Shared Wallet =====
   const SW = window.SharedWallet;
-  if (!SW || typeof SW.getCoins !== "function") {
-    console.error("SharedWallet не найден. Проверь подключение ../shared/wallet.js");
-    alert("Ошибка: не найден общий кошелёк (shared/wallet.js).");
-    return;
-  }
 
-  const Wallet = {
-    get: () => Math.floor(SW.getCoins()),
-    set: (v) => SW.setCoins(v),
-    add: (d) => SW.addCoins(d),
-  };
+  const Wallet = (() => {
+    if (
+      SW &&
+      typeof SW.getCoins === "function" &&
+      typeof SW.setCoins === "function" &&
+      typeof SW.addCoins === "function"
+    ) {
+      return {
+        get: () => Math.floor(Number(SW.getCoins()) || 0),
+        set: (v) => SW.setCoins(Math.max(0, Math.floor(Number(v) || 0))),
+        add: (d) => SW.addCoins(Math.floor(Number(d) || 0))
+      };
+    }
 
-  // ===== RNG (честный) =====
+    const KEY = "wheel_wallet_fallback_v2";
+    const get = () => Math.floor(Number(localStorage.getItem(KEY) || 1000));
+    const set = (v) => localStorage.setItem(KEY, String(Math.max(0, Math.floor(Number(v) || 0))));
+    const add = (d) => set(get() + Math.floor(Number(d) || 0));
+    return { get, set, add };
+  })();
+
+  // ===== RNG =====
   function randFloat() {
     const a = new Uint32Array(1);
     crypto.getRandomValues(a);
     return a[0] / 2 ** 32;
   }
-  function randInt(n) { return Math.floor(randFloat() * n); }
+
+  function randInt(n) {
+    return Math.floor(randFloat() * n);
+  }
 
   // ===== Sound =====
-  const SOUND_KEY = "wheel_sound_v1";
+  const SOUND_KEY = "wheel_sound_v2";
   let soundOn = (localStorage.getItem(SOUND_KEY) ?? "1") === "1";
   let audioCtx = null;
 
-  function getCtx(){
+  function getCtx() {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return null;
     if (!audioCtx) audioCtx = new AC();
     return audioCtx;
   }
 
-  function beep(freq = 520, ms = 55, vol = 0.03) {
+  function beep(freq = 520, ms = 55, vol = 0.03, type = "sine") {
     if (!soundOn) return;
-    const c = getCtx(); if(!c) return;
 
-    const o = c.createOscillator();
-    const g = c.createGain();
-    o.type = "sine";
-    o.frequency.value = freq;
+    try {
+      const ctx = getCtx();
+      if (!ctx) return;
 
-    const t = c.currentTime;
-    g.gain.setValueAtTime(vol, t);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + ms/1000);
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const now = ctx.currentTime;
 
-    o.connect(g); g.connect(c.destination);
-    o.start(t); o.stop(t + ms/1000);
+      osc.type = type;
+      osc.frequency.value = freq;
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(vol, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + ms / 1000);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + ms / 1000 + 0.02);
+    } catch {}
   }
 
-  // ===== UI =====
-  const balanceEl = document.getElementById("balance");
-  const balance2  = document.getElementById("balance2");
+  function soundWin() {
+    beep(780, 70, 0.03, "sine");
+    setTimeout(() => beep(980, 70, 0.03, "sine"), 80);
+  }
 
-  const soundBtn  = document.getElementById("soundBtn");
-  const soundText = document.getElementById("soundText");
-  const soundDot  = document.getElementById("soundDot");
-  const bonusBtn  = document.getElementById("bonusBtn");
+  function soundLose() {
+    beep(220, 110, 0.03, "square");
+  }
 
-  const canvas = document.getElementById("wheel");
+  function soundTick() {
+    beep(520 + Math.random() * 80, 18, 0.012, "triangle");
+  }
+
+  // ===== DOM =====
+  const $ = (id) => document.getElementById(id);
+
+  const balanceEl = $("balance");
+
+  const soundBtn = $("soundBtn");
+  const soundText = $("soundText");
+  const soundDot = $("soundDot");
+
+  const canvas = $("wheel");
   const ctx = canvas.getContext("2d");
-  const spinBtn = document.getElementById("spinBtn");
 
-  const betInput = document.getElementById("betInput");
-  const betMinus = document.getElementById("betMinus");
-  const betPlus  = document.getElementById("betPlus");
+  const betInput = $("betInput");
+  const betMinus = $("betMinus");
+  const betPlus = $("betPlus");
 
-  const statusView = document.getElementById("statusView");
-  const pickView   = document.getElementById("pickView");
-  const resultView = document.getElementById("resultView");
+  const spinBtn = $("spinBtn");
+
+  const statusView = $("statusView");
+  const pickView = $("pickView");
+  const resultView = $("resultView");
+  const potentialView = $("potentialView");
 
   const pickBtns = Array.from(document.querySelectorAll(".pick"));
+  const chipBtns = Array.from(document.querySelectorAll(".chip"));
 
-  function renderBalances(){
-    const c = Wallet.get();
-    balanceEl.textContent = String(c);
-    balance2.textContent = String(c);
+  // ===== Config =====
+  const SEGMENTS = [
+    { label: "1.50x", mult: 1.5, color: "#2ddc5a" },
+    { label: "0.00x", mult: 0.0, color: "#344150" },
+
+    { label: "1.70x", mult: 1.7, color: "#e7efff" },
+    { label: "0.00x", mult: 0.0, color: "#344150" },
+
+    { label: "2.00x", mult: 2.0, color: "#ffd447" },
+    { label: "0.00x", mult: 0.0, color: "#344150" },
+
+    { label: "3.00x", mult: 3.0, color: "#7d4dff" },
+    { label: "0.00x", mult: 0.0, color: "#344150" },
+
+    { label: "4.00x", mult: 4.0, color: "#ff9a3c" },
+    { label: "0.00x", mult: 0.0, color: "#344150" },
+
+    { label: "1.50x", mult: 1.5, color: "#2ddc5a" },
+    { label: "0.00x", mult: 0.0, color: "#344150" },
+
+    { label: "1.70x", mult: 1.7, color: "#e7efff" },
+    { label: "0.00x", mult: 0.0, color: "#344150" },
+
+    { label: "2.00x", mult: 2.0, color: "#ffd447" },
+    { label: "0.00x", mult: 0.0, color: "#344150" },
+
+    { label: "1.50x", mult: 1.5, color: "#2ddc5a" },
+    { label: "0.00x", mult: 0.0, color: "#344150" }
+  ];
+
+  const N = SEGMENTS.length;
+  const TAU = Math.PI * 2;
+
+  // ===== State =====
+  let pickedMult = 1.5;
+  let rotation = 0;
+  let spinning = false;
+  let lastTickIndex = -1;
+
+  // ===== Helpers =====
+  function fmtCoins(n) {
+    return `${Math.floor(n)} 🪙`;
   }
 
-  function clampBet(){
+  function renderBalance() {
+    if (balanceEl) balanceEl.textContent = String(Wallet.get());
+  }
+
+  function clampBet() {
+    if (!betInput) return;
+
+    const coins = Wallet.get();
     let v = Math.floor(Number(betInput.value) || 0);
+
     if (v < 1) v = 1;
-    const max = Wallet.get();
-    if (v > max) v = max;
+    if (coins > 0 && v > coins) v = coins;
+    if (coins <= 0) v = 1;
+
     betInput.value = String(v);
+    renderPotential();
   }
 
-  function addCoins(d){
-    Wallet.add(d);
-    renderBalances();
-    clampBet();
+  function renderPotential() {
+    const bet = Math.floor(Number(betInput?.value) || 0);
+    if (!potentialView) return;
+
+    if (!pickedMult || bet <= 0) {
+      potentialView.textContent = "0 🪙";
+      return;
+    }
+
+    potentialView.textContent = fmtCoins(Math.floor(bet * pickedMult));
   }
 
-  function renderSound(){
-    soundText.textContent = soundOn ? "Звук on" : "Звук off";
+  function renderSound() {
+    if (soundText) soundText.textContent = soundOn ? "Звук on" : "Звук off";
+    if (!soundDot) return;
+
     soundDot.style.background = soundOn ? "#26d47b" : "#ff5a6a";
     soundDot.style.boxShadow = soundOn
       ? "0 0 0 3px rgba(38,212,123,.14)"
       : "0 0 0 3px rgba(255,90,106,.14)";
   }
 
-  // ===== segments =====
-  const SEGMENTS = [
-    { label: "1.50x", mult: 1.5, color: "#2ddc5a" },
-    { label: "0.00x", mult: 0.0, color: "#3a4656" },
+  function renderPick() {
+    pickBtns.forEach((btn) => {
+      btn.classList.toggle("active", Number(btn.dataset.pick) === pickedMult);
+    });
 
-    { label: "1.70x", mult: 1.7, color: "#e7efff" },
-    { label: "0.00x", mult: 0.0, color: "#3a4656" },
+    if (pickView) {
+      pickView.textContent = pickedMult ? `${pickedMult.toFixed(2)}x` : "—";
+    }
 
-    { label: "2.00x", mult: 2.0, color: "#ffd447" },
-    { label: "0.00x", mult: 0.0, color: "#3a4656" },
+    spinBtn.disabled = spinning || !pickedMult;
+    renderPotential();
+  }
 
-    { label: "3.00x", mult: 3.0, color: "#7d4dff" },
-    { label: "0.00x", mult: 0.0, color: "#3a4656" },
+  // ===== Wheel draw =====
+  function drawWheel() {
+    const w = canvas.width;
+    const h = canvas.height;
+    const cx = w / 2;
+    const cy = h / 2;
 
-    { label: "4.00x", mult: 4.0, color: "#ff9a3c" },
-    { label: "0.00x", mult: 0.0, color: "#3a4656" },
+    const rOuter = Math.min(w, h) * 0.48;
+    const rInner = rOuter * 0.67;
 
-    { label: "1.50x", mult: 1.5, color: "#2ddc5a" },
-    { label: "0.00x", mult: 0.0, color: "#3a4656" },
+    ctx.clearRect(0, 0, w, h);
 
-    { label: "1.70x", mult: 1.7, color: "#e7efff" },
-    { label: "0.00x", mult: 0.0, color: "#3a4656" },
-
-    { label: "2.00x", mult: 2.0, color: "#ffd447" },
-    { label: "0.00x", mult: 0.0, color: "#3a4656" },
-
-    { label: "1.50x", mult: 1.5, color: "#2ddc5a" },
-    { label: "0.00x", mult: 0.0, color: "#3a4656" },
-  ];
-
-  const N = SEGMENTS.length;
-  const TAU = Math.PI * 2;
-
-  let rotation = 0;
-  let spinning = false;
-  let pickedMult = null;
-
-  function drawWheel(){
-    const w = canvas.width, h = canvas.height;
-    const cx = w/2, cy = h/2;
-    const rOuter = Math.min(w,h)*0.48;
-    const rInner = rOuter*0.72;
-
-    ctx.clearRect(0,0,w,h);
-
-    // shadow ring
+    // outer shadow
     ctx.save();
-    ctx.translate(cx,cy);
     ctx.beginPath();
-    ctx.arc(0,0,rOuter+10,0,TAU);
+    ctx.arc(cx, cy, rOuter + 12, 0, TAU);
     ctx.fillStyle = "rgba(0,0,0,.22)";
     ctx.fill();
     ctx.restore();
 
-    for(let i=0;i<N;i++){
-      const a0 = rotation + (i * TAU/N);
-      const a1 = rotation + ((i+1) * TAU/N);
+    for (let i = 0; i < N; i++) {
+      const a0 = rotation + (i * TAU / N);
+      const a1 = rotation + ((i + 1) * TAU / N);
 
       ctx.beginPath();
-      ctx.moveTo(cx,cy);
-      ctx.arc(cx,cy,rOuter,a0,a1);
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, rOuter, a0, a1);
       ctx.closePath();
       ctx.fillStyle = SEGMENTS[i].color;
       ctx.fill();
 
-      // ring cut
       ctx.save();
-      ctx.globalCompositeOperation = "destination-out";
-      ctx.beginPath();
-      ctx.arc(cx,cy,rInner,0,TAU);
-      ctx.fill();
-      ctx.restore();
-
-      ctx.save();
-      ctx.strokeStyle = "rgba(0,0,0,.25)";
+      ctx.strokeStyle = "rgba(0,0,0,.32)";
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.arc(cx,cy,rOuter,a0,a1);
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, rOuter, a0, a1);
+      ctx.closePath();
       ctx.stroke();
+      ctx.restore();
+
+      const mid = (a0 + a1) / 2;
+      const tx = cx + Math.cos(mid) * ((rOuter + rInner) / 2);
+      const ty = cy + Math.sin(mid) * ((rOuter + rInner) / 2);
+
+      ctx.save();
+      ctx.translate(tx, ty);
+      ctx.rotate(mid + Math.PI / 2);
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.font = "bold 24px system-ui, Arial";
+      ctx.fillStyle = SEGMENTS[i].mult === 0 ? "#c6d0df" : "#0b1020";
+      ctx.fillText(SEGMENTS[i].label, 0, 0);
       ctx.restore();
     }
 
+    // center cutout
     ctx.save();
+    ctx.globalCompositeOperation = "destination-out";
     ctx.beginPath();
-    ctx.arc(cx,cy,rInner,0,TAU);
-    ctx.strokeStyle = "rgba(255,255,255,.08)";
-    ctx.lineWidth = 8;
-    ctx.stroke();
+    ctx.arc(cx, cy, rInner, 0, TAU);
+    ctx.fill();
     ctx.restore();
 
+    // inner ring
     ctx.save();
     ctx.beginPath();
-    ctx.arc(cx,cy,rInner*0.55,0,TAU);
-    ctx.strokeStyle = "rgba(255,255,255,.08)";
-    ctx.lineWidth = 4;
+    ctx.arc(cx, cy, rInner, 0, TAU);
+    ctx.strokeStyle = "rgba(255,255,255,.10)";
+    ctx.lineWidth = 10;
     ctx.stroke();
     ctx.restore();
   }
 
-  function setPick(mult){
-    pickedMult = mult;
-    pickBtns.forEach(b => b.classList.toggle("active", Number(b.dataset.pick) === mult));
-    pickView.textContent = mult ? `${mult.toFixed(2)}x` : "—";
-    spinBtn.disabled = !pickedMult || spinning;
-    beep(520, 50, 0.02);
-  }
-
-  // pointer at top (12 o’clock)
-  function segmentIndexAtPointer(){
-    const pointerAngle = -Math.PI/2;
+  function segmentIndexAtPointer() {
+    const pointerAngle = -Math.PI / 2;
     let ang = pointerAngle - rotation;
+
     while (ang < 0) ang += TAU;
     while (ang >= TAU) ang -= TAU;
-    return Math.floor(ang / (TAU/N));
+
+    return Math.floor(ang / (TAU / N));
   }
 
-  function animateSpin(targetRotation, duration=2600){
-    return new Promise((resolve)=>{
+  function animateSpin(targetRotation, duration = 2900) {
+    return new Promise((resolve) => {
       const start = performance.now();
       const from = rotation;
       const delta = targetRotation - from;
 
-      const easeOutCubic = (t)=> 1 - Math.pow(1-t, 3);
+      function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
 
-      function frame(now){
-        const t = Math.min(1, (now-start)/duration);
+      function frame(now) {
+        const t = Math.min(1, (now - start) / duration);
         rotation = from + delta * easeOutCubic(t);
         drawWheel();
 
-        // тик
-        if (soundOn && t < 0.98 && Math.random() < 0.12){
-          beep(520 + Math.random()*120, 18, 0.015);
+        const idx = segmentIndexAtPointer();
+        if (idx !== lastTickIndex && t < 0.985) {
+          lastTickIndex = idx;
+          soundTick();
         }
 
-        if(t < 1) requestAnimationFrame(frame);
-        else resolve();
+        if (t < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          resolve();
+        }
       }
+
       requestAnimationFrame(frame);
     });
   }
 
-  // ===== events =====
-  soundBtn.addEventListener("click", async ()=>{
+  function setStatus(text) {
+    if (statusView) statusView.textContent = text;
+  }
+
+  function setResult(text) {
+    if (resultView) resultView.textContent = text;
+  }
+
+  // ===== Events =====
+  soundBtn?.addEventListener("click", async () => {
     soundOn = !soundOn;
     localStorage.setItem(SOUND_KEY, soundOn ? "1" : "0");
     renderSound();
     beep(soundOn ? 640 : 240, 60, 0.03);
+
     if (soundOn && audioCtx && audioCtx.state === "suspended") {
-      try { await audioCtx.resume(); } catch {}
+      try {
+        await audioCtx.resume();
+      } catch {}
     }
   });
 
-  bonusBtn.addEventListener("click", ()=>{
-    addCoins(1000);
-    beep(820, 70, 0.03);
-    beep(980, 70, 0.03);
+  betInput?.addEventListener("input", () => {
+    clampBet();
   });
 
-  betInput.addEventListener("input", ()=>{ clampBet(); beep(520, 30, 0.01); });
-  betMinus.addEventListener("click", ()=>{
-    betInput.value = String((Number(betInput.value)||1) - 10);
-    clampBet(); beep(520, 40, 0.02);
-  });
-  betPlus.addEventListener("click", ()=>{
-    betInput.value = String((Number(betInput.value)||1) + 10);
-    clampBet(); beep(520, 40, 0.02);
+  betMinus?.addEventListener("click", () => {
+    if (spinning || !betInput) return;
+    betInput.value = String((Number(betInput.value) || 1) - 10);
+    clampBet();
+    beep(520, 45, 0.02);
   });
 
-  document.querySelectorAll(".chip").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      const v = btn.dataset.bet;
-      betInput.value = (v === "max") ? String(Wallet.get()) : String(v);
+  betPlus?.addEventListener("click", () => {
+    if (spinning || !betInput) return;
+    betInput.value = String((Number(betInput.value) || 1) + 10);
+    clampBet();
+    beep(520, 45, 0.02);
+  });
+
+  chipBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (spinning || !betInput) return;
+
+      const val = btn.dataset.bet;
+      const coins = Wallet.get();
+      betInput.value = val === "max" ? String(Math.max(1, coins)) : String(val);
       clampBet();
-      beep(540, 55, 0.02);
+      beep(540, 50, 0.02);
     });
   });
 
-  pickBtns.forEach(b => b.addEventListener("click", ()=> setPick(Number(b.dataset.pick))));
+  pickBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (spinning) return;
+      pickedMult = Number(btn.dataset.pick);
+      renderPick();
+      beep(560, 50, 0.02);
+    });
+  });
 
-  spinBtn.addEventListener("click", async ()=>{
+  spinBtn?.addEventListener("click", async () => {
     if (spinning || !pickedMult) return;
 
-    const bet = Math.floor(Number(betInput.value) || 0);
-    if (bet <= 0) return alert("Ставка должна быть больше 0");
-    if (bet > Wallet.get()) return alert("Недостаточно монет");
+    const bet = Math.floor(Number(betInput?.value) || 0);
+    const coins = Wallet.get();
+
+    if (bet <= 0) {
+      alert("Ставка должна быть больше 0");
+      return;
+    }
+
+    if (bet > coins) {
+      alert("Недостаточно монет");
+      return;
+    }
 
     spinning = true;
     spinBtn.disabled = true;
-    statusView.textContent = "Крутим...";
-    resultView.textContent = "—";
+    setStatus("Крутим...");
+    setResult("—");
 
-    addCoins(-bet);
+    Wallet.add(-bet);
+    renderBalance();
+    clampBet();
 
-    const spins = 6 + randInt(5);
+    const spins = 6 + randInt(4);
     const extra = randFloat() * TAU;
-    const target = rotation + spins*TAU + extra;
+    const targetRotation = rotation + spins * TAU + extra;
+    lastTickIndex = -1;
 
-    beep(600, 60, 0.02);
-    await animateSpin(target, 2600);
+    beep(620, 60, 0.02);
+    await animateSpin(targetRotation, 2900);
 
     const idx = segmentIndexAtPointer();
     const seg = SEGMENTS[idx];
-    resultView.textContent = seg.label;
 
-    if (seg.mult > 0 && Math.abs(seg.mult - pickedMult) < 0.001){
+    setResult(seg.label);
+
+    if (seg.mult > 0 && Math.abs(seg.mult - pickedMult) < 0.0001) {
       const win = Math.floor(bet * seg.mult);
-      addCoins(win);
-      statusView.textContent = "Победа";
-      beep(820, 70, 0.03);
-      beep(980, 70, 0.03);
+      Wallet.add(win);
+      renderBalance();
+      setStatus("Победа");
+      soundWin();
     } else {
-      statusView.textContent = "Проигрыш";
-      beep(220, 110, 0.03);
+      setStatus("Проигрыш");
+      soundLose();
     }
 
     spinning = false;
-    spinBtn.disabled = !pickedMult;
+    spinBtn.disabled = false;
   });
 
-  // ===== init =====
-  renderBalances();
-  renderSound();
-  clampBet();
-  drawWheel();
+  // ===== Init =====
+  function init() {
+    renderBalance();
+    renderSound();
+    clampBet();
+    drawWheel();
+    renderPick();
+    setStatus("Ожидание");
+    setResult("—");
+  }
+
+  init();
 })();
