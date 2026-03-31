@@ -24,7 +24,7 @@
           <div class="brandLogo" aria-hidden="true">
             <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="trinitiGoldTower" x1="0%" y1="0%" x2="0%" y2="100%">
+                <linearGradient id="trinitiGoldTowerNew" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#f8e8b2"/>
                   <stop offset="48%" stop-color="#e0c26f"/>
                   <stop offset="100%" stop-color="#b78f46"/>
@@ -32,10 +32,10 @@
               </defs>
               <rect x="10" y="10" width="44" height="44" rx="14"
                     fill="rgba(255,255,255,.04)"
-                    stroke="url(#trinitiGoldTower)"
+                    stroke="url(#trinitiGoldTowerNew)"
                     stroke-width="2.2"/>
               <path d="M21 20H43L39.5 25H34V41L32 45L30 41V25H24.5L21 20Z"
-                    fill="url(#trinitiGoldTower)"/>
+                    fill="url(#trinitiGoldTowerNew)"/>
             </svg>
           </div>
 
@@ -56,7 +56,7 @@
       </div>
     </header>
 
-    <section class="layout">
+    <main class="layout">
       <aside class="panel panel--control">
         <div class="sectionBlock">
           <div class="rowTitle">
@@ -95,23 +95,23 @@
         </div>
 
         <div class="sectionBlock sectionBlock--stats">
-          <div class="miniStats">
-            <div class="miniStat">
+          <div class="compactStats">
+            <div class="compactStat">
               <div class="label">Статус</div>
               <div id="statusText" class="value">Ожидание</div>
             </div>
 
-            <div class="miniStat">
+            <div class="compactStat">
               <div class="label">Шаг</div>
               <div id="stepText" class="value">0</div>
             </div>
 
-            <div class="miniStat">
-              <div class="label">Текущий X</div>
+            <div class="compactStat">
+              <div class="label">X</div>
               <div id="xText" class="value">x1.00</div>
             </div>
 
-            <div class="miniStat">
+            <div class="compactStat">
               <div class="label">Потенциал</div>
               <div id="potentialText" class="value">0 🪙</div>
             </div>
@@ -141,13 +141,13 @@
 
       <aside class="panel panel--ladder">
         <div class="rowTitle">
-          <div class="h2">Шкала X</div>
-          <div class="muted">активный ряд подсвечен</div>
+          <div class="h2">Лестница X</div>
+          <div class="muted">видна заранее</div>
         </div>
 
-        <div id="ladder" class="ladder"></div>
+        <div id="ladder" class="ladderGrid"></div>
       </aside>
-    </section>
+    </main>
   </div>
 </body>
 </html>
