@@ -1,29 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>TRINITI — Wheel</title>
 
-  <!-- ОБЩИЕ СТИЛИ (если файл существует) -->
   <link rel="stylesheet" href="../shared/theme.css" />
-
-  <!-- СТИЛИ РЕЖИМА -->
   <link rel="stylesheet" href="./style.css" />
 
-  <!-- ЕДИНЫЙ КОШЕЛЁК + ЛОГИКА РЕЖИМА -->
   <script src="../shared/wallet.js" defer></script>
   <script src="./app.js" defer></script>
 </head>
-
 <body>
   <div class="bg"></div>
+  <div class="noise" aria-hidden="true"></div>
 
   <div class="app">
     <header class="topbar">
       <div class="topbar__left">
-        <div class="title">Wheel</div>
-        <div class="subtitle">TRINITI • единый кошелёк</div>
+        <a class="backBtn" href="../index.html" aria-label="Назад">←</a>
+
+        <div class="brandRow">
+          <div class="brandLogo" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="trinitiGoldWheel" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f8e8b2"/>
+                  <stop offset="48%" stop-color="#e0c26f"/>
+                  <stop offset="100%" stop-color="#b78f46"/>
+                </linearGradient>
+              </defs>
+              <rect x="10" y="10" width="44" height="44" rx="14"
+                    fill="rgba(255,255,255,.04)"
+                    stroke="url(#trinitiGoldWheel)"
+                    stroke-width="2.2"/>
+              <path d="M21 20H43L39.5 25H34V41L32 45L30 41V25H24.5L21 20Z"
+                    fill="url(#trinitiGoldWheel)"/>
+            </svg>
+          </div>
+
+          <div class="brandText">
+            <div class="title">Triniti</div>
+            <div class="subtitle">WHEEL • ЕДИНЫЙ КОШЕЛЁК</div>
+          </div>
+        </div>
       </div>
 
       <div class="topbar__right">
@@ -32,69 +52,95 @@
           <span id="soundText">Звук on</span>
         </button>
 
-        <button id="bonusBtn" class="pill pill--bonus" type="button">+1000 🪙</button>
-
         <div class="pill pill--balance">🪙 <b id="balance">0</b></div>
-
-        <a class="pill pill--link" href="../index.html">← Назад</a>
       </div>
     </header>
 
     <main class="layout">
-      <section class="card card--left">
-        <div class="cardHead">
-          <div class="h1">Wheel</div>
-          <div class="hint">Выбери множитель снизу и нажми «Крутить». Выигрыш только при попадании.</div>
+      <section class="panel panel--wheel">
+        <div class="panelHead">
+          <div>
+            <div class="h1">Колесо</div>
+            <div class="hint">Выбери множитель, нажми «Крутить» и лови точное попадание.</div>
+          </div>
         </div>
 
         <div class="wheelWrap">
           <div class="wheelPanel">
             <div class="pointer" aria-hidden="true"></div>
             <canvas id="wheel" width="620" height="620"></canvas>
+
             <div class="wheelCenter">
-              <div class="centerText">Выбери множитель</div>
-              <div class="centerSub">и нажми «Крутить»</div>
+              <div class="centerText">TRINITI</div>
+              <div class="centerSub">Wheel</div>
             </div>
           </div>
         </div>
 
-        <div class="choiceRow" role="group" aria-label="Выбор множителя">
-          <button class="pick" data-pick="1.5" type="button"><span class="bar bar--green"></span>1.50x</button>
-          <button class="pick" data-pick="1.7" type="button"><span class="bar bar--white"></span>1.70x</button>
-          <button class="pick" data-pick="2.0" type="button"><span class="bar bar--yellow"></span>2.00x</button>
-          <button class="pick" data-pick="3.0" type="button"><span class="bar bar--purple"></span>3.00x</button>
-          <button class="pick" data-pick="4.0" type="button"><span class="bar bar--orange"></span>4.00x</button>
+        <div class="pickTitleRow">
+          <div class="h2">Выбор множителя</div>
+          <div class="muted">без ставки на 0.00x</div>
         </div>
 
-        <button id="spinBtn" class="btnPrimary" type="button" disabled>Крутить</button>
+        <div class="choiceRow" role="group" aria-label="Выбор множителя">
+          <button class="pick active" data-pick="1.5" type="button">
+            <span class="bar bar--green"></span>
+            <span>1.50x</span>
+          </button>
+
+          <button class="pick" data-pick="1.7" type="button">
+            <span class="bar bar--white"></span>
+            <span>1.70x</span>
+          </button>
+
+          <button class="pick" data-pick="2.0" type="button">
+            <span class="bar bar--yellow"></span>
+            <span>2.00x</span>
+          </button>
+
+          <button class="pick" data-pick="3.0" type="button">
+            <span class="bar bar--purple"></span>
+            <span>3.00x</span>
+          </button>
+
+          <button class="pick" data-pick="4.0" type="button">
+            <span class="bar bar--orange"></span>
+            <span>4.00x</span>
+          </button>
+        </div>
 
         <div class="statusRow">
           <div class="statusBox">
             <div class="label">Статус</div>
             <div class="value" id="statusView">Ожидание</div>
           </div>
+
           <div class="statusBox">
             <div class="label">Твой выбор</div>
-            <div class="value" id="pickView">—</div>
+            <div class="value" id="pickView">1.50x</div>
           </div>
+
           <div class="statusBox">
             <div class="label">Результат</div>
             <div class="value" id="resultView">—</div>
           </div>
         </div>
-
-        <div class="footNote">
-          Правило: если выпало на твой множитель — выигрываешь ×множитель, иначе ставка сгорает.
-        </div>
       </section>
 
-      <aside class="card card--right">
-        <div class="cardHead">
-          <div class="h1">Ставка</div>
-          <div class="hint">Монеты виртуальные, без вывода.</div>
+      <aside class="panel panel--control">
+        <div class="panelHead">
+          <div>
+            <div class="h1">Управление</div>
+            <div class="hint">Один стиль с остальными режимами Triniti.</div>
+          </div>
         </div>
 
-        <div class="betBox">
+        <div class="sectionBlock">
+          <div class="rowTitle">
+            <div class="h2">Ставка</div>
+            <div class="muted">общий кошелёк</div>
+          </div>
+
           <div class="chips" role="group" aria-label="chips">
             <button class="chip" data-bet="10" type="button">10</button>
             <button class="chip" data-bet="50" type="button">50</button>
@@ -109,10 +155,19 @@
             <input id="betInput" class="betInput" type="number" min="1" step="1" value="100" />
             <button id="betPlus" class="btnSmall" type="button">+</button>
           </div>
+        </div>
 
-          <div class="mutedLine">
-            Баланс: <b>🪙 <span id="balance2">0</span></b>
+        <div class="sectionBlock">
+          <div class="winBox">
+            <div>
+              <div class="label">Потенциальный выигрыш</div>
+              <div id="potentialView" class="winValue">0 🪙</div>
+            </div>
           </div>
+        </div>
+
+        <div class="actions">
+          <button id="spinBtn" class="btnPrimary" type="button" disabled>Крутить</button>
         </div>
       </aside>
     </main>
