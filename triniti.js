@@ -18,12 +18,12 @@
   };
 
   const PRIZES = [
-    { label: "+0 🪙", coins: 0 },
-    { label: "+5 🪙", coins: 5 },
-    { label: "+10 🪙", coins: 10 },
-    { label: "+15 🪙", coins: 15 },
-    { label: "+20 🪙", coins: 20 },
-    { label: "+25 🪙", coins: 25 }
+    { label: "+0 ₽", coins: 0 },
+    { label: "+5 ₽", coins: 5 },
+    { label: "+10 ₽", coins: 10 },
+    { label: "+15 ₽", coins: 15 },
+    { label: "+20 ₽", coins: 20 },
+    { label: "+25 ₽", coins: 25 }
   ];
 
   const $ = (id) => document.getElementById(id);
@@ -275,6 +275,7 @@
     for (let i = 0; i < points.length - 1; i++) {
       const a = points[i];
       const b = points[i + 1];
+
       if (m >= a.m && m <= b.m) {
         const t = (m - a.m) / Math.max(1, b.m - a.m);
         return Math.round(lerp(a.val, b.val, t));
@@ -302,16 +303,12 @@
     const wave = Math.sin(minuteBucket * 0.85 + dayKey * 0.011) * 7;
     const offset = Math.round((noise1 - 0.5) * 34 + (noise2 - 0.5) * 18 + wave);
 
-    let val = base + offset;
+    let value = base + offset;
 
-    if (now.getHours() >= 18 && now.getHours() <= 22) {
-      val += 8;
-    }
-    if (now.getHours() >= 2 && now.getHours() <= 5) {
-      val -= 8;
-    }
+    if (now.getHours() >= 18 && now.getHours() <= 22) value += 8;
+    if (now.getHours() >= 2 && now.getHours() <= 5) value -= 8;
 
-    return clamp(Math.round(val), 100, 398);
+    return clamp(Math.round(value), 100, 398);
   }
 
   function readOnlineState() {
@@ -347,6 +344,7 @@
     }
 
     const newValue = computeLiveOnline(new Date(nowTs));
+
     writeOnlineState({
       value: newValue,
       nextUpdateTs: getNextOnlineUpdateTs(nowTs)
@@ -449,6 +447,7 @@
     if (targetSelector === "#heroTop") {
       const sideHome = document.querySelector('.sideItem[data-jump="#heroTop"]');
       const bottomHome = document.querySelector('.mobileBottomNav__item[data-jump="#heroTop"]');
+
       if (sideHome) setSideActive(sideHome);
       if (bottomHome) setBottomActive(bottomHome);
       return;
@@ -570,9 +569,11 @@
       });
     });
 
-    document.querySelector('.mobileBottomNav__item:not([data-jump]):not([data-open])')?.addEventListener("click", () => {
-      toggleSidebar();
-    });
+    document
+      .querySelector('.mobileBottomNav__item:not([data-jump]):not([data-open])')
+      ?.addEventListener("click", () => {
+        toggleSidebar();
+      });
   }
 
   // ===== PRESS FEEDBACK =====
