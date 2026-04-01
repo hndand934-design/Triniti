@@ -9,7 +9,7 @@
   const VK_KEY = "triniti_bonus_vk_v2";
   const TG_KEY = "triniti_bonus_tg_v2";
 
-  const ONLINE_STATE_KEY = "triniti_online_state_v1";
+  const ONLINE_STATE_KEY = "triniti_online_state_v2";
 
   const PROMOS = {
     TRINITI5: 5,
@@ -77,7 +77,9 @@
       ...(options.headers || {})
     };
 
-    if (token) headers.Authorization = "Bearer " + token;
+    if (token) {
+      headers.Authorization = "Bearer " + token;
+    }
 
     const res = await fetch(API_BASE + path, {
       ...options,
@@ -127,7 +129,10 @@
   }
 
   async function fetchBalance() {
-    const data = await api("/wallet/balance", { method: "GET" });
+    const data = await api("/wallet/balance", {
+      method: "GET"
+    });
+
     return Number(data.balance || 0);
   }
 
@@ -253,23 +258,43 @@
     return a + (b - a) * t;
   }
 
-  function getDayMinutes(date = new Date()) {
+  function hashNoise(seed) {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  }
+
+  function getDayKey(date = new Date()) {
+    return Number(
+      `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, "0")}${String(date.getDate()).padStart(2, "0")}`
+    );
+  }
+
+  function getBucketTs(ts = Date.now()) {
+    const step = 5 * 60 * 1000;
+    return Math.floor(ts / step) * step;
+  }
+
+  function getMinutesOfDay(date = new Date()) {
     return date.getHours() * 60 + date.getMinutes();
   }
 
-  function getOnlineBaseByTime(date = new Date()) {
-    const m = getDayMinutes(date);
+  function getOnlineCurveBase(date = new Date()) {
+    const m = getMinutesOfDay(date);
 
     const points = [
-      { m: 0, val: 118 },
-      { m: 240, val: 102 },   // 04:00
-      { m: 420, val: 128 },   // 07:00
-      { m: 600, val: 176 },   // 10:00
-      { m: 780, val: 238 },   // 13:00
-      { m: 960, val: 318 },   // 16:00
-      { m: 1140, val: 386 },  // 19:00
-      { m: 1290, val: 342 },  // 21:30
-      { m: 1439, val: 214 }   // 23:59
+      { m: 0, val: 128 },
+      { m: 180, val: 102 },
+      { m: 300, val: 92 },
+      { m: 420, val: 126 },
+      { m: 540, val: 170 },
+      { m: 660, val: 214 },
+      { m: 780, val: 246 },
+      { m: 900, val: 292 },
+      { m: 1020, val: 348 },
+      { m: 1140, val: 392 },
+      { m: 1260, val: 322 },
+      { m: 1380, val: 236 },
+      { m: 1439, val: 198 }
     ];
 
     for (let i = 0; i < points.length - 1; i++) {
@@ -282,33 +307,33 @@
       }
     }
 
-    return 160;
+    return 180;
   }
 
-  function getDeterministicNoise(seed) {
-    const x = Math.sin(seed) * 10000;
-    return x - Math.floor(x);
-  }
+  function computeLiveOnline(date = new Date()) {
+    const dayKey = getDayKey(date);
+    const bucketIndex = Math.floor(getBucketTs(date.getTime()) / (5 * 60 * 1000));
+    const base = getOnlineCurveBase(date);
 
-  function computeLiveOnline(now = new Date()) {
-    const dayKey = Number(
-      `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}`
-    );
+    const n1 = hashNoise(dayKey * 0.137 + bucketIndex * 1.173);
+    const n2 = hashNoise(dayKey * 0.071 + bucketIndex * 2.417);
+    const n3 = hashNoise(dayKey * 0.049 + bucketIndex * 0.619);
 
-    const minuteBucket = Math.floor(now.getTime() / (1000 * 60 * 4));
-    const base = getOnlineBaseByTime(now);
+    const waveShort = Math.sin(bucketIndex * 0.85 + dayKey * 0.003) * 16;
+    const waveMid = Math.sin(bucketIndex * 0.31 + dayKey * 0.009) * 24;
+    const jitter = (n1 - 0.5) * 34 + (n2 - 0.5) * 22 + (n3 - 0.5) * 14;
 
-    const noise1 = getDeterministicNoise(dayKey * 0.17 + minuteBucket * 1.91);
-    const noise2 = getDeterministicNoise(dayKey * 0.09 + minuteBucket * 0.73);
-    const wave = Math.sin(minuteBucket * 0.85 + dayKey * 0.011) * 7;
-    const offset = Math.round((noise1 - 0.5) * 34 + (noise2 - 0.5) * 18 + wave);
+    let value = Math.round(base + waveShort + waveMid + jitter);
 
-    let value = base + offset;
+    if (date.getHours() >= 18 && date.getHours() <= 22) {
+      value += 6;
+    }
 
-    if (now.getHours() >= 18 && now.getHours() <= 22) value += 8;
-    if (now.getHours() >= 2 && now.getHours() <= 5) value -= 8;
+    if (date.getHours() >= 2 && date.getHours() <= 5) {
+      value -= 10;
+    }
 
-    return clamp(Math.round(value), 100, 398);
+    return clamp(value, 90, 400);
   }
 
   function readOnlineState() {
@@ -326,21 +351,20 @@
   }
 
   function getNextOnlineUpdateTs(fromTs = Date.now()) {
-    const delayMs = (3 + Math.floor(Math.random() * 3)) * 60 * 1000;
-    return fromTs + delayMs;
+    return getBucketTs(fromTs) + 5 * 60 * 1000;
   }
 
   function getLiveOnlineValue() {
     const nowTs = Date.now();
-    const existing = readOnlineState();
+    const state = readOnlineState();
 
     if (
-      existing &&
-      Number.isFinite(existing.value) &&
-      Number.isFinite(existing.nextUpdateTs) &&
-      nowTs < existing.nextUpdateTs
+      state &&
+      Number.isFinite(state.value) &&
+      Number.isFinite(state.nextUpdateTs) &&
+      nowTs < state.nextUpdateTs
     ) {
-      return existing.value;
+      return state.value;
     }
 
     const newValue = computeLiveOnline(new Date(nowTs));
@@ -956,6 +980,7 @@
     drawWheel();
     renderTimer();
     renderSocial();
+    renderOnline();
 
     const wheelCanvas = $("dailyWheel");
     if (wheelCanvas) {
