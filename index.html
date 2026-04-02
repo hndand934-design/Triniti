@@ -155,45 +155,28 @@
                   </button>
                 </div>
 
-                <div class="heroBonusVisual" aria-hidden="true">
-                  <div class="heroCoin heroCoin--back"></div>
+                <div class="heroBonusVisual heroBonusVisual--cards" aria-hidden="true">
+                  <div class="heroVisualGlow heroVisualGlow--one"></div>
+                  <div class="heroVisualGlow heroVisualGlow--two"></div>
 
-                  <div class="heroBonusBadge">
-                    <div class="heroBonusBadge__frame">
-                      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                          <linearGradient id="heroGoldMain" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#fff4c4"/>
-                            <stop offset="38%" stop-color="#f0cf74"/>
-                            <stop offset="72%" stop-color="#d8a847"/>
-                            <stop offset="100%" stop-color="#9f6b1c"/>
-                          </linearGradient>
-                          <linearGradient id="heroGoldDark" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#6d4512"/>
-                            <stop offset="100%" stop-color="#2f1a07"/>
-                          </linearGradient>
-                        </defs>
+                  <div class="heroChip heroChip--back"></div>
+                  <div class="heroChip heroChip--front"></div>
 
-                        <rect x="10" y="10" width="100" height="100" rx="28"
-                              fill="rgba(12,16,25,.96)"
-                              stroke="url(#heroGoldMain)"
-                              stroke-width="5"/>
+                  <div class="heroCardsStack">
+                    <div class="heroCardGold heroCardGold--back"></div>
 
-                        <rect x="18" y="18" width="84" height="84" rx="22"
-                              fill="rgba(255,255,255,.03)"
-                              stroke="rgba(255,230,170,.22)"
-                              stroke-width="1.5"/>
+                    <div class="heroCardGold heroCardGold--mid">
+                      <span class="cardShine"></span>
+                      <span class="cardSuit">♠</span>
+                    </div>
 
-                        <path d="M33 34H88L79 42H67V76L60 90L53 76V42H42L33 34Z"
-                              fill="url(#heroGoldMain)"/>
-
-                        <path d="M61 49L70 45L59 68L50 72L61 49Z"
-                              fill="url(#heroGoldDark)" opacity=".55"/>
-                      </svg>
+                    <div class="heroCardGold heroCardGold--front">
+                      <span class="cardShine"></span>
+                      <span class="cardCorner cardCorner--tl">A</span>
+                      <span class="cardCorner cardCorner--br">A</span>
+                      <span class="cardSuit cardSuit--main">♦</span>
                     </div>
                   </div>
-
-                  <div class="heroCoin heroCoin--front"></div>
                 </div>
               </div>
             </div>
@@ -204,11 +187,17 @@
             </div>
 
             <button id="depositBtn" class="heroSide heroSide--action heroSide--deposit pressable" type="button">
+              <span class="heroSide__iconWrap" aria-hidden="true">
+                <span class="heroSide__icon heroSide__icon--deposit">↗</span>
+              </span>
               <span class="heroSide__title">Пополнить</span>
               <span class="heroSide__desc">быстрый вход в игру</span>
             </button>
 
             <button id="withdrawBtn" class="heroSide heroSide--action heroSide--withdraw pressable" type="button">
+              <span class="heroSide__iconWrap" aria-hidden="true">
+                <span class="heroSide__icon heroSide__icon--withdraw">↘</span>
+              </span>
               <span class="heroSide__title">Вывести</span>
               <span class="heroSide__desc">запрос на вывод</span>
             </button>
@@ -229,8 +218,10 @@
               </div>
 
               <div class="onlineCard__main">
-                <div class="onlineCard__number"><span id="onlineCount">186</span></div>
-                <div class="onlineCard__text">игроков онлайн</div>
+                <div class="onlineCard__valueBox">
+                  <div class="onlineCard__number"><span id="onlineCount">186</span></div>
+                  <div class="onlineCard__text">игроков онлайн</div>
+                </div>
               </div>
 
               <div class="onlineWave" aria-hidden="true">
@@ -254,36 +245,24 @@
               </div>
 
               <div class="mobileHeroBonus__visual" aria-hidden="true">
-                <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="heroGoldMainMobile" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stop-color="#fff4c4"/>
-                      <stop offset="38%" stop-color="#f0cf74"/>
-                      <stop offset="72%" stop-color="#d8a847"/>
-                      <stop offset="100%" stop-color="#9f6b1c"/>
-                    </linearGradient>
-                    <linearGradient id="heroGoldDarkMobile" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#6d4512"/>
-                      <stop offset="100%" stop-color="#2f1a07"/>
-                    </linearGradient>
-                  </defs>
+                <div class="mobileHeroCardsStack">
+                  <div class="mobileHeroChip mobileHeroChip--back"></div>
+                  <div class="mobileHeroChip mobileHeroChip--front"></div>
 
-                  <rect x="10" y="10" width="100" height="100" rx="28"
-                        fill="rgba(12,16,25,.96)"
-                        stroke="url(#heroGoldMainMobile)"
-                        stroke-width="5"/>
+                  <div class="mobileHeroCard mobileHeroCard--back"></div>
 
-                  <rect x="18" y="18" width="84" height="84" rx="22"
-                        fill="rgba(255,255,255,.03)"
-                        stroke="rgba(255,230,170,.22)"
-                        stroke-width="1.5"/>
+                  <div class="mobileHeroCard mobileHeroCard--mid">
+                    <span class="mobileCardShine"></span>
+                    <span class="mobileCardSuit">♠</span>
+                  </div>
 
-                  <path d="M33 34H88L79 42H67V76L60 90L53 76V42H42L33 34Z"
-                        fill="url(#heroGoldMainMobile)"/>
-
-                  <path d="M61 49L70 45L59 68L50 72L61 49Z"
-                        fill="url(#heroGoldDarkMobile)" opacity=".55"/>
-                </svg>
+                  <div class="mobileHeroCard mobileHeroCard--front">
+                    <span class="mobileCardShine"></span>
+                    <span class="mobileCardCorner mobileCardCorner--tl">A</span>
+                    <span class="mobileCardCorner mobileCardCorner--br">A</span>
+                    <span class="mobileCardSuit mobileCardSuit--main">♦</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -294,11 +273,13 @@
 
             <div class="mobileWalletPanel__actions">
               <button id="depositBtnMobile" class="mobileWalletPanel__btn mobileWalletPanel__btn--primary pressable" type="button">
+                <span class="mobileWalletPanel__btnIcon" aria-hidden="true">↗</span>
                 <span>Пополнить</span>
                 <small>быстрый вход в игру</small>
               </button>
 
               <button id="withdrawBtnMobile" class="mobileWalletPanel__btn mobileWalletPanel__btn--withdraw pressable" type="button">
+                <span class="mobileWalletPanel__btnIcon" aria-hidden="true">↘</span>
                 <span>Вывести</span>
                 <small>запрос на вывод</small>
               </button>
