@@ -8,7 +8,7 @@
   const DAILY_NEXT_KEY = "triniti_daily_next_ms_v3";
   const VK_KEY = "triniti_bonus_vk_v2";
   const TG_KEY = "triniti_bonus_tg_v2";
-  const ONLINE_STATE_KEY = "triniti_online_state_v2";
+  const ONLINE_STATE_KEY = "triniti_online_state_v3";
 
   const PROMOS = {
     TRINITI5: 5,
@@ -31,10 +31,6 @@
   let audioCtx = null;
   let spinning = false;
   let lastRotation = 0;
-
-  const mainLayout = $("mainLayout");
-  const menuBtn = $("menuBtn");
-  const menuBtnMobile = $("menuBtnMobile");
 
   // ===== AUDIO =====
   function getCtx() {
@@ -65,6 +61,17 @@
       osc.start(now);
       osc.stop(now + ms / 1000);
     } catch {}
+  }
+
+  // ===== PRESS FEEDBACK =====
+  function initPressFeedback() {
+    $$(".pressable").forEach((el) => {
+      el.addEventListener("pointerdown", () => el.classList.add("is-pressed"));
+      const clear = () => el.classList.remove("is-pressed");
+      el.addEventListener("pointerup", clear);
+      el.addEventListener("pointerleave", clear);
+      el.addEventListener("pointercancel", clear);
+    });
   }
 
   // ===== API =====
@@ -128,10 +135,7 @@
   }
 
   async function fetchBalance() {
-    const data = await api("/wallet/balance", {
-      method: "GET"
-    });
-
+    const data = await api("/wallet/balance", { method: "GET" });
     return Number(data.balance || 0);
   }
 
@@ -140,7 +144,11 @@
       await ensureAuth();
       const balance = await fetchBalance();
 
-      [$("balance"), $("balance2"), $("balanceRail")]
+      [
+        $("balance"),
+        $("balance2"),
+        $("balanceTop")
+      ]
         .filter(Boolean)
         .forEach((el) => {
           el.textContent = String(balance);
@@ -246,8 +254,7 @@
     $("withdrawBtn")?.addEventListener("click", withdrawReal);
     $("depositBtnMobile")?.addEventListener("click", depositReal);
     $("withdrawBtnMobile")?.addEventListener("click", withdrawReal);
-    $("heroDepositBtn")?.addEventListener("click", depositReal);
-    $("heroDepositBtnMobile")?.addEventListener("click", depositReal);
+    $("depositBanner")?.addEventListener("click", depositReal);
   }
 
   // ===== ONLINE COUNTER =====
@@ -283,19 +290,19 @@
     const m = getMinutesOfDay(date);
 
     const points = [
-      { m: 0, val: 128 },
-      { m: 180, val: 102 },
+      { m: 0, val: 126 },
+      { m: 180, val: 104 },
       { m: 300, val: 92 },
-      { m: 420, val: 126 },
+      { m: 420, val: 128 },
       { m: 540, val: 170 },
-      { m: 660, val: 214 },
-      { m: 780, val: 246 },
-      { m: 900, val: 292 },
-      { m: 1020, val: 348 },
+      { m: 660, val: 216 },
+      { m: 780, val: 248 },
+      { m: 900, val: 295 },
+      { m: 1020, val: 350 },
       { m: 1140, val: 392 },
-      { m: 1260, val: 322 },
-      { m: 1380, val: 236 },
-      { m: 1439, val: 198 }
+      { m: 1260, val: 320 },
+      { m: 1380, val: 232 },
+      { m: 1439, val: 194 }
     ];
 
     for (let i = 0; i < points.length - 1; i++) {
@@ -385,10 +392,65 @@
 
   function initOnlineCounter() {
     renderOnline();
+    setInterval(renderOnline, 60 * 1000);
+  }
 
-    setInterval(() => {
-      renderOnline();
-    }, 60 * 1000);
+  // ===== SIDEBAR / NAV =====
+  function setActiveInGroup(selector, activeEl) {
+    $$(selector).forEach((el) => {
+      el.classList.toggle(
+        selector === ".railBtn"
+          ? "railBtn--active"
+          : selector === ".mobileBottomNav__item"
+          ? "mobileBottomNav__item--active"
+          : "is-active",
+        el === activeEl
+      );
+    });
+  }
+
+  function markNavByTarget(selector) {
+    if (!selector) return;
+
+    const railEl = document.querySelector(`.railBtn[data-jump="${selector}"]`);
+    const mobileEl = document.querySelector(`.mobileBottomNav__item[data-jump="${selector}"]`);
+
+    if (railEl) setActiveInGroup(".railBtn", railEl);
+    if (mobileEl) setActiveInGroup(".mobileBottomNav__item", mobileEl);
+  }
+
+  function initJumpButtons() {
+    $$("[data-jump]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const selector = btn.getAttribute("data-jump");
+        const target = selector ? document.querySelector(selector) : null;
+
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }
+
+        if (btn.classList.contains("railBtn")) {
+          setActiveInGroup(".railBtn", btn);
+        }
+
+        if (btn.classList.contains("mobileBottomNav__item")) {
+          setActiveInGroup(".mobileBottomNav__item", btn);
+        }
+
+        beep(520, 45, 0.02);
+      });
+    });
+  }
+
+  function initSidebarButton() {
+    $("menuBtn")?.addEventListener("click", () => {
+      beep(520, 45, 0.02);
+    });
   }
 
   // ===== MODALS =====
@@ -416,122 +478,6 @@
     beep(420, 50, 0.02);
   }
 
-  // ===== ACTIVE STATES =====
-  function setActiveInGroup(selector, activeEl) {
-    $$(selector).forEach((el) => {
-      el.classList.toggle("active", el === activeEl);
-    });
-  }
-
-  function setHeaderActive(el) {
-    if (!el) return;
-    setActiveInGroup(".navPill", el);
-  }
-
-  function setSideActive(el) {
-    if (!el) return;
-    setActiveInGroup(".sideItem", el);
-  }
-
-  function setBottomActive(el) {
-    if (!el) return;
-    setActiveInGroup(".mobileBottomNav__item", el);
-  }
-
-  function syncActiveByModal(name) {
-    const headerMap = {
-      promo: document.querySelector('.navPill[data-open="promo"]'),
-      support: document.querySelector('.navPill[data-open="support"]'),
-      free: document.querySelector('.navPill[data-open="free"]')
-    };
-
-    const sideMap = {
-      promo: document.querySelector('.sideItem[data-open="promo"]'),
-      support: document.querySelector('.sideItem[data-open="support"]'),
-      free: document.querySelector('.sideItem[data-open="free"]')
-    };
-
-    const bottomMap = {
-      promo: document.querySelector('.mobileBottomNav__item[data-open="promo"]'),
-      support: document.querySelector('.mobileBottomNav__item[data-open="support"]'),
-      free: document.querySelector('.mobileBottomNav__item[data-open="free"]')
-    };
-
-    if (headerMap[name]) setHeaderActive(headerMap[name]);
-    if (sideMap[name]) setSideActive(sideMap[name]);
-    if (bottomMap[name]) setBottomActive(bottomMap[name]);
-  }
-
-  function updateMenuStateByTarget(targetSelector) {
-    if (!targetSelector) return;
-
-    if (targetSelector === "#heroTop") {
-      const sideHome = document.querySelector('.sideItem[data-jump="#heroTop"]');
-      const bottomHome = document.querySelector('.mobileBottomNav__item[data-jump="#heroTop"]');
-
-      if (sideHome) setSideActive(sideHome);
-      if (bottomHome) setBottomActive(bottomHome);
-      return;
-    }
-
-    if (targetSelector === "#featuredSec") {
-      const sideFeatured = document.querySelector('.sideItem[data-jump="#featuredSec"]');
-      if (sideFeatured) setSideActive(sideFeatured);
-      return;
-    }
-
-    if (targetSelector === "#gamesSec" || targetSelector === "#games") {
-      const headerGames = document.querySelector('.navPill[data-jump="#gamesSec"], .navPill[data-jump="#games"]');
-      const sideGames = document.querySelector('.sideItem[data-jump="#gamesSec"]');
-      const bottomGames = document.querySelector('.mobileBottomNav__item[data-jump="#gamesSec"]');
-
-      if (headerGames) setHeaderActive(headerGames);
-      if (sideGames) setSideActive(sideGames);
-      if (bottomGames) setBottomActive(bottomGames);
-    }
-  }
-
-  // ===== SIDEBAR =====
-  function openSidebar() {
-    if (!mainLayout) return;
-    mainLayout.classList.remove("layout--sidebar-closed");
-    menuBtn?.classList.add("active");
-    menuBtnMobile?.classList.add("active");
-  }
-
-  function closeSidebar() {
-    if (!mainLayout) return;
-    mainLayout.classList.add("layout--sidebar-closed");
-    menuBtn?.classList.remove("active");
-    menuBtnMobile?.classList.remove("active");
-  }
-
-  function toggleSidebar() {
-    if (!mainLayout) return;
-    const closed = mainLayout.classList.contains("layout--sidebar-closed");
-    if (closed) openSidebar();
-    else closeSidebar();
-    beep(520, 45, 0.02);
-  }
-
-  function initSidebar() {
-    if (!mainLayout) return;
-
-    menuBtn?.addEventListener("click", toggleSidebar);
-    menuBtnMobile?.addEventListener("click", toggleSidebar);
-
-    if (window.innerWidth > 1180) {
-      closeSidebar();
-    }
-
-    window.addEventListener("resize", () => {
-      if (window.innerWidth <= 1180) {
-        closeSidebar();
-      }
-    });
-  }
-
-  // ===== MODAL INIT =====
   function initModals() {
     $("freeClose")?.addEventListener("click", () => closeModal("free"));
     $("promoClose")?.addEventListener("click", () => closeModal("promo"));
@@ -545,63 +491,22 @@
       });
     });
 
+    $$("[data-open]").forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        const name = el.getAttribute("data-open");
+        if (!name) return;
+        openModal(name);
+      });
+    });
+
     window.addEventListener("keydown", (e) => {
       if (e.key !== "Escape") return;
-
       Object.entries(modals).forEach(([name, modal]) => {
         if (modal?.classList.contains("open")) {
           closeModal(name);
         }
       });
-    });
-
-    $$("[data-open]").forEach((el) => {
-      el.addEventListener("click", (e) => {
-        const name = el.getAttribute("data-open");
-        if (!name) return;
-
-        e.preventDefault();
-        openModal(name);
-        syncActiveByModal(name);
-      });
-    });
-  }
-
-  // ===== JUMPS =====
-  function initJumpButtons() {
-    $$("[data-jump]").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const selector = btn.getAttribute("data-jump");
-        const target = selector ? document.querySelector(selector) : null;
-
-        if (target) {
-          target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-        }
-
-        if (btn.classList.contains("navPill")) setHeaderActive(btn);
-        if (btn.classList.contains("sideItem")) setSideActive(btn);
-        if (btn.classList.contains("mobileBottomNav__item")) setBottomActive(btn);
-
-        updateMenuStateByTarget(selector);
-        beep(520, 45, 0.02);
-      });
-    });
-  }
-
-  // ===== PRESS FEEDBACK =====
-  function initPressFeedback() {
-    $$(".pressable").forEach((el) => {
-      el.addEventListener("pointerdown", () => {
-        el.classList.add("is-pressed");
-      });
-
-      const clear = () => el.classList.remove("is-pressed");
-      el.addEventListener("pointerup", clear);
-      el.addEventListener("pointerleave", clear);
-      el.addEventListener("pointercancel", clear);
     });
   }
 
@@ -720,6 +625,8 @@
     if (!wheelCanvas) return;
 
     const ctx = wheelCanvas.getContext("2d");
+    if (!ctx) return;
+
     const W = wheelCanvas.width;
     const H = wheelCanvas.height;
     const cx = W / 2;
@@ -822,6 +729,7 @@
     if (wheelCenterTxt) wheelCenterTxt.textContent = "…";
     if (wheelCenterSub) wheelCenterSub.textContent = "крутим";
     if (dailyMsg) dailyMsg.textContent = "Крутим колесо…";
+
     beep(520, 55, 0.02);
 
     const winIndex = rngInt(PRIZES.length);
@@ -916,10 +824,11 @@
   function setTab(which) {
     const daily = which === "daily";
 
-    $("tabDaily")?.classList.toggle("active", daily);
-    $("tabSocial")?.classList.toggle("active", !daily);
-    $("paneDaily")?.classList.toggle("hidden", !daily);
-    $("paneSocial")?.classList.toggle("hidden", daily);
+    $("tabDaily")?.classList.toggle("tab--active", daily);
+    $("tabSocial")?.classList.toggle("tab--active", !daily);
+
+    $("paneDaily")?.classList.toggle("pane--hidden", !daily);
+    $("paneSocial")?.classList.toggle("pane--hidden", daily);
 
     beep(520, 45, 0.02);
   }
@@ -931,9 +840,7 @@
 
   function initSupportButtons() {
     $$('[data-beep="1"]').forEach((btn) => {
-      btn.addEventListener("click", () => {
-        beep(520, 55, 0.02);
-      });
+      btn.addEventListener("click", () => beep(520, 55, 0.02));
     });
   }
 
@@ -950,15 +857,11 @@
 
   // ===== INIT =====
   async function init() {
-    if (!localStorage.getItem(DAILY_NEXT_KEY)) {
-      localStorage.setItem(DAILY_NEXT_KEY, "0");
-    }
-
     initPressFeedback();
-    initSidebar();
-    initPaymentButtons();
-    initModals();
+    initSidebarButton();
     initJumpButtons();
+    initModals();
+    initPaymentButtons();
     initPromo();
     initWheel();
     initSocial();
@@ -972,11 +875,16 @@
     renderTimer();
     renderSocial();
     renderOnline();
+    markNavByTarget("#heroBanner");
 
     const wheelCanvas = $("dailyWheel");
     if (wheelCanvas) {
       wheelCanvas.style.transform = "rotate(0rad)";
       wheelCanvas.style.transformOrigin = "50% 50%";
+    }
+
+    if (!localStorage.getItem(DAILY_NEXT_KEY)) {
+      localStorage.setItem(DAILY_NEXT_KEY, "0");
     }
 
     try {
@@ -986,10 +894,12 @@
       console.error("Init auth error:", e);
     }
 
-    setInterval(() => {
-      renderTimer();
-    }, 1000);
+    setInterval(renderTimer, 1000);
   }
 
-  init();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
 })();
