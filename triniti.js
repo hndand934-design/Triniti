@@ -1,5 +1,14 @@
 (() => {
-  const API_BASE = "http://localhost:4000/api";
+  const API_BASE = (() => {
+    const host = window.location.hostname || "";
+    const isLocal =
+      host === "localhost" ||
+      host === "127.0.0.1" ||
+      host === "0.0.0.0";
+
+    return isLocal ? "http://localhost:4000/api" : "/api";
+  })();
+
   const TOKEN_KEY = "triniti_token_v1";
   const EMAIL = "test@test.com";
   const PASSWORD = "12345678";
@@ -9,6 +18,7 @@
   const VK_KEY = "triniti_bonus_vk_v2";
   const TG_KEY = "triniti_bonus_tg_v2";
   const ONLINE_STATE_KEY = "triniti_online_state_v2";
+  const LOCAL_BALANCE_KEY = "triniti_local_balance_v1";
 
   const PROMOS = {
     TRINITI5: 5,
@@ -31,6 +41,7 @@
   let audioCtx = null;
   let spinning = false;
   let lastRotation = 0;
+  let useLocalWallet = false;
 
   const mainLayout = $("mainLayout");
   const menuBtn = $("menuBtn");
@@ -65,6 +76,35 @@
       osc.start(now);
       osc.stop(now + ms / 1000);
     } catch {}
+  }
+
+  // ===== LOCAL WALLET FALLBACK =====
+  function getLocalBalance() {
+    const raw = Number(localStorage.getItem(LOCAL_BALANCE_KEY));
+    if (Number.isFinite(raw)) return raw;
+
+    const fallbackEls = [$("balance"), $("balance2")].filter(Boolean);
+    const parsedFromUi = fallbackEls.length
+      ? Number((fallbackEls[0].textContent || "").replace(/[^\d.-]/g, ""))
+      : NaN;
+
+    const initial = Number.isFinite(parsedFromUi) ? parsedFromUi : 1000;
+    localStorage.setItem(LOCAL_BALANCE_KEY, String(initial));
+    return initial;
+  }
+
+  function setLocalBalance(value) {
+    const safe = Math.max(0, Math.round(Number(value) || 0));
+    localStorage.setItem(LOCAL_BALANCE_KEY, String(safe));
+    return safe;
+  }
+
+  function addLocalBalance(amount) {
+    return setLocalBalance(getLocalBalance() + Number(amount || 0));
+  }
+
+  function subtractLocalBalance(amount) {
+    return setLocalBalance(getLocalBalance() - Number(amount || 0));
   }
 
   // ===== API =====
@@ -102,6 +142,8 @@
   }
 
   async function ensureAuth() {
+    if (useLocalWallet) return "local-wallet";
+
     const token = localStorage.getItem(TOKEN_KEY);
     if (token) return token;
 
@@ -128,6 +170,10 @@
   }
 
   async function fetchBalance() {
+    if (useLocalWallet) {
+      return getLocalBalance();
+    }
+
     const data = await api("/wallet/balance", {
       method: "GET"
     });
@@ -137,7 +183,6 @@
 
   async function syncBalanceUI() {
     try {
-      await ensureAuth();
       const balance = await fetchBalance();
 
       [$("balance"), $("balance2"), $("balanceRail")]
@@ -150,10 +195,23 @@
     }
   }
 
+  async function detectWalletMode() {
+    try {
+      await ensureAuth();
+      useLocalWallet = false;
+    } catch (e) {
+      console.warn("API недоступен, включён локальный кошелёк:", e);
+      useLocalWallet = true;
+      setLocalBalance(getLocalBalance());
+    }
+  }
+
   // ===== PAYMENTS =====
   async function depositReal() {
     try {
-      await ensureAuth();
+      if (!useLocalWallet) {
+        await ensureAuth();
+      }
 
       const amountStr = prompt("Введите сумму пополнения:");
       if (amountStr === null) return;
@@ -162,6 +220,17 @@
       if (!amount || amount <= 0) {
         alert("Введите корректную сумму.");
         beep(240, 80, 0.03);
+        return;
+      }
+
+      if (useLocalWallet) {
+        addLocalBalance(amount);
+        await syncBalanceUI();
+
+        beep(760, 70, 0.03);
+        setTimeout(() => beep(920, 70, 0.03), 90);
+
+        alert(`Баланс пополнен на ${amount} ₽`);
         return;
       }
 
@@ -190,7 +259,9 @@
 
   async function withdrawReal() {
     try {
-      await ensureAuth();
+      if (!useLocalWallet) {
+        await ensureAuth();
+      }
 
       const balance = await fetchBalance();
 
@@ -212,6 +283,17 @@
 
       const requisites = prompt("Введите реквизиты для тестового вывода:", "test-card");
       if (requisites === null) return;
+
+      if (useLocalWallet) {
+        subtractLocalBalance(amount);
+        await syncBalanceUI();
+
+        beep(760, 70, 0.03);
+        setTimeout(() => beep(520, 70, 0.03), 90);
+
+        alert(`Вывод на ${amount} ₽ выполнен`);
+        return;
+      }
 
       const created = await api("/withdraw/create", {
         method: "POST",
@@ -639,17 +721,21 @@
       localStorage.setItem(PROMO_KEY_USED, JSON.stringify(used));
 
       try {
-        await ensureAuth();
+        if (useLocalWallet) {
+          addLocalBalance(reward);
+        } else {
+          await ensureAuth();
 
-        const created = await api("/deposit/create", {
-          method: "POST",
-          body: JSON.stringify({ amount: reward })
-        });
+          const created = await api("/deposit/create", {
+            method: "POST",
+            body: JSON.stringify({ amount: reward })
+          });
 
-        await api("/deposit/confirm-test", {
-          method: "POST",
-          body: JSON.stringify({ depositId: created.depositId })
-        });
+          await api("/deposit/confirm-test", {
+            method: "POST",
+            body: JSON.stringify({ depositId: created.depositId })
+          });
+        }
 
         await syncBalanceUI();
 
@@ -830,18 +916,22 @@
     const prize = PRIZES[winIndex];
 
     try {
-      await ensureAuth();
+      if (useLocalWallet) {
+        if (prize.coins > 0) addLocalBalance(prize.coins);
+      } else {
+        await ensureAuth();
 
-      if (prize.coins > 0) {
-        const created = await api("/deposit/create", {
-          method: "POST",
-          body: JSON.stringify({ amount: prize.coins })
-        });
+        if (prize.coins > 0) {
+          const created = await api("/deposit/create", {
+            method: "POST",
+            body: JSON.stringify({ amount: prize.coins })
+          });
 
-        await api("/deposit/confirm-test", {
-          method: "POST",
-          body: JSON.stringify({ depositId: created.depositId })
-        });
+          await api("/deposit/confirm-test", {
+            method: "POST",
+            body: JSON.stringify({ depositId: created.depositId })
+          });
+        }
       }
 
       await syncBalanceUI();
@@ -883,17 +973,21 @@
     if (localStorage.getItem(key) === "1") return;
 
     try {
-      await ensureAuth();
+      if (useLocalWallet) {
+        addLocalBalance(amount);
+      } else {
+        await ensureAuth();
 
-      const created = await api("/deposit/create", {
-        method: "POST",
-        body: JSON.stringify({ amount })
-      });
+        const created = await api("/deposit/create", {
+          method: "POST",
+          body: JSON.stringify({ amount })
+        });
 
-      await api("/deposit/confirm-test", {
-        method: "POST",
-        body: JSON.stringify({ depositId: created.depositId })
-      });
+        await api("/deposit/confirm-test", {
+          method: "POST",
+          body: JSON.stringify({ depositId: created.depositId })
+        });
+      }
 
       localStorage.setItem(key, "1");
       renderSocial();
@@ -954,6 +1048,8 @@
       localStorage.setItem(DAILY_NEXT_KEY, "0");
     }
 
+    await detectWalletMode();
+
     initPressFeedback();
     initSidebar();
     initPaymentButtons();
@@ -980,10 +1076,9 @@
     }
 
     try {
-      await ensureAuth();
       await syncBalanceUI();
     } catch (e) {
-      console.error("Init auth error:", e);
+      console.error("Init sync error:", e);
     }
 
     setInterval(() => {
