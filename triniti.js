@@ -18,7 +18,9 @@
   const VK_KEY = "triniti_bonus_vk_v2";
   const TG_KEY = "triniti_bonus_tg_v2";
   const ONLINE_STATE_KEY = "triniti_online_state_v2";
-  const LOCAL_BALANCE_KEY = "triniti_local_balance_v1";
+
+  // Единый общий кошелёк для главной и всех режимов
+  const SHARED_WALLET_KEY = "triniti_shared_wallet_v1";
 
   const PROMOS = {
     TRINITI5: 5,
@@ -78,33 +80,47 @@
     } catch {}
   }
 
-  // ===== LOCAL WALLET FALLBACK =====
-  function getLocalBalance() {
-    const raw = Number(localStorage.getItem(LOCAL_BALANCE_KEY));
-    if (Number.isFinite(raw)) return raw;
-
-    const fallbackEls = [$("balance"), $("balance2")].filter(Boolean);
-    const parsedFromUi = fallbackEls.length
-      ? Number((fallbackEls[0].textContent || "").replace(/[^\d.-]/g, ""))
-      : NaN;
-
-    const initial = Number.isFinite(parsedFromUi) ? parsedFromUi : 1000;
-    localStorage.setItem(LOCAL_BALANCE_KEY, String(initial));
-    return initial;
+  // ===== SHARED WALLET =====
+  function getSharedWalletRaw() {
+    try {
+      return JSON.parse(localStorage.getItem(SHARED_WALLET_KEY) || "null");
+    } catch {
+      return null;
+    }
   }
 
-  function setLocalBalance(value) {
-    const safe = Math.max(0, Math.round(Number(value) || 0));
-    localStorage.setItem(LOCAL_BALANCE_KEY, String(safe));
-    return safe;
+  function readSharedBalance() {
+    const raw = getSharedWalletRaw();
+    if (raw && Number.isFinite(Number(raw.balance))) {
+      return Math.max(0, Math.round(Number(raw.balance)));
+    }
+
+    const uiBalance = Number(($("balance")?.textContent || "1000").replace(/[^\d.-]/g, ""));
+    return Number.isFinite(uiBalance) ? uiBalance : 1000;
   }
 
-  function addLocalBalance(amount) {
-    return setLocalBalance(getLocalBalance() + Number(amount || 0));
+  function writeSharedBalance(value) {
+    const safeBalance = Math.max(0, Math.round(Number(value) || 0));
+    const payload = {
+      balance: safeBalance,
+      updatedAt: Date.now()
+    };
+    localStorage.setItem(SHARED_WALLET_KEY, JSON.stringify(payload));
+    return safeBalance;
   }
 
-  function subtractLocalBalance(amount) {
-    return setLocalBalance(getLocalBalance() - Number(amount || 0));
+  function addSharedBalance(amount) {
+    return writeSharedBalance(readSharedBalance() + Number(amount || 0));
+  }
+
+  function subtractSharedBalance(amount) {
+    return writeSharedBalance(readSharedBalance() - Number(amount || 0));
+  }
+
+  function ensureSharedWalletInit() {
+    if (!localStorage.getItem(SHARED_WALLET_KEY)) {
+      writeSharedBalance(readSharedBalance());
+    }
   }
 
   // ===== API =====
@@ -142,7 +158,7 @@
   }
 
   async function ensureAuth() {
-    if (useLocalWallet) return "local-wallet";
+    if (useLocalWallet) return "shared-wallet";
 
     const token = localStorage.getItem(TOKEN_KEY);
     if (token) return token;
@@ -171,19 +187,21 @@
 
   async function fetchBalance() {
     if (useLocalWallet) {
-      return getLocalBalance();
+      return readSharedBalance();
     }
 
     const data = await api("/wallet/balance", {
       method: "GET"
     });
 
-    return Number(data.balance || 0);
+    const balance = Number(data.balance || 0);
+    writeSharedBalance(balance);
+    return balance;
   }
 
   async function syncBalanceUI() {
     try {
-      const balance = await fetchBalance();
+      const balance = useLocalWallet ? readSharedBalance() : await fetchBalance();
 
       [$("balance"), $("balance2"), $("balanceRail")]
         .filter(Boolean)
@@ -200,18 +218,16 @@
       await ensureAuth();
       useLocalWallet = false;
     } catch (e) {
-      console.warn("API недоступен, включён локальный кошелёк:", e);
+      console.warn("API недоступен, включён общий localStorage-кошелёк:", e);
       useLocalWallet = true;
-      setLocalBalance(getLocalBalance());
+      ensureSharedWalletInit();
     }
   }
 
   // ===== PAYMENTS =====
   async function depositReal() {
     try {
-      if (!useLocalWallet) {
-        await ensureAuth();
-      }
+      if (!useLocalWallet) await ensureAuth();
 
       const amountStr = prompt("Введите сумму пополнения:");
       if (amountStr === null) return;
@@ -224,12 +240,10 @@
       }
 
       if (useLocalWallet) {
-        addLocalBalance(amount);
+        addSharedBalance(amount);
         await syncBalanceUI();
-
         beep(760, 70, 0.03);
         setTimeout(() => beep(920, 70, 0.03), 90);
-
         alert(`Баланс пополнен на ${amount} ₽`);
         return;
       }
@@ -259,11 +273,9 @@
 
   async function withdrawReal() {
     try {
-      if (!useLocalWallet) {
-        await ensureAuth();
-      }
+      if (!useLocalWallet) await ensureAuth();
 
-      const balance = await fetchBalance();
+      const balance = useLocalWallet ? readSharedBalance() : await fetchBalance();
 
       const amountStr = prompt("Введите сумму вывода:");
       if (amountStr === null) return;
@@ -285,7 +297,7 @@
       if (requisites === null) return;
 
       if (useLocalWallet) {
-        subtractLocalBalance(amount);
+        subtractSharedBalance(amount);
         await syncBalanceUI();
 
         beep(760, 70, 0.03);
@@ -722,7 +734,7 @@
 
       try {
         if (useLocalWallet) {
-          addLocalBalance(reward);
+          addSharedBalance(reward);
         } else {
           await ensureAuth();
 
@@ -917,7 +929,7 @@
 
     try {
       if (useLocalWallet) {
-        if (prize.coins > 0) addLocalBalance(prize.coins);
+        if (prize.coins > 0) addSharedBalance(prize.coins);
       } else {
         await ensureAuth();
 
@@ -974,7 +986,7 @@
 
     try {
       if (useLocalWallet) {
-        addLocalBalance(amount);
+        addSharedBalance(amount);
       } else {
         await ensureAuth();
 
@@ -1040,6 +1052,12 @@
         renderOnline();
       } catch {}
     });
+
+    window.addEventListener("storage", (e) => {
+      if (e.key === SHARED_WALLET_KEY) {
+        syncBalanceUI();
+      }
+    });
   }
 
   // ===== INIT =====
@@ -1048,6 +1066,7 @@
       localStorage.setItem(DAILY_NEXT_KEY, "0");
     }
 
+    ensureSharedWalletInit();
     await detectWalletMode();
 
     initPressFeedback();
