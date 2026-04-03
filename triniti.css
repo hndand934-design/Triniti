@@ -110,6 +110,11 @@ button{font:inherit}
     inset 0 -1px 0 rgba(0,0,0,.28);
 }
 
+.topbar__left{
+  display:flex;
+  align-items:center;
+}
+
 .topbar__right{
   display:flex;
   align-items:center;
@@ -120,24 +125,6 @@ button{font:inherit}
   display:flex;
   align-items:center;
   gap:14px;
-}
-
-.menuBtn{
-  width:46px;
-  height:46px;
-  border-radius:15px;
-  border:1px solid #0a0b0d;
-  background:
-    linear-gradient(180deg, rgba(54,56,62,.98), rgba(23,24,27,.98));
-  color:#fff;
-  display:grid;
-  place-items:center;
-  cursor:pointer;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.05),
-    inset 0 -1px 0 rgba(0,0,0,.24);
-  position:relative;
-  z-index:71;
 }
 
 .brandLogo{
@@ -201,94 +188,6 @@ button{font:inherit}
 .layout{
   margin-top:14px;
   display:block;
-}
-
-.sidebarBackdrop{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.50);
-  backdrop-filter:blur(4px);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .22s ease;
-  z-index:58;
-}
-
-.sidebarBackdrop.open{
-  opacity:1;
-  pointer-events:auto;
-}
-
-.sidebar{
-  position:fixed;
-  left:14px;
-  top:96px;
-  width:226px;
-  max-height:calc(100vh - 112px);
-  overflow:auto;
-  opacity:0;
-  visibility:hidden;
-  transform:translateX(-16px);
-  pointer-events:none;
-  transition:opacity .18s ease, transform .22s ease, visibility .18s ease;
-  z-index:60;
-}
-
-.sidebar.open{
-  opacity:1;
-  visibility:visible;
-  transform:translateX(0);
-  pointer-events:auto;
-}
-
-.sideCard{
-  border-radius:22px;
-  border:1px solid #0a0b0d;
-  background:
-    radial-gradient(220px 120px at 50% 0%, rgba(255,255,255,.03), transparent 70%),
-    linear-gradient(180deg, rgba(28,29,33,.98), rgba(12,13,15,.98));
-  padding:10px;
-  box-shadow:
-    var(--shadow-md),
-    inset 0 1px 0 rgba(255,255,255,.05);
-}
-
-.sideItem{
-  width:100%;
-  min-height:48px;
-  margin-bottom:8px;
-  padding:0 14px;
-  border:none;
-  border-radius:14px;
-  background:rgba(255,255,255,.03);
-  color:#f3f4f6;
-  text-align:left;
-  font-weight:900;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  cursor:pointer;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
-}
-
-.sideItem:last-child{margin-bottom:0}
-
-.sideItem.active{
-  background:linear-gradient(180deg, rgba(199,153,78,.24), rgba(90,66,30,.12));
-}
-
-.sideItem:hover{
-  background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
-}
-
-.sideItem.active:hover{
-  background:linear-gradient(180deg, rgba(214,171,95,.28), rgba(101,76,37,.15));
-}
-
-.sideItem__icon{
-  width:18px;
-  text-align:center;
-  opacity:.9;
 }
 
 .content{min-width:0}
@@ -853,7 +752,6 @@ button{font:inherit}
 .mobileWalletPanel{display:none}
 .mobileHeroBonus{display:none}
 
-/* toolbar и featured убраны */
 .toolbar,
 #featuredSec{
   display:none !important;
@@ -900,8 +798,6 @@ button{font:inherit}
   font-weight:900;
   cursor:pointer;
 }
-
-/* ===== GAMES LUX ===== */
 
 .grid.grid--kazaro{
   display:grid;
@@ -1439,11 +1335,6 @@ button{font:inherit}
 }
 
 @media (max-width:1180px){
-  .sidebar{
-    left:10px;
-    top:90px;
-  }
-
   .heroGrid{
     grid-template-columns:1fr 1fr;
     grid-template-rows:auto 110px 88px;
@@ -1505,14 +1396,12 @@ button{font:inherit}
 }
 
 @media (max-width:700px){
-  .topbar{display:none}
-  .sidebar,
-  .sidebarBackdrop{display:none !important}
-
   .shell{
     width:calc(100% - 14px);
     margin:8px auto 92px;
   }
+
+  .topbar{display:none}
 
   .mobileTop{
     display:block;
