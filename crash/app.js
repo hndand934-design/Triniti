@@ -11,8 +11,6 @@
   const soundBtn = $("soundBtn");
   const soundDot = $("soundDot");
 
-  const bonusBtn = $("bonusBtn");
-
   const multVal = $("multVal");
   const statusVal = $("statusVal");
   const betVal = $("betVal");
@@ -47,8 +45,10 @@
   }
 
   // =========================
-  // Shared Wallet
+  // Shared Wallet + fallback
   // =========================
+  const WALLET_KEY_FALLBACK = "mini_wallet_triniti_shared_v1";
+
   const Wallet = (() => {
     const sw = window.SharedWallet;
 
@@ -71,21 +71,24 @@
       };
     }
 
-    const KEY = "mini_wallet_crash_fallback_v2";
-    let coins = 1000;
-
-    try {
-      const saved = Number(localStorage.getItem(KEY));
-      if (Number.isFinite(saved)) {
-        coins = Math.max(0, Math.floor(saved));
-      }
-    } catch {}
-
-    const save = () => {
+    function loadFallback() {
       try {
-        localStorage.setItem(KEY, String(coins));
+        const raw = localStorage.getItem(WALLET_KEY_FALLBACK);
+        if (raw !== null) {
+          const parsed = Number(raw);
+          if (Number.isFinite(parsed)) return Math.max(0, Math.floor(parsed));
+        }
       } catch {}
-    };
+      return 1000;
+    }
+
+    function saveFallback(v) {
+      try {
+        localStorage.setItem(WALLET_KEY_FALLBACK, String(v));
+      } catch {}
+    }
+
+    let coins = loadFallback();
 
     return {
       get() {
@@ -93,11 +96,10 @@
       },
       set(v) {
         coins = Math.max(0, Math.floor(Number(v) || 0));
-        save();
+        saveFallback(coins);
       },
       add(d) {
-        coins = Math.max(0, Math.floor(coins + (Number(d) || 0)));
-        save();
+        this.set(coins + Math.floor(Number(d) || 0));
       }
     };
   })();
@@ -562,6 +564,12 @@
   // =========================
   window.addEventListener("resize", draw);
 
+  window.addEventListener("focus", () => {
+    renderWallet();
+    setBet(betInput.value || bet || 100);
+    setUI();
+  });
+
   soundBtn?.addEventListener("click", async () => {
     soundOn = !soundOn;
     localStorage.setItem("crash_sound", soundOn ? "1" : "0");
@@ -573,12 +581,6 @@
         await audioCtx.resume();
       } catch {}
     }
-  });
-
-  bonusBtn?.addEventListener("click", () => {
-    addCoins(1000);
-    beep(760, 70, 0.03);
-    setBet(betInput.value || 100);
   });
 
   betMinus?.addEventListener("click", () => {
