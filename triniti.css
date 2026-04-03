@@ -15,10 +15,6 @@
   --gold4:#8f6727;
   --gold5:#5d421b;
 
-  --steel1:#9aa2b3;
-  --steel2:#616978;
-  --steel3:#2f3642;
-
   --shadow-xl:0 36px 84px rgba(0,0,0,.45);
   --shadow-lg:0 24px 52px rgba(0,0,0,.38);
   --shadow-md:0 14px 28px rgba(0,0,0,.24);
@@ -395,7 +391,6 @@ button{font:inherit}
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  text-shadow:none;
 }
 
 .heroTitle{
@@ -858,38 +853,18 @@ button{font:inherit}
 .mobileWalletPanel{display:none}
 .mobileHeroBonus{display:none}
 
-.toolbar{
-  margin-top:16px;
-  display:block;
-}
-
-.toolbar__tabs{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.navPill{
-  min-height:46px;
-  padding:0 18px;
-  border-radius:999px;
-  border:1px solid #0a0b0d;
-  background:linear-gradient(180deg, rgba(35,36,40,.98), rgba(16,17,18,.98));
-  color:#f4f5f7;
-  font-weight:900;
-  cursor:pointer;
-}
-
-.navPill.active{
-  background:linear-gradient(180deg, rgba(199,153,78,.24), rgba(90,66,30,.12));
-}
-
-.navPill--free{
-  background:linear-gradient(180deg, rgba(199,153,78,.18), rgba(31,24,17,.92));
+/* toolbar и featured убраны */
+.toolbar,
+#featuredSec{
+  display:none !important;
 }
 
 .section{
   margin-top:18px;
+}
+
+.section--gamesOnly{
+  margin-top:16px;
 }
 
 .sectionHead{
@@ -924,82 +899,6 @@ button{font:inherit}
   color:#fff;
   font-weight:900;
   cursor:pointer;
-}
-
-.featuredStrip{
-  display:grid;
-  grid-template-columns:repeat(4, minmax(0,1fr));
-  gap:14px;
-}
-
-.featuredCard{
-  min-height:220px;
-  border-radius:24px;
-  border:1px solid #0a0b0d;
-  padding:18px;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  position:relative;
-  overflow:hidden;
-  box-shadow:
-    var(--shadow-lg),
-    inset 0 1px 0 rgba(255,255,255,.04);
-  background:
-    radial-gradient(180px 120px at 50% 0%, rgba(231,200,125,.04), transparent 72%),
-    linear-gradient(180deg, rgba(26,27,30,.98), rgba(11,12,13,.98));
-}
-
-.featuredCard::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0) 40%);
-  pointer-events:none;
-}
-
-.featuredCard__tag{
-  position:absolute;
-  top:12px;
-  left:12px;
-  min-height:28px;
-  padding:0 10px;
-  display:inline-flex;
-  align-items:center;
-  border-radius:999px;
-  border:1px solid rgba(0,0,0,.9);
-  background:rgba(8,10,14,.66);
-  font-size:11px;
-  font-weight:950;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  color:#f0d79e;
-}
-
-.featuredCard__name{
-  position:relative;
-  z-index:1;
-  font-size:30px;
-  line-height:1;
-  font-weight:1000;
-}
-
-.featuredCard__sub{
-  position:relative;
-  z-index:1;
-  margin-top:8px;
-  font-size:13px;
-  color:rgba(255,255,255,.80);
-  font-weight:700;
-}
-
-.featuredCard--crash,
-.featuredCard--mines,
-.featuredCard--wheel,
-.featuredCard--penalty{
-  background:
-    radial-gradient(180px 120px at 50% 0%, rgba(231,200,125,.04), transparent 72%),
-    linear-gradient(180deg, rgba(26,27,30,.98), rgba(11,12,13,.98));
 }
 
 /* ===== GAMES LUX ===== */
@@ -1559,10 +1458,6 @@ button{font:inherit}
     grid-column:1 / -1;
   }
 
-  .featuredStrip{
-    grid-template-columns:repeat(2, minmax(0,1fr));
-  }
-
   .grid.grid--kazaro{
     grid-template-columns:repeat(2, minmax(0,1fr));
   }
@@ -2073,32 +1968,8 @@ button{font:inherit}
   .onlineWave span:nth-child(15){height:13px}
   .onlineWave span:nth-child(16){height:8px}
 
-  .toolbar{
+  .section--gamesOnly{
     margin-top:14px;
-  }
-
-  .toolbar__tabs{
-    overflow:auto;
-    flex-wrap:nowrap;
-    padding-bottom:2px;
-    scrollbar-width:none;
-  }
-
-  .toolbar__tabs::-webkit-scrollbar{display:none}
-
-  .featuredStrip{
-    display:flex;
-    gap:12px;
-    overflow:auto;
-    padding-bottom:2px;
-    scrollbar-width:none;
-  }
-
-  .featuredStrip::-webkit-scrollbar{display:none}
-
-  .featuredCard{
-    flex:0 0 220px;
-    min-height:190px;
   }
 
   .grid.grid--kazaro{
