@@ -8,10 +8,6 @@
     return a[0] / 2 ** 32;
   }
 
-  function randInt(min, max) {
-    return Math.floor(randFloat() * (max - min + 1)) + min;
-  }
-
   // ======================
   // Shared Wallet + fallback
   // ======================
@@ -123,7 +119,6 @@
 
   const balanceEl = $("balance");
   const soundBtn = $("soundBtn");
-  const bonusBtn = $("bonusBtn2");
 
   const coinEl = $("coin");
   const flipBtn = $("flipBtn");
@@ -195,8 +190,10 @@
   function resetRoundUI() {
     setCoinIdlePurple();
 
+    const bet = Math.floor(Number(betInput?.value) || 0);
+
     if (winView) {
-      winView.textContent = `+${Math.floor(Number(betInput?.value) || 0)}`;
+      winView.textContent = `+${bet}`;
     }
 
     if (statusView) {
@@ -231,7 +228,7 @@
       betView.textContent = String(bet);
     }
 
-    if (winView) {
+    if (winView && !busy) {
       winView.textContent = `+${bet}`;
     }
   }
@@ -252,7 +249,7 @@
     }
 
     recalc();
-    resetRoundUI();
+    if (!busy) resetRoundUI();
   }
 
   betInput?.addEventListener("input", clampBet);
@@ -310,15 +307,6 @@
 
     renderSoundButton();
     beep(soundOn ? 640 : 240, 60, 0.03);
-  });
-
-  // ======================
-  // Bonus button
-  // ======================
-  bonusBtn?.addEventListener("click", () => {
-    addCoins(1000);
-    beep(760, 70, 0.03);
-    setTimeout(() => beep(920, 70, 0.03), 90);
   });
 
   // ======================
@@ -389,11 +377,11 @@
     await playFlipAnim();
 
     const resultText = result === "eagle" ? "Орёл" : "Решка";
-    const win = result === picked;
+    const isWin = result === picked;
 
     setCoinResultTheme(result);
 
-    if (win) {
+    if (isWin) {
       const payout = bet * 2;
       addCoins(payout);
 
@@ -421,6 +409,7 @@
 
     busy = false;
     flipBtn.disabled = false;
+    clampBet();
   });
 
   // ======================
