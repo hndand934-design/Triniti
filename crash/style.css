@@ -400,20 +400,11 @@ button,input{
 
 .actionRow{
   display:grid;
-  grid-template-columns:100px 1fr 1fr;
   gap:8px;
 }
 
-.bonusMini{
-  min-height:46px;
-  padding:0 12px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:
-    linear-gradient(180deg, rgba(95,124,255,.22), rgba(74,103,234,.16));
-  color:#fff;
-  font-weight:950;
-  cursor:pointer;
+.actionRow--singleBonusless{
+  grid-template-columns:1fr 1fr;
 }
 
 .btnPrimary{
@@ -584,12 +575,11 @@ button,input{
     border-radius:12px;
   }
 
-  .actionRow{
-    grid-template-columns:86px 1fr 1fr;
+  .actionRow--singleBonusless{
+    grid-template-columns:1fr 1fr;
     gap:6px;
   }
 
-  .bonusMini,
   .btnPrimary,
   .btnDanger{
     min-height:42px;
