@@ -536,16 +536,8 @@ button,input{
   gap:8px;
 }
 
-.bonusMini{
-  min-height:46px;
-  padding:0 12px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:
-    linear-gradient(180deg, rgba(95,124,255,.22), rgba(74,103,234,.16));
-  color:#fff;
-  font-weight:950;
-  cursor:pointer;
+.actionRow--single{
+  grid-template-columns:1fr;
 }
 
 .btnPrimary{
@@ -711,23 +703,15 @@ button,input{
     border-radius:12px;
   }
 
-  .actionRow{
-    grid-template-columns:96px 1fr;
+  .actionRow,
+  .actionRow--single{
+    grid-template-columns:1fr;
     gap:6px;
   }
 
-  .bonusMini,
   .btnPrimary{
     min-height:42px;
     border-radius:13px;
-  }
-
-  .bonusMini{
-    font-size:13px;
-    padding:0 8px;
-  }
-
-  .btnPrimary{
     font-size:16px;
   }
 }
