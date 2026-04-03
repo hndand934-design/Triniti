@@ -13,9 +13,9 @@
   }
 
   // ======================
-  // Shared Wallet + fallback
+  // Shared Wallet + common fallback
   // ======================
-  const WALLET_KEY_FALLBACK = "mini_wallet_dice_v1";
+  const WALLET_KEY_FALLBACK = "triniti_shared_wallet_v1";
 
   const Wallet = (() => {
     const sw = window.SharedWallet;
@@ -119,7 +119,6 @@
   const balanceEl = $("balance");
 
   const soundBtn = $("soundBtn");
-  const bonusBtn = $("bonusBtn2");
 
   const btnLess = $("btnLess");
   const btnMore = $("btnMore");
@@ -182,17 +181,6 @@
   });
 
   renderSoundButton();
-
-  // ======================
-  // Bonus
-  // ======================
-  function onBonus() {
-    addCoins(1000);
-    beep(760, 70, 0.03);
-    setTimeout(() => beep(920, 70, 0.03), 90);
-  }
-
-  bonusBtn?.addEventListener("click", onBonus);
 
   // ======================
   // Game state
