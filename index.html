@@ -67,11 +67,6 @@
             <span>Главная</span>
           </button>
 
-          <button class="sideItem pressable" type="button" data-jump="#featuredSec">
-            <span class="sideItem__icon">★</span>
-            <span>Популярные</span>
-          </button>
-
           <button class="sideItem pressable" type="button" data-jump="#gamesSec">
             <span class="sideItem__icon">◼</span>
             <span>Все игры</span>
@@ -305,52 +300,7 @@
           </div>
         </section>
 
-        <section class="toolbar">
-          <div class="toolbar__tabs">
-            <button class="navPill pressable active" type="button" data-jump="#gamesSec">Игры</button>
-            <button class="navPill pressable" type="button" data-open="promo">Промокоды</button>
-            <button class="navPill pressable" type="button" data-open="support">Поддержка</button>
-            <button class="navPill navPill--free pressable" type="button" data-open="free">Халява</button>
-          </div>
-        </section>
-
-        <section id="featuredSec" class="section">
-          <div class="sectionHead">
-            <div>
-              <div class="sectionEyebrow">FEATURED</div>
-              <div class="sectionTitle">Популярные режимы</div>
-            </div>
-            <button class="sectionMore pressable" type="button" data-jump="#gamesSec">Все игры</button>
-          </div>
-
-          <div class="featuredStrip">
-            <a class="featuredCard featuredCard--crash pressable" href="./crash/">
-              <div class="featuredCard__tag">HOT</div>
-              <div class="featuredCard__name">CRASH</div>
-              <div class="featuredCard__sub">Растущий множитель</div>
-            </a>
-
-            <a class="featuredCard featuredCard--mines pressable" href="./mines/">
-              <div class="featuredCard__tag">TOP</div>
-              <div class="featuredCard__name">MINES</div>
-              <div class="featuredCard__sub">5×5 · cashout</div>
-            </a>
-
-            <a class="featuredCard featuredCard--wheel pressable" href="./wheel/">
-              <div class="featuredCard__tag">RNG</div>
-              <div class="featuredCard__name">WHEEL</div>
-              <div class="featuredCard__sub">Выбор X</div>
-            </a>
-
-            <a class="featuredCard featuredCard--penalty pressable" href="./penalty/">
-              <div class="featuredCard__tag">SPORT</div>
-              <div class="featuredCard__name">PENALTY</div>
-              <div class="featuredCard__sub">Удар и сейв</div>
-            </a>
-          </div>
-        </section>
-
-        <section id="gamesSec" class="section">
+        <section id="gamesSec" class="section section--gamesOnly">
           <div class="sectionHead">
             <div>
               <div class="sectionEyebrow">COLLECTION</div>
