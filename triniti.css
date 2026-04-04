@@ -731,23 +731,46 @@
   transform:translateY(-1px);
 }
 
-.gameGlyph--crash{
-  font-size:32px;
-  transform:translateY(-1px);
-}
-
 .gameGlyph--rps{
   font-size:34px;
   transform:translateY(-1px);
 }
 
-.gameGlyph--penalty{
-  font-size:31px;
+.gameIconSvg{
+  width:36px;
+  height:36px;
+  display:block;
+  overflow:visible;
+}
+
+.gameIconSvg path,
+.gameIconSvg circle,
+.gameIconSvg rect,
+.gameIconSvg line,
+.gameIconSvg polyline,
+.gameIconSvg polygon{
+  fill:none;
+  stroke:#e7c57e;
+  stroke-width:2.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.gameIconSvg--crash{
+  width:38px;
+  height:38px;
   transform:translateY(-1px);
 }
 
-.gameGlyph--wheel{
-  font-size:31px;
+.gameIconSvg--penalty{
+  width:37px;
+  height:37px;
+  transform:translateY(-1px);
+}
+
+.gameIconSvg--wheel{
+  width:38px;
+  height:38px;
   transform:translateY(-1px);
 }
 
@@ -1558,10 +1581,22 @@
   .gameGlyph--tower{font-size:44px}
   .gameGlyph--dice{font-size:42px}
   .gameGlyph--coinflip{font-size:41px}
-  .gameGlyph--crash{font-size:39px}
   .gameGlyph--rps{font-size:42px}
-  .gameGlyph--penalty{font-size:38px}
-  .gameGlyph--wheel{font-size:38px}
+
+  .gameIconSvg--crash{
+    width:46px;
+    height:46px;
+  }
+
+  .gameIconSvg--penalty{
+    width:45px;
+    height:45px;
+  }
+
+  .gameIconSvg--wheel{
+    width:46px;
+    height:46px;
+  }
 
   .gameCardKazaro__title{
     margin-top:16px;
