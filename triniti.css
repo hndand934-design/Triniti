@@ -1,14 +1,12 @@
 :root{
-  --bg0:#101114;
-  --bg1:#17191e;
-  --bg2:#1d2026;
+  --bg0:#060708;
+  --bg1:#0a0b0d;
+  --bg2:#101114;
 
   --text:#f3f4f7;
   --muted:rgba(243,244,247,.62);
 
   --line:#000;
-  --blue1:#8d97ab;
-  --blue2:#5d6678;
   --green1:#1ed760;
   --green2:#12b84b;
 
@@ -17,9 +15,9 @@
   --gold3:#d3a94b;
   --gold4:#9d6c1f;
 
-  --shadow-xl:0 36px 84px rgba(0,0,0,.52);
-  --shadow-lg:0 22px 48px rgba(0,0,0,.42);
-  --shadow-md:0 12px 26px rgba(0,0,0,.28);
+  --shadow-xl:0 36px 84px rgba(0,0,0,.58);
+  --shadow-lg:0 22px 48px rgba(0,0,0,.46);
+  --shadow-md:0 12px 26px rgba(0,0,0,.32);
 }
 
 *{box-sizing:border-box}
@@ -38,9 +36,9 @@ body{
   font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   color:var(--text);
   background:
-    radial-gradient(1200px 820px at 16% 0%, rgba(255,255,255,.05), transparent 54%),
-    radial-gradient(1000px 720px at 100% 100%, rgba(214,176,86,.05), transparent 50%),
-    linear-gradient(180deg, #6e7178 0%, #555962 18%, var(--bg0) 36%, var(--bg1) 58%, var(--bg2) 100%);
+    radial-gradient(1000px 700px at 15% 0%, rgba(255,255,255,.028), transparent 54%),
+    radial-gradient(900px 640px at 100% 100%, rgba(212,169,75,.035), transparent 50%),
+    linear-gradient(180deg, var(--bg0) 0%, #08090b 18%, var(--bg1) 48%, var(--bg2) 100%);
 }
 
 .bg{
@@ -48,19 +46,19 @@ body{
   inset:0;
   pointer-events:none;
   background:
-    radial-gradient(900px 520px at 50% -10%, rgba(255,255,255,.02), transparent 60%),
-    radial-gradient(1000px 720px at 50% 120%, rgba(255,255,255,.012), transparent 70%);
+    radial-gradient(900px 520px at 50% -10%, rgba(255,255,255,.015), transparent 60%),
+    radial-gradient(1000px 720px at 50% 120%, rgba(255,255,255,.010), transparent 70%);
 }
 
 .noise{
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.04;
+  opacity:.03;
   background-image:
-    radial-gradient(1px 1px at 10% 18%, rgba(255,255,255,.24), transparent 60%),
-    radial-gradient(1px 1px at 70% 32%, rgba(255,255,255,.18), transparent 60%),
-    radial-gradient(1px 1px at 34% 76%, rgba(255,255,255,.15), transparent 60%);
+    radial-gradient(1px 1px at 10% 18%, rgba(255,255,255,.22), transparent 60%),
+    radial-gradient(1px 1px at 70% 32%, rgba(255,255,255,.16), transparent 60%),
+    radial-gradient(1px 1px at 34% 76%, rgba(255,255,255,.12), transparent 60%);
 }
 
 a{color:inherit;text-decoration:none}
@@ -99,9 +97,8 @@ button{font:inherit}
   border-radius:22px;
   border:1px solid var(--line);
   background:
-    radial-gradient(380px 120px at 16% 0%, rgba(255,255,255,.07), transparent 70%),
-    linear-gradient(180deg, rgba(31,34,40,.98), rgba(20,23,29,.98));
-  box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.05);
+    linear-gradient(180deg, rgba(18,19,22,.98), rgba(11,12,14,.98));
+  box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.04);
 }
 
 .topbar__right{
@@ -122,12 +119,11 @@ button{font:inherit}
   border-radius:18px;
   border:1px solid var(--line);
   background:
-    radial-gradient(40px 40px at 30% 22%, rgba(255,255,255,.08), transparent 70%),
-    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
   display:flex;
   align-items:center;
   justify-content:center;
-  box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.05);
+  box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.04);
   flex:0 0 58px;
 }
 
@@ -175,19 +171,15 @@ button{font:inherit}
   display:block;
 }
 
-.sidebarBackdrop{
-  display:none;
-}
-
 .content{min-width:0}
 .mobileTop{display:none}
 
 .heroBoard{
   border-radius:26px;
   border:1px solid var(--line);
-  background:linear-gradient(180deg, rgba(23,25,31,.98), rgba(16,18,23,.98));
+  background:linear-gradient(180deg, rgba(14,15,18,.98), rgba(9,10,12,.98));
   padding:16px;
-  box-shadow:var(--shadow-xl), inset 0 1px 0 rgba(255,255,255,.04);
+  box-shadow:var(--shadow-xl), inset 0 1px 0 rgba(255,255,255,.03);
 }
 
 .heroGrid{
@@ -203,11 +195,11 @@ button{font:inherit}
   overflow:hidden;
   border-radius:24px;
   border:1px solid var(--line);
-  box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.04);
+  box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.03);
 }
 
 .heroMain--bonus{
-  background:linear-gradient(135deg, #202227 0%, #1b1d22 42%, #24262b 100%);
+  background:linear-gradient(135deg, #111215 0%, #0d0e11 42%, #14161a 100%);
 }
 
 .heroMain__overlay{
@@ -218,8 +210,7 @@ button{font:inherit}
 
 .heroMain__overlay--bonus{
   background:
-    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0) 34%),
-    radial-gradient(circle at 82% 24%, rgba(255,255,255,.05) 0 34px, transparent 84px);
+    linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0) 34%);
 }
 
 .heroMain__content{
@@ -247,7 +238,7 @@ button{font:inherit}
 }
 
 .heroKicker--bonus{
-  color:#b9bec8;
+  color:#bcc0c8;
   font-size:13px;
   letter-spacing:.5px;
   text-transform:none;
@@ -260,8 +251,8 @@ button{font:inherit}
   line-height:.88;
   font-weight:1000;
   letter-spacing:-2px;
-  color:#d8dee9;
-  text-shadow:0 0 24px rgba(255,255,255,.08);
+  color:#eceef3;
+  text-shadow:0 0 18px rgba(255,255,255,.05);
 }
 
 .heroTitle{
@@ -272,13 +263,9 @@ button{font:inherit}
   font-weight:1000;
 }
 
-.heroTitle--bonus{
-  font-size:56px;
-}
-
 .heroText{
   margin:8px 0 0;
-  color:rgba(243,246,255,.80);
+  color:rgba(243,246,255,.78);
   font-size:14px;
   line-height:1.46;
   font-weight:700;
@@ -292,12 +279,12 @@ button{font:inherit}
   padding:0 22px;
   border-radius:16px;
   border:1px solid rgba(0,0,0,.88);
-  background:linear-gradient(180deg, #6d7688, #4d5564);
+  background:linear-gradient(180deg, #6a7181, #4a5060);
   color:#fff;
   font-size:18px;
   font-weight:1000;
   cursor:pointer;
-  box-shadow:0 14px 28px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.18);
+  box-shadow:0 14px 28px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.16);
 }
 
 .heroPromoBtn--mobile{
@@ -325,7 +312,7 @@ button{font:inherit}
   position:relative;
   width:min(100%, 304px);
   height:236px;
-  filter:drop-shadow(0 30px 52px rgba(0,0,0,.44));
+  filter:drop-shadow(0 30px 52px rgba(0,0,0,.46));
 }
 
 .heroCardGold{
@@ -333,12 +320,12 @@ button{font:inherit}
   border-radius:22px;
   border:1px solid rgba(92,59,14,.84);
   background:
-    linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,0) 30%),
+    linear-gradient(145deg, rgba(255,255,255,.18), rgba(255,255,255,0) 30%),
     linear-gradient(180deg, #f0dba0 0%, #d7b464 38%, #b68831 70%, #7d5315 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.28),
-    inset 0 -14px 22px rgba(111,73,20,.26),
-    0 18px 32px rgba(0,0,0,.28);
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -14px 22px rgba(111,73,20,.24),
+    0 18px 32px rgba(0,0,0,.30);
 }
 
 .heroCardGold::before{
@@ -346,8 +333,8 @@ button{font:inherit}
   position:absolute;
   inset:12px;
   border-radius:16px;
-  border:1px solid rgba(255,246,209,.28);
-  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+  border:1px solid rgba(255,246,209,.22);
+  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
 }
 
 .heroCardGold--back{
@@ -384,7 +371,7 @@ button{font:inherit}
   width:44px;
   height:150px;
   border-radius:999px;
-  background:linear-gradient(180deg, rgba(255,255,255,.24), rgba(255,255,255,0));
+  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0));
   transform:rotate(18deg);
   opacity:.7;
 }
@@ -423,7 +410,7 @@ button{font:inherit}
   border-radius:22px;
   border:1px solid var(--line);
   padding:16px 18px;
-  box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.04);
+  box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.03);
   position:relative;
   overflow:hidden;
 }
@@ -432,7 +419,7 @@ button{font:inherit}
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0) 42%);
+  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0) 42%);
   pointer-events:none;
 }
 
@@ -441,7 +428,7 @@ button{font:inherit}
 }
 
 .heroSide--balance{
-  background:linear-gradient(180deg, rgba(43,46,54,.98), rgba(24,27,33,.98));
+  background:linear-gradient(180deg, rgba(19,20,24,.98), rgba(11,12,14,.98));
 }
 
 .heroSide--action{
@@ -455,11 +442,11 @@ button{font:inherit}
 }
 
 .heroSide--deposit{
-  background:linear-gradient(180deg, rgba(61,66,78,.98), rgba(28,31,38,.98));
+  background:linear-gradient(180deg, rgba(22,23,28,.98), rgba(12,13,15,.98));
 }
 
 .heroSide--withdraw{
-  background:linear-gradient(180deg, rgba(53,56,62,.98), rgba(24,27,31,.98));
+  background:linear-gradient(180deg, rgba(22,23,26,.98), rgba(12,13,15,.98));
 }
 
 .heroSide__iconWrap{
@@ -468,8 +455,8 @@ button{font:inherit}
   width:42px;
   height:42px;
   border-radius:14px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.06);
   display:grid;
   place-items:center;
 }
@@ -484,7 +471,7 @@ button{font:inherit}
 .heroSide--online{
   padding:12px 18px;
   cursor:pointer;
-  background:linear-gradient(135deg, #282c33 0%, #313742 44%, #424a57 100%);
+  background:linear-gradient(135deg, #1a1b1f 0%, #22252b 44%, #353941 100%);
 }
 
 .onlineCard__inner{
@@ -542,7 +529,7 @@ button{font:inherit}
 .onlineMiniBars span{
   width:6px;
   border-radius:999px;
-  background:linear-gradient(180deg, rgba(239,207,114,.95), rgba(255,255,255,.18));
+  background:linear-gradient(180deg, rgba(239,207,114,.95), rgba(255,255,255,.14));
   opacity:.92;
 }
 .onlineMiniBars span:nth-child(1){height:8px}
@@ -640,7 +627,7 @@ button{font:inherit}
   font-weight:900;
   letter-spacing:2px;
   text-transform:uppercase;
-  color:#b6b9bf;
+  color:#b9bcc2;
 }
 
 .sectionTitle{
@@ -660,12 +647,12 @@ button{font:inherit}
   position:relative;
   min-height:172px;
   border-radius:20px;
-  border:1px solid #0c0d10;
+  border:1px solid #0b0c0e;
   overflow:hidden;
-  background:linear-gradient(180deg, rgba(26,27,31,.98), rgba(14,15,18,.98));
+  background:linear-gradient(180deg, rgba(16,17,20,.98), rgba(9,10,12,.98));
   box-shadow:
-    0 18px 34px rgba(0,0,0,.34),
-    inset 0 1px 0 rgba(255,255,255,.05);
+    0 18px 34px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.04);
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -677,15 +664,15 @@ button{font:inherit}
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0) 42%);
+  background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,0) 42%);
   pointer-events:none;
 }
 
 .gameCard--kazaro:hover{
   transform:translateY(-4px);
   box-shadow:
-    0 24px 42px rgba(0,0,0,.42),
-    inset 0 1px 0 rgba(255,255,255,.06);
+    0 24px 42px rgba(0,0,0,.46),
+    inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 .gameCardKazaro__bg{
@@ -693,14 +680,14 @@ button{font:inherit}
   inset:0;
   pointer-events:none;
   background:
-    radial-gradient(180px 120px at 50% 0%, rgba(239,207,114,.10), transparent 72%),
-    linear-gradient(180deg, rgba(30,31,36,.98), rgba(12,13,16,.98));
+    radial-gradient(180px 120px at 50% 0%, rgba(239,207,114,.07), transparent 72%),
+    linear-gradient(180deg, rgba(17,18,21,.98), rgba(8,9,11,.98));
 }
 
 .gameCardKazaro__pattern{
   position:absolute;
   inset:0;
-  opacity:.16;
+  opacity:.14;
   pointer-events:none;
   background-size:56px 56px;
   background-position:center;
@@ -708,38 +695,38 @@ button{font:inherit}
 
 .gameCard--mines .gameCardKazaro__pattern{
   background-image:
-    radial-gradient(circle at 16px 16px, rgba(255,255,255,.16) 0 7px, transparent 8px),
-    radial-gradient(circle at 40px 36px, rgba(255,255,255,.08) 0 5px, transparent 6px);
+    radial-gradient(circle at 16px 16px, rgba(255,255,255,.14) 0 7px, transparent 8px),
+    radial-gradient(circle at 40px 36px, rgba(255,255,255,.07) 0 5px, transparent 6px);
 }
 .gameCard--tower .gameCardKazaro__pattern{
   background-image:
-    linear-gradient(135deg, transparent 0 42%, rgba(255,255,255,.10) 42% 48%, transparent 48% 100%);
+    linear-gradient(135deg, transparent 0 42%, rgba(255,255,255,.08) 42% 48%, transparent 48% 100%);
 }
 .gameCard--dice .gameCardKazaro__pattern{
   background-image:
-    radial-gradient(circle at 14px 14px, rgba(255,255,255,.10) 0 2px, transparent 3px),
-    radial-gradient(circle at 28px 28px, rgba(255,255,255,.10) 0 2px, transparent 3px);
+    radial-gradient(circle at 14px 14px, rgba(255,255,255,.08) 0 2px, transparent 3px),
+    radial-gradient(circle at 28px 28px, rgba(255,255,255,.08) 0 2px, transparent 3px);
 }
 .gameCard--coinflip .gameCardKazaro__pattern{
   background-image:
-    radial-gradient(circle at 16px 16px, rgba(255,255,255,.10) 0 6px, transparent 7px),
-    radial-gradient(circle at 40px 40px, rgba(255,255,255,.06) 0 9px, transparent 10px);
+    radial-gradient(circle at 16px 16px, rgba(255,255,255,.08) 0 6px, transparent 7px),
+    radial-gradient(circle at 40px 40px, rgba(255,255,255,.05) 0 9px, transparent 10px);
 }
 .gameCard--crash .gameCardKazaro__pattern{
   background-image:
-    linear-gradient(60deg, transparent 0 44%, rgba(255,255,255,.08) 44% 48%, transparent 48% 100%);
+    linear-gradient(60deg, transparent 0 44%, rgba(255,255,255,.06) 44% 48%, transparent 48% 100%);
 }
 .gameCard--rps .gameCardKazaro__pattern{
   background-image:
-    radial-gradient(circle at 14px 14px, rgba(255,255,255,.08) 0 4px, transparent 5px);
+    radial-gradient(circle at 14px 14px, rgba(255,255,255,.06) 0 4px, transparent 5px);
 }
 .gameCard--penalty .gameCardKazaro__pattern{
   background-image:
-    linear-gradient(90deg, transparent 0 47%, rgba(255,255,255,.08) 47% 53%, transparent 53% 100%);
+    linear-gradient(90deg, transparent 0 47%, rgba(255,255,255,.06) 47% 53%, transparent 53% 100%);
 }
 .gameCard--wheel .gameCardKazaro__pattern{
   background-image:
-    radial-gradient(circle at 28px 28px, rgba(255,255,255,.08) 0 2px, transparent 3px);
+    radial-gradient(circle at 28px 28px, rgba(255,255,255,.06) 0 2px, transparent 3px);
 }
 
 .gameCardKazaro__iconWrap{
@@ -755,13 +742,13 @@ button{font:inherit}
   width:72px;
   height:72px;
   border-radius:18px;
-  border:1px solid rgba(211,169,75,.42);
+  border:1px solid rgba(211,169,75,.38);
   background:
-    radial-gradient(42px 28px at 30% 24%, rgba(255,255,255,.16), transparent 72%),
-    linear-gradient(180deg, #2c2f36 0%, #22252c 55%, #17191e 100%);
+    radial-gradient(42px 28px at 30% 24%, rgba(255,255,255,.10), transparent 72%),
+    linear-gradient(180deg, #26282e 0%, #1c1e23 55%, #131418 100%);
   box-shadow:
     0 10px 24px rgba(0,0,0,.34),
-    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 1px 0 rgba(255,255,255,.09),
     inset 0 -8px 14px rgba(0,0,0,.22);
   display:flex;
   align-items:center;
@@ -772,7 +759,7 @@ button{font:inherit}
   width:42px;
   height:42px;
   display:block;
-  filter:drop-shadow(0 2px 8px rgba(239,207,114,.10));
+  filter:drop-shadow(0 2px 8px rgba(239,207,114,.08));
 }
 
 .gameCardKazaro__title{
@@ -889,9 +876,7 @@ button{font:inherit}
     height:58px;
     border-radius:18px;
     border:1px solid #000;
-    background:
-      radial-gradient(40px 40px at 30% 22%, rgba(255,255,255,.10), transparent 70%),
-      linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+    background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
     display:flex;
     align-items:center;
     justify-content:center;
@@ -960,8 +945,8 @@ button{font:inherit}
     border-radius:24px;
     border:1px solid #000;
     padding:18px;
-    background:linear-gradient(135deg, #22242a 0%, #1c1e22 44%, #2a2d33 100%);
-    box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.04);
+    background:linear-gradient(135deg, #121316 0%, #0d0e10 44%, #17191d 100%);
+    box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.03);
     overflow:hidden;
     position:relative;
   }
@@ -970,7 +955,7 @@ button{font:inherit}
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0) 40%);
+    background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,0) 40%);
     pointer-events:none;
   }
 
@@ -981,7 +966,7 @@ button{font:inherit}
 
   .mobileHeroBonus__kicker{
     font-size:12px;
-    color:#b6bcc8;
+    color:#bcc0c8;
     font-weight:800;
   }
 
@@ -991,7 +976,7 @@ button{font:inherit}
     line-height:.9;
     font-weight:1000;
     letter-spacing:-1.6px;
-    color:#d7dde8;
+    color:#eceef3;
   }
 
   .mobileHeroBonus__title{
@@ -1021,11 +1006,11 @@ button{font:inherit}
     border-radius:16px;
     border:1px solid rgba(92,59,14,.84);
     background:
-      linear-gradient(145deg, rgba(255,255,255,.20), rgba(255,255,255,0) 30%),
+      linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,0) 30%),
       linear-gradient(180deg, #f0dba0 0%, #d7b464 38%, #b68831 70%, #8f5f17 100%);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.24),
-      inset 0 -10px 16px rgba(111,73,20,.28),
+      inset 0 1px 0 rgba(255,255,255,.20),
+      inset 0 -10px 16px rgba(111,73,20,.24),
       0 16px 26px rgba(0,0,0,.26);
   }
 
@@ -1034,7 +1019,7 @@ button{font:inherit}
     position:absolute;
     inset:9px;
     border-radius:12px;
-    border:1px solid rgba(255,246,209,.28);
+    border:1px solid rgba(255,246,209,.20);
   }
 
   .mobileHeroCard--back{
@@ -1071,7 +1056,7 @@ button{font:inherit}
     width:18px;
     height:64px;
     border-radius:999px;
-    background:linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,0));
+    background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0));
     transform:rotate(18deg);
   }
 
@@ -1116,7 +1101,7 @@ button{font:inherit}
   .mobileWalletPanel__balance{
     border-radius:20px;
     border:1px solid #000;
-    background:linear-gradient(180deg, rgba(43,46,54,.98), rgba(24,27,33,.98));
+    background:linear-gradient(180deg, rgba(14,15,18,.98), rgba(9,10,12,.98));
     padding:14px;
     box-shadow:var(--shadow-md);
   }
@@ -1150,7 +1135,7 @@ button{font:inherit}
     text-align:left;
     font-size:22px;
     font-weight:1000;
-    box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.04);
+    box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.03);
     cursor:pointer;
     display:flex;
     flex-direction:column;
@@ -1164,7 +1149,7 @@ button{font:inherit}
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0) 42%);
+    background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,0) 42%);
     pointer-events:none;
   }
 
@@ -1174,8 +1159,8 @@ button{font:inherit}
     width:40px;
     height:40px;
     border-radius:13px;
-    border:1px solid rgba(255,255,255,.12);
-    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.10);
+    background:rgba(255,255,255,.06);
     display:grid;
     place-items:center;
     font-size:18px;
@@ -1191,11 +1176,11 @@ button{font:inherit}
   }
 
   .mobileWalletPanel__btn--primary{
-    background:linear-gradient(180deg, rgba(61,66,78,.98), rgba(28,31,38,.98));
+    background:linear-gradient(180deg, rgba(17,18,21,.98), rgba(10,11,13,.98));
   }
 
   .mobileWalletPanel__btn--withdraw{
-    background:linear-gradient(180deg, rgba(53,56,62,.98), rgba(24,27,31,.98));
+    background:linear-gradient(180deg, rgba(17,18,21,.98), rgba(10,11,13,.98));
   }
 
   .mobileWalletPanel__online{
@@ -1204,11 +1189,11 @@ button{font:inherit}
     border:none;
     border-radius:20px;
     border:1px solid #000;
-    background:linear-gradient(135deg, #282c33 0%, #313742 42%, #4a5160 100%);
+    background:linear-gradient(135deg, #181a1f 0%, #21252b 42%, #30353d 100%);
     color:#fff;
     padding:16px;
     text-align:left;
-    box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.04);
+    box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.03);
     overflow:hidden;
     position:relative;
   }
@@ -1254,7 +1239,7 @@ button{font:inherit}
   .onlineWave span{
     flex:1 1 auto;
     border-radius:999px 999px 0 0;
-    background:linear-gradient(180deg, rgba(239,207,114,.88), rgba(255,255,255,.18));
+    background:linear-gradient(180deg, rgba(239,207,114,.85), rgba(255,255,255,.14));
     opacity:.86;
   }
 
@@ -1291,7 +1276,6 @@ button{font:inherit}
     display:none;
   }
 
-  /* РАСШИРЕННЫЕ КАРТОЧКИ НА МОБ */
   .gameCard--kazaro{
     flex:0 0 272px;
     min-height:198px;
@@ -1331,7 +1315,7 @@ button{font:inherit}
     padding:10px;
     border-radius:22px;
     border:1px solid #000;
-    background:linear-gradient(180deg, rgba(17,23,38,.97), rgba(10,14,25,.97));
+    background:linear-gradient(180deg, rgba(14,15,18,.97), rgba(9,10,12,.97));
     box-shadow:0 18px 36px rgba(0,0,0,.34);
   }
 
@@ -1347,6 +1331,6 @@ button{font:inherit}
   }
 
   .mobileBottomNav__item.active{
-    background:linear-gradient(180deg, rgba(90,121,255,.20), rgba(76,103,234,.12));
+    background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
   }
 }
