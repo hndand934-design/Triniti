@@ -1,4 +1,4 @@
-.shell{
+shell{
   width:min(1380px, calc(100% - 20px));
   margin:12px auto 22px;
 }
@@ -757,6 +757,12 @@
 }
 
 .gameIconSvg--crash{
+  width:38px;
+  height:38px;
+  transform:translateY(-1px);
+}
+
+.gameIconSvg--rps{
   width:38px;
   height:38px;
   transform:translateY(-1px);
@@ -1584,6 +1590,11 @@
   .gameGlyph--rps{font-size:42px}
 
   .gameIconSvg--crash{
+    width:46px;
+    height:46px;
+  }
+
+  .gameIconSvg--rps{
     width:46px;
     height:46px;
   }
