@@ -1,6 +1,104 @@
-.shell{
-  width:min(1240px, calc(100% - 20px));
+.shell--layout{
+  width:min(1340px, calc(100% - 20px));
   margin:12px auto 22px;
+  display:grid;
+  grid-template-columns:78px minmax(0,1fr);
+  gap:14px;
+  align-items:start;
+}
+
+.shellMain{
+  min-width:0;
+}
+
+.deskSidebar{
+  display:block;
+}
+
+.deskSidebar__inner{
+  position:sticky;
+  top:12px;
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(180deg, rgba(11,14,24,.98), rgba(6,10,18,.98));
+  box-shadow:0 20px 40px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.03);
+  padding:10px 8px 12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  min-height:760px;
+}
+
+.deskSidebar__menuBtn,
+.deskSidebar__item,
+.mobileMenuBtn,
+.mobileQuickMenu__item{
+  border:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(180deg, rgba(36,44,73,.72), rgba(20,27,49,.9));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04), 0 10px 22px rgba(0,0,0,.22);
+  color:#8f98b8;
+  cursor:pointer;
+}
+
+.deskSidebar__menuBtn{
+  width:52px;
+  height:52px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 52px;
+}
+
+.deskSidebar__menuBtn svg,
+.mobileMenuBtn svg{
+  width:22px;
+  height:22px;
+  display:block;
+}
+
+.deskSidebar__menuBtn path,
+.mobileMenuBtn path{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.deskSidebar__group{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:100%;
+  align-items:center;
+}
+
+.deskSidebar__label{
+  font-size:10px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:1.6px;
+  color:#7c85a6;
+  margin-top:2px;
+}
+
+.deskSidebar__item{
+  width:52px;
+  height:52px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 52px;
+}
+
+.deskSidebar__item span,
+.mobileQuickMenu__item span{
+  font-size:24px;
+  line-height:1;
+  font-weight:900;
 }
 
 .topbar{
@@ -30,39 +128,7 @@
 .brandRow{
   display:flex;
   align-items:center;
-  gap:12px;
-}
-
-.brandMenuBtn,
-.mobileMenuBtn{
-  width:52px;
-  height:52px;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,.08);
-  background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-  box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.04);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#8f98b8;
-  cursor:pointer;
-  flex:0 0 52px;
-}
-
-.brandMenuBtn svg,
-.mobileMenuBtn svg{
-  width:22px;
-  height:22px;
-  display:block;
-}
-
-.brandMenuBtn svg path,
-.mobileMenuBtn svg path{
-  fill:none;
-  stroke:currentColor;
-  stroke-width:2.4;
-  stroke-linecap:round;
-  stroke-linejoin:round;
+  gap:14px;
 }
 
 .brandLogo{
@@ -122,8 +188,8 @@
 
 .heroGrid{
   display:grid;
-  grid-template-columns:minmax(0,1.56fr) minmax(230px,.72fr) minmax(230px,.72fr);
-  grid-template-rows:112px 112px 100px;
+  grid-template-columns:minmax(0,1.48fr) minmax(220px,.74fr) minmax(220px,.74fr);
+  grid-template-rows:102px 102px 92px;
   gap:14px;
   align-items:stretch;
 }
@@ -155,31 +221,31 @@
   position:relative;
   z-index:2;
   min-height:100%;
-  padding:22px 28px 22px;
+  padding:18px 24px 18px;
 }
 
 .heroMain__content--bonus{
   display:grid;
-  grid-template-columns:minmax(0,1.02fr) minmax(270px,.88fr);
+  grid-template-columns:minmax(0,1fr) minmax(230px,.82fr);
   align-items:center;
-  gap:18px;
-  min-height:324px;
+  gap:16px;
+  min-height:296px;
 }
 
 .heroBonusLeft{
-  max-width:480px;
+  max-width:420px;
   min-width:0;
 }
 
 .heroKicker--bonus{
   color:#bfc4d2;
-  font-size:13px;
+  font-size:12px;
   font-weight:800;
 }
 
 .heroBonusX2{
-  margin-top:8px;
-  font-size:72px;
+  margin-top:6px;
+  font-size:64px;
   line-height:.88;
   font-weight:1000;
   letter-spacing:-2px;
@@ -190,32 +256,32 @@
 }
 
 .heroTitle{
-  margin:6px 0 0;
-  font-size:56px;
+  margin:4px 0 0;
+  font-size:50px;
   line-height:.9;
   font-weight:1000;
-  letter-spacing:-1.4px;
+  letter-spacing:-1.3px;
 }
 
 .heroText{
-  margin:10px 0 0;
-  max-width:430px;
+  margin:8px 0 0;
+  max-width:390px;
   color:rgba(242,243,247,.74);
-  font-size:14px;
-  line-height:1.46;
+  font-size:13px;
+  line-height:1.42;
   font-weight:700;
 }
 
 .heroPromoBtn{
-  margin-top:18px;
-  min-width:154px;
-  height:52px;
-  padding:0 24px;
-  border-radius:16px;
+  margin-top:14px;
+  min-width:140px;
+  height:46px;
+  padding:0 22px;
+  border-radius:15px;
   border:1px solid rgba(211,160,74,.34);
   background:linear-gradient(180deg, #f1d08a, #c49144);
   color:#24170a;
-  font-size:18px;
+  font-size:17px;
   font-weight:1000;
   cursor:pointer;
   box-shadow:0 14px 28px rgba(201,145,68,.18), inset 0 1px 0 rgba(255,255,255,.22);
@@ -228,7 +294,7 @@
 
 .heroBonusVisual{
   position:relative;
-  min-height:266px;
+  min-height:236px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -242,26 +308,26 @@
 }
 
 .heroVisualGlow--one{
-  width:220px;
-  height:220px;
-  right:34px;
-  top:10px;
+  width:210px;
+  height:210px;
+  right:20px;
+  top:8px;
   background:radial-gradient(circle, rgba(243,211,138,.12), transparent 66%);
 }
 
 .heroVisualGlow--two{
-  width:170px;
-  height:170px;
-  left:10px;
-  bottom:8px;
+  width:150px;
+  height:150px;
+  left:6px;
+  bottom:4px;
   background:radial-gradient(circle, rgba(255,255,255,.06), transparent 68%);
 }
 
 .heroCardsStack{
   position:relative;
-  width:min(100%, 300px);
-  height:232px;
-  filter:drop-shadow(0 30px 52px rgba(0,0,0,.44));
+  width:min(100%, 270px);
+  height:212px;
+  filter:drop-shadow(0 28px 48px rgba(0,0,0,.44));
 }
 
 .heroCardGold{
@@ -286,28 +352,28 @@
 }
 
 .heroCardGold--back{
-  width:140px;
-  height:194px;
+  width:128px;
+  height:180px;
   right:18px;
-  top:12px;
+  top:10px;
   transform:rotate(17deg);
   opacity:.72;
 }
 
 .heroCardGold--mid{
-  width:148px;
-  height:202px;
-  left:52px;
-  top:12px;
+  width:136px;
+  height:188px;
+  left:46px;
+  top:10px;
   transform:rotate(-10deg);
   z-index:2;
 }
 
 .heroCardGold--front{
-  width:162px;
-  height:216px;
-  left:88px;
-  top:18px;
+  width:148px;
+  height:200px;
+  left:76px;
+  top:16px;
   transform:rotate(8deg);
   z-index:3;
 }
@@ -325,20 +391,20 @@
 
 .cardCorner{
   position:absolute;
-  font-size:22px;
+  font-size:20px;
   line-height:1;
   font-weight:1000;
   color:#785011;
 }
 
 .cardCorner--tl{
-  top:18px;
-  left:18px;
+  top:16px;
+  left:16px;
 }
 
 .cardCorner--br{
-  right:18px;
-  bottom:18px;
+  right:16px;
+  bottom:16px;
   transform:rotate(180deg);
 }
 
@@ -350,7 +416,7 @@
 }
 
 .cardSuit--main{
-  font-size:58px;
+  font-size:52px;
   color:#8a5b16;
 }
 
@@ -373,23 +439,23 @@
 }
 
 .heroChip--back{
-  width:58px;
-  height:58px;
-  left:16px;
-  bottom:18px;
+  width:52px;
+  height:52px;
+  left:10px;
+  bottom:12px;
 }
 
 .heroChip--front{
-  width:48px;
-  height:48px;
-  right:12px;
-  bottom:12px;
+  width:42px;
+  height:42px;
+  right:6px;
+  bottom:6px;
 }
 
 .heroSide{
   border-radius:22px;
   border:1px solid var(--line);
-  padding:16px 18px;
+  padding:14px 16px;
   position:relative;
   overflow:hidden;
   box-shadow:var(--shadow-md), inset 0 1px 0 rgba(255,255,255,.03);
@@ -421,8 +487,8 @@
 }
 
 .heroSide__value{
-  margin-top:10px;
-  font-size:34px;
+  margin-top:8px;
+  font-size:28px;
   line-height:1;
   font-weight:1000;
   position:relative;
@@ -450,7 +516,7 @@
 .heroSide__title{
   display:block;
   margin-top:10px;
-  font-size:20px;
+  font-size:18px;
   line-height:1;
   font-weight:1000;
   position:relative;
@@ -460,7 +526,7 @@
 .heroSide__desc{
   display:block;
   margin-top:6px;
-  font-size:12px;
+  font-size:11px;
   line-height:1.3;
   font-weight:700;
   color:rgba(255,255,255,.84);
@@ -480,7 +546,7 @@
 }
 
 .heroSide--online{
-  padding:12px 18px;
+  padding:10px 16px;
 }
 
 .onlineCard__inner{
@@ -503,7 +569,7 @@
   display:inline-flex;
   align-items:center;
   gap:8px;
-  min-height:30px;
+  min-height:28px;
   padding:0 12px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,.1);
@@ -523,8 +589,8 @@
 }
 
 .onlineCard__number{
-  margin-top:10px;
-  font-size:52px;
+  margin-top:8px;
+  font-size:46px;
   line-height:.86;
   font-weight:1000;
   letter-spacing:-1.4px;
@@ -534,7 +600,7 @@
   display:flex;
   align-items:flex-end;
   justify-content:flex-end;
-  min-height:70px;
+  min-height:60px;
 }
 
 .onlineMiniBars{
@@ -1161,10 +1227,73 @@
   display:none;
 }
 
+.mobileTop__left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.mobileMenuBtn{
+  width:52px;
+  height:52px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 52px;
+  color:#8f98b8;
+}
+
+.mobileQuickMenu{
+  display:none;
+  margin-bottom:12px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(180deg, rgba(17,17,23,.98), rgba(10,10,15,.98));
+  box-shadow:var(--shadow-lg);
+  padding:12px;
+}
+
+.mobileQuickMenu.open{
+  display:block;
+}
+
+.mobileQuickMenu__grid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:10px;
+}
+
+.mobileQuickMenu__item{
+  min-height:54px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
 @media (max-width:1180px){
+  .shell--layout{
+    grid-template-columns:64px minmax(0,1fr);
+  }
+
+  .deskSidebar__inner{
+    min-height:720px;
+    padding:8px 6px 10px;
+  }
+
+  .deskSidebar__menuBtn,
+  .deskSidebar__item{
+    width:46px;
+    height:46px;
+    flex-basis:46px;
+    border-radius:14px;
+  }
+
   .heroGrid{
     grid-template-columns:1fr 1fr;
-    grid-template-rows:auto 112px 100px;
+    grid-template-rows:auto 102px 92px;
   }
 
   .heroMain{
@@ -1187,44 +1316,49 @@
   }
 
   .heroBonusVisual{
-    min-height:240px;
+    min-height:220px;
   }
 
   .heroCardsStack{
-    height:226px;
-    width:min(100%, 288px);
+    height:210px;
+    width:min(100%, 270px);
   }
 
   .heroCardGold--back{
-    width:136px;
-    height:188px;
-    right:26px;
-    top:14px;
+    width:128px;
+    height:180px;
+    right:24px;
+    top:12px;
   }
 
   .heroCardGold--mid{
-    width:144px;
-    height:196px;
-    left:62px;
-    top:14px;
+    width:136px;
+    height:188px;
+    left:56px;
+    top:12px;
   }
 
   .heroCardGold--front{
-    width:156px;
-    height:208px;
-    left:90px;
-    top:22px;
+    width:148px;
+    height:198px;
+    left:82px;
+    top:18px;
   }
 }
 
 @media (max-width:700px){
-  .topbar{
+  .shell--layout{
+    width:calc(100% - 14px);
+    margin:8px auto 94px;
+    display:block;
+  }
+
+  .deskSidebar{
     display:none;
   }
 
-  .shell{
-    width:calc(100% - 14px);
-    margin:8px auto 94px;
+  .topbar{
+    display:none;
   }
 
   .heroBoard{
@@ -1243,9 +1377,9 @@
   }
 
   .mobileTop{
-    display:flex;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
     align-items:center;
-    justify-content:space-between;
     gap:10px;
     margin-bottom:12px;
     padding:10px 12px;
@@ -1263,56 +1397,53 @@
   }
 
   .mBrandLogo{
-    width:58px;
-    height:58px;
-    border-radius:18px;
+    width:52px;
+    height:52px;
+    border-radius:16px;
     border:1px solid rgba(255,255,255,.08);
     background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
     display:flex;
     align-items:center;
     justify-content:center;
-    flex:0 0 58px;
+    flex:0 0 52px;
   }
 
   .mBrandLogo svg{
-    width:40px;
-    height:40px;
+    width:36px;
+    height:36px;
     display:block;
   }
 
   .mTitle{
-    font-size:30px;
+    font-size:24px;
     line-height:1;
     font-weight:1000;
-    letter-spacing:-.4px;
+    letter-spacing:-.35px;
+    white-space:nowrap;
   }
 
   .mobileAuth{
     display:flex;
     gap:8px;
+    align-items:center;
+    justify-content:flex-end;
   }
 
   .mobileAuth .authBtn{
     min-width:auto;
     height:42px;
     padding:0 14px;
-  }
-
-  .mobileMenuBtn{
-    width:50px;
-    height:50px;
-    border-radius:15px;
-    flex-basis:50px;
+    font-size:14px;
   }
 
   .mobileHeroBonus{
     display:grid;
-    grid-template-columns:minmax(0,1fr) 118px;
+    grid-template-columns:minmax(0,1fr) 110px;
     align-items:center;
     gap:10px;
     border-radius:24px;
     border:1px solid rgba(255,255,255,.08);
-    padding:18px;
+    padding:16px;
     background:linear-gradient(180deg, rgba(18,18,24,.98), rgba(13,13,18,.98));
     box-shadow:var(--shadow-lg);
     overflow:hidden;
@@ -1339,11 +1470,11 @@
   }
 
   .mobileHeroBonus__x2{
-    margin-top:10px;
-    font-size:54px;
+    margin-top:8px;
+    font-size:52px;
     line-height:.9;
     font-weight:1000;
-    letter-spacing:-1.4px;
+    letter-spacing:-1.3px;
     background:linear-gradient(180deg, #f0c978 0%, #cb9647 100%);
     -webkit-background-clip:text;
     background-clip:text;
@@ -1352,9 +1483,15 @@
 
   .mobileHeroBonus__title{
     margin-top:4px;
-    font-size:28px;
+    font-size:26px;
     line-height:.95;
     font-weight:1000;
+  }
+
+  .heroPromoBtn--mobile{
+    min-width:132px;
+    height:46px;
+    margin-top:14px;
   }
 
   .mobileHeroBonus__visual{
@@ -1363,13 +1500,13 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    min-height:150px;
+    min-height:140px;
   }
 
   .mobileHeroCardsStack{
     position:relative;
-    width:108px;
-    height:138px;
+    width:104px;
+    height:132px;
   }
 
   .mobileHeroCard{
@@ -1391,8 +1528,8 @@
   }
 
   .mobileHeroCard--back{
-    width:68px;
-    height:94px;
+    width:66px;
+    height:92px;
     right:2px;
     top:6px;
     transform:rotate(18deg);
@@ -1400,8 +1537,8 @@
   }
 
   .mobileHeroCard--mid{
-    width:74px;
-    height:102px;
+    width:72px;
+    height:100px;
     left:12px;
     top:10px;
     transform:rotate(-11deg);
@@ -1409,10 +1546,10 @@
   }
 
   .mobileHeroCard--front{
-    width:80px;
-    height:112px;
+    width:78px;
+    height:108px;
     left:24px;
-    top:22px;
+    top:20px;
     transform:rotate(8deg);
     z-index:3;
   }
