@@ -2,8 +2,6 @@
   const WALLET_KEY_FALLBACK = "triniti_shared_wallet";
   const AUTH_KEY = "triniti_user_registered";
   const PROMO_USED_KEY = "triniti_promo_used_v1";
-  const VK_CLAIM_KEY = "triniti_vk_claimed_v1";
-  const TG_CLAIM_KEY = "triniti_tg_claimed_v1";
 
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => Array.from(root.querySelectorAll(s));
@@ -53,11 +51,6 @@
 
   function setRegistered(flag) {
     localStorage.setItem(AUTH_KEY, flag ? "1" : "0");
-    syncAuthState();
-  }
-
-  function syncAuthState() {
-    document.body.dataset.auth = isRegistered() ? "1" : "0";
   }
 
   function updateBalanceUI() {
@@ -149,20 +142,12 @@
       alert("Запрос на вывод отправлен.");
     };
 
-    [
-      "#depositBtn",
-      "#depositBtnMobile",
-      "#heroDepositBtn",
-      "#heroDepositBtnMobile"
-    ].forEach((selector) => {
+    ["#depositBtn", "#depositBtnMobile", "#heroDepositBtn", "#heroDepositBtnMobile"].forEach((selector) => {
       const el = $(selector);
       if (el) el.addEventListener("click", depositAction);
     });
 
-    [
-      "#withdrawBtn",
-      "#withdrawBtnMobile"
-    ].forEach((selector) => {
+    ["#withdrawBtn", "#withdrawBtnMobile"].forEach((selector) => {
       const el = $(selector);
       if (el) el.addEventListener("click", withdrawAction);
     });
@@ -243,21 +228,21 @@
     const paneDaily = $("#paneDaily");
     const paneSocial = $("#paneSocial");
 
-    if (!tabDaily || !tabSocial || !paneDaily || !paneSocial) return;
+    if (tabDaily && tabSocial && paneDaily && paneSocial) {
+      tabDaily.addEventListener("click", () => {
+        tabDaily.classList.add("active");
+        tabSocial.classList.remove("active");
+        paneDaily.classList.remove("hidden");
+        paneSocial.classList.add("hidden");
+      });
 
-    tabDaily.addEventListener("click", () => {
-      tabDaily.classList.add("active");
-      tabSocial.classList.remove("active");
-      paneDaily.classList.remove("hidden");
-      paneSocial.classList.add("hidden");
-    });
-
-    tabSocial.addEventListener("click", () => {
-      tabSocial.classList.add("active");
-      tabDaily.classList.remove("active");
-      paneSocial.classList.remove("hidden");
-      paneDaily.classList.add("hidden");
-    });
+      tabSocial.addEventListener("click", () => {
+        tabSocial.classList.add("active");
+        tabDaily.classList.remove("active");
+        paneSocial.classList.remove("hidden");
+        paneDaily.classList.add("hidden");
+      });
+    }
   }
 
   function bindPromo() {
@@ -297,45 +282,25 @@
     const vkState = $("#vkState");
     const tgState = $("#tgState");
 
-    const vkClaimed = localStorage.getItem(VK_CLAIM_KEY) === "1";
-    const tgClaimed = localStorage.getItem(TG_CLAIM_KEY) === "1";
-
     if (vkBtn && vkState) {
-      if (vkClaimed) {
-        vkState.textContent = "Получено";
-        vkBtn.disabled = true;
-      }
-
       vkBtn.addEventListener("click", () => {
         if (vkBtn.disabled) return;
         addWallet(10);
         updateBalanceUI();
-        localStorage.setItem(VK_CLAIM_KEY, "1");
         vkState.textContent = "Получено";
         vkBtn.disabled = true;
       });
     }
 
     if (tgBtn && tgState) {
-      if (tgClaimed) {
-        tgState.textContent = "Получено";
-        tgBtn.disabled = true;
-      }
-
       tgBtn.addEventListener("click", () => {
         if (tgBtn.disabled) return;
         addWallet(10);
         updateBalanceUI();
-        localStorage.setItem(TG_CLAIM_KEY, "1");
         tgState.textContent = "Получено";
         tgBtn.disabled = true;
       });
     }
-  }
-
-  function closeMobileSideMenu() {
-    const toggle = $("#mobileMenuToggle");
-    if (toggle) toggle.checked = false;
   }
 
   function bindJumpButtons() {
@@ -356,31 +321,18 @@
           $$(".mobileBottomNav__item").forEach((item) => item.classList.remove("active"));
           btn.classList.add("active");
         }
-
-        closeMobileSideMenu();
       });
     });
   }
 
-  function bindSideMenus() {
-    const sideButtons = [
-      ".sideDock__icon",
-      ".mobileSideSheet__icon"
-    ];
+  function bindMobileMenu() {
+    const btn = $("#mobileMenuBtn");
+    const panel = $("#mobileQuickMenu");
+    if (!btn || !panel) return;
 
-    sideButtons.forEach((selector) => {
-      $$(selector).forEach((btn) => {
-        btn.addEventListener("click", () => {
-          if (!isRegistered()) {
-            alert("Это меню доступно после регистрации.");
-            closeMobileSideMenu();
-            return;
-          }
-
-          closeMobileSideMenu();
-          alert("Меню подключено. Логику добавим следующим шагом.");
-        });
-      });
+    btn.addEventListener("click", () => {
+      panel.classList.toggle("open");
+      panel.setAttribute("aria-hidden", panel.classList.contains("open") ? "false" : "true");
     });
   }
 
@@ -390,7 +342,7 @@
 
     let total = 8 * 60 * 60;
 
-    const tick = () => {
+    setInterval(() => {
       const h = String(Math.floor(total / 3600)).padStart(2, "0");
       const m = String(Math.floor((total % 3600) / 60)).padStart(2, "0");
       const s = String(total % 60).padStart(2, "0");
@@ -399,10 +351,7 @@
 
       total -= 1;
       if (total < 0) total = 8 * 60 * 60;
-    };
-
-    tick();
-    setInterval(tick, 1000);
+    }, 1000);
   }
 
   function renderPrizeList() {
@@ -480,11 +429,9 @@
   function init() {
     if (readWallet() < 0) writeWallet(0);
 
-    syncAuthState();
     updateBalanceUI();
     updateOnlineUI();
     syncLocks();
-
     bindAuthButtons();
     bindWalletButtons();
     bindGameLocks();
@@ -493,7 +440,7 @@
     bindPromo();
     bindSocialClaims();
     bindJumpButtons();
-    bindSideMenus();
+    bindMobileMenu();
     startTimer();
     renderPrizeList();
     drawWheel();
