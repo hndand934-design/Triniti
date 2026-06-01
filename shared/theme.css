@@ -271,6 +271,119 @@ input::-webkit-inner-spin-button{-webkit-appearance:none; margin:0}
   box-shadow:0 14px 30px rgba(24,186,78,.24), inset 0 1px 0 rgba(255,255,255,.2) !important;
 }
 
+.gameCard--kazaro{
+  position:relative !important;
+  overflow:hidden !important;
+  border-color:rgba(244,211,138,.22) !important;
+  background:
+    radial-gradient(220px 140px at 50% 8%, rgba(244,211,138,.07), transparent 66%),
+    linear-gradient(140deg, rgba(255,255,255,.028), transparent 42%),
+    linear-gradient(180deg, rgba(18,19,27,.99), rgba(8,9,14,.99)) !important;
+}
+
+.gameCard--kazaro::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.34;
+  background:
+    linear-gradient(115deg, transparent 0 34%, rgba(255,255,255,.045) 35% 36%, transparent 37% 100%),
+    radial-gradient(circle at 16% 20%, rgba(244,211,138,.08) 0 7px, transparent 8px),
+    radial-gradient(circle at 74% 28%, rgba(244,211,138,.055) 0 6px, transparent 7px),
+    radial-gradient(circle at 34% 74%, rgba(244,211,138,.04) 0 7px, transparent 8px);
+}
+
+.gameCard--kazaro::after{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:inherit;
+  pointer-events:none;
+  border:1px solid rgba(255,246,204,.055);
+}
+
+.gameCard--kazaro:hover{
+  border-color:rgba(244,211,138,.42) !important;
+  box-shadow:
+    0 26px 58px rgba(0,0,0,.5),
+    0 0 34px rgba(214,168,79,.14),
+    inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+.gameCardKazaro__iconBox{
+  position:relative !important;
+  isolation:isolate !important;
+  width:82px !important;
+  height:82px !important;
+  border-radius:23px !important;
+  overflow:visible !important;
+  background:
+    radial-gradient(circle at 50% 12%, rgba(255,245,206,.22), transparent 34%),
+    linear-gradient(180deg, #343641 0%, #1a1b23 54%, #101117 100%) !important;
+}
+
+.gameCardKazaro__iconBox > *{
+  opacity:0 !important;
+}
+
+.gameCardKazaro__iconBox::before{
+  content:"";
+  position:absolute;
+  inset:15px;
+  z-index:2;
+  background:linear-gradient(180deg, #fff4c7 0%, #e7bd62 48%, #9d6927 100%);
+  -webkit-mask-image:var(--mode-icon);
+  -webkit-mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  -webkit-mask-size:contain;
+  mask-image:var(--mode-icon);
+  mask-repeat:no-repeat;
+  mask-position:center;
+  mask-size:contain;
+  filter:
+    drop-shadow(0 2px 0 rgba(255,255,255,.22))
+    drop-shadow(0 13px 20px rgba(214,168,79,.28));
+  transition:transform .18s ease, filter .18s ease;
+}
+
+.gameCardKazaro__iconBox::after{
+  content:"";
+  position:absolute;
+  inset:8px;
+  z-index:1;
+  border-radius:18px;
+  border:1px solid rgba(244,211,138,.24);
+  background:
+    radial-gradient(circle at 50% 42%, rgba(244,211,138,.13), transparent 54%),
+    linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,0));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+.gameCard--kazaro:hover .gameCardKazaro__iconBox::before{
+  transform:translateY(-2px) scale(1.07);
+  filter:
+    drop-shadow(0 2px 0 rgba(255,255,255,.28))
+    drop-shadow(0 17px 24px rgba(214,168,79,.38));
+}
+
+.gameCard--mines{--mode-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='black' d='M32 6l5 15 15-5-8 14 14 8-16 3 3 16-13-10-13 10 3-16-16-3 14-8-8-14 15 5z'/%3E%3Ccircle fill='black' cx='32' cy='32' r='8'/%3E%3C/svg%3E")}
+.gameCard--tower{--mode-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='black' d='M15 10h10v8h6v-8h10v8h8v12h-5v24H20V30h-5V18h8v-8zm12 20v7h10v-7H27zm-2 16h14v8H25v-8z'/%3E%3C/svg%3E")}
+.gameCard--dice{--mode-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect fill='black' x='10' y='10' width='44' height='44' rx='10'/%3E%3Ccircle fill='white' cx='23' cy='23' r='4'/%3E%3Ccircle fill='white' cx='41' cy='23' r='4'/%3E%3Ccircle fill='white' cx='32' cy='32' r='4'/%3E%3Ccircle fill='white' cx='23' cy='41' r='4'/%3E%3Ccircle fill='white' cx='41' cy='41' r='4'/%3E%3C/svg%3E")}
+.gameCard--coinflip{--mode-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle fill='black' cx='32' cy='32' r='24'/%3E%3Ccircle fill='white' cx='32' cy='32' r='16'/%3E%3Cpath fill='black' d='M32 18c9 0 14 6 14 14s-5 14-14 14c-7 0-13-5-14-12h8c1 3 3 5 6 5 4 0 7-3 7-7s-3-7-7-7c-3 0-5 2-6 5h-8c1-7 7-12 14-12z'/%3E%3C/svg%3E")}
+.gameCard--crash{--mode-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='black' d='M40 6c6 8 8 18 5 29l10 10-8 8-10-10c-11 3-21 1-29-5l17-7 8-8 7-17zM23 43l-9 7 7-9 2 2zm16-20a5 5 0 100-10 5 5 0 000 10z'/%3E%3C/svg%3E")}
+.gameCard--rps{--mode-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='black' d='M18 10a8 8 0 110 16 8 8 0 010-16zm28 0a8 8 0 110 16 8 8 0 010-16zM8 49l18-18 7 7-18 18H8v-7zm48 0v7h-7L31 38l7-7 18 18zM27 18h10v8H27v-8z'/%3E%3C/svg%3E")}
+.gameCard--penalty{--mode-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='black' d='M8 12h48v28h-8V20H16v20H8V12zm8 30h32v8H16v-8z'/%3E%3Ccircle fill='black' cx='32' cy='40' r='10'/%3E%3Cpath fill='white' d='M32 31l5 4-2 6h-6l-2-6 5-4z'/%3E%3C/svg%3E")}
+.gameCard--wheel{--mode-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle fill='black' cx='32' cy='32' r='25'/%3E%3Ccircle fill='white' cx='32' cy='32' r='17'/%3E%3Cpath fill='black' d='M30 7h4v50h-4V7zm-23 23h50v4H7v-4zm8-17l36 36-3 3-36-36 3-3zm34 0l3 3-36 36-3-3 36-36z'/%3E%3Ccircle fill='black' cx='32' cy='32' r='7'/%3E%3C/svg%3E")}
+
+@media (max-width:700px){
+  .gameCardKazaro__iconBox{
+    width:76px !important;
+    height:76px !important;
+  }
+  .gameCardKazaro__iconBox::before{inset:14px}
+}
+
 @media (prefers-reduced-motion: reduce){
   *{
     scroll-behavior:auto !important;
