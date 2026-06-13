@@ -73,8 +73,8 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
 .gameGlyph,.gameIconSvg path,.gameIconSvg circle,.gameIconSvg rect,.gameIconSvg line,.gameIconSvg polyline,.gameIconSvg polygon{color:#f3cf78 !important;stroke:#f3cf78 !important;filter:drop-shadow(0 8px 14px rgba(214,168,79,.22))}
 .navPill.active,.tab.active,.mobileBottomNav__item.active{border-color:rgba(244,211,138,.3) !important;background:linear-gradient(180deg,rgba(244,211,138,.18),rgba(244,211,138,.055)) !important;color:#fff5ca !important}
 .authBtn--primary{background:linear-gradient(180deg,#45f07d,#18ba4e) !important;box-shadow:0 14px 30px rgba(24,186,78,.24),inset 0 1px 0 rgba(255,255,255,.2) !important}
-.gameCard--kazaro{--mode-art-x:0%;--mode-art-y:0%;position:relative !important;overflow:hidden !important;min-height:194px !important;padding:0 !important;display:flex !important;align-items:flex-end !important;justify-content:center !important;border-color:rgba(244,211,138,.34) !important;background:#07080d !important;box-shadow:0 30px 70px rgba(0,0,0,.58),0 0 34px rgba(214,168,79,.08),inset 0 1px 0 rgba(255,255,255,.08) !important}
-.gameCard--kazaro::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:url("./mode-cards/triniti-mode-cards-v1.jpg");background-size:400% auto;background-position:var(--mode-art-x) var(--mode-art-y);background-repeat:no-repeat;filter:saturate(1.08) contrast(1.04);transform:scale(1.01);transition:transform .22s ease,filter .22s ease}
+.gameCard--kazaro{--mode-cover:url("./mode-cards/mines-cover.jpg");position:relative !important;overflow:hidden !important;min-height:218px !important;padding:0 !important;display:flex !important;align-items:flex-end !important;justify-content:center !important;border-color:rgba(244,211,138,.34) !important;background:#07080d !important;box-shadow:0 30px 70px rgba(0,0,0,.58),0 0 34px rgba(214,168,79,.08),inset 0 1px 0 rgba(255,255,255,.08) !important}
+.gameCard--kazaro::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:var(--mode-cover);background-size:cover;background-position:center;background-repeat:no-repeat;filter:saturate(1.08) contrast(1.04);transform:scale(1.01);transition:transform .22s ease,filter .22s ease}
 .gameCard--kazaro::after{content:"";position:absolute;inset:0;z-index:4;border-radius:inherit;pointer-events:none;border:1px solid rgba(255,246,204,.08);background:linear-gradient(180deg,rgba(4,5,9,0) 30%,rgba(4,5,9,.2) 54%,rgba(4,5,9,.82) 82%,rgba(4,5,9,.97) 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),inset 0 -44px 54px rgba(0,0,0,.72)}
 .gameCard--kazaro:hover{border-color:rgba(255,224,149,.68) !important;box-shadow:0 36px 78px rgba(0,0,0,.62),0 0 42px rgba(214,168,79,.2),inset 0 1px 0 rgba(255,255,255,.1) !important}
 .gameCard--kazaro:hover::before{transform:scale(1.065);filter:saturate(1.16) contrast(1.08) brightness(1.04)}
@@ -85,13 +85,13 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appear
 .gameCardKazaro__iconBox::before,.gameCardKazaro__iconBox::after{content:none !important}
 .gameCardKazaro__title{position:relative !important;z-index:6 !important;width:100% !important;margin:0 !important;padding:0 12px 19px !important;text-align:center !important;font-size:29px !important;line-height:1 !important;letter-spacing:0 !important;color:#fff !important;text-shadow:0 4px 0 rgba(0,0,0,.42),0 14px 30px rgba(0,0,0,.78),0 0 18px rgba(244,211,138,.22) !important}
 .gameCardKazaro__lock{z-index:7 !important}
-.gameCard--coinflip{--mode-art-x:0%;--mode-art-y:20%}
-.gameCard--tower{--mode-art-x:33.333%;--mode-art-y:20%}
-.gameCard--dice{--mode-art-x:66.666%;--mode-art-y:20%}
-.gameCard--mines{--mode-art-x:100%;--mode-art-y:20%}
-.gameCard--crash{--mode-art-x:0%;--mode-art-y:80%}
-.gameCard--rps{--mode-art-x:33.333%;--mode-art-y:80%}
-.gameCard--penalty{--mode-art-x:66.666%;--mode-art-y:80%}
-.gameCard--wheel{--mode-art-x:100%;--mode-art-y:80%}
-@media (max-width:700px){.gameCard--kazaro{min-height:168px !important}.gameCardKazaro__title{font-size:24px !important;padding-bottom:15px !important}}
+.gameCard--coinflip{--mode-cover:url("./mode-cards/coinflip-cover.jpg")}
+.gameCard--tower{--mode-cover:url("./mode-cards/tower-cover.jpg")}
+.gameCard--dice{--mode-cover:url("./mode-cards/dice-cover.jpg")}
+.gameCard--mines{--mode-cover:url("./mode-cards/mines-cover.jpg")}
+.gameCard--crash{--mode-cover:url("./mode-cards/crash-cover.jpg")}
+.gameCard--rps{--mode-cover:url("./mode-cards/rps-cover.jpg")}
+.gameCard--penalty{--mode-cover:url("./mode-cards/penalty-cover.jpg")}
+.gameCard--wheel{--mode-cover:url("./mode-cards/wheel-cover.jpg")}
+@media (max-width:700px){.gameCard--kazaro{min-height:182px !important}.gameCardKazaro__title{font-size:24px !important;padding-bottom:15px !important}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto !important;transition:none !important;animation:none !important}}
