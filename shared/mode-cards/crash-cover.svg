@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 460" role="img" aria-label="Crash premium cover">
+  <defs>
+    <radialGradient id="bg" cx="42%" cy="42%" r="72%">
+      <stop offset="0" stop-color="#2d210c"/>
+      <stop offset=".58" stop-color="#0c0d12"/>
+      <stop offset="1" stop-color="#05060a"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff5be"/>
+      <stop offset=".42" stop-color="#e5a83a"/>
+      <stop offset=".73" stop-color="#895018"/>
+      <stop offset="1" stop-color="#ffe19a"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff7c8"/>
+      <stop offset=".45" stop-color="#ffb434"/>
+      <stop offset="1" stop-color="#9a3308"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="460" rx="34" fill="url(#bg)"/>
+  <path d="M69 375c120-164 271-234 463-250" fill="none" stroke="#ffce66" stroke-width="5" opacity=".45"/>
+  <g transform="translate(170 42) rotate(-24 130 190)">
+    <path d="M127 59c80 55 114 135 98 240l-77 36-77-36C50 192 67 112 127 59z" fill="url(#gold)" stroke="#fff0ad" stroke-width="6"/>
+    <circle cx="127" cy="158" r="34" fill="#17191f" stroke="#ffe39a" stroke-width="8"/>
+    <path d="M70 241l-76 57 86 13zM184 241l76 57-86 13z" fill="#b87622" stroke="#ffda83" stroke-width="5"/>
+    <path d="M95 321c11 49 32 75 32 75s25-31 32-75z" fill="url(#flame)" stroke="#fff1a7" stroke-width="4"/>
+  </g>
+  <path d="M109 365c44 21 91 20 139 5" fill="none" stroke="#f4a92f" stroke-width="17" opacity=".42"/>
+  <circle cx="487" cy="96" r="5" fill="#ffd87e"/>
+  <circle cx="456" cy="331" r="7" fill="#d9952f"/>
+</svg>

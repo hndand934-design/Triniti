@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 460" role="img" aria-label="Penalty premium cover">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#051009"/>
+      <stop offset=".48" stop-color="#102512"/>
+      <stop offset="1" stop-color="#05060a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff1b0"/>
+      <stop offset=".48" stop-color="#d69a33"/>
+      <stop offset="1" stop-color="#7b4614"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="460" rx="34" fill="url(#bg)"/>
+  <path d="M96 91h408v257M96 348h408M136 91v257M464 91v257" fill="none" stroke="#f0ce7a" stroke-width="8" opacity=".86"/>
+  <path d="M136 132h328M136 180h328M136 228h328M136 276h328M180 91v257M236 91v257M292 91v257M348 91v257M404 91v257" stroke="#e3c166" stroke-width="3" opacity=".34"/>
+  <circle cx="300" cy="288" r="100" fill="#f6efe0" stroke="#ffe39a" stroke-width="6"/>
+  <path d="M300 204l58 42-22 68h-72l-22-68z" fill="url(#gold)" stroke="#7b4b19" stroke-width="5"/>
+  <path d="M300 188v16M205 259l37-13M395 259l-37-13M241 371l23-57M359 371l-23-57" stroke="#7b4b19" stroke-width="8"/>
+  <path d="M141 392h318" stroke="#46c96f" stroke-width="10" opacity=".45"/>
+</svg>

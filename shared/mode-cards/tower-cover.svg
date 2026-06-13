@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 460" role="img" aria-label="Tower premium cover">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0a0b10"/>
+      <stop offset=".5" stop-color="#17110a"/>
+      <stop offset="1" stop-color="#05060a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff2b3"/>
+      <stop offset=".42" stop-color="#d99631"/>
+      <stop offset=".72" stop-color="#875015"/>
+      <stop offset="1" stop-color="#ffe196"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="460" rx="34" fill="url(#bg)"/>
+  <path d="M104 382h392v30H104zM147 335h306v48H147zM171 249h258v88H171zM196 161h208v91H196zM224 92h152v72H224z" fill="url(#gold)" stroke="#ffdd86" stroke-width="5"/>
+  <path d="M211 92h38v52h-38zM281 78h38v65h-38zM351 92h38v52h-38z" fill="url(#gold)" stroke="#ffdd86" stroke-width="5"/>
+  <path d="M198 337v-55c0-24 32-24 32 0v55M284 337v-55c0-24 32-24 32 0v55M370 337v-55c0-24 32-24 32 0v55M247 251v-49c0-22 30-22 30 0v49M323 251v-49c0-22 30-22 30 0v49" fill="#17100a" stroke="#ffdf8e" stroke-width="4"/>
+  <path d="M157 361h286M175 314h254M193 276h222M207 224h186M224 185h152M237 125h126" stroke="#734713" stroke-width="4" opacity=".6"/>
+  <path d="M300 68v337" stroke="#fff1b4" stroke-width="4" opacity=".58"/>
+  <circle cx="104" cy="118" r="6" fill="#e6a234"/>
+  <circle cx="494" cy="146" r="7" fill="#d8942b"/>
+  <circle cx="470" cy="318" r="5" fill="#ffde85"/>
+</svg>

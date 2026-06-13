@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 460" role="img" aria-label="Rock paper scissors premium cover">
+  <defs>
+    <radialGradient id="bg" cx="52%" cy="45%" r="75%">
+      <stop offset="0" stop-color="#38270d"/>
+      <stop offset=".56" stop-color="#0d0e13"/>
+      <stop offset="1" stop-color="#05060a"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff3b9"/>
+      <stop offset=".48" stop-color="#d59631"/>
+      <stop offset="1" stop-color="#6e3d10"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="460" rx="34" fill="url(#bg)"/>
+  <path d="M76 354c128-159 280-210 447-156" fill="none" stroke="#f1b448" stroke-width="5" opacity=".36"/>
+  <g fill="url(#gold)" stroke="#ffdf8a" stroke-width="5" stroke-linejoin="round">
+    <path d="M193 226c-24-23-55-19-65 7-8 21 6 40 34 55l69 39c36 20 95 3 106-43 10-41-18-86-65-91l-45-5c-31-3-50 18-34 38z"/>
+    <path d="M198 201c-20-59 52-75 64-15l5 30"/>
+    <path d="M263 196c-14-60 60-66 66-5l2 43"/>
+    <path d="M332 215c5-54 74-48 61 8l-11 47"/>
+    <path d="M385 293c33-28 77 8 43 45l-41 45"/>
+  </g>
+  <g transform="translate(332 222) rotate(-25)" fill="none" stroke="#ffdf8a" stroke-width="12" stroke-linecap="round">
+    <circle cx="48" cy="49" r="33"/>
+    <circle cx="139" cy="49" r="33"/>
+    <path d="M76 75l79 107M115 75L36 182"/>
+  </g>
+  <circle cx="108" cy="103" r="5" fill="#ffd477"/>
+  <circle cx="503" cy="347" r="6" fill="#d79a33"/>
+</svg>

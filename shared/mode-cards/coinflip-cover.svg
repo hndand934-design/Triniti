@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 460" role="img" aria-label="Coinflip premium cover">
+  <defs>
+    <radialGradient id="bg" cx="42%" cy="34%" r="72%">
+      <stop offset="0" stop-color="#3b270b"/>
+      <stop offset=".5" stop-color="#101016"/>
+      <stop offset="1" stop-color="#05060a"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff4ba"/>
+      <stop offset=".32" stop-color="#f2c85f"/>
+      <stop offset=".68" stop-color="#a96d22"/>
+      <stop offset="1" stop-color="#ffe39a"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" x2="1">
+      <stop offset="0" stop-color="#6d4114"/>
+      <stop offset=".45" stop-color="#ffd77a"/>
+      <stop offset="1" stop-color="#6f3d10"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="460" rx="34" fill="url(#bg)"/>
+  <path d="M62 346c122-210 285-252 470-224" fill="none" stroke="#d9962f" stroke-width="14" opacity=".24"/>
+  <path d="M38 393c122-238 306-303 510-278" fill="none" stroke="#ffd36e" stroke-width="4" opacity=".72"/>
+  <ellipse cx="303" cy="229" rx="178" ry="128" fill="#5b3511" opacity=".8" transform="rotate(-18 303 229)"/>
+  <ellipse cx="288" cy="210" rx="178" ry="128" fill="url(#edge)" transform="rotate(-18 288 210)"/>
+  <ellipse cx="284" cy="207" rx="143" ry="96" fill="url(#gold)" stroke="#fff0ad" stroke-width="6" transform="rotate(-18 284 207)"/>
+  <ellipse cx="284" cy="207" rx="104" ry="66" fill="none" stroke="#7c4a16" stroke-width="10" opacity=".7" transform="rotate(-18 284 207)"/>
+  <path d="M219 192l148-49 13 40-50 17 38 114-49 16-38-114-49 16z" fill="#6a3c13" opacity=".55"/>
+  <path d="M207 177l148-49 13 40-50 17 38 114-49 16-38-114-49 16z" fill="url(#gold)" stroke="#fff0b0" stroke-width="4"/>
+  <circle cx="100" cy="92" r="5" fill="#ffd474"/>
+  <circle cx="515" cy="343" r="6" fill="#e8ab42"/>
+  <circle cx="475" cy="91" r="4" fill="#ffe09a"/>
+</svg>

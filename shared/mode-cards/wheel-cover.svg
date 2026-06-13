@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 460" role="img" aria-label="Wheel premium cover">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="72%">
+      <stop offset="0" stop-color="#33240d"/>
+      <stop offset=".56" stop-color="#0d0e13"/>
+      <stop offset="1" stop-color="#05060a"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff2b3"/>
+      <stop offset=".46" stop-color="#d69a32"/>
+      <stop offset="1" stop-color="#744211"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="460" rx="34" fill="url(#bg)"/>
+  <circle cx="300" cy="239" r="154" fill="#08090d" stroke="#f0c76f" stroke-width="12"/>
+  <circle cx="300" cy="239" r="121" fill="#121217" stroke="#8b5a22" stroke-width="6"/>
+  <g transform="translate(300 239)" stroke="#f4d07b" stroke-width="3">
+    <path d="M0 0L0-121A121 121 0 0 1 85-85z" fill="url(#gold)"/>
+    <path d="M0 0L85-85A121 121 0 0 1 121 0z" fill="#171717"/>
+    <path d="M0 0L121 0A121 121 0 0 1 85 85z" fill="url(#gold)"/>
+    <path d="M0 0L85 85A121 121 0 0 1 0 121z" fill="#171717"/>
+    <path d="M0 0L0 121A121 121 0 0 1 -85 85z" fill="url(#gold)"/>
+    <path d="M0 0L-85 85A121 121 0 0 1 -121 0z" fill="#171717"/>
+    <path d="M0 0L-121 0A121 121 0 0 1 -85 -85z" fill="url(#gold)"/>
+    <path d="M0 0L-85 -85A121 121 0 0 1 0 -121z" fill="#171717"/>
+  </g>
+  <circle cx="300" cy="239" r="34" fill="url(#gold)" stroke="#fff0ad" stroke-width="6"/>
+  <path d="M300 41l43 79h-86z" fill="url(#gold)" stroke="#fff0ad" stroke-width="6"/>
+  <rect x="207" y="388" width="186" height="34" rx="13" fill="url(#gold)" stroke="#ffdf8a" stroke-width="4"/>
+  <g fill="#f3c667">
+    <circle cx="300" cy="85" r="7"/><circle cx="409" cy="130" r="7"/><circle cx="454" cy="239" r="7"/><circle cx="409" cy="348" r="7"/><circle cx="300" cy="393" r="7"/><circle cx="191" cy="348" r="7"/><circle cx="146" cy="239" r="7"/><circle cx="191" cy="130" r="7"/>
+  </g>
+</svg>

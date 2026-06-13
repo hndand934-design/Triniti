@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 460" role="img" aria-label="Dice premium cover">
+  <defs>
+    <radialGradient id="bg" cx="68%" cy="38%" r="72%">
+      <stop offset="0" stop-color="#3b2609"/>
+      <stop offset=".56" stop-color="#0b0c11"/>
+      <stop offset="1" stop-color="#05060a"/>
+    </radialGradient>
+    <linearGradient id="top" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff5bd"/>
+      <stop offset=".5" stop-color="#e7aa3c"/>
+      <stop offset="1" stop-color="#9a5a17"/>
+    </linearGradient>
+    <linearGradient id="side" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#c78122"/>
+      <stop offset=".55" stop-color="#6f3e10"/>
+      <stop offset="1" stop-color="#f4cb6d"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="460" rx="34" fill="url(#bg)"/>
+  <path d="M92 358c120-192 286-236 430-188" fill="none" stroke="#f0b94e" stroke-width="7" opacity=".34"/>
+  <g transform="translate(118 60) rotate(-14 190 170)">
+    <path d="M91 130l150-86 154 89-151 91z" fill="url(#top)" stroke="#fff0a7" stroke-width="6"/>
+    <path d="M91 130l153 94v151L91 281z" fill="url(#side)" stroke="#ffd172" stroke-width="6"/>
+    <path d="M244 224l151-91v149l-151 93z" fill="#8c5419" stroke="#ffd172" stroke-width="6"/>
+    <g fill="#211306" stroke="#f8d77b" stroke-width="3">
+      <circle cx="190" cy="115" r="16"/><circle cx="291" cy="142" r="16"/>
+      <circle cx="138" cy="214" r="15"/><circle cx="197" cy="252" r="15"/><circle cx="138" cy="292" r="15"/><circle cx="199" cy="330" r="15"/>
+      <circle cx="305" cy="232" r="15"/><circle cx="353" cy="203" r="15"/><circle cx="354" cy="289" r="15"/>
+    </g>
+  </g>
+  <circle cx="503" cy="96" r="5" fill="#ffd777"/>
+  <circle cx="477" cy="347" r="4" fill="#e9a938"/>
+</svg>
