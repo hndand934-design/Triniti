@@ -30,6 +30,7 @@
 html,body{min-height:100%}
 body{
   margin:0;
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;
   color:var(--txt);
   overflow-x:hidden;
   background:
